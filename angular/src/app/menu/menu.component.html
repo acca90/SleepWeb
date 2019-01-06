@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-purple">
+    <a class="navbar-brand" routerLink="/">
+        <i>SleepWeb</i>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul class="navbar-nav mr-auto">
+            <li ngbDropdown class="nav-item dropdown">
+                <a ngbDropdownToggle class="nav-link dropdown-toggle" id="menuAdmin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-gears"></i> Admin
+                </a>
+                <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="/usuarios">Usuários</a>
+                    <a class="dropdown-item" routerLink="/grupos">Grupos</a>
+                    <a class="dropdown-item" routerLink="/permissoes">Permissões</a>
+                    <a class="dropdown-item" routerLink="/pacientes">Pacientes</a>
+                </div>
+            </li>
+
+            <li ngbDropdown class="nav-item dropdown">
+                <a ngbDropdownToggle class="nav-link dropdown-toggle" id="menuPrincipal" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-star"></i> Principal
+                </a>
+                <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="/">Action</a>
+                </div>
+            </li>
+
+            <li ngbDropdown class="nav-item dropdown">
+                <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-bath"></i> SandBox
+                </a>
+                <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="sandbox">icones</a>
+                </div>
+            </li>
+
+        </ul>
+
+        <ul class="navbar-nav">
+            <li ngbDropdown class="nav-item dropdown">
+                <a ngbDropdownToggle class="nav-link dropdown-toggle" id="menuUsuario" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user-circle"></i> <span>Usuário</span>
+                </a>
+                <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="/"><i class="fa fa-user-circle-o"> </i>Meus Dados</a>
+                    <a class="dropdown-item" routerLink="/"><i class="fa fa-question"></i> Ajuda</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" routerLink="/"><i class="fa fa-sign-out"></i> <span>Sair</span></a>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</nav>

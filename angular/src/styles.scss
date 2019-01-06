@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+
+$color-blue: #60d1e6;
+$color-purple: #480090;
+$color-purple-light: #4c0098;
+$color-black: #000000;
+$color-white: white;
+
+.bg-purple {
+    background: $color-purple;
+}
+
+
+.navbar-dark .navbar-nav .nav-link {
+    color: $color-white
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: $color-blue
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+    color: $color-white;
+    background-color: $color-purple-light;
+}
