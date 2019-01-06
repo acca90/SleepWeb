@@ -6,11 +6,20 @@ $color-purple-light: #4c0098;
 $color-black: #000000;
 $color-white: white;
 
-.bg-purple {
-    background: $color-purple;
+body {
+    font-size: 12px;
 }
 
 
+.bg-purple {
+    background: $color-purple;
+}
+.navbar {
+    padding: unset;
+    .navbar-brand {
+        color: #14b7e6;
+    }
+}
 .navbar-dark .navbar-nav .nav-link {
     color: $color-white
 }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
@@ -16,24 +17,25 @@ import { PermissoesComponent } from './permissoes/permissoes.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    MenuComponent,
-    SandboxComponent,
-    UsuariosComponent,
-    GruposComponent,
-    PermissoesComponent,
-    PacientesComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule.forRoot(),
-    AngularFontAwesomeModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        MenuComponent,
+        SandboxComponent,
+        UsuariosComponent,
+        GruposComponent,
+        PermissoesComponent,
+        PacientesComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NgbModule.forRoot(),
+        AngularFontAwesomeModule,
+        HttpClientModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }
