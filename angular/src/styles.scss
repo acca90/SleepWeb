@@ -1,33 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/bootstrap";
 
-$color-blue: #60d1e6;
-$color-purple: #480090;
-$color-purple-light: #4c0098;
-$color-black: #000000;
-$color-white: white;
+$grey-soft: #ededed;
+$brand-color: #6097ff;
+$brand-hover: #588bea;
 
 body {
     font-size: 12px;
-}
-
-
-.bg-purple {
-    background: $color-purple;
+    font-family: "Arial", sans-serif;
 }
 .navbar {
     padding: unset;
+    background-color: $grey-soft;
+
     .navbar-brand {
-        color: #14b7e6;
+        color: $brand-color;
+    }
+    .navbar-brand:hover {
+        color: $brand-hover;
     }
 }
-.navbar-dark .navbar-nav .nav-link {
-    color: $color-white
-}
-.navbar-dark .navbar-nav .nav-link:hover {
-    color: $color-blue
-}
-
-.dropdown-item:focus, .dropdown-item:hover {
-    color: $color-white;
-    background-color: $color-purple-light;
+form {
+    label {
+        font-weight: bold;
+    }
 }
