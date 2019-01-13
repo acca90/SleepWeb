@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bd4045b2-5e11-4a15-987d-e5a276026ad0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sleepweb/user/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/angular.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/e2e/protractor.conf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/e2e/src/app.e2e-spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/e2e/src/app.po.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/e2e/tsconfig.e2e.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/app-routing.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/app.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/app.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/app.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/app.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/app.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/home/home.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/home/home.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/home/home.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/home/home.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/menu/menu.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/menu/menu.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/menu/menu.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/menu/menu.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/sandbox/sandbox.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/sandbox/sandbox.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/sandbox/sandbox.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/sandbox/sandbox.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/usuario/usuario-edt/usuario-edt.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/usuario/usuario-edt/usuario-edt.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/usuario/usuario-edt/usuario-edt.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/usuario/usuario-edt/usuario-edt.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/usuario/usuario-list/usuario-list.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/usuario/usuario-list/usuario-list.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/usuario/usuario-list/usuario-list.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/usuario/usuario-list/usuario-list.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/usuario/usuario-routing.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/app/usuario/usuario.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/assets/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/browserslist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/environments/environment.prod.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/environments/environment.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/karma.conf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/polyfills.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/styles.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/test.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/tsconfig.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/tsconfig.spec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/src/tslint.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../angular/tslint.json" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sleepweb/user/serializers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/7423148d-8b39-4eb7-981b-8736c27f05a5/console.sql" />
+        <option value="$PROJECT_DIR$/backend/settings.py" />
+        <option value="$PROJECT_DIR$/sleepweb/usuario/models.py" />
+        <option value="$PROJECT_DIR$/sleepweb/user/apps.py" />
+        <option value="$PROJECT_DIR$/sleepweb/models.py" />
+        <option value="$PROJECT_DIR$/sleepweb/user/views.py" />
+        <option value="$PROJECT_DIR$/backend/urls.py" />
+        <option value="$PROJECT_DIR$/sleepweb/user/serializers.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="39" />
+    <option name="y" value="25" />
+    <option name="width" value="1038" />
+    <option name="height" value="1055" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="sleepweb" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="sleepweb" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="database.console.LAST_STATE" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="backend" type="Python.DjangoServer" factoryName="Django server">
+      <module name="backend" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="backend.settings" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bd4045b2-5e11-4a15-987d-e5a276026ad0" name="Default Changelist" comment="" />
+      <created>1547317461154</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1547317461154</updated>
+      <workItem from="1547317465706" duration="143000" />
+      <workItem from="1547317678615" duration="450000" />
+      <workItem from="1547318496205" duration="4720000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="5313000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="39" y="25" width="1038" height="1055" extended-state="4" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34638554" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Database Console" weight="0.3296582" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3296582" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3296582" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39911798" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3296582" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32952693" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/7423148d-8b39-4eb7-981b-8736c27f05a5/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="9" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sleepweb/user/apps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sleepweb/user/admin.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sleepweb/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="27" column="18" lean-forward="true" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sleepweb/user/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          <folding>
+            <element signature="e#631#663#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sleepweb/user/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sleepweb/user/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
