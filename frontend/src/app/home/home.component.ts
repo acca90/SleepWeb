@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+      $('#moduleName').html('<i class="fa fa-home"></i> Home');
   }
 
 }

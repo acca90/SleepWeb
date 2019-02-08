@@ -21,7 +21,7 @@ from sleepweb.user.views import UserViewSet
 
 router = routers.DefaultRouter()
 router.register(
-    'user/list', UserViewSet, base_name='user/list'
+    'user', UserViewSet, base_name='user'
 )
 
 urlpatterns = [
