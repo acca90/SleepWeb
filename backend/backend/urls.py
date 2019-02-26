@@ -18,11 +18,11 @@ from django.urls import include, path
 from rest_framework import routers
 
 from sleepweb.user.views import UserViewSet
+from sleepweb.institution.views import InstitutionViewSet
 
 router = routers.DefaultRouter()
-router.register(
-    'user', UserViewSet, base_name='user'
-)
+router.register('user', UserViewSet)
+router.register('institution', InstitutionViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

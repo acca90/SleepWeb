@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DataTablesModule } from 'angular-datatables';
@@ -28,7 +29,8 @@ import { SandboxComponent } from './sandbox/sandbox.component';
         NgbModule.forRoot(),
         AngularFontAwesomeModule,
         DataTablesModule,
-        HttpClientModule
+        HttpClientModule,
+        ReactiveFormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -13,4 +13,7 @@ export class UserListService {
     listUsers() {
         return this.http.get(this.url.concat('user/'));
     }
+    listInstitutions() {
+        return this.http.get(this.url.concat('institutions/'));
+    }
 }

@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'sleepweb',
-    'sleepweb.user'
+    'sleepweb.user',
+    'sleepweb.institution'
 ]
 
 MIDDLEWARE = [

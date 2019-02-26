@@ -26,8 +26,9 @@ export class UserListComponent implements OnInit {
             data: items,
             columns: [
                 { title: 'Id', data: 'id', width: '60px' },
-                { title: 'Name', data: 'name', width: '' },
-                { title: 'E-mail', data: 'email', width: '' }
+                { title: 'Name', data: 'name', width: '250px' },
+                { title: 'E-mail', data: 'email', width: '250px' },
+                { title: 'Institution', data: 'institution_name', width: '' }
             ]
         });
     }

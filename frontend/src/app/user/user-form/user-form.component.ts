@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-usuario-form',
-  templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+    selector: 'app-usuario-form',
+    templateUrl: './user-form.component.html',
+    styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent implements OnInit {
 
-  constructor() { }
+    // https://www.techiediaries.com/angular-tutorial/
 
-  ngOnInit() {
-  }
-
+    constructor() {
+    }
+    ngOnInit() {
+    }
 }
