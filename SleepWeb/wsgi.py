@@ -1,10 +1,10 @@
 """
-WSGI config for SleepWeb project.
+SleepWeb
+Projeto desenvolvido para o Programa de Pós-Graduação em Computação Aplicada
+Universidade de Passo Fundo - 2018/2019
 
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/
+@author Matheus Hernandes
+@since 09/03/2018
 """
 
 import os
