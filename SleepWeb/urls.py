@@ -29,6 +29,4 @@ urlpatterns = [
     # views
     url(r'^$', Home.as_view(), name='index'),
     url(r'institution/', Institution.as_view(), name='institution'),
-
-
 ]

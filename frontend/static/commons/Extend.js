@@ -18,6 +18,16 @@ jQuery.fn.extend({
             result[pair[0]] = decodeURIComponent(pair[1] || '');
         });
         return JSON.parse(JSON.stringify(result));
+    },
+
+});
+jQuery.extend({
+     isEmpty: function ( value ) {
+        return value === null ||
+            value === undefined ||
+            value === 'undefined' ||
+            value === [] ||
+            value === '';
     }
 });
 

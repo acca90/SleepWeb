@@ -10,6 +10,11 @@
  */
 function AbstractController(params) {
     /**
+     *
+     * @memberOf AbortController
+     */
+    let isUpdate = false;
+    /**
      * Map of elements
      * @memberOf AbortController
      */
@@ -26,17 +31,16 @@ function AbstractController(params) {
                 remove: null,
                 refresh: null,
             },
-            datatable: null,
-            fields: {},
+            datatable: null
         },
         form: {
             alert: null,
             tagForm: null,
+            pk: null,
             buttons: {
                 save: null,
                 cancel: null
-            },
-            fields: {}
+            }
         }
     };
     /**
@@ -56,6 +60,7 @@ function AbstractController(params) {
         DOM.form.buttons.save = $('#btnSave', params.container);
         DOM.form.buttons.cancel = $('#btnCancel', params.container);
         DOM.form.alert = $('#formAlert', params.container);
+        DOM.form.pk = $('[isPk]', DOM.form.tagForm);
     };
     /**
      * Iinitilize events for module navigation
@@ -83,8 +88,72 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const edit = function () {
-        alert('edit');
+        let $tr = DOM.list.datatable.find('tr.selected');
+        if ($tr.length) {
+            return editForSelectedRow($tr);
+        }
+        fadeOutAlert(
+            applyAlert(
+                'warning',
+                DOM.list.alert,
+                params.message.editPickError
+            ).show()
+        );
+    };
+    /**
+     * Get data for start edition
+     * @memberOf AbstractController
+     */
+    const editForSelectedRow = function ($tr) {
+        let data = DOM.list.datatable.DataTable().row($tr).data();
+        new AjaxController({
+            data: {pk: data.id},
+            method: 'GET',
+            url: params.apiUrl,
+            success: editPickSuccess,
+            error: editPickError
+        }).send();
+    };
+    /**
+     * Handle success on pick register to update
+     * @memberOf AbstractController
+     */
+    const editPickSuccess = function (data) {
+        if ($.isEmpty(data)) {
+            fadeOutAlert(
+                applyAlert(
+                    'danger',
+                    DOM.list.alert,
+                    params.message.editAjaxError
+                ).show()
+            );
+            return;
+        }
+        toForm(data[0]);
+    };
+    /**
+     * Handle form transition for update
+     * @memberOf AbstractController
+     */
+    const toForm = function (data) {
         clean();
+        isUpdate = true;
+        params.toForm(data);
+        DOM.divs.list.hide();
+        DOM.divs.form.show();
+    };
+    /**
+     * Handle errors on pick register to update
+     * @memberOf AbstractController
+     */
+    const editPickError = function () {
+        fadeOutAlert(
+            applyAlert(
+                'warning',
+                DOM.list.alert,
+                params.message.editAjaxError
+            ).show()
+        );
     };
     /**
      * Method responsable to call remove option
@@ -167,11 +236,32 @@ function AbstractController(params) {
     const serializeAndSubmit = function () {
         new AjaxController({
             data: params.serialize(),
-            method: 'POST',
-            url: params.apiUrl,
+            method: getMethodForPersistence(),
+            url: getApiUrlForDefinedMethod(),
             success: submitSuccess,
             error: submitError
         }).send();
+    };
+    /**
+     * Test condition of update flag to handle the correct method for persistence
+     * @memberOf AbstractController
+     */
+    const getMethodForPersistence = function () {
+        return isUpdate ? 'PUT' : 'POST'
+    };
+    /**
+     * Test condition of update flag to handle the correct URL for persistence
+     * @memberOf AbstractController
+     */
+    const getApiUrlForDefinedMethod = function () {
+        return isUpdate ? params.apiUrl + getPk() + '/' : params.apiUrl
+    };
+    /**
+     * Return PK for register in update
+     * @memberOf AbstractController
+     */
+    const getPk = function () {
+        return DOM.form.pk.val();
     };
     /**
      * Handle success after submit
@@ -182,6 +272,7 @@ function AbstractController(params) {
         DOM.divs.list.show();
         clean();
         showSuccess();
+        refresh();
     };
     /**
      * Handle erros after submit
@@ -202,7 +293,7 @@ function AbstractController(params) {
         applyAlert(
             'success',
             DOM.list.alert,
-            params.successMessage
+            params.message.saveSuccess
         ).show();
         fadeOutAlert(DOM.list.alert);
     };
@@ -236,6 +327,7 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const clean = function () {
+        isUpdate = false;
         DOM.form.alert.hide();
         DOM.form.alert.html("");
         DOM.form.tagForm.find('textarea,input:not([type=radio]):not([type=checkbox])').val('');
@@ -256,6 +348,19 @@ function AbstractController(params) {
         });
     };
     /**
+     *
+     * @memberOf AbstractController
+     */
+    const initSelectedDatatable = function () {
+        DOM.list.datatable.on('click', 'tbody > tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected')
+            } else {
+                $(this).addClass('selected').siblings('.selected').removeClass('selected');
+            }
+        });
+    };
+    /**
      * Refresh datatables
      * @memberOf AbstractController
      */
@@ -271,5 +376,6 @@ function AbstractController(params) {
         initMap();
         initEvents();
         initDatatable();
+        initSelectedDatatable();
     };
 }

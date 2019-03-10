@@ -19,6 +19,7 @@ function AjaxController(params) {
         $.ajax({
             url: params.url,
             method: params.method,
+            headers:{"X-CSRFToken": $("input[name='csrfmiddlewaretoken']").val()},
             data: Object.assign(
                 params.data,
                 {

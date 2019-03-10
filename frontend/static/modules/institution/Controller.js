@@ -7,23 +7,38 @@
  * @since 09/03/2018
  * @namespace InstitutionController
  */
-function Controller() {
+function Controller($container) {
     /**
      * Return params for AbstractController
      * @memberOf InstitutionController
      */
     const getParams = function () {
         return {
-            container: $('#institution'),
+            container: $container,
             apiUrl: '/api/institution/',
             serialize: serialize,
-            successMessage: `Institution successfully registered`,
+            message: {
+                saveSuccess: `Institution successfully registered`,
+                editPickError: `Select a institution to update`,
+                editAjaxError: 'Something went wrong with request, call administrators'
+            },
             datatableColumns: [
-              { data: 'id' },
-              { data: 'name' },
-              { data: 'country' }
-            ]
+                {data: 'id'},
+                {data: 'name'},
+                {data: 'country'}
+            ],
+            toForm: toForm
         };
+    };
+    /**
+     * Fill form fields for update data
+       * @memberOf InstitutionController
+   */
+    const toForm = function (institution) {
+        let $form = $('form',$container);
+        $('#institution\\.id', $form).val(institution.id);
+        $('#institution\\.name', $form).val(institution.name);
+        $('#institution\\.country', $form).val(institution.country);
     };
     /**
      * Serialize form for API submit
@@ -42,5 +57,5 @@ function Controller() {
 }
 
 $(document).ready(function () {
-    new Controller().init();
+    new Controller($('#institution')).init();
 });

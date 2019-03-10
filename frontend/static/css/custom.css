@@ -1,4 +1,8 @@
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #616b78;
+    color: white;
+}
+table.dataTable tbody tr.selected {
     background-color: #343a40;
     color: white;
 }

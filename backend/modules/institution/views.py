@@ -7,6 +7,7 @@ Universidade de Passo Fundo - 2018/2019
 @since 09/03/2018
 """
 from rest_framework import viewsets
+from rest_framework.response import Response
 
 from .models import Institution
 from .serializers import InstitutionSerializer
@@ -14,6 +15,13 @@ from .serializers import InstitutionSerializer
 
 class InstitutionViewSet(viewsets.ModelViewSet):
     serializer_class = InstitutionSerializer
-    queryset = Institution.objects.all().order_by('id')
 
+    def get_queryset(self):
+
+        identification = self.request.query_params.get('pk', None)
+        if identification is not None:
+            self.pagination_class = None
+            return Institution.objects.filter(pk=identification)
+
+        return Institution.objects.all().order_by('id')
 
