@@ -22,6 +22,8 @@ class Institution(models.Model):
         managed = True
         verbose_name = 'Institutions'
         verbose_name_plural = 'Institutions'
+        ordering = ['id']
+
 
     def __str__(self):
         return self.name

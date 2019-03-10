@@ -23,8 +23,10 @@ function AbstractController(params) {
             buttons: {
                 new: null,
                 edit: null,
-                remove: null
+                remove: null,
+                refresh: null,
             },
+            datatable: null,
             fields: {},
         },
         form: {
@@ -47,7 +49,9 @@ function AbstractController(params) {
         DOM.list.buttons.new = $('#btnNew', params.container);
         DOM.list.buttons.edit = $('#btnEdit', params.container);
         DOM.list.buttons.remove = $('#btnRemove', params.container);
+        DOM.list.buttons.refresh = $('#btnRefresh', params.container);
         DOM.list.alert = $('#listAlert', params.container);
+        DOM.list.datatable = $('#datatable', params.container);
         DOM.form.tagForm = $('form', params.container);
         DOM.form.buttons.save = $('#btnSave', params.container);
         DOM.form.buttons.cancel = $('#btnCancel', params.container);
@@ -61,6 +65,7 @@ function AbstractController(params) {
         DOM.list.buttons.new.on('click', newRegister);
         DOM.list.buttons.edit.on('click', edit);
         DOM.list.buttons.remove.on('click', remove);
+        DOM.list.buttons.refresh.on('click', refresh);
         DOM.form.buttons.save.on('click', save);
         DOM.form.buttons.cancel.on('click', cancel);
     };
@@ -164,15 +169,15 @@ function AbstractController(params) {
             data: params.serialize(),
             method: 'POST',
             url: params.apiUrl,
-            success: success,
-            error: showError
+            success: submitSuccess,
+            error: submitError
         }).send();
     };
     /**
      * Handle success after submit
      * @memberOf AbstractController
      */
-    const success = function () {
+    const submitSuccess = function () {
         DOM.divs.form.hide();
         DOM.divs.list.show();
         clean();
@@ -182,7 +187,7 @@ function AbstractController(params) {
      * Handle erros after submit
      * @memberOf AbstractController
      */
-    const showError = function () {
+    const submitError = function () {
         applyAlert(
             'danger',
             DOM.form.alert,
@@ -240,11 +245,31 @@ function AbstractController(params) {
         DOM.form.tagForm.parsley().reset();
     };
     /**
+     * Initialize datatable for module
+     * @memberOf AbstractController
+     */
+    const initDatatable = function () {
+        DOM.list.datatable.DataTable({
+            serverSide: true,
+            ajax: params.apiUrl + '?format=datatables',
+            columns: params.datatableColumns
+        });
+    };
+    /**
+     * Refresh datatables
+     * @memberOf AbstractController
+     */
+    const refresh = function () {
+        DOM.list.datatable.DataTable().search('');
+        DOM.list.datatable.DataTable().ajax.reload();
+    };
+    /**
      * Module Initialize
      * @memberOf AbstractController
      */
     this.init = function () {
         initMap();
         initEvents();
+        initDatatable();
     };
 }

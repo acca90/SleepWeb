@@ -17,8 +17,12 @@ function Controller() {
             container: $('#institution'),
             apiUrl: '/api/institution/',
             serialize: serialize,
-            successMessage: `Institution successfully registered`
-
+            successMessage: `Institution successfully registered`,
+            datatableColumns: [
+              { data: 'id' },
+              { data: 'name' },
+              { data: 'country' }
+            ]
         };
     };
     /**

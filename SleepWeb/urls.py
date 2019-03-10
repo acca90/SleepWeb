@@ -17,7 +17,7 @@ from frontend.modules.institution.views import Institution
 from frontend.modules.home.views import Home
 
 router = routers.DefaultRouter()
-router.register('institution', InstitutionViewSet)
+router.register(r'institution', InstitutionViewSet, base_name='Institution')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
