@@ -25,6 +25,7 @@
         <option value="$MODULE_DIR$/frontend/templates/modules" />
         <option value="$MODULE_DIR$/frontend/templates/modules/home" />
         <option value="$MODULE_DIR$/frontend/templates/modules/institution" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/user" />
       </list>
     </option>
   </component>

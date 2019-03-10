@@ -16,26 +16,31 @@ function Controller($container) {
         return {
             container: $container,
             apiUrl: '/api/institution/',
-            serialize: serialize,
             message: {
                 saveSuccess: `Institution successfully registered`,
                 editPickError: `Select a institution to update`,
-                editAjaxError: 'Something went wrong with request, call administrators'
+                editAjaxError: `Something went wrong with request, call administrators`,
+                editSuccess: `Institution successfully updated`,
+                removeConfirmationMsg: `Are you sure to remove this institution? You cannot revert if it is done.`,
+                removePickError: `Select a institution to remove`,
+                removeError: `Something went wrong with request, call administrators`,
+                removeSuccess: `Institution successfully removed`,
             },
             datatableColumns: [
                 {data: 'id'},
                 {data: 'name'},
                 {data: 'country'}
             ],
+            serialize: serialize,
             toForm: toForm
         };
     };
     /**
      * Fill form fields for update data
-       * @memberOf InstitutionController
-   */
+     * @memberOf InstitutionController
+     */
     const toForm = function (institution) {
-        let $form = $('form',$container);
+        let $form = $('form', $container);
         $('#institution\\.id', $form).val(institution.id);
         $('#institution\\.name', $form).val(institution.name);
         $('#institution\\.country', $form).val(institution.country);

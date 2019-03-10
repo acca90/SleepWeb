@@ -105,9 +105,8 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const editForSelectedRow = function ($tr) {
-        let data = DOM.list.datatable.DataTable().row($tr).data();
         new AjaxController({
-            data: {pk: data.id},
+            data: {pk: getId($tr)},
             method: 'GET',
             url: params.apiUrl,
             success: editPickSuccess,
@@ -156,11 +155,79 @@ function AbstractController(params) {
         );
     };
     /**
-     * Method responsable to call remove option
+     *
      * @memberOf AbstractController
      */
     const remove = function () {
-        alert('remove');
+        let $tr = DOM.list.datatable.find('tr.selected');
+        if ($tr.length) {
+            return removeSelected($tr);
+        }
+        fadeOutAlert(
+            applyAlert(
+                'warning',
+                DOM.list.alert,
+                params.message.removePickError
+            ).show()
+        );
+    };
+    /**
+     * Method responsable to call remove option
+     * @memberOf AbstractController
+     */
+    const removeSelected = function ($tr) {
+        new ConfirmationController(
+            'Need confirmation',
+            params.message.removeConfirmationMsg,
+            $modal => {
+                $modal.modal('toggle');
+                sendRemoveRequest($tr);
+            },
+            () => {
+                console.log('dismiss');
+            },
+        ).open();
+    };
+    /**
+     * Send remove request to back-end
+     * @memberOf AbstractController
+     */
+    const sendRemoveRequest = function ($tr) {
+        new AjaxController({
+            data: params.serialize(),
+            method: 'DELETE',
+            url: params.apiUrl + getId($tr) + '/',
+            success: removeSuccess,
+            error: removeError
+        }).send();
+    };
+
+    /**
+     * Handle success when remove
+     * @memberOf AbstractController
+     */
+    const removeSuccess = function () {
+        refresh();
+        fadeOutAlert(
+            applyAlert(
+                'success',
+                DOM.list.alert,
+                params.message.removeSuccess
+            ).show()
+        );
+    };
+    /**
+     * Handle erro when remove
+     * @memberOf AbstractController
+     */
+    const removeError = function () {
+        fadeOutAlert(
+            applyAlert(
+                'danger',
+                DOM.list.alert,
+                params.message.removeError
+            ).show()
+        );
     };
     /**
      * Method responsable to submit form and save
@@ -270,8 +337,8 @@ function AbstractController(params) {
     const submitSuccess = function () {
         DOM.divs.form.hide();
         DOM.divs.list.show();
-        clean();
         showSuccess();
+        clean();
         refresh();
     };
     /**
@@ -293,9 +360,16 @@ function AbstractController(params) {
         applyAlert(
             'success',
             DOM.list.alert,
-            params.message.saveSuccess
+            getMessageForSuccess()
         ).show();
         fadeOutAlert(DOM.list.alert);
+    };
+    /**
+     * Return message of success based on method used
+     * @memberOf AbstractController
+     */
+    const getMessageForSuccess = function () {
+        return isUpdate ? params.message.editSuccess : params.message.saveSuccess;
     };
     /**
      * Fade out alert after a time
@@ -367,6 +441,14 @@ function AbstractController(params) {
     const refresh = function () {
         DOM.list.datatable.DataTable().search('');
         DOM.list.datatable.DataTable().ajax.reload();
+    };
+    /**
+     * Return data for selected row
+     * @memberOf AbstractController
+     */
+    const getId = function ($tr) {
+        let rowData = DOM.list.datatable.DataTable().row($tr).data();
+        return rowData.id;
     };
     /**
      * Module Initialize
