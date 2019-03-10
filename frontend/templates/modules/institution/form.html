@@ -1,12 +1,16 @@
 <div id="form" style="display: none">
+
+	<div id="formAlert" class="alert" role="alert" style="display: none">
+	</div>
+
+	{% csrf_token %}
 	<div class="row">
 		<div class="col-12 mb-2">
-			<button type="button"
-					class="btn btn-success btn-sm">
+			<button type="button" class="btn btn-success btn-sm" id="btnSave">
 				<i class="fa fa-floppy-o"></i>
 				<b>Save</b>
 			</button>
-			<button type="button" class="btn btn-danger btn-sm">
+			<button type="button" class="btn btn-danger btn-sm" id="btnCancel">
 				<i class="fa fa-remove"></i>
 				<b>Cancel</b>
 			</button>
@@ -20,14 +24,14 @@
 		</div>
 		<div class="card-body">
 
-			<form id="formUser">
+			<form data-parsley-validate>
 				<div class="form-row">
 					<div class="form-group col-md-3">
 						<label for="user.id">Identification</label>
 						<input type="text"
 							   class="form-control form-control-sm"
 							   id="user.id"
-							   name="user.id"
+							   name="id"
 							   disabled>
 					</div>
 				</div>
@@ -35,15 +39,19 @@
 					<label for="user.name">Name</label>
 					<input type="text"
 						   class="form-control form-control-sm"
+						   required=""
+						   data-parsley-required-message="Enter the name of the institution"
 						   id="user.name"
-						   required>
+						   name="name">
 				</div>
 				<div class="form-group">
 					<label for="user.institution">Country</label>
 					<select class="form-control form-control-sm"
-							id="user.institution"
-							required>
-						Afghanistan
+							required=""
+							data-parsley-required-message="Enter the country of the institution"
+							id="user.country"
+							name="country">
+						<option value="">Select</option>
 						<option>Afghanistan</option>
 						<option>Albania</option>
 						<option>Algeria</option>
@@ -239,8 +247,8 @@
 						<option>Vietnam</option>
 						<option>Yemen</option>
 						<option>Zambia</option>
-						<option>Zimbabwe</option>
 					</select>
+
 				</div>
 			</form>
 

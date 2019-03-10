@@ -7,23 +7,36 @@
  * @since 09/03/2018
  * @namespace InstitutionController
  */
-const Controller = $(function ()
+function Controller() {
     /**
-     * Controller
+     * Return params for AbstractController
      * @memberOf InstitutionController
      */
-    let controller = new AbstractController();
+    const getParams = function () {
+        return {
+            container: $('#institution'),
+            apiUrl: '/api/institution/',
+            serialize: serialize,
+            successMessage: `Institution successfully registered`
+
+        };
+    };
+    /**
+     * Serialize form for API submit
+     * @memberOf InstitutionController
+     */
+    const serialize = function () {
+        return $('form').serializeToJson();
+    };
     /**
      * Module Initialize
      * @memberOf InstitutionController
      */
-    const init = function () {
-        controller.init();
+    this.init = function () {
+        new AbstractController(getParams()).init();
     };
-    /**
-     * Public Methods
-     */
-    return {
-        init: init
-    };
-})(jQuery);
+}
+
+$(document).ready(function () {
+    new Controller().init();
+});

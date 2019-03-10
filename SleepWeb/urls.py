@@ -23,10 +23,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
 
+    # api
+    path('api/', include(router.urls)),
+
     # views
     url(r'^$', Home.as_view(), name='index'),
     url(r'institution/', Institution.as_view(), name='institution'),
 
-    # api
-    path('api/', include(router.urls)),
+
 ]

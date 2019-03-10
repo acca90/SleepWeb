@@ -1,15 +1,17 @@
 <div id="list">
+	<div id="listAlert" class="alert" role="alert" style="display: none">
+	</div>
 	<div class="row">
 		<div class="col-12 mb-2">
-			<button type="button" class="btn btn-success btn-sm" [routerLink]="['/user/form']">
+			<button type="button" class="btn btn-success btn-sm" id="btnNew">
 				<i class="fa fa-plus"></i>
 				<b>New</b>
 			</button>
-			<button type="button" class="btn btn-primary btn-sm">
+			<button type="button" class="btn btn-primary btn-sm" id="btnEdit">
 				<i class="fa fa-pencil"></i>
 				<b>Edit</b>
 			</button>
-			<button type="button" class="btn btn-danger btn-sm">
+			<button type="button" class="btn btn-danger btn-sm" id="btnRemove">
 				<i class="fa fa-trash"></i>
 				<b>Remove</b>
 			</button>
@@ -18,7 +20,7 @@
 	<div class="card bg-light">
 		<div class="card-header">
 			<i class="fa fa-building"></i>
-			<b>Institution</b>
+			<b>Institutions</b>
 		</div>
 		<div class="card-body">
 			<table id="user-list" class="table table-striped table-hover table-sm">

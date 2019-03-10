@@ -1,9 +1,16 @@
-{% extends "base.html" %}
+{% extends "moduleBase.html" %}
 {% load static %}
 
 {% block content %}
 
-	{% include 'list.html' %}
-	{% include 'form.html' %}
+	<div id="institution">
+		{% include 'list.html' %}
+		{% include 'form.html' %}
+	</div>
 
+{% endblock %}
+
+{% block scripts %}
+	{{ block.super }}
+	<script src="{% static "modules/institution/Controller.js" %}"></script>
 {% endblock %}

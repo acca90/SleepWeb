@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% endblock %}
+
+{% block scripts %}
+	{{ block.super }}
+	<script src="{% static "js/parsley.min.js" %}"></script>
+	<script src="{% static "commons/AbstractController.js" %}"></script>
+{% endblock %}
