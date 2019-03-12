@@ -1,0 +1,72 @@
+{% extends 'commons/base.html' %}
+{% load static %}
+
+{% block base %}
+
+	<style>
+		body {
+			background: #26f9d5;
+		}
+	</style>
+
+	<div class="col-md-4 mx-auto">
+		<div class="card card-signin my-5">
+
+			<div class="card-body">
+
+				<form role="form">
+					<fieldset>
+						<h2>Please Sign In</h2>
+						<hr class="colorgraph">
+						<div class="form-group">
+							<input type="email"
+								   name="email"
+								   id="email"
+								   class="form-control input-lg"
+								   placeholder="Email Address">
+						</div>
+						<div class="form-group">
+							<input type="password"
+								   name="password"
+								   id="password"
+								   class="form-control input-lg"
+								   placeholder="Password">
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>
+									<input type="checkbox" name="remember_me" id="remember_me" checked>
+									<b>Remember Me</b>
+								</label>
+							</div>
+							<div class="col-md-6 text-right">
+								<a href="">Forgot Password?</a>
+							</div>
+						</div>
+						<hr class="colorgraph">
+						<div class="row">
+							<div class="col-xs-6 col-sm-6 col-md-6">
+								<a href="" class="btn btn-lg btn-warning btn-block">
+									Sign In
+								</a>
+							</div>
+							<div class="col-xs-6 col-sm-6 col-md-6">
+								<a href="" class="btn btn-lg btn-danger btn-block">
+									Register
+								</a>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+
+{% endblock base %}
+
+{% block scripts %}
+	{{ block.super }}
+	<script src="{% static "commons/AjaxController.js" %}"></script>
+{% endblock %}

@@ -7,7 +7,7 @@
  * @since 09/03/2018
  * @namespace InstitutionController
  */
-function Controller($container) {
+function InstitutionController($container) {
     /**
      * Return params for AbstractController
      * @memberOf InstitutionController
@@ -62,5 +62,5 @@ function Controller($container) {
 }
 
 $(document).ready(function () {
-    new Controller($('#institution')).init();
+    new InstitutionController($('#institution')).init();
 });

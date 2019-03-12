@@ -7,7 +7,6 @@ Universidade de Passo Fundo - 2018/2019
 @since 09/03/2018
 """
 from rest_framework import viewsets
-from rest_framework.response import Response
 
 from .models import Institution
 from .serializers import InstitutionSerializer

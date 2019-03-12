@@ -27,10 +27,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Application definition
 SLEEPWEB_APPS = [
+    'backend.modules.user',
     'frontend.modules.institution',
-    'frontend.modules.user',
+    'frontend.modules.user_fe',
     'frontend.modules.patient',
-    'frontend.modules.group'
+    'frontend.modules.group',
+    'frontend.modules.login'
 ]
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -65,7 +67,6 @@ TEMPLATES = [
         'DIRS': [
             'frontend/templates',
             'frontend/templates/modules',
-            'frontend/templates/modules/institution',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -112,6 +113,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTH_USER_MODEL = 'user.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

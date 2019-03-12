@@ -1,9 +1,16 @@
-{% extends "base.html" %}
+{% extends "commons/module.html" %}
 {% load static %}
 
-{% block content %}
+{% block container %}
 
-	{% include 'list.html' %}
-	{% include 'form.html' %}
+	<div id="user">
+		{% include 'user/list.html' %}
+		{% include 'user/form.html' %}
+	</div>
 
+{% endblock container %}
+
+{% block scripts %}
+	{{ block.super }}
+	<script src="{% static "modules/user/UserController.js" %}"></script>
 {% endblock %}

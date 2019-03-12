@@ -1,16 +1,16 @@
-{% extends "moduleBase.html" %}
+{% extends "commons/module.html" %}
 {% load static %}
 
-{% block content %}
+{% block container %}
 
 	<div id="institution">
-		{% include 'list.html' %}
-		{% include 'form.html' %}
+		{% include 'institution/list.html' %}
+		{% include 'institution/form.html' %}
 	</div>
 
-{% endblock %}
+{% endblock container %}
 
 {% block scripts %}
 	{{ block.super }}
-	<script src="{% static "modules/institution/Controller.js" %}"></script>
+	<script src="{% static "modules/institution/InstitutionController.js" %}"></script>
 {% endblock %}
