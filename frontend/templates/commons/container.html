@@ -2,17 +2,20 @@
 {% load static %}
 
 {% block base %}
-	{% include 'commons/navbar.html' %}
-	<div class="container mt-3">
-		{% block container %}
-		{% endblock container %}
-		<hr class="colorgraph">
-		<p class="small text-center">
-			Developed by <a href="http://github.com/acca90" target="_blank">Matheus R. Hernandes</a> - University of Passo Fundo - 2019
-		</p>
-	</div>
-{% endblock base %}
 
+	{% if user.is_authenticated %}
+		{% include 'commons/navbar.html' %}
+		<div class="container mt-3">
+			{% block container %}
+			{% endblock container %}
+			<hr class="colorgraph">
+			{% include 'commons/developedby.html' %}
+		</div>
+	{% else %}
+		<meta http-equiv="REFRESH" content="0;url=/login/">
+	{% endif %}
+
+{% endblock base %}
 {% include 'commons/confirmation.html' %}
 
 {% block scripts %}

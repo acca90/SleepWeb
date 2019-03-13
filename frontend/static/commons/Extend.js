@@ -30,4 +30,3 @@ jQuery.extend({
             value === '';
     }
 });
-

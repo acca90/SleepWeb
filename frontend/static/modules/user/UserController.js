@@ -21,17 +21,17 @@ function UserController($container) {
                 editPickError: `Select a user to update`,
                 editAjaxError: `Something went wrong with request, call administrators`,
                 editSuccess: `User successfully updated`,
-                removeConfirmationMsg: `Are you sure to remove this user? You cannot revert if it is done.`,
                 removePickError: `Select a user to remove`,
-                removeError: `Something went wrong with request, call administrators`,
+                removeConfirmationMsg: `Are you sure to remove this user? You cannot revert if it is done.`,
                 removeSuccess: `User successfully removed`,
+                removeError: `Something went wrong with request, call administrators`,
             },
             datatableColumns: [
-                {data: 'id'},
-                {data: 'username'},
-                {data: 'first_name'},
-                {data: 'email'},
-                {data: 'institution_name'}
+                {data: 'id', sDefaultContent: '',},
+                {data: 'username', sDefaultContent: '',},
+                {data: 'first_name', sDefaultContent: '',},
+                {data: 'email', sDefaultContent: '',},
+                {data: 'institution_name', sDefaultContent: 'Not Available',}
             ],
             serialize: serialize,
             toForm: toForm

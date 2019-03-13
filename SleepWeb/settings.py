@@ -27,6 +27,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Application definition
 SLEEPWEB_APPS = [
+    'backend',
+    'frontend',
     'backend.modules.user',
     'frontend.modules.institution',
     'frontend.modules.user_fe',
@@ -42,11 +44,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework_datatables',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
     'crispy_forms',
     'corsheaders',
     'rest_framework',
-    'backend',
-    'frontend',
 ] + SLEEPWEB_APPS
 
 MIDDLEWARE = [
@@ -146,3 +152,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework_datatables.pagination.DatatablesPageNumberPagination',
     'PAGE_SIZE': 50,
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+SITE_ID = 1

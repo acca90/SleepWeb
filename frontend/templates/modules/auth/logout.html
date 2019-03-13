@@ -1,0 +1,23 @@
+{% load static %}
+
+<form>
+	{% csrf_token %}
+</form>
+{% block scripts %}
+	<script src="{% static "js/jQuery/jQuery.min.js" %}"></script>
+	<script src="{% static "commons/AjaxController.js" %}"></script>
+{% endblock %}
+<script>
+	function redirect() {
+	    window.location.href='/login/?logout=true';
+	}
+    $(document).ready(function () {
+        new AjaxController({
+            data: {},
+            method: 'POST',
+            url: '/api/rest-auth/logout/',
+            success: redirect,
+            error: redirect
+        }).send();
+    });
+</script>

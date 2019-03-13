@@ -11,7 +11,19 @@ from django.views import View
 
 
 class Login(View):
-    template_name = 'login/index.html'
+    template_name = 'auth/index.html'
+
+    def get(self, request):
+
+        logout = 'false'
+        if 'logout' in request.GET:
+            logout = request.GET['logout']
+
+        return render(request, self.template_name, {'logout': logout})
+
+
+class Logout(View):
+    template_name = 'auth/logout.html'
 
     def get(self, request):
         return render(request, self.template_name)

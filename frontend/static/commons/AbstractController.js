@@ -10,7 +10,7 @@
  */
 function AbstractController(params) {
     /**
-     *
+     * Flag indicate if form is being updated
      * @memberOf AbortController
      */
     let isUpdate = false;
@@ -71,7 +71,7 @@ function AbstractController(params) {
         DOM.list.buttons.edit.on('click', edit);
         DOM.list.buttons.remove.on('click', remove);
         DOM.list.buttons.refresh.on('click', refresh);
-        DOM.form.buttons.save.on('click', save);
+        DOM.form.buttons.save.on('click', validate);
         DOM.form.buttons.cancel.on('click', cancel);
     };
     /**
@@ -228,13 +228,6 @@ function AbstractController(params) {
                 params.message.removeError
             ).show()
         );
-    };
-    /**
-     * Method responsable to submit form and save
-     * @memberOf AbstractController
-     */
-    const save = function () {
-        validate();
     };
     /**
      * Validate form for submit
@@ -394,7 +387,10 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const applyAlert = function (type, alert, msg) {
-        return alert.removeClass('alert-success alert-info alert-warning alert-danger').addClass('alert-' + type).html(msg);
+        return alert
+            .removeClass('alert-success alert-info alert-warning alert-danger')
+            .addClass('alert-' + type)
+            .html(msg);
     };
     /**
      * Clean form form back to original state
@@ -422,7 +418,7 @@ function AbstractController(params) {
         });
     };
     /**
-     *
+     * Initialize row select for datatables
      * @memberOf AbstractController
      */
     const initSelectedDatatable = function () {

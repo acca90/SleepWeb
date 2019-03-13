@@ -1,0 +1,92 @@
+{% extends 'commons/base.html' %}
+{% load static %}
+
+{% block base %}
+
+	{% if user.is_authenticated %}
+		<meta http-equiv="REFRESH" content="0;url=/">
+	{% else %}
+
+		<style>
+			body {background: #26f9d5;}
+			p > a {color: #ac0756;}
+			p > a:hover {color: #880744;}
+			p > a:visited {color: #660733;}
+		</style>
+		<div class="col-lg-4 col-sm-6 mx-auto">
+
+			<div class="card card-signin my-5">
+				<div class="card-body">
+
+					<form role="form" action="{% url 'rest_login' %}" method="POST" data-parsley-validate>
+						<fieldset>
+							<h2>Please Sign In</h2>
+							<hr class="colorgraph">
+							<div class="form-group">
+								<input type="text"
+									   name="username"
+									   id="username"
+									   data-parsley-required-message="Enter your username"
+									   required
+									   class="form-control input-lg"
+									   placeholder="Username">
+							</div>
+							<div class="form-group">
+								<input type="password"
+									   name="password"
+									   id="password"
+									   data-parsley-required-message="Enter your password"
+									   required
+									   class="form-control input-lg"
+									   placeholder="Password">
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<label>
+										<input type="checkbox" name="remember_me" id="remember_me" checked>
+										<b>Remember Me</b>
+									</label>
+								</div>
+								<div class="col-md-6 text-right">
+									<a href="">Forgot Password?</a>
+								</div>
+							</div>
+							<div id="loginAlert" class="alert" role="alert" style="display: none;">
+								aaaaa
+							</div>
+							<hr class="colorgraph">
+							<div class="row">
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<a id="login" class="btn btn-lg btn-warning btn-block">
+										Sign In
+									</a>
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<a href="" class="btn btn-lg btn-danger btn-block">
+										Register
+									</a>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+
+				</div>
+			</div>
+			{% include 'commons/developedby.html' %}
+		</div>
+	{% endif %}
+
+{% endblock base %}
+
+{% block scripts %}
+	{{ block.super }}
+	<script src="{% static "js/parsley/parsley.min.js" %}"></script>
+	<script src="{% static "commons/AjaxController.js" %}"></script>
+	<script src="{% static "modules/login/LoginController.js" %}"></script>
+
+	<script>
+        $(document).ready(function () {
+            new LoginController().init({{ logout }});
+        })
+	</script>
+{% endblock %}

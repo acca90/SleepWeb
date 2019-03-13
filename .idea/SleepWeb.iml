@@ -13,7 +13,11 @@
     </facet>
   </component>
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/frontend/modules" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/backend/modules" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
@@ -26,6 +30,8 @@
         <option value="$MODULE_DIR$/frontend/templates/modules/home" />
         <option value="$MODULE_DIR$/frontend/templates/modules/institution" />
         <option value="$MODULE_DIR$/frontend/templates/modules/user" />
+        <option value="$MODULE_DIR$/frontend/templates/commons" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/login" />
       </list>
     </option>
   </component>

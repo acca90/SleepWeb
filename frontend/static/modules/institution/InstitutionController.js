@@ -21,10 +21,10 @@ function InstitutionController($container) {
                 editPickError: `Select a institution to update`,
                 editAjaxError: `Something went wrong with request, call administrators`,
                 editSuccess: `Institution successfully updated`,
-                removeConfirmationMsg: `Are you sure to remove this institution? You cannot revert if it is done.`,
                 removePickError: `Select a institution to remove`,
-                removeError: `Something went wrong with request, call administrators`,
+                removeConfirmationMsg: `Are you sure to remove this institution? You cannot revert if it is done.`,
                 removeSuccess: `Institution successfully removed`,
+                removeError: `Something went wrong with request, call administrators`,
             },
             datatableColumns: [
                 {data: 'id'},

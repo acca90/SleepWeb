@@ -14,10 +14,10 @@ from rest_framework import routers
 from backend.modules.institution.views import InstitutionViewSet
 
 from frontend.modules.institution.views import Institution
-from frontend.modules.login.views import Login
+from frontend.modules.login.views import Login, Logout
 from frontend.modules.home.views import Home
 from backend.modules.user.views import UserViewSet
-from user_fe.views import UserFrontEnd
+from frontend.modules.user_fe.views import UserFrontEnd
 
 router = routers.DefaultRouter()
 router.register(r'institution', InstitutionViewSet, base_name='Institution')
@@ -28,12 +28,15 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
 
     # api
-    path('api/rest-auth', include('rest_auth.urls')),
+    path('api/rest-auth/registration/', include('rest_auth.registration.urls')),
+    path('api/rest-auth/', include('rest_auth.urls')),
     path('api/', include(router.urls)),
 
     # views
     url(r'^$', Home.as_view(), name='index'),
     url(r'user/', UserFrontEnd.as_view(), name='user'),
     url(r'institution/', Institution.as_view(), name='institution'),
+    url(r'login/(?P<logout>\w+)', Login.as_view(), name='login'),
     url(r'login/', Login.as_view(), name='login'),
+    url(r'logout/', Logout.as_view(), name='logout'),
 ]

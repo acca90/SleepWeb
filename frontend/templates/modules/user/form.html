@@ -30,20 +30,78 @@
 						<label for="user.id">Identification</label>
 						<input type="text"
 							   class="form-control form-control-sm"
-							   id="institution.id"
+							   id="user.id"
 							   name="id"
 							   isPk
-							   disabled>
+							   disabled
+							   autocomplete="off">
 					</div>
 				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="user.id">First Name</label>
+						<input type="text"
+							   class="form-control form-control-sm"
+							   data-parsley-required-message="Enter the first name of the user"
+							   required
+							   id="user.id"
+							   name="id">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="user.id">Last Name</label>
+						<input type="text"
+							   class="form-control form-control-sm"
+							   data-parsley-required-message="Enter the last name of the user"
+							   autocomplete="off"
+							   required
+							   id="user.id"
+							   name="id">
+					</div>
+				</div>
+
 				<div class="form-group">
-					<label for="user.name">Name</label>
-					<input type="text"
+					<label for="user.name">E-mail</label>
+					<input type="email"
 						   class="form-control form-control-sm"
-						   required=""
-						   data-parsley-required-message="Enter the name of the institution"
-						   id="institution.name"
-						   name="name">
+						   data-parsley-required-message="Enter the email of the user"
+						   autocomplete="off"
+						   required
+						   id="user.id"
+						   name="id">
+				</div>
+
+				<div class="form-group">
+					<label for="user.name">Institution</label>
+					<select id="institution"
+							name="user.institution"
+							autocomplete="off"
+							required
+							class="form-control form-control-sm">
+					</select>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="user.id">Password</label>
+						<input type="password"
+							   class="form-control form-control-sm"
+							   data-parsley-required-message="Enter the password of the user"
+							   required
+							   autocomplete="off"
+							   id="user.id"
+							   name="id">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="user.id">Confirm Password</label>
+						<input type="password"
+							   class="form-control form-control-sm"
+							   data-parsley-required-message="Enter the password of the user"
+							   required
+							   autocomplete="off"
+							   id="user.id"
+							   name="id">
+					</div>
 				</div>
 
 			</form>
