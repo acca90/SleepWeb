@@ -8,6 +8,7 @@ Universidade de Passo Fundo - 2018/2019
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 from rest_framework import routers
 
@@ -28,15 +29,16 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
 
     # api
-    path('api/rest-auth/registration/', include('rest_auth.registration.urls')),
     path('api/rest-auth/', include('rest_auth.urls')),
     path('api/', include(router.urls)),
 
     # views
-    url(r'^$', Home.as_view(), name='index'),
-    url(r'user/', UserFrontEnd.as_view(), name='user'),
-    url(r'institution/', Institution.as_view(), name='institution'),
-    url(r'login/(?P<logout>\w+)', Login.as_view(), name='login'),
+    url(r'^$', Login.as_view(), name='index'),
+    url(r'login/(?P<logout>\w+)', login_required(Login.as_view()), name='login'),
     url(r'login/', Login.as_view(), name='login'),
-    url(r'logout/', Logout.as_view(), name='logout'),
+    url(r'logout/', login_required(Logout.as_view()), name='logout'),
+
+    url(r'home/', login_required(Home.as_view()), name='home'),
+    url(r'user/', login_required(UserFrontEnd.as_view()), name='user'),
+    url(r'institution/', login_required(Institution.as_view()), name='institution'),
 ]

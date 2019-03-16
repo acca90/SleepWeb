@@ -12,5 +12,6 @@
 
 {% block scripts %}
 	{{ block.super }}
+	<script src="{% static "modules/user/UserService.js" %}"></script>
 	<script src="{% static "modules/user/UserController.js" %}"></script>
 {% endblock %}

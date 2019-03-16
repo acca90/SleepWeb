@@ -4,14 +4,24 @@
 {% block base %}
 
 	{% if user.is_authenticated %}
-		<meta http-equiv="REFRESH" content="0;url=/">
+		<meta http-equiv="REFRESH" content="0;url=/home/">
 	{% else %}
-
 		<style>
-			body {background: #26f9d5;}
-			p > a {color: #ac0756;}
-			p > a:hover {color: #880744;}
-			p > a:visited {color: #660733;}
+			body {
+				background: #26f9d5;
+			}
+
+			p > a {
+				color: #ac0756;
+			}
+
+			p > a:hover {
+				color: #880744;
+			}
+
+			p > a:visited {
+				color: #660733;
+			}
 		</style>
 		<div class="col-lg-4 col-sm-6 mx-auto">
 
@@ -79,14 +89,18 @@
 {% endblock base %}
 
 {% block scripts %}
-	{{ block.super }}
-	<script src="{% static "js/parsley/parsley.min.js" %}"></script>
-	<script src="{% static "commons/AjaxController.js" %}"></script>
-	<script src="{% static "modules/login/LoginController.js" %}"></script>
-
-	<script>
-        $(document).ready(function () {
-            new LoginController().init({{ logout }});
-        })
-	</script>
+	{% if not user.is_authenticated %}
+		{{ block.super }}
+		<script src="{% static "js/parsley/parsley.min.js" %}"></script>
+		<script src="{% static "commons/AjaxController.js" %}"></script>
+		<script src="{% static "modules/login/LoginController.js" %}"></script>
+		<script>
+            $(document).ready(function () {
+                new LoginController().init({
+                    'isLogout': {{ logout }},
+                    'isNotAuth': {{ auth }}
+                });
+            })
+		</script>
+	{% endif %}
 {% endblock %}

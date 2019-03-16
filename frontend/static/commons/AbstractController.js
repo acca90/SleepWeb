@@ -307,7 +307,7 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const getMethodForPersistence = function () {
-        return isUpdate ? 'PUT' : 'POST'
+        return isUpdate ? 'PATCH' : 'POST'
     };
     /**
      * Test condition of update flag to handle the correct URL for persistence
@@ -327,7 +327,8 @@ function AbstractController(params) {
      * Handle success after submit
      * @memberOf AbstractController
      */
-    const submitSuccess = function () {
+    const submitSuccess = function ( data ) {
+        console.log(data);
         DOM.divs.form.hide();
         DOM.divs.list.show();
         showSuccess();
@@ -405,6 +406,9 @@ function AbstractController(params) {
         DOM.form.tagForm.find('select').val('');
         DOM.form.tagForm.find('.is-invalid').removeClass('is-invalid');
         DOM.form.tagForm.parsley().reset();
+        if (!$.isEmpty(params.clean)) {
+            params.clean();
+        }
     };
     /**
      * Initialize datatable for module

@@ -121,7 +121,17 @@ function LoginController() {
         $('#login').off('click').on('click', function () {
             $('#loginAlert').hide();
             $form.submit();
-        })
+        });
+        $('#username').off('keyup').on('keyup', function (e) {
+            if (e.which === 13) {
+                $('#password').focus();
+            }
+        });
+        $('#password').off('keyup').on('keyup', function (e) {
+            if (e.which === 13) {
+                $('#login').trigger('click')
+            }
+        });
     };
     /**
      * Show logout alert
@@ -137,11 +147,25 @@ function LoginController() {
         ).show();
     };
     /**
+     * Check if user is not auth and show alert
+     * @param isNotAuth
+     */
+    const showAlertIfNotAuth = function (isNotAuth) {
+        if (isNotAuth) {
+            return;
+        }
+        applyAlert(
+            'danger',
+            `You are not authorized`
+        ).show();
+    };
+    /**
      * Initialize controller
      * @memberOf LoginController
      */
-    this.init = function (isLogout) {
+    this.init = function (params) {
         initEvents();
-        showAlertIfLogout(isLogout);
+        showAlertIfLogout(params.isLogout);
+        showAlertIfNotAuth(params.isNotAuth);
     };
 }

@@ -15,7 +15,9 @@ jQuery.fn.extend({
         let result = {};
         pairs.forEach(function (pair) {
             pair = pair.split('=');
-            result[pair[0]] = decodeURIComponent(pair[1] || '');
+            if (!$.isEmpty(pair[1])) {
+                result[pair[0]] = decodeURIComponent(pair[1]);
+            }
         });
         return JSON.parse(JSON.stringify(result));
     },

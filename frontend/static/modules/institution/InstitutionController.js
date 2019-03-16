@@ -32,7 +32,8 @@ function InstitutionController($container) {
                 {data: 'country'}
             ],
             serialize: serialize,
-            toForm: toForm
+            toForm: toForm,
+            clean: null
         };
     };
     /**

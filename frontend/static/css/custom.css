@@ -6,6 +6,12 @@ table.dataTable tbody tr.selected {
     background-color: #343a40;
     color: white;
 }
+.bg-admin {
+    background-color: #880744;
+}
+.navbar-dark.bg-admin .navbar-nav .nav-link {
+    color: #ffffff;
+}
 .colorgraph {
   height: 5px;
   border-top: 0;

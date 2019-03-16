@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block base %}
-
 	{% if user.is_authenticated %}
 		{% include 'commons/navbar.html' %}
 		<div class="container mt-3">
@@ -11,12 +10,11 @@
 			<hr class="colorgraph">
 			{% include 'commons/developedby.html' %}
 		</div>
+		{% include 'commons/confirmation.html' %}
 	{% else %}
-		<meta http-equiv="REFRESH" content="0;url=/login/">
+		<meta http-equiv="REFRESH" content="0;url=/login/?auth=false">
 	{% endif %}
-
 {% endblock base %}
-{% include 'commons/confirmation.html' %}
 
 {% block scripts %}
 	{{ block.super }}

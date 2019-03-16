@@ -19,7 +19,11 @@ class Login(View):
         if 'logout' in request.GET:
             logout = request.GET['logout']
 
-        return render(request, self.template_name, {'logout': logout})
+        auth = 'true'
+        if 'auth' in request.GET:
+            auth = request.GET['auth']
+
+        return render(request, self.template_name, {'logout': logout, 'auth': auth})
 
 
 class Logout(View):

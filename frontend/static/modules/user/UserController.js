@@ -31,11 +31,20 @@ function UserController($container) {
                 {data: 'username', sDefaultContent: '',},
                 {data: 'first_name', sDefaultContent: '',},
                 {data: 'email', sDefaultContent: '',},
-                {data: 'institution_name', sDefaultContent: 'Not Available',}
+                {data: 'institution_name', sDefaultContent: 'Not Available',},
+                {data: 'is_active', sDefaultContent: 'Not Available', render: userActiveRender}
             ],
             serialize: serialize,
-            toForm: toForm
+            toForm: toForm,
+            clean: clean
         };
+    };
+    /**
+     * Render for user active situation
+     * @memberOf UserController
+     */
+    const userActiveRender = function (data) {
+        return data ? 'Active' : 'Inactive'
     };
     /**
      * Fill form fields for update data
@@ -43,7 +52,15 @@ function UserController($container) {
      */
     const toForm = function (user) {
         let $form = $('form', $container);
-
+        $('#userId', $form).val(user.id);
+        $('#userFirstName', $form).val(user.first_name);
+        $('#userLastName', $form).val(user.last_name);
+        $('#userUsername', $form).val(user.username);
+        $('#userEmail', $form).val(user.email);
+        $('#userInstitution', $form).val(user.institution);
+        $('#userPassword', $form).removeAttr('required');
+        $('#userPasswordConfirm', $form).removeAttr('required');
+        $('#is_active', $form).prop('checked',user.is_active);
     };
     /**
      * Serialize form for API submit
@@ -53,11 +70,20 @@ function UserController($container) {
         return $('form').serializeToJson();
     };
     /**
+     * Extend default clean functionality
+     */
+    const clean = function () {
+        $('#userPassword', $container).attr('required', '');
+        $('#userPasswordConfirm', $container).attr('required', '');
+    };
+    /**
      * Module Initialize
      * @memberOf UserController
      */
     this.init = function () {
         new AbstractController(getParams()).init();
+        let userService = new UserService();
+        userService.institutions();
     };
 }
 
