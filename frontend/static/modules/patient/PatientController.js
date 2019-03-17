@@ -4,7 +4,7 @@
  * Universidade de Passo Fundo - 2018/2019
  *
  * @author Matheus Hernandes
- * @since 09/03/2018
+ * @since 09/03/2019
  * @namespace InstitutionController
  */
 function PatientController($container) {
@@ -15,7 +15,7 @@ function PatientController($container) {
     const getParams = function () {
         return {
             moduleName: 'Patients',
-            moduleIcon: 'fa fa-building',
+            moduleIcon: 'fa fa-address-card-o',
             container: $container,
             apiUrl: '/api/patient/',
             message: {

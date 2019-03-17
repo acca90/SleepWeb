@@ -34,6 +34,7 @@
         <option value="$MODULE_DIR$/frontend/templates/modules/patient" />
         <option value="$MODULE_DIR$/frontend/templates/modules/stage" />
         <option value="$MODULE_DIR$/frontend/templates/modules/user" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/analysis" />
       </list>
     </option>
   </component>

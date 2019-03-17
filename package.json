@@ -1,0 +1,27 @@
+{
+  "name": "sleepweb",
+  "version": "0.0.1",
+  "description": "Sleep Monitoring System",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acca90/SleepWeb.git"
+  },
+  "author": "Matheus Hernandes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acca90/SleepWeb/issues"
+  },
+  "homepage": "https://github.com/acca90/SleepWeb#readme",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "bootstrap-datepicker": "^1.8.0",
+    "chart.js": "^2.8.0",
+    "datatables.net-bs4": "^1.10.19",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1",
+    "parsleyjs": "^2.8.1",
+    "popper.js": "^1.14.7"
+  }
+}

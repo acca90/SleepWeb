@@ -4,7 +4,7 @@
  * Universidade de Passo Fundo - 2018/2019
  *
  * @author Matheus Hernandes
- * @since 16/03/2018
+ * @since 16/03/2019
  * @namespace UserService
  */
 function UserService() {

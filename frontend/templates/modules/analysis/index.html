@@ -1,0 +1,26 @@
+{% extends "commons/container.html" %}
+{% load static %}
+
+{% block css %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static "chart.js/dist/Chart.min.css" %}"/>
+{% endblock %}
+
+{% block container %}
+	<div id="analysis" class="">
+		<canvas id="myChart" style="max-height: 400px !important; max-width: 400px !important; height: 400px !important; width: 400px !important;"></canvas>
+	</div>
+{% endblock container %}
+
+{% block scripts %}
+	{{ block.super }}
+	<script src="{% static "chart.js/dist/Chart.min.js" %}"></script>
+	<script src="{% static "modules/analysis/AnalysisService.js" %}"></script>
+	<script src="{% static "modules/analysis/AnalysisController.js" %}"></script>
+	<script>
+		$(document).ready(function () {
+			new AnalysisController().init();
+        });
+	</script>
+{% endblock %}
+

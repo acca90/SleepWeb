@@ -4,7 +4,7 @@ Projeto desenvolvido para o Programa de Pós-Graduação em Computação Aplicad
 Universidade de Passo Fundo - 2018/2019
 
 @author Matheus Hernandes
-@since 11/03/2018
+@since 11/03/2019
 """
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from backend.modules.user.models import User

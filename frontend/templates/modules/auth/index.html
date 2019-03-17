@@ -1,5 +1,6 @@
 {% extends 'commons/base.html' %}
 {% load static %}
+{% load compress %}
 
 {% block base %}
 
@@ -91,7 +92,7 @@
 {% block scripts %}
 	{% if not user.is_authenticated %}
 		{{ block.super }}
-		<script src="{% static "js/parsley/parsley.min.js" %}"></script>
+		<script src="{% static "parsleyjs/dist/parsley.min.js" %}"></script>
 		<script src="{% static "commons/AjaxController.js" %}"></script>
 		<script src="{% static "modules/login/LoginController.js" %}"></script>
 		<script>

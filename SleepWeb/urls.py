@@ -4,7 +4,7 @@ Projeto desenvolvido para o Programa de Pós-Graduação em Computação Aplicad
 Universidade de Passo Fundo - 2018/2019
 
 @author Matheus Hernandes
-@since 09/03/2018
+@since 09/03/2019
 """
 from django.conf.urls import url
 from django.contrib import admin
@@ -15,13 +15,14 @@ from rest_framework import routers
 from backend.modules.institution.views import InstitutionViewSet
 from backend.modules.patient.views import PatientViewSet
 from backend.modules.stage.views import StageViewSet
+from backend.modules.user.views import UserViewSet
 from frontend.modules.stage.views import Stage
 from frontend.modules.patient.views import Patient
 from frontend.modules.institution.views import Institution
 from frontend.modules.login.views import Login, Logout
 from frontend.modules.home.views import Home
 from frontend.modules.user.views import UserFrontEnd
-from backend.modules.user.views import UserViewSet
+from frontend.modules.analysis.views import AnalysisView
 
 
 router = routers.DefaultRouter()
@@ -50,4 +51,5 @@ urlpatterns = [
 
     url(r'stage/', login_required(Stage.as_view()), name='stage'),
     url(r'patient/', login_required(Patient.as_view()), name='patient'),
+    url(r'analysis/', login_required(AnalysisView.as_view()), name='analysis'),
 ]

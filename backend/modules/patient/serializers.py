@@ -4,7 +4,7 @@ Projeto desenvolvido para o Programa de Pós-Graduação em Computação Aplicad
 Universidade de Passo Fundo - 2018/2019
 
 @author Matheus Hernandes
-@since 16/03/2018
+@since 16/03/2019
 """
 from rest_framework import serializers
 

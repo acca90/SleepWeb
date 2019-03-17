@@ -4,7 +4,7 @@
  * Universidade de Passo Fundo - 2018/2019
  *
  * @author Matheus Hernandes
- * @since 10/03/2018
+ * @since 10/03/2019
  * @namespace ConfirmationController
  */
 function ConfirmationController(title, msg, confirmFunction, dismissFunction) {

@@ -1,6 +1,10 @@
 {% extends 'commons/base.html' %}
 {% load static %}
 
+{% block css %}
+	{{ block.super }}
+{% endblock %}
+
 {% block base %}
 	{% if user.is_authenticated %}
 		{% include 'commons/navbar.html' %}
