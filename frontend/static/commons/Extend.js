@@ -24,11 +24,36 @@ jQuery.fn.extend({
 
 });
 jQuery.extend({
-     isEmpty: function ( value ) {
+    /**
+     * Check if value is empty
+     */
+    isEmpty: function (value) {
         return value === null ||
             value === undefined ||
             value === 'undefined' ||
             value === [] ||
             value === '';
+    },
+    /**
+     * Format default django date format
+     */
+    dateFormat: function (value) {
+        let splitted = value.split('-');
+        return (splitted.reverse()).join('/');
+    },
+    /**
+     * Calculate the age from birth date
+     */
+    calcAge: function (date) {
+        let DOB = new Date(date);
+        let today = new Date();
+        let age = today.getTime() - DOB.getTime();
+        let elapsed = new Date(age);
+        let year = elapsed.getYear() - 70;
+        let month = elapsed.getMonth();
+        if (year > 0) {
+            return year + ' years';
+        }
+        return month + ' Months';
     }
 });

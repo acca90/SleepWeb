@@ -7,15 +7,15 @@ Universidade de Passo Fundo - 2018/2019
 @since 09/03/2018
 """
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
 
+from backend.commons.IsSuperUserPermission import IsSuperUserPermission
 from .models import Institution
 from .serializers import InstitutionSerializer
 
 
 class InstitutionViewSet(viewsets.ModelViewSet):
     serializer_class = InstitutionSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsSuperUserPermission,)
 
     def get_queryset(self):
 

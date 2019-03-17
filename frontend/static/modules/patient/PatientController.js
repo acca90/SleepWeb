@@ -29,9 +29,11 @@ function PatientController($container) {
                 removeError: `Something went wrong with request, call administrators`,
             },
             datatableColumns: [
-                {data: 'id'},
-                {data: 'name'},
-                {data: 'country'}
+                {data: 'id', width: '60px'},
+                {data: 'first_name', render: renderFullName},
+                {data: 'birth_date', render: renderBirthDateAndAge, width: '200px'},
+                {data: 'gender', render: renderGender, width: '100px'},
+                {data: 'stage', sDefaultContent: '', width: '120px'}
             ],
             serialize: serialize,
             toForm: toForm,
@@ -39,18 +41,50 @@ function PatientController($container) {
         };
     };
     /**
+     * Render for name
+     * @memberOf PatientController
+     */
+    const renderFullName = function (data, type, row) {
+        return data + " " + row.last_name;
+    };
+    /**
+     * Render for birth date and age
+     * @memberOf PatientController
+     */
+    const renderBirthDateAndAge = function (data) {
+        return $.dateFormat(data) + ` (${$.calcAge(data)})`;
+    };
+    /**
+     * Render for gender
+     * @memberOf PatientController
+     */
+    const renderGender = function (data) {
+        return data === 1 ? 'Masculine' : 'Feminine';
+    };
+    /**
      * Fill form fields for update data
      * @memberOf PatientController
      */
     const toForm = function (patient) {
         let $form = $('form', $container);
+        $('#patientId', $form).val(patient.id);
+        $('#patientFirstName', $form).val(patient.first_name);
+        $('#patientLastName', $form).val(patient.last_name);
+        $('#patientBirthDate', $form).val($.dateFormat(patient.birth_date));
+        $('#patientGender', $form).val(patient.gender);
+        $('#patientObs', $form).val(patient.obs);
     };
     /**
      * Serialize form for API submit
      * @memberOf PatientController
      */
     const serialize = function () {
-        return $('form').serializeToJson();
+        let $form = $('form', $container);
+        let json = $form.serializeToJson();
+        if ($.isEmpty($('#patientObs', $form).val())) {
+            json.obs = '';
+        }
+        return json;
     };
     /**
      * Module Initialize

@@ -7,18 +7,19 @@ Universidade de Passo Fundo - 2018/2019
 @since 09/03/2018
 """
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth.hashers import make_password
 
+from backend.commons.IsSuperUserPermission import IsSuperUserPermission
 from backend.modules.user.models import User
 from backend.modules.user.serializers import UserSerializer
 
 
 class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsSuperUserPermission,)
 
     def get_queryset(self):
 
@@ -35,6 +36,7 @@ class UserViewSet(ModelViewSet):
         return super(self.__class__, self).get_permissions()
 
     def create(self, request, *args, **kwargs):
+
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.create(serializer.validated_data)
@@ -43,6 +45,7 @@ class UserViewSet(ModelViewSet):
             return Response(serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def partial_update(self, request, *args, **kwargs):
+
         user = User.objects.get(pk=request.data['id'])
         serializer = UserSerializer(instance=user, data=request.data, partial=True)
         if serializer.is_valid():
@@ -54,3 +57,5 @@ class UserViewSet(ModelViewSet):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+

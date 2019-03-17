@@ -84,7 +84,8 @@ function AbstractController(params) {
         datePickers.parent('div').append(buildCalendarIcon());
         initClickCalendar();
         datePickers.datepicker({
-            'autoclose': true
+            'autoclose': true,
+            format: 'dd/mm/yyyy',
         });
     };
     /**
@@ -124,6 +125,7 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const newRegister = function () {
+        hideAlerts();
         DOM.form.option.html('> New');
         DOM.divs.list.hide();
         DOM.divs.form.show();
@@ -134,6 +136,7 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const edit = function () {
+        hideAlerts();
         DOM.form.option.html('> Update');
         let $tr = DOM.list.datatable.find('tr.selected');
         if ($tr.length) {
@@ -375,7 +378,7 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const submitSuccess = function (data) {
-        if (!$.isEmpty(data.id)) {
+        if ($.isEmpty(data.id)) {
             applyAlert(
                 'danger',
                 DOM.form.alert,
@@ -429,6 +432,14 @@ function AbstractController(params) {
         }, 30000)
     };
     /**
+     * Hide alerts
+     * @memberOf AbstractController
+     */
+    const hideAlerts = function () {
+        DOM.list.alert.hide();
+        DOM.form.alert.hide();
+    };
+    /**
      * Method responsable to cancel and toggle to list
      * @memberOf AbstractController
      */
@@ -476,6 +487,19 @@ function AbstractController(params) {
         });
     };
     /**
+     * Initialize double click on datatable
+     * @memberOf AbstractController
+     */
+    const initDoubleClickDatatable = function () {
+        DOM.list.datatable.on('dblclick', 'tbody > tr', function () {
+            $(this)
+                .addClass('selected')
+                .siblings('.selected')
+                .removeClass('selected');
+            edit();
+        });
+    };
+    /**
      * Initialize row select for datatables
      * @memberOf AbstractController
      */
@@ -514,6 +538,7 @@ function AbstractController(params) {
         initDatePickers();
         initEvents();
         initDatatable();
+        initDoubleClickDatatable();
         initSelectedDatatable();
     };
 }

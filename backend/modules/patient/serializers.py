@@ -12,6 +12,10 @@ from .models import Patient
 
 
 class PatientSerializer(serializers.ModelSerializer):
+
+    def create(self, validated_data):
+        return Patient.objects.create(**validated_data)
+
     class Meta:
         model = Patient
         fields = '__all__'

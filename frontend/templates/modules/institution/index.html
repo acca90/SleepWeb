@@ -3,19 +3,26 @@
 
 {% block container %}
 
-	<div id="institution">
-		{% include 'institution/list.html' %}
-		{% include 'institution/form.html' %}
-	</div>
+	{% if user.is_superuser %}
+		<div id="institution">
+			{% include 'institution/list.html' %}
+			{% include 'institution/form.html' %}
+		</div>
+	{% else %}
+		{% include '../commons/notallowed.html' %}
+	{% endif %}
 
 {% endblock container %}
 
-{% block scripts %}
-	{{ block.super }}
-	<script src="{% static "modules/institution/InstitutionController.js" %}"></script>
-	<script>
-        $(document).ready(function () {
-            new InstitutionController($('#institution')).init();
-        });
-	</script>
-{% endblock %}
+{% if user.is_superuser %}
+	{% block scripts %}
+		{{ block.super }}
+		<script src="{% static "modules/institution/InstitutionController.js" %}"></script>
+		<script>
+            $(document).ready(function () {
+                new InstitutionController($('#institution')).init();
+            });
+		</script>
+	{% endblock %}
+{% endif %}
+

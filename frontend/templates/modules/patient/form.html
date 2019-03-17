@@ -32,7 +32,7 @@
 						<label for="user.id">Identification</label>
 						<input type="text"
 							   class="form-control form-control-sm"
-							   id="patient.id"
+							   id="patientId"
 							   name="id"
 							   isPk
 							   disabled>
@@ -70,8 +70,8 @@
 								   data-parsley-required-message="Enter the birth date of the patient"
 								   data-parsley-errors-container="#birthDateValidateMessage"
 								   required
-								   id="patientFirstName"
-								   name="first_name">
+								   id="patientBirthDate"
+								   name="birth_date">
 						<div id="birthDateValidateMessage"></div>
 					</div>
 					<div class="form-group col-md-6">
@@ -80,12 +80,22 @@
 								data-parsley-required-message="Enter the gender of the patient"
 								autocomplete="off"
 								required
-								id="patientLastName"
-								name="last_name">
+								id="patientGender"
+								name="gender">
 							<option value="1">Masculine</option>
 							<option value="2">Feminine</option>
 						</select>
 					</div>
+				</div>
+				<div class="form-group">
+					<label for="user.name">Comments</label>
+					<textarea cols="30"
+							  rows="5"
+							  class="form-control"
+							  maxlength="1000"
+							  id="patientObs"
+							  name="obs"
+					></textarea>
 				</div>
 
 			</form>

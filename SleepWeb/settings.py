@@ -36,23 +36,23 @@ SLEEPWEB_APPS = [
     'backend.modules.group',
 ]
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework_datatables',
-    'rest_framework.authtoken',
-    'rest_auth',
-    'rest_auth.registration',
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'crispy_forms',
-    'corsheaders',
-    'rest_framework',
-] + SLEEPWEB_APPS
+                     'django.contrib.admin',
+                     'django.contrib.auth',
+                     'django.contrib.contenttypes',
+                     'django.contrib.sessions',
+                     'django.contrib.messages',
+                     'django.contrib.staticfiles',
+                     'rest_framework_datatables',
+                     'rest_framework.authtoken',
+                     'rest_auth',
+                     'rest_auth.registration',
+                     'django.contrib.sites',
+                     'allauth',
+                     'allauth.account',
+                     'crispy_forms',
+                     'corsheaders',
+                     'rest_framework',
+                 ] + SLEEPWEB_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -150,6 +150,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework_datatables.pagination.DatatablesPageNumberPagination',
     'PAGE_SIZE': 50,
+    "DATE_INPUT_FORMATS": ["%d/%m/%Y"],
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

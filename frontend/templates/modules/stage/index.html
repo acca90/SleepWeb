@@ -3,19 +3,25 @@
 
 {% block container %}
 
-	<div id="stage">
-		{% include 'stage/list.html' %}
-		{% include 'stage/form.html' %}
-	</div>
+	{% if user.is_superuser %}
+		<div id="stage">
+			{% include 'stage/list.html' %}
+			{% include 'stage/form.html' %}
+		</div>
+	{% else %}
+		{% include '../commons/notallowed.html' %}
+	{% endif %}
 
 {% endblock container %}
 
-{% block scripts %}
-	{{ block.super }}
-	<script src="{% static "modules/stage/StageController.js" %}"></script>
-	<script>
-        $(document).ready(function () {
-            new StageController($('#stage')).init();
-        });
-	</script>
-{% endblock %}
+{% if user.is_superuser %}
+	{% block scripts %}
+		{{ block.super }}
+		<script src="{% static "modules/stage/StageController.js" %}"></script>
+		<script>
+            $(document).ready(function () {
+                new StageController($('#stage')).init();
+            });
+		</script>
+	{% endblock %}
+{% endif %}

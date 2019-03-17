@@ -7,15 +7,15 @@ Universidade de Passo Fundo - 2018/2019
 @since 16/03/2018
 """
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
 
+from backend.commons.IsSuperUserPermission import IsSuperUserPermission
 from .serializers import StageSerializer
 from .models import Stage
 
 
 class StageViewSet(viewsets.ModelViewSet):
     serializer_class = StageSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsSuperUserPermission,)
 
     def get_queryset(self):
 

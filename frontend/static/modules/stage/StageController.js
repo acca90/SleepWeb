@@ -43,6 +43,9 @@ function StageController($container) {
      */
     const toForm = function (stage) {
         let $form = $('form', $container);
+        $('#stage\\.id', $form).val(stage.id);
+        $('#stage\\.description', $form).val(stage.description);
+        $('#stage\\.definition', $form).val(stage.definition);
     };
     /**
      * Serialize form for API submit

@@ -18,10 +18,10 @@ class Patient(models.Model):
     last_name = models.CharField(db_column='last_name', max_length=255, null=False)
     birth_date = models.DateField(db_column='brith_date', null=False)
     gender = models.IntegerField(db_column='gender', null=False)
-    obs = models.CharField(db_column='obs', max_length=3000)
+    obs = models.CharField(db_column='obs', max_length=3000, null=True)
 
-    stage = models.ForeignKey(Stage, on_delete=None, null=False, blank=False)
-    user = models.ForeignKey(User, on_delete=None, null=False, blank=False)
+    stage = models.ForeignKey(Stage, on_delete=None, null=True)
+    user = models.ForeignKey(User, on_delete=None, null=True)
 
     class Meta:
         db_table = 'Patient'
