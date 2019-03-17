@@ -1623,7 +1623,7 @@ getText = Sizzle.getText = function( elem ) {
 
 Expr = Sizzle.selectors = {
 
-	// Can be adjusted by the user_fe
+	// Can be adjusted by the user
 	cacheLength: 50,
 
 	createPseudo: markFunction,
@@ -1899,7 +1899,7 @@ Expr = Sizzle.selectors = {
 				fn = Expr.pseudos[ pseudo ] || Expr.setFilters[ pseudo.toLowerCase() ] ||
 					Sizzle.error( "unsupported pseudo: " + pseudo );
 
-			// The user_fe may use createPseudo to indicate that
+			// The user may use createPseudo to indicate that
 			// arguments are needed to create the filter function
 			// just as Sizzle does
 			if ( fn[ expando ] ) {
@@ -4174,9 +4174,9 @@ var dataUser = new Data();
 //	1. Enforce API surface and semantic compatibility with 1.9.x branch
 //	2. Improve the module's maintainability by reducing the storage
 //		paths to a single mechanism.
-//	3. Use the same single mechanism to support "private" and "user_fe" data.
-//	4. _Never_ expose "private" data to user_fe code (TODO: Drop _data, _removeData)
-//	5. Avoid exposing implementation details on user_fe objects (eg. expando properties)
+//	3. Use the same single mechanism to support "private" and "user" data.
+//	4. _Never_ expose "private" data to user code (TODO: Drop _data, _removeData)
+//	5. Avoid exposing implementation details on user objects (eg. expando properties)
 //	6. Provide a clear path for implementation upgrade to WeakMap in 2014
 
 var rbrace = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,
@@ -5669,7 +5669,7 @@ function cloneCopyEvent( src, dest ) {
 		}
 	}
 
-	// 2. Copy user_fe data
+	// 2. Copy user data
 	if ( dataUser.hasData( src ) ) {
 		udataOld = dataUser.access( src );
 		udataCur = jQuery.extend( {}, udataOld );
@@ -6465,7 +6465,7 @@ jQuery.extend( {
 
 		// Make sure that we're working with the right name. We don't
 		// want to query the value if it is a CSS custom property
-		// since they are user_fe-defined.
+		// since they are user-defined.
 		if ( !isCustomProp ) {
 			name = finalPropName( origName );
 		}
@@ -6532,7 +6532,7 @@ jQuery.extend( {
 
 		// Make sure that we're working with the right name. We don't
 		// want to modify the value if it is a CSS custom property
-		// since they are user_fe-defined.
+		// since they are user-defined.
 		if ( !isCustomProp ) {
 			name = finalPropName( origName );
 		}
@@ -9379,7 +9379,7 @@ jQuery._evalUrl = function( url ) {
 	return jQuery.ajax( {
 		url: url,
 
-		// Make this explicit, since user_fe can override this through ajaxSetup (#11264)
+		// Make this explicit, since user can override this through ajaxSetup (#11264)
 		type: "GET",
 		dataType: "script",
 		cache: true,
@@ -9892,7 +9892,7 @@ jQuery.fn.load = function( url, params, callback ) {
 
 			// If "type" variable is undefined, then "GET" method will be used.
 			// Make value of this field explicit since
-			// user_fe can override it through ajaxSetup method
+			// user can override it through ajaxSetup method
 			type: type || "GET",
 			dataType: "html",
 			data: params
@@ -11411,17 +11411,17 @@ return jQuery;
 			_fnMap( oSettings.oLanguage, oInit, "fnInfoCallback" );
 			
 			/* Callback functions which are array driven */
-			_fnCallbackReg( oSettings, 'aoDrawCallback',       oInit.fnDrawCallback,      'user_fe' );
-			_fnCallbackReg( oSettings, 'aoServerParams',       oInit.fnServerParams,      'user_fe' );
-			_fnCallbackReg( oSettings, 'aoStateSaveParams',    oInit.fnStateSaveParams,   'user_fe' );
-			_fnCallbackReg( oSettings, 'aoStateLoadParams',    oInit.fnStateLoadParams,   'user_fe' );
-			_fnCallbackReg( oSettings, 'aoStateLoaded',        oInit.fnStateLoaded,       'user_fe' );
-			_fnCallbackReg( oSettings, 'aoRowCallback',        oInit.fnRowCallback,       'user_fe' );
-			_fnCallbackReg( oSettings, 'aoRowCreatedCallback', oInit.fnCreatedRow,        'user_fe' );
-			_fnCallbackReg( oSettings, 'aoHeaderCallback',     oInit.fnHeaderCallback,    'user_fe' );
-			_fnCallbackReg( oSettings, 'aoFooterCallback',     oInit.fnFooterCallback,    'user_fe' );
-			_fnCallbackReg( oSettings, 'aoInitComplete',       oInit.fnInitComplete,      'user_fe' );
-			_fnCallbackReg( oSettings, 'aoPreDrawCallback',    oInit.fnPreDrawCallback,   'user_fe' );
+			_fnCallbackReg( oSettings, 'aoDrawCallback',       oInit.fnDrawCallback,      'user' );
+			_fnCallbackReg( oSettings, 'aoServerParams',       oInit.fnServerParams,      'user' );
+			_fnCallbackReg( oSettings, 'aoStateSaveParams',    oInit.fnStateSaveParams,   'user' );
+			_fnCallbackReg( oSettings, 'aoStateLoadParams',    oInit.fnStateLoadParams,   'user' );
+			_fnCallbackReg( oSettings, 'aoStateLoaded',        oInit.fnStateLoaded,       'user' );
+			_fnCallbackReg( oSettings, 'aoRowCallback',        oInit.fnRowCallback,       'user' );
+			_fnCallbackReg( oSettings, 'aoRowCreatedCallback', oInit.fnCreatedRow,        'user' );
+			_fnCallbackReg( oSettings, 'aoHeaderCallback',     oInit.fnHeaderCallback,    'user' );
+			_fnCallbackReg( oSettings, 'aoFooterCallback',     oInit.fnFooterCallback,    'user' );
+			_fnCallbackReg( oSettings, 'aoInitComplete',       oInit.fnInitComplete,      'user' );
+			_fnCallbackReg( oSettings, 'aoPreDrawCallback',    oInit.fnPreDrawCallback,   'user' );
 			
 			oSettings.rowIdFn = _fnGetObjectDataFn( oInit.rowId );
 			
@@ -12064,7 +12064,7 @@ return jQuery;
 	 *    mapped.
 	 *  @param {object} user The object to convert from camel case to Hungarian.
 	 *  @param {boolean} force When set to `true`, properties which already have a
-	 *    Hungarian value in the `user_fe` object will be overwritten. Otherwise they
+	 *    Hungarian value in the `user` object will be overwritten. Otherwise they
 	 *    won't be.
 	 *  @memberof DataTable#oApi
 	 */
@@ -12359,7 +12359,7 @@ return jQuery;
 		oSettings.aoColumns.push( oCol );
 	
 		// Add search object for column specific search. Note that the `searchCols[ iCol ]`
-		// passed into extend can be undefined. This allows the user_fe to give a default
+		// passed into extend can be undefined. This allows the user to give a default
 		// with only some of the parameters defined, and also not give a default
 		var searchCols = oSettings.aoPreSearchCols;
 		searchCols[ iCol ] = $.extend( {}, DataTable.models.oSearch, searchCols[ iCol ] );
@@ -13493,7 +13493,7 @@ return jQuery;
 					nTd.innerHTML = _fnGetCellData( oSettings, iRow, i, 'display' );
 				}
 	
-				/* Add user_fe defined class */
+				/* Add user defined class */
 				if ( oCol.sClass )
 				{
 					nTd.className += ' '+oCol.sClass;
@@ -13628,7 +13628,7 @@ return jQuery;
 		$(tfoot).find('>tr>th, >tr>td').addClass( classes.sFooterTH );
 	
 		// Cache the footer cells. Note that we only take the cells from the first
-		// row in the footer. If there is more than one row the user_fe wants to
+		// row in the footer. If there is more than one row the user wants to
 		// interact with, they need to use the table().foot() method. Note also this
 		// allows cells to be used for multiple columns using colspan
 		if ( tfoot !== null ) {
@@ -13953,7 +13953,7 @@ return jQuery;
 		oSettings.nTableWrapper = insert[0];
 		oSettings.nTableReinsertBefore = oSettings.nTable.nextSibling;
 	
-		/* Loop over the user_fe set positioning and place the elements as needed */
+		/* Loop over the user set positioning and place the elements as needed */
 		var aDom = oSettings.sDom.split('');
 		var featureNode, cOption, nNewNode, cNext, sAttr, j;
 		for ( var i=0 ; i<aDom.length ; i++ )
@@ -14751,7 +14751,7 @@ return jQuery;
 	
 	
 	/**
-	 * Filter the data table based on user_fe input and draw the table
+	 * Filter the data table based on user input and draw the table
 	 *  @param {object} settings dataTables settings object
 	 *  @param {string} input string to filter on
 	 *  @param {int} force optional - force a research of the master array (1) or not (undefined or 0)
@@ -15176,7 +15176,7 @@ return jQuery;
 	
 	
 	/**
-	 * Generate the node required for user_fe display length changing
+	 * Generate the node required for user display length changing
 	 *  @param {object} settings dataTables settings object
 	 *  @returns {node} Display length feature node
 	 *  @memberof DataTable#oApi
@@ -15215,7 +15215,7 @@ return jQuery;
 			settings.oLanguage.sLengthMenu.replace( '_MENU_', select[0].outerHTML )
 		);
 	
-		// Can't use `select` variable as user_fe might provide their own and the
+		// Can't use `select` variable as user might provide their own and the
 		// reference is broken by the use of outerHTML
 		$('select', div)
 			.val( settings._iDisplayLength )
@@ -15782,7 +15782,7 @@ return jQuery;
 				tableStyle.width = _fnStringToCss( correction-barWidth );
 			}
 	
-			// And give the user_fe a warning that we've stopped the table getting too small
+			// And give the user a warning that we've stopped the table getting too small
 			if ( scrollX === "" || scrollXInner !== "" ) {
 				_fnLog( settings, 1, 'Possible column misalignment', 6 );
 			}
@@ -15917,7 +15917,7 @@ return jQuery;
 			tableWidthAttr = styleWidth;
 		}
 	
-		/* Convert any user_fe input sizes into pixel sizes */
+		/* Convert any user input sizes into pixel sizes */
 		for ( i=0 ; i<visibleColumns.length ; i++ ) {
 			column = columns[ visibleColumns[i] ];
 	
@@ -15948,7 +15948,7 @@ return jQuery;
 		else
 		{
 			// Otherwise construct a single row, worst case, table with the widest
-			// node in the data, assign any user_fe defined widths, then insert it into
+			// node in the data, assign any user defined widths, then insert it into
 			// the DOM and allow the browser to do all the hard work of calculating
 			// table widths
 			var tmpTable = $(table).clone() // don't use cloneNode - IE8 will remove events on the main table
@@ -16465,7 +16465,7 @@ return jQuery;
 	
 	
 	/**
-	 * Function to run on user_fe sort request
+	 * Function to run on user sort request
 	 *  @param {object} settings dataTables settings object
 	 *  @param {node} attachTo node to attach the handler to
 	 *  @param {int} colIdx column sorting index
@@ -16543,7 +16543,7 @@ return jQuery;
 		// Run the sort by calling a full redraw
 		_fnReDraw( settings );
 	
-		// callback used for async user_fe interaction
+		// callback used for async user interaction
 		if ( typeof callback == 'function' ) {
 			callback( settings );
 		}
@@ -16824,7 +16824,7 @@ return jQuery;
 	/**
 	 * Log an error message
 	 *  @param {object} settings dataTables settings object
-	 *  @param {int} level log error messages, or display them to the user_fe
+	 *  @param {int} level log error messages, or display them to the user
 	 *  @param {string} msg error message
 	 *  @param {int} tn Technical note id to get more information about the error.
 	 *  @memberof DataTable#oApi
@@ -19621,9 +19621,9 @@ return jQuery;
 	 *
 	 *  @param {object} src The model object which holds all parameters that can be
 	 *    mapped.
-	 *  @param {object} user_fe The object to convert from camel case to Hungarian.
+	 *  @param {object} user The object to convert from camel case to Hungarian.
 	 *  @param {boolean} force When set to `true`, properties which already have a
-	 *    Hungarian value in the `user_fe` object will be overwritten. Otherwise they
+	 *    Hungarian value in the `user` object will be overwritten. Otherwise they
 	 *    won't be.
 	 */
 	DataTable.camelToHungarian = _fnCamelToHungarian;
@@ -19718,7 +19718,7 @@ return jQuery;
 			}
 	
 			// Blitz all `DT` namespaced events (these are internal events, the
-			// lowercase, `dt` events are user_fe subscribed and they are responsible
+			// lowercase, `dt` events are user subscribed and they are responsible
 			// for removing them
 			jqWrapper.off('.DT').find(':not(tbody *)').off('.DT');
 			$(window).off('.DT-'+settings.sInstance);
@@ -20368,9 +20368,9 @@ return jQuery;
 	
 		/**
 		 * This parameter is basically identical to the `sorting` parameter, but
-		 * cannot be overridden by user_fe interaction with the table. What this means
+		 * cannot be overridden by user interaction with the table. What this means
 		 * is that you could have a column (visible or hidden) which the sorting
-		 * will always be forced on first - any sorting after that (from the user_fe)
+		 * will always be forced on first - any sorting after that (from the user)
 		 * will then be performed as required. This can be useful for grouping rows
 		 * together.
 		 *  @type array
@@ -20729,7 +20729,7 @@ return jQuery;
 	
 		/**
 		 * Enable or disable filtering of data. Filtering in DataTables is "smart" in
-		 * that it allows the end user_fe to input multiple words (space separated) and
+		 * that it allows the end user to input multiple words (space separated) and
 		 * will match a row containing those words, even if not in the order that was
 		 * specified (this allow matching across multiple columns). Note that if you
 		 * wish to use filtering in DataTables this must remain 'true' - to remove the
@@ -20772,7 +20772,7 @@ return jQuery;
 	
 	
 		/**
-		 * Allows the end user_fe to select the size of a formatted page from a select
+		 * Allows the end user to select the size of a formatted page from a select
 		 * menu (sizes are 10, 25, 50 and 100). Requires pagination (`paginate`).
 		 *  @type boolean
 		 *  @default true
@@ -20934,7 +20934,7 @@ return jQuery;
 	
 		/**
 		 * Enable or display DataTables' ability to sort multiple columns at the
-		 * same time (activated by shift-click by the user_fe).
+		 * same time (activated by shift-click by the user).
 		 *  @type boolean
 		 *  @default true
 		 *
@@ -20997,7 +20997,7 @@ return jQuery;
 		/**
 		 * Enable or disable state saving. When enabled HTML5 `localStorage` will be
 		 * used to save table display information such as pagination information,
-		 * display length, filtering and sorting. As such when the end user_fe reloads
+		 * display length, filtering and sorting. As such when the end user reloads
 		 * the page the display display will match what thy had previously set up.
 		 *
 		 * Due to the use of `localStorage` the default state saving is not supported
@@ -21100,7 +21100,7 @@ return jQuery;
 		 * When rendering large numbers in the information element for the table
 		 * (i.e. "Showing 1 to 10 of 57 entries") DataTables will render large numbers
 		 * to have a comma separator for the 'thousands' units (e.g. 1 million is
-		 * rendered as "1,000,000") to help readability for the end user_fe. This
+		 * rendered as "1,000,000") to help readability for the end user. This
 		 * function will override the default method DataTables uses.
 		 *  @type function
 		 *  @member
@@ -21558,7 +21558,7 @@ return jQuery;
 	
 		/**
 		 * Number of rows to display on a single page when using pagination. If
-		 * feature enabled (`lengthChange`) then the end user_fe will be able to override
+		 * feature enabled (`lengthChange`) then the end user will be able to override
 		 * this to a custom setting using a pop-up menu.
 		 *  @type int
 		 *  @default 10
@@ -21632,7 +21632,7 @@ return jQuery;
 	
 	
 		/**
-		 * All strings that DataTables uses in the user_fe interface that it creates
+		 * All strings that DataTables uses in the user interface that it creates
 		 * are defined in this object, allowing you to modified them individually or
 		 * completely replace them all as required.
 		 *  @namespace
@@ -21703,7 +21703,7 @@ return jQuery;
 			"oPaginate": {
 				/**
 				 * Text to use when using the 'full_numbers' type of pagination for the
-				 * button to take the user_fe to the first page.
+				 * button to take the user to the first page.
 				 *  @type string
 				 *  @default First
 				 *
@@ -21726,7 +21726,7 @@ return jQuery;
 	
 				/**
 				 * Text to use when using the 'full_numbers' type of pagination for the
-				 * button to take the user_fe to the last page.
+				 * button to take the user to the last page.
 				 *  @type string
 				 *  @default Last
 				 *
@@ -21748,7 +21748,7 @@ return jQuery;
 	
 	
 				/**
-				 * Text to use for the 'next' pagination button (to take the user_fe to the
+				 * Text to use for the 'next' pagination button (to take the user to the
 				 * next page).
 				 *  @type string
 				 *  @default Next
@@ -21771,7 +21771,7 @@ return jQuery;
 	
 	
 				/**
-				 * Text to use for the 'previous' pagination button (to take the user_fe to
+				 * Text to use for the 'previous' pagination button (to take the user to
 				 * the previous page).
 				 *  @type string
 				 *  @default Previous
@@ -21817,7 +21817,7 @@ return jQuery;
 	
 	
 			/**
-			 * This string gives information to the end user_fe about the information
+			 * This string gives information to the end user about the information
 			 * that is current on display on the page. The following tokens can be
 			 * used in the string and will be dynamically replaced as the table
 			 * display updates. This tokens can be placed anywhere in the string, or
@@ -21870,7 +21870,7 @@ return jQuery;
 	
 	
 			/**
-			 * When a user_fe filters the information in a table, this string is appended
+			 * When a user filters the information in a table, this string is appended
 			 * to the information (`info`) to give an idea of how strong the filtering
 			 * is. The variable _MAX_ is dynamically updated.
 			 *  @type string
@@ -22012,7 +22012,7 @@ return jQuery;
 			/**
 			 * When using Ajax sourced data and during the first draw when DataTables is
 			 * gathering the data, this message is shown in an empty row in the table to
-			 * indicate to the end user_fe the the data is being loaded. Note that this
+			 * indicate to the end user the the data is being loaded. Note that this
 			 * parameter is not used when loading data by server-side processing, just
 			 * Ajax sourced data with client-side processing.
 			 *  @type string
@@ -22034,7 +22034,7 @@ return jQuery;
 	
 	
 			/**
-			 * Text which is displayed when the table is processing a user_fe action
+			 * Text which is displayed when the table is processing a user action
 			 * (usually a sort command or similar).
 			 *  @type string
 			 *  @default Processing...
@@ -22055,7 +22055,7 @@ return jQuery;
 	
 	
 			/**
-			 * Details the actions that will be taken when the user_fe types into the
+			 * Details the actions that will be taken when the user types into the
 			 * filtering input text box. The variable "_INPUT_", if used in the string,
 			 * is replaced with the HTML text box for the filtering input allowing
 			 * control over where it appears in the string. If "_INPUT_" is not given
@@ -22930,7 +22930,7 @@ return jQuery;
 		 *    // This would be used with a data source such as:
 		 *    //   { "phone": 5552368, "phone_filter": "5552368 555-2368", "phone_display": "555-2368" }
 		 *    // Here the `phone` integer is used for sorting and type detection, while `phone_filter`
-		 *    // (which has both forms) is used for filtering for if a user_fe inputs either format, while
+		 *    // (which has both forms) is used for filtering for if a user inputs either format, while
 		 *    // the formatted phone number is the one that is shown in the table.
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
@@ -23145,7 +23145,7 @@ return jQuery;
 		/**
 		 * Defines a data source type for the ordering which can be used to read
 		 * real-time information from the table (updating the internally cached
-		 * version) prior to ordering. This allows ordering to occur on user_fe
+		 * version) prior to ordering. This allows ordering to occur on user
 		 * editable elements such as form inputs.
 		 *  @type string
 		 *  @default std
@@ -23372,7 +23372,7 @@ return jQuery;
 			"bInfo": null,
 	
 			/**
-			 * Present a user_fe control allowing the end user_fe to change the page size
+			 * Present a user control allowing the end user to change the page size
 			 * when pagination is enabled.
 			 * Note that this parameter will be set by the initialisation routine. To
 			 * set a default use {@link DataTable.defaults}.
@@ -23391,7 +23391,7 @@ return jQuery;
 	
 			/**
 			 * Processing indicator enable flag whenever DataTables is enacting a
-			 * user_fe request - typically an Ajax request for server-side processing.
+			 * user request - typically an Ajax request for server-side processing.
 			 * Note that this parameter will be set by the initialisation routine. To
 			 * set a default use {@link DataTable.defaults}.
 			 *  @type boolean
@@ -23985,7 +23985,7 @@ return jQuery;
 		"fnFormatNumber": null,
 	
 		/**
-		 * List of options that can be used for the user_fe selectable length menu.
+		 * List of options that can be used for the user selectable length menu.
 		 * Note that this parameter will be set by the initialisation routine. To
 		 * set a default use {@link DataTable.defaults}.
 		 *  @type array
@@ -24354,7 +24354,7 @@ return jQuery;
 		 *  @example
 		 *    // The following example shows custom search being applied to the
 		 *    // fourth column (i.e. the data[3] index) based on two input values
-		 *    // from the end-user_fe, matching the data in a certain range.
+		 *    // from the end-user, matching the data in a certain range.
 		 *    $.fn.dataTable.ext.search.push(
 		 *      function( settings, data, dataIndex ) {
 		 *        var min = document.getElementById('min').value * 1;
@@ -24388,7 +24388,7 @@ return jQuery;
 		 * each of the three built in selector types offer (row, column and cell +
 		 * their plural counterparts). For example the Select extension uses this
 		 * mechanism to provide an option to select only rows, columns and cells
-		 * that have been marked as selected by the end user_fe (`{selected: true}`),
+		 * that have been marked as selected by the end user (`{selected: true}`),
 		 * which can be used in conjunction with the existing built in selector
 		 * options.
 		 *
@@ -25592,7 +25592,7 @@ return jQuery;
 	/**
 	 * Processing event, fired when DataTables is doing some kind of processing
 	 * (be it, order, searcg or anything else). It can be used to indicate to
-	 * the end user_fe that there is something happening, or that something has
+	 * the end user that there is something happening, or that something has
 	 * finished.
 	 *  @name DataTable#processing.dt
 	 *  @event

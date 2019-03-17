@@ -7,9 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>SleepWeb - Sleep Monitoring System</title>
 	<link rel="stylesheet" href="{% static "css/bootstrap/bootstrap.min.css" %}"/>
+		<link rel="stylesheet" href="{% static "plugins/datatables/datatables.min.css" %}"/>
+	<link rel="stylesheet" href="{% static "plugins/datepicker/css/bootstrap-datepicker3.min.css" %}"/>
 	<link rel="stylesheet" href="{% static "css/fontawesome/css/font-awesome.min.css" %}"/>
 	<link rel="stylesheet" href="{% static "css/custom.css" %}"/>
-	<link rel="stylesheet" href="{% static "plugins/datatables/datatables.min.css" %}"/>
+
 </head>
 <body>
 
@@ -19,6 +21,7 @@
 {% block scripts %}
 	<script src="{% static "js/jQuery/jQuery.min.js" %}"></script>
 	<script src="{% static "plugins/datatables/datatables.min.js" %}"></script>
+	<script src="{% static "plugins/datepicker/js/bootstrap-datepicker.min.js" %}"></script>
 	<script src="{% static "js/popper/popper.min.js" %}"></script>
 	<script src="{% static "js/bootstrap/bootstrap.min.js" %}"></script>
 	<script src="{% static "commons/Extend.js" %}"></script>

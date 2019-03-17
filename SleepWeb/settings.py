@@ -29,12 +29,11 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 SLEEPWEB_APPS = [
     'backend',
     'frontend',
+    'backend.modules.institution',
+    'backend.modules.stage',
     'backend.modules.user',
-    'frontend.modules.institution',
-    'frontend.modules.user_fe',
-    'frontend.modules.patient',
-    'frontend.modules.group',
-    'frontend.modules.login'
+    'backend.modules.patient',
+    'backend.modules.group',
 ]
 INSTALLED_APPS = [
     'django.contrib.admin',

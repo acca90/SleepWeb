@@ -1,0 +1,22 @@
+{% extends "commons/module.html" %}
+{% load static %}
+
+
+{% block container %}
+
+	<div id="patient">
+		{% include 'patient/list.html' %}
+		{% include 'patient/form.html' %}
+	</div>
+
+{% endblock container %}
+
+{% block scripts %}
+	{{ block.super }}
+	<script src="{% static "modules/patient/PatientController.js" %}"></script>
+	<script>
+        $(document).ready(function () {
+            new PatientController($('#patient')).init();
+        });
+	</script>
+{% endblock %}

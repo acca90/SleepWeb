@@ -11,12 +11,12 @@
 function AbstractController(params) {
     /**
      * Flag indicate if form is being updated
-     * @memberOf AbortController
+     * @memberOf AbstractController
      */
     let isUpdate = false;
     /**
      * Map of elements
-     * @memberOf AbortController
+     * @memberOf AbstractController
      */
     let DOM = {
         divs: {
@@ -40,12 +40,13 @@ function AbstractController(params) {
             buttons: {
                 save: null,
                 cancel: null
-            }
+            },
+            option: null
         }
     };
     /**
      * Initilize map of DOM's elements
-     * @memberOf AbortController
+     * @memberOf AbstractController
      */
     const initMap = function () {
         DOM.divs.list = $('div#list', params.container);
@@ -61,10 +62,54 @@ function AbstractController(params) {
         DOM.form.buttons.cancel = $('#btnCancel', params.container);
         DOM.form.alert = $('#formAlert', params.container);
         DOM.form.pk = $('[isPk]', DOM.form.tagForm);
+        DOM.form.option = $('#moduleOption', DOM.divs.form);
+    };
+    /**
+     * Initialize module identity
+     * @memberOf AbstractController
+     */
+    const initModuleIdentity = function () {
+        $('#moduleIcon', DOM.divs.list).addClass(params.moduleIcon);
+        $('#moduleName', DOM.divs.list).html(params.moduleName);
+        $('#moduleIcon', DOM.divs.form).addClass(params.moduleIcon);
+        $('#moduleName', DOM.divs.form).html(params.moduleName);
+    };
+    /**
+     * Initilize date pickers
+     * @memberOf AbstractController
+     */
+    const initDatePickers = function () {
+        let datePickers = $('[isDatePicker]');
+        datePickers.wrap('<div class="input-group"></div>');
+        datePickers.parent('div').append(buildCalendarIcon());
+        initClickCalendar();
+        datePickers.datepicker({
+            'autoclose': true
+        });
+    };
+    /**
+     * Build a calendar icon for input
+     * @memberOf AbstractController
+     */
+    const buildCalendarIcon = function () {
+        return `<div class="input-group-append calendar">
+				    <span class="input-group-text">
+					    <i class="fa fa-calendar"></i>
+					</span>
+				</div>`;
+    };
+    /**
+     * Build a calendar icon for input
+     * @memberOf AbstractController
+     */
+    const initClickCalendar = function () {
+        $('.calendar').off('click').on('click', function () {
+            $(this).parent('div').find('input').trigger('focus');
+        });
     };
     /**
      * Iinitilize events for module navigation
-     * @memberOf AbortController
+     * @memberOf AbstractController
      */
     const initEvents = function () {
         DOM.list.buttons.new.on('click', newRegister);
@@ -79,6 +124,7 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const newRegister = function () {
+        DOM.form.option.html('> New');
         DOM.divs.list.hide();
         DOM.divs.form.show();
         clean();
@@ -88,6 +134,7 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const edit = function () {
+        DOM.form.option.html('> Update');
         let $tr = DOM.list.datatable.find('tr.selected');
         if ($tr.length) {
             return editForSelectedRow($tr);
@@ -327,8 +374,15 @@ function AbstractController(params) {
      * Handle success after submit
      * @memberOf AbstractController
      */
-    const submitSuccess = function ( data ) {
-        console.log(data);
+    const submitSuccess = function (data) {
+        if (!$.isEmpty(data.id)) {
+            applyAlert(
+                'danger',
+                DOM.form.alert,
+                `Something went wrong, call administrators for more information`
+            ).show();
+            return;
+        }
         DOM.divs.form.hide();
         DOM.divs.list.show();
         showSuccess();
@@ -456,6 +510,8 @@ function AbstractController(params) {
      */
     this.init = function () {
         initMap();
+        initModuleIdentity();
+        initDatePickers();
         initEvents();
         initDatatable();
         initSelectedDatatable();

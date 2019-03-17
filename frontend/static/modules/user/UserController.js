@@ -14,6 +14,8 @@ function UserController($container) {
      */
     const getParams = function () {
         return {
+            moduleName: 'Users',
+            moduleIcon: 'fa fa-user',
             container: $container,
             apiUrl: '/api/user/',
             message: {
@@ -27,17 +29,24 @@ function UserController($container) {
                 removeError: `Something went wrong with request, call administrators`,
             },
             datatableColumns: [
-                {data: 'id', sDefaultContent: '',},
-                {data: 'username', sDefaultContent: '',},
-                {data: 'first_name', sDefaultContent: '',},
-                {data: 'email', sDefaultContent: '',},
-                {data: 'institution_name', sDefaultContent: 'Not Available',},
-                {data: 'is_active', sDefaultContent: 'Not Available', render: userActiveRender}
+                {width:'50px' , data: 'id', sDefaultContent: '',},
+                {width:'120px' , data: 'username', sDefaultContent: '',},
+                {width:'' , data: 'first_name', sDefaultContent: '', render: nameRender},
+                {width:'' , data: 'email', sDefaultContent: '',},
+                {width:'' , data: 'institution_name', sDefaultContent: 'Not Available',},
+                {width:'70px' , data: 'is_active', sDefaultContent: 'Not Available', render: userActiveRender}
             ],
             serialize: serialize,
             toForm: toForm,
             clean: clean
         };
+    };
+    /**
+     * Render for name
+     * @memberOf UserController
+     */
+    const nameRender = function (data, type, row) {
+        return data + " " + row.last_name;
     };
     /**
      * Render for user active situation
@@ -60,7 +69,7 @@ function UserController($container) {
         $('#userInstitution', $form).val(user.institution);
         $('#userPassword', $form).removeAttr('required');
         $('#userPasswordConfirm', $form).removeAttr('required');
-        $('#is_active', $form).prop('checked',user.is_active);
+        $('#is_active', $form).prop('checked', user.is_active);
     };
     /**
      * Serialize form for API submit
@@ -86,7 +95,3 @@ function UserController($container) {
         userService.institutions();
     };
 }
-
-$(document).ready(function () {
-    new UserController($('#user')).init();
-});

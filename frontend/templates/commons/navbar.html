@@ -18,6 +18,7 @@
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="{% url 'institution' %}">Institutions</a>
 						<a class="dropdown-item" href="{% url 'user' %}">Users</a>
+						<a class="dropdown-item" href="{% url 'stage' %}">Life Stages</a>
 					</div>
 				</li>
 			{% endif %}
@@ -28,7 +29,7 @@
 					Registers
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="/patient/">Patients</a>
+					<a class="dropdown-item" href="{% url 'patient' %}">Patients</a>
 					<a class="dropdown-item" href="/group/">Groups</a>
 				</div>
 			</li>

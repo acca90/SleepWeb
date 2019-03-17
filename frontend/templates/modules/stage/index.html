@@ -1,0 +1,21 @@
+{% extends "commons/module.html" %}
+{% load static %}
+
+{% block container %}
+
+	<div id="stage">
+		{% include 'stage/list.html' %}
+		{% include 'stage/form.html' %}
+	</div>
+
+{% endblock container %}
+
+{% block scripts %}
+	{{ block.super }}
+	<script src="{% static "modules/stage/StageController.js" %}"></script>
+	<script>
+        $(document).ready(function () {
+            new StageController($('#stage')).init();
+        });
+	</script>
+{% endblock %}

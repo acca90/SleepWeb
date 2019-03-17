@@ -4,10 +4,8 @@ Projeto desenvolvido para o Programa de Pós-Graduação em Computação Aplicad
 Universidade de Passo Fundo - 2018/2019
 
 @author Matheus Hernandes
-@since 11/03/2018
+@since 16/03/2018
 """
-from django.apps import AppConfig
+from django.test import TestCase
 
-
-class LoginConfig(AppConfig):
-    name = 'login'
+# Create your tests here.
