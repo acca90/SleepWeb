@@ -9,19 +9,6 @@
  */
 function UserService() {
     /**
-     * Method that find institutions
-     * @memberOf UserService
-     */
-    this.institutions = function () {
-        new AjaxController({
-            data: {},
-            method: 'GET',
-            url: '/api/institution/',
-            success: successInstitutionsHandler,
-            error: errorInstitutionsHandler
-        }).send();
-    };
-    /**
      * Handle success on request
      * @memberOf UserService
      */
@@ -41,5 +28,18 @@ function UserService() {
      * @memberOf UserService
      */
     const errorInstitutionsHandler = function () {
+    };
+        /**
+     * Method that find institutions
+     * @memberOf UserService
+     */
+    this.findInstitutions = function () {
+        new AjaxController({
+            data: {},
+            method: 'GET',
+            url: '/api/institution/',
+            success: successInstitutionsHandler,
+            error: errorInstitutionsHandler
+        }).send();
     };
 }

@@ -10,7 +10,6 @@ from django.db import models
 
 
 class Stage(models.Model):
-    id = models.AutoField(db_column='id', primary_key=True)
     description = models.CharField(db_column='description', max_length=255, null=False)
     definition = models.CharField(db_column='definition', max_length=1000, null=False)
 

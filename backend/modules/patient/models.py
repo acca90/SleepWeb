@@ -13,7 +13,6 @@ from backend.modules.user.models import User
 
 
 class Patient(models.Model):
-    id = models.AutoField(db_column='id', primary_key=True)
     first_name = models.CharField(db_column='first_name', max_length=255, null=False)
     last_name = models.CharField(db_column='last_name', max_length=255, null=False)
     birth_date = models.DateField(db_column='brith_date', null=False)

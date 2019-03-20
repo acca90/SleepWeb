@@ -8,11 +8,17 @@ Universidade de Passo Fundo - 2018/2019
 """
 from rest_framework import serializers
 from backend.modules.user.models import User
+from backend.modules.institution.serializers import InstitutionSerializer
+from backend.modules.institution.models import Institution
 
 
 class UserSerializer(serializers.ModelSerializer):
-
-    institution_name = serializers.ReadOnlyField(source='institution.name')
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.context['request'].method == 'GET':
+            self.fields['institution'] = InstitutionSerializer()
+        else:
+            self.fields['institution'] = serializers.PrimaryKeyRelatedField(queryset=Institution.objects.all())
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
@@ -28,7 +34,6 @@ class UserSerializer(serializers.ModelSerializer):
             'password',
             'is_active',
             'institution',
-            'institution_name'
         )
         datatables_always_serialize = (
             'id',
@@ -38,5 +43,4 @@ class UserSerializer(serializers.ModelSerializer):
             'email',
             'is_active',
             'institution',
-            'institution_name'
         )

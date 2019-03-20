@@ -126,7 +126,7 @@ function AbstractController(params) {
      */
     const newRegister = function () {
         hideAlerts();
-        DOM.form.option.html('> New');
+        DOM.form.option.html('New');
         DOM.divs.list.hide();
         DOM.divs.form.show();
         clean();
@@ -137,7 +137,7 @@ function AbstractController(params) {
      */
     const edit = function () {
         hideAlerts();
-        DOM.form.option.html('> Update');
+        DOM.form.option.html('Update');
         let $tr = DOM.list.datatable.find('tr.selected');
         if ($tr.length) {
             return editForSelectedRow($tr);
@@ -155,10 +155,11 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const editForSelectedRow = function ($tr) {
+        let id = getId($tr);
         new AjaxController({
-            data: {pk: getId($tr)},
+            data: {pk: id},
             method: 'GET',
-            url: params.apiUrl,
+            url: params.apiUrl + id + '/',
             success: editPickSuccess,
             error: editPickError
         }).send();
@@ -178,7 +179,7 @@ function AbstractController(params) {
             );
             return;
         }
-        toForm(data[0]);
+        toForm(data);
     };
     /**
      * Handle form transition for update
@@ -198,7 +199,7 @@ function AbstractController(params) {
     const editPickError = function () {
         fadeOutAlert(
             applyAlert(
-                'warning',
+                'danger',
                 DOM.list.alert,
                 params.message.editAjaxError
             ).show()
@@ -377,15 +378,7 @@ function AbstractController(params) {
      * Handle success after submit
      * @memberOf AbstractController
      */
-    const submitSuccess = function (data) {
-        if ($.isEmpty(data.id)) {
-            applyAlert(
-                'danger',
-                DOM.form.alert,
-                `Something went wrong, call administrators for more information`
-            ).show();
-            return;
-        }
+    const submitSuccess = function () {
         DOM.divs.form.hide();
         DOM.divs.list.show();
         showSuccess();
@@ -444,6 +437,7 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const cancel = function () {
+        refresh();
         DOM.divs.form.hide();
         DOM.divs.list.show();
         clean();

@@ -1,28 +1,36 @@
 <div id="form" style="display: none">
-
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" aria-current="page">
+				<i id="moduleIcon" class=""></i>
+				<b>
+					<span id="moduleName"></span>
+				</b>
+			</li>
+			<li class="breadcrumb-item active" aria-current="page">
+				<span id="moduleOption"></span>
+			</li>
+		</ol>
+	</nav>
 	<div id="formAlert" class="alert" role="alert" style="display: none">
 	</div>
-
 	{% csrf_token %}
-	<div class="row">
-		<div class="col-12 mb-2">
-			<button type="button" class="btn btn-success btn-sm" id="btnSave">
-				<i class="fa fa-floppy-o"></i>
-				<b>Save</b>
-			</button>
-			<button type="button" class="btn btn-danger btn-sm" id="btnCancel">
-				<i class="fa fa-remove"></i>
-				<b>Cancel</b>
-			</button>
-		</div>
-	</div>
 	<div class="card bg-light">
 		<div class="card-header">
-			<i id="moduleIcon" class=""></i>
-			<b>
-				<span id="moduleName"></span>
-				<span id="moduleOption"></span>
-			</b>
+			<ul class="nav nav-pills card-header-pills ">
+				<li class="nav-item">
+					<button type="button" class="btn btn-success btn-sm" id="btnSave">
+						<i class="fa fa-floppy-o"></i>
+						<b>Save</b>
+					</button>
+				</li>
+				<li class="nav-item">
+					<button type="button" class="btn btn-danger btn-sm" id="btnCancel">
+						<i class="fa fa-remove"></i>
+						<b>Cancel</b>
+					</button>
+				</li>
+			</ul>
 		</div>
 		<div class="card-body">
 
@@ -64,14 +72,14 @@
 				<div class="form-row">
 					<div class="form-group col-md-6 mb-3">
 						<label for="user.id">Birth Date</label>
-							<input type="text"
-								   isDatePicker
-								   class="form-control form-control-sm"
-								   data-parsley-required-message="Enter the birth date of the patient"
-								   data-parsley-errors-container="#birthDateValidateMessage"
-								   required
-								   id="patientBirthDate"
-								   name="birth_date">
+						<input type="text"
+							   isDatePicker
+							   class="form-control form-control-sm"
+							   data-parsley-required-message="Enter the birth date of the patient"
+							   data-parsley-errors-container="#birthDateValidateMessage"
+							   required
+							   id="patientBirthDate"
+							   name="birth_date">
 						<div id="birthDateValidateMessage"></div>
 					</div>
 					<div class="form-group col-md-6">

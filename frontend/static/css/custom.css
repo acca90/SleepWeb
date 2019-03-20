@@ -9,7 +9,7 @@ table.dataTable tbody tr.selected {
 }
 
 .bg-admin {
-    background-color: #880744;
+    background-color: #2c5c88;
 }
 
 .navbar-dark.bg-admin .navbar-nav .nav-link {
@@ -43,4 +43,14 @@ table.dataTable tbody tr.selected {
     color: #16181b;
     text-decoration: none;
     background-color: #afb0b1;
+}
+
+.nav-item {
+    margin-right: 5px;
+}
+
+nav > ol.breadcrumb {
+    background-color: #f8f9fa;
+    border: 1px solid rgba(0,0,0,.125);
+    color: #212529
 }

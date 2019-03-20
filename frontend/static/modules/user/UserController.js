@@ -29,12 +29,12 @@ function UserController($container) {
                 removeError: `Something went wrong with request, call administrators`,
             },
             datatableColumns: [
-                {width:'50px' , data: 'id', sDefaultContent: '',},
-                {width:'120px' , data: 'username', sDefaultContent: '',},
-                {width:'' , data: 'first_name', sDefaultContent: '', render: nameRender},
-                {width:'' , data: 'email', sDefaultContent: '',},
-                {width:'' , data: 'institution_name', sDefaultContent: 'Not Available',},
-                {width:'70px' , data: 'is_active', sDefaultContent: 'Not Available', render: userActiveRender}
+                {width: '50px', data: 'id', sDefaultContent: '',},
+                {width: '120px', data: 'username', sDefaultContent: '',},
+                {width: '', data: 'first_name', sDefaultContent: '', render: nameRender},
+                {width: '', data: 'email', sDefaultContent: '',},
+                {width: '', data: 'institution', sDefaultContent: 'Not Available', render: renderInstitution},
+                {width: '70px', data: 'is_active', sDefaultContent: 'Not Available', render: userActiveRender}
             ],
             serialize: serialize,
             toForm: toForm,
@@ -47,6 +47,13 @@ function UserController($container) {
      */
     const nameRender = function (data, type, row) {
         return data + " " + row.last_name;
+    };
+    /**
+     * Render for institution
+     * @memberOf UserController
+     */
+    const renderInstitution = function (data) {
+        return $.isEmpty(data) ? 'Not Available' : data.name
     };
     /**
      * Render for user active situation
@@ -66,7 +73,7 @@ function UserController($container) {
         $('#userLastName', $form).val(user.last_name);
         $('#userUsername', $form).val(user.username);
         $('#userEmail', $form).val(user.email);
-        $('#userInstitution', $form).val(user.institution);
+        $('#userInstitution', $form).val($.isEmpty(user.institution) ? '' : user.institution.id);
         $('#userPassword', $form).removeAttr('required');
         $('#userPasswordConfirm', $form).removeAttr('required');
         $('#is_active', $form).prop('checked', user.is_active);
@@ -92,6 +99,6 @@ function UserController($container) {
     this.init = function () {
         new AbstractController(getParams()).init();
         let userService = new UserService();
-        userService.institutions();
+        userService.findInstitutions();
     };
 }

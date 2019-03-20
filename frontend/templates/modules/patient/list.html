@@ -1,32 +1,44 @@
 <div id="list">
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" aria-current="page">
+				<i id="moduleIcon" class=""></i>
+				<b>
+					<span id="moduleName"></span>
+				</b>
+			</li>
+		</ol>
+	</nav>
 	<div id="listAlert" class="alert" role="alert" style="display: none">
-	</div>
-	<div class="row">
-		<div class="col-12 mb-2">
-			<button type="button" class="btn btn-success btn-sm" id="btnNew">
-				<i class="fa fa-plus"></i>
-				<b>New</b>
-			</button>
-			<button type="button" class="btn btn-primary btn-sm" id="btnEdit">
-				<i class="fa fa-pencil"></i>
-				<b>Edit</b>
-			</button>
-			<button type="button" class="btn btn-danger btn-sm" id="btnRemove">
-				<i class="fa fa-trash"></i>
-				<b>Remove</b>
-			</button>
-			<button type="button" class="btn btn-info btn-sm" id="btnRefresh">
-				<i class="fa fa-refresh"></i>
-				<b>Refresh</b>
-			</button>
-		</div>
 	</div>
 	<div class="card bg-light">
 		<div class="card-header">
-			<i id="moduleIcon" class=""></i>
-			<b>
-				<span id="moduleName"></span>
-			</b>
+			<ul class="nav nav-pills card-header-pills ">
+				<li class="nav-item">
+					<button type="button" class="btn btn-success btn-sm" id="btnNew">
+						<i class="fa fa-plus"></i>
+						<b>New</b>
+					</button>
+				</li>
+				<li class="nav-item">
+					<button type="button" class="btn btn-primary btn-sm" id="btnEdit">
+						<i class="fa fa-pencil"></i>
+						<b>Edit</b>
+					</button>
+				</li>
+				<li class="nav-item">
+					<button type="button" class="btn btn-danger btn-sm" id="btnRemove">
+						<i class="fa fa-trash"></i>
+						<b>Remove</b>
+					</button>
+				</li>
+				<li class="nav-item">
+					<button type="button" class="btn btn-info btn-sm" id="btnRefresh">
+						<i class="fa fa-refresh"></i>
+						<b>Refresh</b>
+					</button>
+				</li>
+			</ul>
 		</div>
 		<div class="card-body">
 			<table id="datatable" class="table table-striped table-hover table-sm">
