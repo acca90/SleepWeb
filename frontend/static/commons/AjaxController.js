@@ -8,13 +8,19 @@
  * @namespace AjaxController
  */
 function AjaxController(params) {
+
+    let spinner = new SpinnerController();
     /**
      * Execute request for defined parameters
+     * @memberOf AjaxController
      */
-    this.send = function () {
+    this.send = function (lock) {
         if (!params) {
             console.error('No parameters informed for submit');
             return;
+        }
+        if (lock) {
+            spinner.open();
         }
         $.ajax({
             url: params.url,
@@ -26,8 +32,18 @@ function AjaxController(params) {
                     csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()
                 }
             ),
-            success: params.success,
-            error: params.error
+            success: function (response) {
+                if (lock) {
+                    spinner.close();
+                }
+                params.success(response)
+            },
+            error: function (response) {
+                if (lock) {
+                    spinner.close();
+                }
+                params.error(response)
+            }
         });
     };
 }

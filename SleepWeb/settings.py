@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'compressor',
     'compressor_toolkit',
+    'sass_processor',
 
+    # Modulos SleepWeb
     'backend',
     'frontend',
     'backend.modules.institution',
@@ -148,6 +150,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
+    'sass_processor.finders.CssFinder',
 )
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter',
@@ -161,6 +164,15 @@ COMPRESS_PRECOMPILERS = (
     ('module', 'compressor_toolkit.precompilers.ES6Compiler'),
     ('css', 'compressor_toolkit.precompilers.SCSSCompiler'),
 )
+SASS_PROCESSOR_INCLUDE_DIRS = [
+    os.path.join(BASE_DIR, 'frontend/static/scss'),
+    os.path.join(BASE_DIR, 'node_modules'),
+]
+SASS_PROCESSOR_AUTO_INCLUDE = False
+SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.scss$'
+SASS_PRECISION = 8
+SASS_OUTPUT_STYLE = 'compact'
+
 COMPRESS_ENABLED = False
 COMPRESS_OFFLINE = False
 

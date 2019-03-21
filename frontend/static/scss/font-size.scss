@@ -1,0 +1,22 @@
+$font-size-default: 13px;
+$font-size-xl: 26px;
+
+body {
+  font-size: $font-size-default;
+}
+.dropdown-menu {
+  font-size: $font-size-default;
+}
+.navbar-brand {
+  font-size: 1rem;
+}
+input, select, textarea {
+  font-size: $font-size-default !important;
+}
+.btn {
+  font-size: $font-size-default;
+}
+
+.font-size-xl {
+  font-size: $font-size-xl;
+}

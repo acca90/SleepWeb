@@ -15,6 +15,11 @@ function AbstractController(params) {
      */
     let isUpdate = false;
     /**
+     * Spinner
+     * @memberOf AbstractController
+     */
+    let spinner = new SpinnerController();
+    /**
      * Map of elements
      * @memberOf AbstractController
      */
@@ -116,7 +121,7 @@ function AbstractController(params) {
         DOM.list.buttons.new.on('click', newRegister);
         DOM.list.buttons.edit.on('click', edit);
         DOM.list.buttons.remove.on('click', remove);
-        DOM.list.buttons.refresh.on('click', refresh);
+        DOM.list.buttons.refresh.on('click', () => { spinner.pop(); refresh(); });
         DOM.form.buttons.save.on('click', validate);
         DOM.form.buttons.cancel.on('click', cancel);
     };
@@ -162,7 +167,7 @@ function AbstractController(params) {
             url: params.apiUrl + id + '/',
             success: editPickSuccess,
             error: editPickError
-        }).send();
+        }).send(true);
     };
     /**
      * Handle success on pick register to update
@@ -250,7 +255,7 @@ function AbstractController(params) {
             url: params.apiUrl + getId($tr) + '/',
             success: removeSuccess,
             error: removeError
-        }).send();
+        }).send(true);
     };
 
     /**
@@ -351,7 +356,7 @@ function AbstractController(params) {
             url: getApiUrlForDefinedMethod(),
             success: submitSuccess,
             error: submitError
-        }).send();
+        }).send(true);
     };
     /**
      * Test condition of update flag to handle the correct method for persistence
@@ -474,10 +479,14 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const initDatatable = function () {
+        DOM.list.datatable.css('width', '100%');
+        DOM.list.datatable.css('min-width', '1000px');
         DOM.list.datatable.DataTable({
             serverSide: true,
             ajax: params.apiUrl + '?format=datatables',
-            columns: params.datatableColumns
+            columns: params.datatableColumns,
+            scrollX: true,
+            responsive: true
         });
     };
     /**
