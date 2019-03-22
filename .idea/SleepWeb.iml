@@ -28,13 +28,15 @@
         <option value="$MODULE_DIR$/frontend/templates" />
         <option value="$MODULE_DIR$/frontend/templates/commons" />
         <option value="$MODULE_DIR$/frontend/templates/modules" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/analysis" />
         <option value="$MODULE_DIR$/frontend/templates/modules/auth" />
         <option value="$MODULE_DIR$/frontend/templates/modules/home" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/indicator" />
         <option value="$MODULE_DIR$/frontend/templates/modules/institution" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/msystem" />
         <option value="$MODULE_DIR$/frontend/templates/modules/patient" />
         <option value="$MODULE_DIR$/frontend/templates/modules/stage" />
         <option value="$MODULE_DIR$/frontend/templates/modules/user" />
-        <option value="$MODULE_DIR$/frontend/templates/modules/analysis" />
       </list>
     </option>
   </component>

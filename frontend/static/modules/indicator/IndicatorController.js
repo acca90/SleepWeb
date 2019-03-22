@@ -4,28 +4,28 @@
  * Universidade de Passo Fundo - 2018/2019
  *
  * @author Matheus Hernandes
- * @since 09/03/2019
- * @namespace StageController
+ * @since 21/03/2019
+ * @namespace IndicatorController
  */
-function StageController($container) {
+function IndicatorController($container) {
     /**
      * Return params for AbstractController
-     * @memberOf StageController
+     * @memberOf IndicatorController
      */
     const getParams = function () {
         return {
-            moduleName: 'Stages',
+            moduleName: 'Indicators',
             moduleIcon: 'fa fa-heart',
             container: $container,
-            apiUrl: '/api/stage/',
+            apiUrl: '/api/indicator/',
             message: {
-                saveSuccess: `Stage successfully registered`,
-                editPickError: `Select a stage to update`,
+                saveSuccess: `Indicator successfully registered`,
+                editPickError: `Select a indicator to update`,
                 editAjaxError: `Something went wrong with request, call administrators`,
-                editSuccess: `Stage successfully updated`,
-                removePickError: `Select a stage to remove`,
-                removeConfirmationMsg: `Are you sure to remove this stage? You cannot revert if it is done.`,
-                removeSuccess: `Stage successfully removed`,
+                editSuccess: `Indicator successfully updated`,
+                removePickError: `Select a indicator to remove`,
+                removeConfirmationMsg: `Are you sure to remove this indicator? You cannot revert if it is done.`,
+                removeSuccess: `Indicator successfully removed`,
                 removeError: `Something went wrong with request, call administrators`,
             },
             datatableColumns: [
@@ -40,24 +40,24 @@ function StageController($container) {
     };
     /**
      * Fill form fields for update data
-     * @memberOf StageController
+     * @memberOf IndicatorController
      */
-    const toForm = function (stage) {
+    const toForm = function (indicator) {
         let $form = $('form', $container);
-        $('#stage\\.id', $form).val(stage.id);
-        $('#stage\\.description', $form).val(stage.description);
-        $('#stage\\.definition', $form).val(stage.definition);
+        $('#indicatorId', $form).val(indicator.id);
+        $('#indicatorDescription', $form).val(indicator.description);
+        $('#indicatorDefinition', $form).val(indicator.definition);
     };
     /**
      * Serialize form for API submit
-     * @memberOf StageController
+     * @memberOf IndicatorController
      */
     const serialize = function () {
         return $('form').serializeToJson();
     };
     /**
      * Module Initialize
-     * @memberOf StageController
+     * @memberOf IndicatorController
      */
     this.init = function () {
         new AbstractController(getParams()).init();

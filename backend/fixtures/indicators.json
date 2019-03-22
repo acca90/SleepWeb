@@ -1,0 +1,109 @@
+[
+    {
+        "pk": 1,
+        "model": "indicator.Indicator",
+        "fields": {
+            "description": "Eficiência do sono",
+            "definition": "Percentual total de inconsciência enquanto estiver deitado"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "indicator.Indicator",
+        "fields": {
+            "description": "Latência do sono",
+            "definition": "Tempo em minutos necessário em minutos para transição do estado de consciência para o inconsciência"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "indicator.Indicator",
+        "fields": {
+            "description": "Sono REM",
+            "definition": "Percentual de sono REM"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "indicator.Indicator",
+        "fields": {
+            "description": "Sono não-REM 1-2",
+            "definition": "Percentual de sono e grau (N1,N2)"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "indicator.Indicator",
+        "fields": {
+            "description": "Sono não-REM 3-4",
+            "definition": "Percentual de sono e grau (N3,N4)"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "indicator.Indicator",
+        "fields": {
+            "description": "Cochilos",
+            "definition": "Número de cochilos em um período de 24 horas"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "indicator.Indicator",
+        "fields": {
+            "description": "Duração de cochilo",
+            "definition": "Duração média dos cochilos em minutos"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "indicator.Indicator",
+        "fields": {
+            "description": "Frequência de cochilo",
+            "definition": "Número de dias em um período de uma semana com registros de cochilos"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "indicator.Indicator",
+        "fields": {
+            "description": "Excitações",
+            "definition": "Mudanças abruptas do estágio de sono"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "indicator.Indicator",
+        "fields": {
+            "description": "Despertar",
+            "definition": "Número de vezes que a pessoa acordou durante"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "indicator.Indicator",
+        "fields": {
+            "description": "a noite de sono",
+            "definition": "Consciência após inicio do sono (WASO) Duração em minutos do estado de consciência após o início do sono e antes de despertar final"
+        }
+    }
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

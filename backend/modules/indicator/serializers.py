@@ -4,14 +4,15 @@ Projeto desenvolvido para o Programa de Pós-Graduação em Computação Aplicad
 Universidade de Passo Fundo - 2018/2019
 
 @author Matheus Hernandes
-@since 09/03/2019
+@since 21/03/2019
 """
 from rest_framework import serializers
-from .models import Stage
+from .models import Indicator
 
 
-class StageSerializer(serializers.ModelSerializer):
+class IndicatorSerializer(serializers.ModelSerializer):
+
     class Meta:
-        model = Stage
+        model = Indicator
         fields = '__all__'
         datatables_always_serialize = ('id', 'description')

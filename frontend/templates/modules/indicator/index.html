@@ -1,0 +1,27 @@
+{% extends "commons/module.html" %}
+{% load static %}
+
+{% block container %}
+
+	{% if user.is_superuser %}
+		<div id="indicator">
+			{% include 'indicator/list.html' %}
+			{% include 'indicator/form.html' %}
+		</div>
+	{% else %}
+		{% include '../commons/notallowed.html' %}
+	{% endif %}
+
+{% endblock container %}
+
+{% if user.is_superuser %}
+	{% block scripts %}
+		{{ block.super }}
+		<script src="{% static "modules/indicator/IndicatorController.js" %}"></script>
+		<script>
+            $(document).ready(function () {
+                new IndicatorController($('#indicator')).init();
+            });
+		</script>
+	{% endblock %}
+{% endif %}

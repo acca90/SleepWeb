@@ -1,0 +1,27 @@
+{% extends "commons/module.html" %}
+{% load static %}
+
+{% block container %}
+
+	{% if user.is_superuser %}
+		<div id="msystem">
+			{% include 'msystem/list.html' %}
+			{% include 'msystem/form.html' %}
+		</div>
+	{% else %}
+		{% include '../commons/notallowed.html' %}
+	{% endif %}
+
+{% endblock container %}
+
+{% if user.is_superuser %}
+	{% block scripts %}
+		{{ block.super }}
+		<script src="{% static "modules/msystem/MSystemController.js" %}"></script>
+		<script>
+            $(document).ready(function () {
+                new MSystemController($('#msystem')).init();
+            });
+		</script>
+	{% endblock %}
+{% endif %}

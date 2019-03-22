@@ -4,14 +4,14 @@ Projeto desenvolvido para o Programa de Pós-Graduação em Computação Aplicad
 Universidade de Passo Fundo - 2018/2019
 
 @author Matheus Hernandes
-@since 09/03/2019
+@since 21/03/2019
 """
 from rest_framework import serializers
-from .models import Stage
+from .models import MSystem
 
 
-class StageSerializer(serializers.ModelSerializer):
+class MSystemSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Stage
+        model = MSystem
         fields = '__all__'
-        datatables_always_serialize = ('id', 'description')
+        datatables_always_serialize = ('id', 'name', 'url')

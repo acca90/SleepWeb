@@ -48,9 +48,11 @@ INSTALLED_APPS = [
     'compressor_toolkit',
     'sass_processor',
 
-    # Modulos SleepWeb
+    # SleepWeb
     'backend',
     'frontend',
+    'backend.modules.indicator',
+    'backend.modules.msystem',
     'backend.modules.institution',
     'backend.modules.stage',
     'backend.modules.user',

@@ -31,14 +31,14 @@ function SpinnerController() {
         $modal.modal('hide');
     };
     /**
-     * Shows modal and close 1 second after
+     * Shows modal and close short time
      * @memberOf SpinnerController
      */
     this.pop = function () {
         this.open();
         setTimeout(() => {
             this.close();
-        }, 1000);
+        }, 500);
     };
 }
 

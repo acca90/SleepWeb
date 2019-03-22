@@ -4,16 +4,16 @@ Projeto desenvolvido para o Programa de Pós-Graduação em Computação Aplicad
 Universidade de Passo Fundo - 2018/2019
 
 @author Matheus Hernandes
-@since 16/03/2019
+@since 21/03/2019
 """
 from rest_framework import viewsets
 from backend.commons.IsSuperUserPermission import IsSuperUserPermission
-from .serializers import StageSerializer
-from .models import Stage
+from backend.modules.msystem.serializers import MSystemSerializer
+from backend.modules.msystem.models import MSystem
 
 
-class StageViewSet(viewsets.ModelViewSet):
-    serializer_class = StageSerializer
+class MSystemViewSet(viewsets.ModelViewSet):
+    serializer_class = MSystemSerializer
     permission_classes = (IsSuperUserPermission,)
 
     def get_queryset(self):
@@ -21,6 +21,6 @@ class StageViewSet(viewsets.ModelViewSet):
         identification = self.request.query_params.get('pk', None)
         if identification is not None:
             self.pagination_class = None
-            return Stage.objects.filter(pk=identification)
+            return MSystem.objects.filter(pk=identification)
 
-        return Stage.objects.all().order_by('id')
+        return MSystem.objects.all().order_by('id')
