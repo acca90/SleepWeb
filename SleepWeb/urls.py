@@ -19,11 +19,13 @@ from backend.modules.stage.views import StageViewSet
 from backend.modules.user.views import UserViewSet
 from backend.modules.msystem.views import MSystemViewSet
 from backend.modules.indicator.views import IndicatorViewSet
+from backend.modules.group.views import GroupViewSet
 
 # Front-End
 from frontend.modules.stage.views import Stage
 from frontend.modules.msystem.views import MSystem
 from frontend.modules.indicator.views import Indicator
+from frontend.modules.group.views import Group
 from frontend.modules.patient.views import Patient
 from frontend.modules.institution.views import Institution
 from frontend.modules.login.views import Login, Logout
@@ -38,6 +40,7 @@ router.register(r'stage', StageViewSet, base_name='stage')
 router.register(r'patient', PatientViewSet, base_name='patient')
 router.register(r'msystem', MSystemViewSet, base_name='msystem')
 router.register(r'indicator', IndicatorViewSet, base_name='indicator')
+router.register(r'group', GroupViewSet, base_name='group')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -56,7 +59,7 @@ urlpatterns = [
     url(r'home/', login_required(Home.as_view()), name='home'),
     url(r'user/', login_required(UserFrontEnd.as_view()), name='user'),
     url(r'institution/', login_required(Institution.as_view()), name='institution'),
-
+    url(r'group/', login_required(Group.as_view()), name='group'),
     url(r'indicator/', login_required(Indicator.as_view()), name='indicator'),
     url(r'msystem/', login_required(MSystem.as_view()), name='msystem'),
     url(r'stage/', login_required(Stage.as_view()), name='stage'),

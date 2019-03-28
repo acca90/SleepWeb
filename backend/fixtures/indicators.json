@@ -76,15 +76,15 @@
         "model": "indicator.Indicator",
         "fields": {
             "description": "Despertar",
-            "definition": "Número de vezes que a pessoa acordou durante"
+            "definition": "Número de vezes que a pessoa acordou durante a noite de sono"
         }
     },
     {
         "pk": 11,
         "model": "indicator.Indicator",
         "fields": {
-            "description": "a noite de sono",
-            "definition": "Consciência após inicio do sono (WASO) Duração em minutos do estado de consciência após o início do sono e antes de despertar final"
+            "description": "WASO",
+            "definition": "Duração em minutos do estado de consciência após o início do sono e antes de despertar final"
         }
     }
 ]

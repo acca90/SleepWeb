@@ -21,34 +21,23 @@ from backend.modules.user.serializers import UserSerializer
 class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (IsSuperUserPermission,)
-
-    def list(self, request, **kwargs):
-        params = Q()
-        if 'search[value]' in request.GET and request.GET['search[value]'] != '':
-            params = Q(username__icontains=request.GET['search[value]']) |\
-                     Q(first_name__icontains=request.GET['search[value]']) |\
-                     Q(last_name__icontains=request.GET['search[value]']) |\
-                     Q(email__icontains=request.GET['search[value]']) |\
-                     Q(institution__name__icontains=request.GET['search[value]'])
-
-        queryset = User.objects.filter(params).select_related().order_by('id')
-        serializer = self.serializer_class(queryset, many=True, context={"request": request})
-        return Response(serializer.data)
-
-    def retrieve(self, request, *args, **kwargs):
-        queryset = User.objects.get(pk=request.GET['pk'])
-        serializer = UserSerializer(queryset, many=False, context={"request": request})
-        return Response(serializer.data)
+    queryset = User.objects.all()
 
     def get_permissions(self):
         if self.action in ('create',):
             self.permission_classes = [AllowAny, ]
         return super(self.__class__, self).get_permissions()
 
+    def retrieve(self, request, *args, **kwargs):
+        queryset = User.objects.get(pk=request.GET['pk'])
+        serializer = UserSerializer(queryset, many=False, context={"request": request})
+        return Response(serializer.data)
+
     def create(self, request, *args, **kwargs):
         serializer = UserSerializer(data=request.data, context={"request": request})
         if serializer.is_valid():
             user = serializer.create(serializer.validated_data)
+            serializer.data['id'] = user.id
             return Response(serializer.data, status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)

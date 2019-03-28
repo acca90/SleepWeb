@@ -15,7 +15,7 @@ from backend.modules.institution.models import Institution
 class UserSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        if self.context['request'].method == 'GET':
+        if 'request' in self.context and self.context['request'].method == 'GET':
             self.fields['institution'] = InstitutionSerializer()
         else:
             self.fields['institution'] = serializers.PrimaryKeyRelatedField(queryset=Institution.objects.all())

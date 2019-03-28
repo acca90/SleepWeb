@@ -31,9 +31,9 @@ function UserController($container) {
             datatableColumns: [
                 {width: '50px', data: 'id', sDefaultContent: '',},
                 {width: '120px', data: 'username', sDefaultContent: '',},
-                {width: '', data: 'first_name', sDefaultContent: '', render: nameRender},
-                {width: '', data: 'email', sDefaultContent: '',},
-                {width: '', data: 'institution', sDefaultContent: 'Not Available', render: renderInstitution},
+                {data: 'first_name', sDefaultContent: '', render: nameRender},
+                {data: 'email', sDefaultContent: '',},
+                {data: 'institution', name:'institution__name', sDefaultContent: 'Not Available', render: renderInstitution},
                 {width: '70px', data: 'is_active', sDefaultContent: 'Not Available', render: userActiveRender}
             ],
             serialize: serialize,

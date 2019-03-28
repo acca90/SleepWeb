@@ -7,5 +7,11 @@ Universidade de Passo Fundo - 2018/2019
 @since 09/03/2019
 """
 from django.shortcuts import render
+from django.views import View
 
-# Create your views here.
+
+class Group(View):
+    template_name = 'group/index.html'
+
+    def get(self, request):
+        return render(request, self.template_name)

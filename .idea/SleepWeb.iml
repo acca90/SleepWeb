@@ -30,6 +30,7 @@
         <option value="$MODULE_DIR$/frontend/templates/modules" />
         <option value="$MODULE_DIR$/frontend/templates/modules/analysis" />
         <option value="$MODULE_DIR$/frontend/templates/modules/auth" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/group" />
         <option value="$MODULE_DIR$/frontend/templates/modules/home" />
         <option value="$MODULE_DIR$/frontend/templates/modules/indicator" />
         <option value="$MODULE_DIR$/frontend/templates/modules/institution" />

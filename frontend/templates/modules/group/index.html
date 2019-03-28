@@ -1,0 +1,19 @@
+{% extends "commons/module.html" %}
+{% load static %}
+
+{% block container %}
+	<div id="group">
+		{% include 'group/list.html' %}
+		{% include 'group/form.html' %}
+	</div>
+{% endblock container %}
+
+{% block scripts %}
+	{{ block.super }}
+	<script src="{% static "modules/group/GroupController.js" %}"></script>
+	<script>
+        $(document).ready(function () {
+            new GroupController($('#group')).init();
+        });
+	</script>
+{% endblock %}
