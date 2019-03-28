@@ -9,6 +9,7 @@ Universidade de Passo Fundo - 2018/2019
 from django.db import models
 from backend.modules.user.models import User
 from backend.modules.institution.models import Institution
+from backend.modules.patient.models import Patient
 
 
 class Group(models.Model):
@@ -17,7 +18,8 @@ class Group(models.Model):
     owner = models.ForeignKey(User, db_column='owner', on_delete=None, null=True)
 
     users = models.ManyToManyField(User, related_name='group_user')
-    institutions = models.ManyToManyField(Institution, related_name='grouo_institution')
+    institutions = models.ManyToManyField(Institution, related_name='group_institution')
+    patients = models.ManyToManyField(Patient, related_name='group_patients')
 
     class Meta:
         db_table = 'Group'

@@ -9,6 +9,7 @@ Universidade de Passo Fundo - 2018/2019
 from rest_framework import serializers
 from backend.modules.group.models import Group
 
+from backend.modules.patient.models import Patient
 from backend.modules.user.models import User
 from backend.modules.institution.models import Institution
 
@@ -18,6 +19,7 @@ class GroupSerializer(serializers.ModelSerializer):
     owner = serializers.SlugRelatedField(read_only=True, slug_field='first_name')
     institutions = serializers.PrimaryKeyRelatedField(queryset=Institution.objects.all(), many=True)
     users = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
+    patients = serializers.PrimaryKeyRelatedField(queryset=Patient.objects.all(), many=True)
 
     def create(self, validated_data):
         validated_data['owner'] = self.context['request'].user
@@ -32,6 +34,7 @@ class GroupSerializer(serializers.ModelSerializer):
             'owner',
             'institutions',
             'users',
+            'patients',
         )
         datatables_always_serialize = (
             'id',

@@ -14,7 +14,7 @@ function GroupController($container) {
      */
     const getParams = function () {
         return {
-            moduleName: 'Groups',
+            moduleName: 'Share Groups',
             moduleIcon: 'fa fa-group',
             container: $container,
             apiUrl: '/api/group/',
@@ -45,6 +45,7 @@ function GroupController($container) {
      */
     const toForm = function (group) {
         let $form = $('form', $container);
+        alert(JSON.stringify(group));
     };
     /**
      * Serialize form for API submit

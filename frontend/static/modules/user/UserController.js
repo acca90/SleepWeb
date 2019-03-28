@@ -33,7 +33,12 @@ function UserController($container) {
                 {width: '120px', data: 'username', sDefaultContent: '',},
                 {data: 'first_name', sDefaultContent: '', render: nameRender},
                 {data: 'email', sDefaultContent: '',},
-                {data: 'institution', name:'institution__name', sDefaultContent: 'Not Available', render: renderInstitution},
+                {
+                    data: 'institution',
+                    name: 'institution__name',
+                    sDefaultContent: 'Not Available',
+                    render: renderInstitution
+                },
                 {width: '70px', data: 'is_active', sDefaultContent: 'Not Available', render: userActiveRender}
             ],
             serialize: serialize,
@@ -100,5 +105,12 @@ function UserController($container) {
         new AbstractController(getParams()).init();
         let userService = new UserService();
         userService.findInstitutions();
+    };
+    /**
+     * Load a modal datatables for search and pick registers
+     * @memberOf UserController
+     */
+    this.modal = function () {
+
     };
 }
