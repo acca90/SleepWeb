@@ -56,40 +56,56 @@
 						   name="name">
 				</div>
 
-				<ul class="nav nav-tabs" id="myTab" role="tablist">
-					<li class="nav-item">
-						<a class="nav-link active" id="allow-tab" data-toggle="tab" href="#allow-form" role="tab" aria-controls="allow" aria-selected="true">
-							<b>Share data with</b>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" id="allow-tab" data-toggle="tab" href="#allow-form" role="tab" aria-controls="allow" aria-selected="true">
-							<b>Patients</b>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" id="detail-tab" data-toggle="tab" href="#detail-form" role="tab" aria-controls="details" aria-selected="false">
-							<b>Details</b>
-						</a>
-					</li>
-				</ul>
-				<div class="tab-content" id="myTabContent">
-					<div class="tab-pane fade show active" id="allow-form" role="tabpanel" aria-labelledby="home-tab">
 
-						{% include 'group/allow_form.html' %}
-
+				<div class="card">
+					<div class="card-header">
+						<ul class="nav nav-tabs card-header-tabs">
+							<li class="nav-item">
+								<a class="nav-link active" id="sharewith" data-toggle="tab" href="#sharewith-form"
+								   role="tab"
+								   aria-controls="allow" aria-selected="true">
+									<b>Share data with</b>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="patientstab" data-toggle="tab" href="#patients-form" role="tab"
+								   aria-controls="allow" aria-selected="true">
+									<b>Patients</b>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="detailtab" data-toggle="tab" href="#detail-form" role="tab"
+								   aria-controls="details" aria-selected="false">
+									<b>Details</b>
+								</a>
+							</li>
+						</ul>
 					</div>
-					<div class="tab-pane fade" id="detail-form" role="tabpanel" aria-labelledby="profile-tab">
-						<div class="form-group mt-2">
-							<textarea cols="30"
-									  rows="10"
-									  class="form-control"
-									  required=""
-									  data-parsley-required-message="Enter the definition of the stage"
-									  maxlength="1000"
-									  id="indicatorDefinition"
-									  name="details"
-							></textarea>
+					<div class="card-body">
+						<div class="tab-content" id="myTabContent">
+
+							<div class="tab-pane fade show active" id="sharewith-form" role="tabpanel"
+								 aria-labelledby="home-tab">
+								{% include 'group/allow_form.html' %}
+							</div>
+
+							<div class="tab-pane fade" id="patients-form" role="tabpanel" aria-labelledby="profile-tab">
+								patients
+							</div>
+
+							<div class="tab-pane fade" id="detail-form" role="tabpanel" aria-labelledby="profile-tab">
+								<div class="form-group mt-2">
+									<textarea cols="30"
+											  rows="10"
+											  class="form-control"
+											  required=""
+											  data-parsley-required-message="Enter the definition of the stage"
+											  maxlength="1000"
+											  id="indicatorDefinition"
+											  name="details"></textarea>
+								</div>
+							</div>
+
 						</div>
 					</div>
 				</div>

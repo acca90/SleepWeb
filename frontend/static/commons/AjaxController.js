@@ -8,19 +8,14 @@
  * @namespace AjaxController
  */
 function AjaxController(params) {
-
-    let spinner = new SpinnerController();
     /**
      * Execute request for defined parameters
      * @memberOf AjaxController
      */
-    this.send = function (lock) {
+    this.send = function () {
         if (!params) {
             console.error('No parameters informed for submit');
             return;
-        }
-        if (lock) {
-            spinner.open();
         }
         $.ajax({
             url: params.url,
@@ -33,15 +28,9 @@ function AjaxController(params) {
                 }
             ),
             success: function (response) {
-                if (lock) {
-                    spinner.close();
-                }
                 params.success(response)
             },
             error: function (response) {
-                if (lock) {
-                    spinner.close();
-                }
                 params.error(response)
             }
         });

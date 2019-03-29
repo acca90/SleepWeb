@@ -100,8 +100,9 @@ function DataTableController(settings) {
      * Add row to DataTable;
      * @namespace DataTableController
      */
-    this.addRow = function () {
-        // TODO
+    this.addRow = function (data) {
+        $table.DataTable().row.add(data).draw();
+        return this;
     };
     /**
      * Mount DataTable ajax
@@ -121,7 +122,15 @@ function DataTableController(settings) {
      * Mount DataTable static
      */
     this.mountStatic = function () {
-        // TODO
+        $table.DataTable({
+            columns: settings,
+            scrollX: true,
+            responsive: true,
+            scrollY: '300px',
+            scrollCollapse: false,
+            paging: false
+        });
+        return this;
     };
 }
 

@@ -173,7 +173,7 @@ function AbstractController(params) {
             url: params.apiUrl + id + '/',
             success: editPickSuccess,
             error: editPickError
-        }).send(true);
+        }).send();
     };
     /**
      * Handle success on pick register to update
@@ -261,7 +261,7 @@ function AbstractController(params) {
             url: params.apiUrl + getId($tr) + '/',
             success: removeSuccess,
             error: removeError
-        }).send(true);
+        }).send();
     };
 
     /**
@@ -362,7 +362,7 @@ function AbstractController(params) {
             url: getApiUrlForDefinedMethod(),
             success: submitSuccess,
             error: submitError
-        }).send(true);
+        }).send();
     };
     /**
      * Test condition of update flag to handle the correct method for persistence

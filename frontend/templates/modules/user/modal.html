@@ -3,7 +3,7 @@
 <script src="{% static "modules/user/UserController.js" %}"></script>
 
 <script>
-    $(document).ready(function () {
-        new UserController().modal();
-    });
+	function getSettings() {
+		return new UserController().getSettings();
+    }
 </script>

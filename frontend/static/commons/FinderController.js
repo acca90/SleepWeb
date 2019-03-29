@@ -21,21 +21,18 @@ function FinderController() {
         $.ajax({
             url: url,
             dataType: "html",
-        }).done(html => $("#load").html(html));
+        }).done(async function (html) {
+            await $("#load").html(html);
+            await initDatatable(getSettings());
+            await $finder.modal('show');
+        });
     };
     /**
      * Set title for finder
      * @namespace FinderController
      */
-    const setTitle = function ( title ) {
+    const setTitle = function (title) {
         $finder.find('#titleArea').html(title);
-    };
-    /**
-     * Return finder container
-     * @namespace FinderController
-     */
-    this.getContainer = function () {
-        return $finder.find('#container');
     };
     /**
      * Opens finder
@@ -55,5 +52,19 @@ function FinderController() {
             callBackClose: param.callBackClose
         });
     };
-
+    /**
+     * Load a modal datatables for search and pick registers
+     * @memberOf UserController
+     */
+    const initDatatable = function (param) {
+        new DataTableController(param.datatableSettings)
+            .buildTable()
+            .place($finder.find('#container'))
+            .strechtIt()
+            .selectable()
+            .dblClickEvent(() => {
+                alert('todo')
+            })
+            .mountAjax(param.apiUrl);
+    };
 }

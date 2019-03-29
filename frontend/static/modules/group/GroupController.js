@@ -67,5 +67,6 @@ function GroupController($container) {
      */
     this.init = function () {
         new AbstractController(getParams()).init();
+        new GroupAllowFormController().init()
     };
 }
