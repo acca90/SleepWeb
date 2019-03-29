@@ -15,3 +15,10 @@ class Institution(View):
 
     def get(self, request):
         return render(request, self.template_name)
+
+
+class InstitutionFinder(View):
+    template_name = 'institution/modal.html'
+
+    def get(self, request):
+        return render(request, self.template_name)

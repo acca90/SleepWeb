@@ -15,3 +15,10 @@ class Stage(View):
 
     def get(self, request):
         return render(request, self.template_name)
+
+
+class StageFinder(View):
+    template_name = 'stage/modal.html'
+
+    def get(self, request):
+        return render(request, self.template_name)

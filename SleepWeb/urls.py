@@ -22,14 +22,14 @@ from backend.modules.indicator.views import IndicatorViewSet
 from backend.modules.group.views import GroupViewSet
 
 # Front-End
-from frontend.modules.stage.views import Stage
-from frontend.modules.msystem.views import MSystem
-from frontend.modules.indicator.views import Indicator
-from frontend.modules.group.views import Group
-from frontend.modules.patient.views import Patient
-from frontend.modules.institution.views import Institution
-from frontend.modules.login.views import Login, Logout
 from frontend.modules.home.views import Home
+from frontend.modules.login.views import Login, Logout
+from frontend.modules.stage.views import Stage, StageFinder
+from frontend.modules.msystem.views import MSystem
+from frontend.modules.indicator.views import Indicator, IndicatorFinder
+from frontend.modules.group.views import Group
+from frontend.modules.patient.views import Patient, PatientFinder
+from frontend.modules.institution.views import Institution, InstitutionFinder
 from frontend.modules.user.views import UserFrontEnd, UserFinder
 from frontend.modules.analysis.views import AnalysisView
 
@@ -67,4 +67,8 @@ urlpatterns = [
     url(r'^analysis/', login_required(AnalysisView.as_view()), name='analysis'),
 
     url(r'^finder/user/$', login_required(UserFinder.as_view()), name='userFinder'),
+    url(r'^finder/institution/$', login_required(InstitutionFinder.as_view()), name='InstitutionFinder'),
+    url(r'^finder/indicator/$', login_required(IndicatorFinder.as_view()), name='IndicatorFinder'),
+    url(r'^finder/stage/$', login_required(StageFinder.as_view()), name='StageFinder'),
+    url(r'^finder/patient/$', login_required(PatientFinder.as_view()), name='PatientFinder'),
 ]

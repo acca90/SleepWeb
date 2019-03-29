@@ -1,0 +1,9 @@
+{% load static %}
+
+<script src="{% static "modules/institution/InstitutionController.js" %}"></script>
+
+<script>
+    $(document).ready(function () {
+        new InstitutionController().modal();
+    });
+</script>

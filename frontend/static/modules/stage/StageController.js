@@ -9,6 +9,17 @@
  */
 function StageController($container) {
     /**
+     * DataTable Settings
+     * @namespace StageController
+     */
+    const getDatatableSettings = function () {
+        return [
+            {th: '#', data: 'id', width: '60px'},
+            {th: 'Description', data: 'description'},
+            {th: 'Definition', data: 'definition'},
+        ]
+    };
+    /**
      * Return params for AbstractController
      * @memberOf StageController
      */
@@ -28,11 +39,7 @@ function StageController($container) {
                 removeSuccess: `Stage successfully removed`,
                 removeError: `Something went wrong with request, call administrators`,
             },
-            datatableColumns: [
-                {data: 'id',width:'60px'},
-                {data: 'description'},
-                {data: 'definition'},
-            ],
+            datatableSettings: getDatatableSettings(),
             serialize: serialize,
             toForm: toForm,
             clean: null
@@ -61,5 +68,22 @@ function StageController($container) {
      */
     this.init = function () {
         new AbstractController(getParams()).init();
+    };
+    /**
+     * Load a modal datatables for search and pick registers
+     * @memberOf StageController
+     */
+    this.modal = function () {
+        let finder = new FinderController();
+        new DataTableController(getDatatableSettings())
+            .buildTable()
+            .place(finder.getContainer())
+            .strechtIt()
+            .selectable()
+            .dblClickEvent(() => {
+                alert('todo')
+            })
+            .mountAjax(getParams().apiUrl);
+        finder.show();
     };
 }

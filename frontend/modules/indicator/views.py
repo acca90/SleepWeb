@@ -15,3 +15,11 @@ class Indicator(View):
 
     def get(self, request):
         return render(request, self.template_name)
+
+
+class IndicatorFinder(View):
+    template_name = 'indicator/modal.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+

@@ -9,6 +9,17 @@
  */
 function MSystemController($container) {
     /**
+     * DataTable Settings
+     * @namespace MSystemController
+     */
+    const getDatatableSettings = function () {
+        return [
+            {th: '#', data: 'id', width: '50px', sDefaultContent: ''},
+            {th: 'Name', data: 'name', sDefaultContent: ''},
+            {th: 'URL', data: 'url', sDefaultContent: ''}
+        ]
+    };
+    /**
      * Return params for AbstractController
      * @memberOf MSystemController
      */
@@ -28,11 +39,7 @@ function MSystemController($container) {
                 removeSuccess: `Monitoring System successfully removed`,
                 removeError: `Something went wrong with request, call administrators`,
             },
-            datatableColumns: [
-                {data: 'id', width: '50px', sDefaultContent: ''},
-                {data: 'name', sDefaultContent: ''},
-                {data: 'url', sDefaultContent: ''}
-            ],
+            datatableSettings: getDatatableSettings(),
             serialize: serialize,
             toForm: toForm,
             clean: null

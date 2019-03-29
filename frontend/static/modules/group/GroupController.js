@@ -9,6 +9,17 @@
  */
 function GroupController($container) {
     /**
+     * DataTable Settings
+     * @namespace GroupController
+     */
+    const getDatatableSettings = function () {
+        return [
+            {th: '#', width: '50px', data: 'id'},
+            {th: 'Name', width: '', data: 'name'},
+            {th: 'Owner', width: '', data: 'owner', name: 'owner__first_name'}
+        ]
+    };
+    /**
      * Return params for AbstractController
      * @memberOf GroupController
      */
@@ -28,11 +39,7 @@ function GroupController($container) {
                 removeSuccess: `Group successfully removed`,
                 removeError: `Something went wrong with request, call administrators`,
             },
-            datatableColumns: [
-                {width: '50px', data: 'id'},
-                {width: '', data: 'name'},
-                {width: '', data: 'owner', name:'owner__first_name'}
-            ],
+            datatableSettings: getDatatableSettings(),
             serialize: serialize,
             toForm: toForm,
             clean: null

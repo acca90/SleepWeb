@@ -9,6 +9,17 @@
  */
 function InstitutionController($container) {
     /**
+     * DataTable Settings
+     * @namespace StageController
+     */
+    const getDatatableSettings = function () {
+        return [
+            {th: '#', data: 'id'},
+            {th: 'Name', data: 'name'},
+            {th: 'Contry', data: 'country'}
+        ];
+    };
+    /**
      * Return params for AbstractController
      * @memberOf InstitutionController
      */
@@ -28,11 +39,7 @@ function InstitutionController($container) {
                 removeSuccess: `Institution successfully removed`,
                 removeError: `Something went wrong with request, call administrators`,
             },
-            datatableColumns: [
-                {data: 'id'},
-                {data: 'name'},
-                {data: 'country'}
-            ],
+            datatableSettings: getDatatableSettings(),
             serialize: serialize,
             toForm: toForm,
             clean: null
@@ -61,5 +68,22 @@ function InstitutionController($container) {
      */
     this.init = function () {
         new AbstractController(getParams()).init();
+    };
+    /**
+     * Load a modal datatables for search and pick registers
+     * @memberOf StageController
+     */
+    this.modal = function () {
+        let finder = new FinderController();
+        new DataTableController(getDatatableSettings())
+            .buildTable()
+            .place(finder.getContainer())
+            .strechtIt()
+            .selectable()
+            .dblClickEvent(() => {
+                alert('todo')
+            })
+            .mountAjax(getParams().apiUrl);
+        finder.show();
     };
 }

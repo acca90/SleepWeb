@@ -1,0 +1,9 @@
+{% load static %}
+
+<script src="{% static "modules/patient/PatientController.js" %}"></script>
+
+<script>
+    $(document).ready(function () {
+        new PatientController().modal();
+    });
+</script>

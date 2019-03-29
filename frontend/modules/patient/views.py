@@ -15,3 +15,10 @@ class Patient(View):
 
     def get(self, request):
         return render(request, self.template_name)
+
+
+class PatientFinder(View):
+    template_name = 'patient/modal.html'
+
+    def get(self, request):
+        return render(request, self.template_name)

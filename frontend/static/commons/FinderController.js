@@ -48,11 +48,12 @@ function FinderController() {
      * Run finder for user
      * @namespace FinderController
      */
-    this.user = async function (callBackConfirm, callBackClose) {
-        setTitle('Find users');
-        await load('/finder/user/', {
-            callBackConfirm: callBackConfirm,
-            callBackClose: callBackClose
+    this.find = async function (param) {
+        setTitle(param.title);
+        await load('/finder/' + param.url, {
+            callBackConfirm: param.callBackConfirm,
+            callBackClose: param.callBackClose
         });
     };
+
 }

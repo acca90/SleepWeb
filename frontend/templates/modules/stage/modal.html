@@ -1,0 +1,9 @@
+{% load static %}
+
+<script src="{% static "modules/stage/StageController.js" %}"></script>
+
+<script>
+    $(document).ready(function () {
+        new StageController().modal();
+    });
+</script>

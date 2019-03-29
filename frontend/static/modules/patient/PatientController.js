@@ -9,6 +9,19 @@
  */
 function PatientController($container) {
     /**
+     * DataTable Settings
+     * @namespace PatientController
+     */
+    const getDatatableSettings = function () {
+        return [
+            {th: '#', data: 'id', width: '60px'},
+            {th: 'Name', data: 'first_name', render: renderFullName},
+            {th: 'Brith Date', data: 'birth_date', render: renderBirthDateAndAge, width: '200px'},
+            {th: 'Gender', data: 'gender', render: renderGender, width: '100px'},
+            {th: 'Stage', data: 'stage', sDefaultContent: '', width: '120px'}
+        ];
+    };
+    /**
      * Return params for AbstractController
      * @memberOf PatientController
      */
@@ -28,13 +41,7 @@ function PatientController($container) {
                 removeSuccess: `Patient successfully removed`,
                 removeError: `Something went wrong with request, call administrators`,
             },
-            datatableColumns: [
-                {data: 'id', width: '60px'},
-                {data: 'first_name', render: renderFullName},
-                {data: 'birth_date', render: renderBirthDateAndAge, width: '200px'},
-                {data: 'gender', render: renderGender, width: '100px'},
-                {data: 'stage', sDefaultContent: '', width: '120px'}
-            ],
+            datatableSettings: getDatatableSettings(),
             serialize: serialize,
             toForm: toForm,
             clean: null
@@ -92,5 +99,22 @@ function PatientController($container) {
      */
     this.init = function () {
         new AbstractController(getParams()).init();
+    };
+        /**
+     * Load a modal datatables for search and pick registers
+     * @memberOf PatientController
+     */
+    this.modal = function () {
+        let finder = new FinderController();
+        new DataTableController(getDatatableSettings())
+            .buildTable()
+            .place(finder.getContainer())
+            .strechtIt()
+            .selectable()
+            .dblClickEvent(() => {
+                alert('todo')
+            })
+            .mountAjax(getParams().apiUrl);
+        finder.show();
     };
 }
