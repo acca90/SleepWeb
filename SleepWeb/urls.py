@@ -30,7 +30,7 @@ from frontend.modules.patient.views import Patient
 from frontend.modules.institution.views import Institution
 from frontend.modules.login.views import Login, Logout
 from frontend.modules.home.views import Home
-from frontend.modules.user.views import UserFrontEnd
+from frontend.modules.user.views import UserFrontEnd, UserFinder
 from frontend.modules.analysis.views import AnalysisView
 
 router = routers.DefaultRouter()
@@ -56,13 +56,15 @@ urlpatterns = [
     url(r'login/', Login.as_view(), name='login'),
     url(r'logout/', login_required(Logout.as_view()), name='logout'),
 
-    url(r'home/', login_required(Home.as_view()), name='home'),
-    url(r'user/', login_required(UserFrontEnd.as_view()), name='user'),
-    url(r'institution/', login_required(Institution.as_view()), name='institution'),
-    url(r'group/', login_required(Group.as_view()), name='group'),
-    url(r'indicator/', login_required(Indicator.as_view()), name='indicator'),
-    url(r'msystem/', login_required(MSystem.as_view()), name='msystem'),
-    url(r'stage/', login_required(Stage.as_view()), name='stage'),
-    url(r'patient/', login_required(Patient.as_view()), name='patient'),
-    url(r'analysis/', login_required(AnalysisView.as_view()), name='analysis'),
+    url(r'^home/', login_required(Home.as_view()), name='home'),
+    url(r'^user/', login_required(UserFrontEnd.as_view()), name='user'),
+    url(r'^institution/', login_required(Institution.as_view()), name='institution'),
+    url(r'^group/', login_required(Group.as_view()), name='group'),
+    url(r'^indicator/', login_required(Indicator.as_view()), name='indicator'),
+    url(r'^msystem/', login_required(MSystem.as_view()), name='msystem'),
+    url(r'^stage/', login_required(Stage.as_view()), name='stage'),
+    url(r'^patient/', login_required(Patient.as_view()), name='patient'),
+    url(r'^analysis/', login_required(AnalysisView.as_view()), name='analysis'),
+
+    url(r'^finder/user/$', login_required(UserFinder.as_view()), name='userFinder'),
 ]

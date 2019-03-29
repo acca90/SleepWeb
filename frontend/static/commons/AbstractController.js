@@ -15,10 +15,15 @@ function AbstractController(params) {
      */
     let isUpdate = false;
     /**
-     * Spinner
+     * Spinner for loading
      * @memberOf AbstractController
      */
     let spinner = new SpinnerController();
+    /**
+     * Module DataTable
+     * @memberOf AbstractController
+     */
+    let moduleDataTable = null;
     /**
      * Map of elements
      * @memberOf AbstractController
@@ -35,8 +40,7 @@ function AbstractController(params) {
                 edit: null,
                 remove: null,
                 refresh: null,
-            },
-            datatable: null
+            }
         },
         form: {
             alert: null,
@@ -53,7 +57,7 @@ function AbstractController(params) {
      * Initilize map of DOM's elements
      * @memberOf AbstractController
      */
-    const initMap = function () {
+    const initMap = async function () {
         DOM.divs.list = $('div#list', params.container);
         DOM.divs.form = $('div#form', params.container);
         DOM.list.buttons.new = $('#btnNew', params.container);
@@ -61,7 +65,6 @@ function AbstractController(params) {
         DOM.list.buttons.remove = $('#btnRemove', params.container);
         DOM.list.buttons.refresh = $('#btnRefresh', params.container);
         DOM.list.alert = $('#listAlert', params.container);
-        DOM.list.datatable = $('#datatable', params.container);
         DOM.form.tagForm = $('form', params.container);
         DOM.form.buttons.save = $('#btnSave', params.container);
         DOM.form.buttons.cancel = $('#btnCancel', params.container);
@@ -73,7 +76,7 @@ function AbstractController(params) {
      * Initialize module identity
      * @memberOf AbstractController
      */
-    const initModuleIdentity = function () {
+    const initModuleIdentity = async function () {
         $('#moduleIcon', DOM.divs.list).addClass(params.moduleIcon);
         $('#moduleName', DOM.divs.list).html(params.moduleName);
         $('#moduleIcon', DOM.divs.form).addClass(params.moduleIcon);
@@ -83,7 +86,7 @@ function AbstractController(params) {
      * Initilize date pickers
      * @memberOf AbstractController
      */
-    const initDatePickers = function () {
+    const initDatePickers = async function () {
         let datePickers = $('[isDatePicker]');
         datePickers.wrap('<div class="input-group"></div>');
         datePickers.parent('div').append(buildCalendarIcon());
@@ -117,11 +120,14 @@ function AbstractController(params) {
      * Iinitilize events for module navigation
      * @memberOf AbstractController
      */
-    const initEvents = function () {
+    const initEvents = async function () {
         DOM.list.buttons.new.on('click', newRegister);
         DOM.list.buttons.edit.on('click', edit);
         DOM.list.buttons.remove.on('click', remove);
-        DOM.list.buttons.refresh.on('click', () => { spinner.pop(); refresh(); });
+        DOM.list.buttons.refresh.on('click', () => {
+            spinner.pop();
+            refresh();
+        });
         DOM.form.buttons.save.on('click', validate);
         DOM.form.buttons.cancel.on('click', cancel);
     };
@@ -143,7 +149,7 @@ function AbstractController(params) {
     const edit = function () {
         hideAlerts();
         DOM.form.option.html('Update');
-        let $tr = DOM.list.datatable.find('tr.selected');
+        let $tr = moduleDataTable.getSelectedRow();
         if ($tr.length) {
             return editForSelectedRow($tr);
         }
@@ -215,7 +221,7 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const remove = function () {
-        let $tr = DOM.list.datatable.find('tr.selected');
+        let $tr = moduleDataTable.getSelectedRow();
         if ($tr.length) {
             return removeSelected($tr);
         }
@@ -478,70 +484,39 @@ function AbstractController(params) {
      * Initialize datatable for module
      * @memberOf AbstractController
      */
-    const initDatatable = function () {
-        DOM.list.datatable.css('width', '100%');
-        DOM.list.datatable.css('min-width', '1000px');
-        DOM.list.datatable.DataTable({
-            serverSide: true,
-            ajax: params.apiUrl + '?format=datatables',
-            columns: params.datatableColumns,
-            scrollX: true,
-            responsive: true
-        });
-    };
-    /**
-     * Initialize double click on datatable
-     * @memberOf AbstractController
-     */
-    const initDoubleClickDatatable = function () {
-        DOM.list.datatable.on('dblclick', 'tbody > tr', function () {
-            $(this)
-                .addClass('selected')
-                .siblings('.selected')
-                .removeClass('selected');
-            edit();
-        });
-    };
-    /**
-     * Initialize row select for datatables
-     * @memberOf AbstractController
-     */
-    const initSelectedDatatable = function () {
-        DOM.list.datatable.on('click', 'tbody > tr', function () {
-            if ($(this).hasClass('selected')) {
-                $(this).removeClass('selected')
-            } else {
-                $(this).addClass('selected').siblings('.selected').removeClass('selected');
-            }
-        });
+    const initDatatable = async function () {
+        moduleDataTable = new DataTableController(params.datatableSettings)
+            .buildTable()
+            .place($('div#datatable'))
+            .strechtIt()
+            .selectable()
+            .dblClickEvent(edit)
+            .mountAjax(params.apiUrl);
     };
     /**
      * Refresh datatables
      * @memberOf AbstractController
      */
     const refresh = function () {
-        DOM.list.datatable.DataTable().search('');
-        DOM.list.datatable.DataTable().ajax.reload();
+        moduleDataTable.refresh();
     };
     /**
      * Return data for selected row
      * @memberOf AbstractController
      */
     const getId = function ($tr) {
-        let rowData = DOM.list.datatable.DataTable().row($tr).data();
+        let rowData = moduleDataTable.getRowData($tr);
         return rowData.id;
     };
     /**
      * Module Initialize
      * @memberOf AbstractController
      */
-    this.init = function () {
-        initMap();
-        initModuleIdentity();
-        initDatePickers();
-        initEvents();
-        initDatatable();
-        initDoubleClickDatatable();
-        initSelectedDatatable();
+    this.init = async function () {
+        await initMap();
+        await initModuleIdentity();
+        await initDatePickers();
+        await initDatatable();
+        await initEvents();
     };
 }

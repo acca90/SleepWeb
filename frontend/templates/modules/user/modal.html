@@ -1,0 +1,9 @@
+{% load static %}
+
+<script src="{% static "modules/user/UserController.js" %}"></script>
+
+<script>
+    $(document).ready(function () {
+        new UserController($('#user')).modal();
+    });
+</script>

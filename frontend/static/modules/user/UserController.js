@@ -9,6 +9,32 @@
  */
 function UserController($container) {
     /**
+     * DataTable Settings
+     * @namespace UserController
+     */
+    const getDatatableSettings = function () {
+        return [
+            {th: '#', width: '50px', data: 'id', sDefaultContent: '',},
+            {th: 'Username', width: '120px', data: 'username', sDefaultContent: '',},
+            {th: 'Name', data: 'first_name', sDefaultContent: '', render: nameRender},
+            {th: 'E-mail', data: 'email', sDefaultContent: '',},
+            {
+                th: 'Institution',
+                data: 'institution',
+                name: 'institution__name',
+                sDefaultContent: 'Not Available',
+                render: renderInstitution
+            },
+            {
+                th: 'Is Active',
+                width: '70px',
+                data: 'is_active',
+                sDefaultContent: 'Not Available',
+                render: userActiveRender
+            }
+        ];
+    };
+    /**
      * Return params for AbstractController
      * @memberOf UserController
      */
@@ -28,19 +54,7 @@ function UserController($container) {
                 removeSuccess: `User successfully removed`,
                 removeError: `Something went wrong with request, call administrators`,
             },
-            datatableColumns: [
-                {width: '50px', data: 'id', sDefaultContent: '',},
-                {width: '120px', data: 'username', sDefaultContent: '',},
-                {data: 'first_name', sDefaultContent: '', render: nameRender},
-                {data: 'email', sDefaultContent: '',},
-                {
-                    data: 'institution',
-                    name: 'institution__name',
-                    sDefaultContent: 'Not Available',
-                    render: renderInstitution
-                },
-                {width: '70px', data: 'is_active', sDefaultContent: 'Not Available', render: userActiveRender}
-            ],
+            datatableSettings: getDatatableSettings(),
             serialize: serialize,
             toForm: toForm,
             clean: clean
@@ -102,6 +116,7 @@ function UserController($container) {
      * @memberOf UserController
      */
     this.init = function () {
+        //console.log(getParams());
         new AbstractController(getParams()).init();
         let userService = new UserService();
         userService.findInstitutions();
@@ -111,6 +126,16 @@ function UserController($container) {
      * @memberOf UserController
      */
     this.modal = function () {
-
+        let finder = new FinderController();
+        new DataTableController(getDatatableSettings())
+            .buildTable()
+            .place(finder.getContainer())
+            .strechtIt()
+            .selectable()
+            .dblClickEvent(() => { alert('todo') })
+            .mountAjax(getParams().apiUrl);
+        finder.show();
     };
 }
+
+

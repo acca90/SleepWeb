@@ -15,3 +15,10 @@ class UserFrontEnd(View):
 
     def get(self, request):
         return render(request, self.template_name)
+
+
+class UserFinder(View):
+    template_name = 'user/modal.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
