@@ -7,7 +7,7 @@
  * @since 28/03/2019
  * @namespace FinderController
  */
-function FinderController() {
+function FinderController(param) {
     /**
      * Finder modal
      * @namespace FinderController
@@ -23,7 +23,7 @@ function FinderController() {
             dataType: "html",
         }).done(async function (html) {
             await $("#load").html(html);
-            await initDatatable(getSettings());
+            await initDatatable(getSettings(), callBacks);
             await $finder.modal('show');
         });
     };
@@ -33,6 +33,32 @@ function FinderController() {
      */
     const setTitle = function (title) {
         $finder.find('#titleArea').html(title);
+    };
+    /**
+     * Load a modal datatables for search and pick registers
+     * @memberOf FinderController
+     */
+    const initDatatable = function (param, callBacks) {
+        new DataTableController(param.datatableSettings)
+            .buildTable()
+            .place($finder.find('#container'))
+            .strechtIt()
+            .selectable()
+            .dblClickEvent($tr => {
+                customDblClickEvent($tr, callBacks)
+            })
+            .mountAjax(param.apiUrl);
+    };
+    /**
+     * Custom double click for fiender
+     * @memberOf FinderController
+     */
+    const customDblClickEvent = function (rowData, callBacks) {
+        if ($.isEmpty(callBacks) || $.isEmpty(callBacks.callBackConfirm)) {
+            return
+        }
+        callBacks.callBackConfirm(rowData);
+        $finder.modal('hide');
     };
     /**
      * Opens finder
@@ -45,26 +71,11 @@ function FinderController() {
      * Run finder for user
      * @namespace FinderController
      */
-    this.find = async function (param) {
+    this.find = async function () {
         setTitle(param.title);
         await load('/finder/' + param.url, {
             callBackConfirm: param.callBackConfirm,
             callBackClose: param.callBackClose
         });
-    };
-    /**
-     * Load a modal datatables for search and pick registers
-     * @memberOf UserController
-     */
-    const initDatatable = function (param) {
-        new DataTableController(param.datatableSettings)
-            .buildTable()
-            .place($finder.find('#container'))
-            .strechtIt()
-            .selectable()
-            .dblClickEvent(() => {
-                alert('todo')
-            })
-            .mountAjax(param.apiUrl);
     };
 }

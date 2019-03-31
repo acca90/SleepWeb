@@ -14,12 +14,50 @@ function GroupAllowFormController() {
      */
     let datatable = null;
     /**
+     * Settings for find users
+     * @memberOf GroupAllowFormController
+     */
+    let finderSettingsUser = null;
+    /**
+     * Settings for find institutions
+     * @memberOf GroupAllowFormController
+     */
+    let finderSettingsInstitution = null;
+    /**
      * Datatables settings for
+     * @memberOf GroupAllowFormController
      */
     const datatableSettings = [
         {th: 'Name', data: 'name', sDefaultContent: '',},
         {th: 'Type', data: 'type', sDefaultContent: ''},
     ];
+    /**
+     * Initialize settings
+     */
+    const initSettings = function () {
+        finderSettingsUser = {
+            url: 'user',
+            callBackConfirm: callBackUser
+        };
+        finderSettingsInstitution = {
+            url: 'institution',
+            callBackConfirm: callBackInstitution
+        };
+    };
+    /**
+     * CallBack for Users
+     * @memberOf GroupAllowFormController
+     */
+    const callBackUser = function (data) {
+        datatable.addRow(data);
+    };
+    /**
+     * CallBack for Institution
+     * @memberOf GroupAllowFormController
+     */
+    const callBackInstitution = function (data) {
+        datatable.addRow(data);
+    };
     /**
      * Initialize DataTable
      * @memberOf GroupAllowFormController
@@ -37,7 +75,12 @@ function GroupAllowFormController() {
      * @memberOf GroupAllowFormController
      */
     const initEvents = function () {
-
+        $('#addResearchers').on('click', function () {
+            new FinderController(finderSettingsUser).find();
+        });
+        $('#addInstitutions').on('click', function () {
+            new FinderController(finderSettingsInstitution).find();
+        });
     };
     this.toForm = function () {
         // TODO
@@ -52,5 +95,6 @@ function GroupAllowFormController() {
     this.init = function () {
         initDatatable();
         initEvents();
+        initSettings();
     };
 }

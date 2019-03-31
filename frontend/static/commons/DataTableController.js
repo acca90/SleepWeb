@@ -45,7 +45,7 @@ function DataTableController(settings) {
                 .siblings('.selected')
                 .removeClass('selected');
 
-            event($table);
+            event($table.DataTable().row($(this)).data());
         });
         return this;
     };
@@ -58,6 +58,9 @@ function DataTableController(settings) {
             if ($(this).hasClass('selected')) {
                 $(this).removeClass('selected')
             } else {
+                if ($(this).find('.dataTables_empty').length > 0) {
+                    return;
+                }
                 $(this)
                     .addClass('selected')
                     .siblings('.selected')
