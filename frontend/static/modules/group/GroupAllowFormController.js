@@ -27,20 +27,33 @@ function GroupAllowFormController() {
      * Datatables settings for
      * @memberOf GroupAllowFormController
      */
-    const datatableSettings = [
-        {th: 'Name', data: 'name', sDefaultContent: '',},
-        {th: 'Type', data: 'type', sDefaultContent: ''},
-    ];
+    let datatableSettings = null;
+    /**
+     * Render for name
+     * @memberOf GroupAllowFormController
+     */
+    const nameRender = function (data, type, row) {
+        if (row.type === 'Researcher') {
+            return row.first_name + ' ' + row.last_name;
+        }
+        return row.name;
+    };
     /**
      * Initialize settings
      */
     const initSettings = function () {
+        datatableSettings = [
+            {th: 'Type', width: '120px', data: 'type', sDefaultContent: ''},
+            {th: 'Name', data: 'name', sDefaultContent: '', render: nameRender}
+        ];
         finderSettingsUser = {
             url: 'user',
+            title: 'Find for Researchers',
             callBackConfirm: callBackUser
         };
         finderSettingsInstitution = {
             url: 'institution',
+            title: 'Find for Institutions',
             callBackConfirm: callBackInstitution
         };
     };
@@ -49,6 +62,7 @@ function GroupAllowFormController() {
      * @memberOf GroupAllowFormController
      */
     const callBackUser = function (data) {
+        data.type = 'Researcher';
         datatable.addRow(data);
     };
     /**
@@ -56,6 +70,7 @@ function GroupAllowFormController() {
      * @memberOf GroupAllowFormController
      */
     const callBackInstitution = function (data) {
+        data.type = 'Institution';
         datatable.addRow(data);
     };
     /**
@@ -66,6 +81,7 @@ function GroupAllowFormController() {
         datatable = new DataTableController(datatableSettings)
             .buildTable()
             .place($('#datatableAllowContainer'))
+            .setOrder([1,'desc'])
             .strechtIt()
             .selectable()
             .mountStatic();
@@ -82,19 +98,33 @@ function GroupAllowFormController() {
             new FinderController(finderSettingsInstitution).find();
         });
     };
-    this.toForm = function () {
+    /**
+     * Load form for allowed
+     * @memberOf GroupAllowFormController
+     */
+    this.toForm = function (users, institutions) {
         // TODO
+        return this;
     };
+    /**
+     * Clean form for allowed
+     * @memberOf GroupAllowFormController
+     */
     this.clean = function () {
-        // TODO
+        datatable
+            .ajustColumns()
+            .clear();
+
+        return this;
     };
     /**
      * Initialize form
      * @memberOf GroupAllowFormController
      */
     this.init = function () {
+        initSettings();
         initDatatable();
         initEvents();
-        initSettings();
+        return this;
     };
 }

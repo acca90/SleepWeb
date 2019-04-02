@@ -70,20 +70,13 @@ function InstitutionController($container) {
         new AbstractController(getParams()).init();
     };
     /**
-     * Load a modal datatables for search and pick registers
-     * @memberOf StageController
+     * Load a settings for modal datatables
+     * @memberOf InstitutionController
      */
-    this.modal = function () {
-        let finder = new FinderController();
-        new DataTableController(getDatatableSettings())
-            .buildTable()
-            .place(finder.getContainer())
-            .strechtIt()
-            .selectable()
-            .dblClickEvent(() => {
-                alert('todo')
-            })
-            .mountAjax(getParams().apiUrl);
-        finder.show();
+    this.getSettings = function () {
+        return {
+            apiUrl: getParams().apiUrl,
+            datatableSettings: getDatatableSettings()
+        }
     };
 }

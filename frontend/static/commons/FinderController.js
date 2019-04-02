@@ -10,12 +10,17 @@
 function FinderController(param) {
     /**
      * Finder modal
-     * @namespace FinderController
+     * @memberOf FinderController
      */
     let $finder = $('#finder');
     /**
+     * Finder DataTable
+     * @memberOf FinderController
+     */
+    let dataTable = null;
+    /**
      * Load module for Finder
-     * @namespace FinderController
+     * @memberOf FinderController
      */
     const load = async function (url, callBacks) {
         $.ajax({
@@ -24,12 +29,33 @@ function FinderController(param) {
         }).done(async function (html) {
             await $("#load").html(html);
             await initDatatable(getSettings(), callBacks);
-            await $finder.modal('show');
+            await $finder.modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+            await updateBindButtonEvents(callBacks);
         });
     };
     /**
+     * Update bind of finder's buttons
+     * @memberOf FinderController
+     */
+    const updateBindButtonEvents = function (callBacks) {
+        $('#finderConfirm').off('click').on('click', function () {
+            if ($.isEmpty(callBacks) || $.isEmpty(callBacks.callBackConfirm)) {
+
+            }
+            let rowData = dataTable.getRowData();
+            if ($.isEmpty(rowData)) {
+                return;
+            }
+            callBacks.callBackConfirm(rowData);
+            $finder.modal('hide');
+        })
+    };
+    /**
      * Set title for finder
-     * @namespace FinderController
+     * @memberOf FinderController
      */
     const setTitle = function (title) {
         $finder.find('#titleArea').html(title);
@@ -39,7 +65,7 @@ function FinderController(param) {
      * @memberOf FinderController
      */
     const initDatatable = function (param, callBacks) {
-        new DataTableController(param.datatableSettings)
+        dataTable = new DataTableController(param.datatableSettings)
             .buildTable()
             .place($finder.find('#container'))
             .strechtIt()
@@ -62,14 +88,15 @@ function FinderController(param) {
     };
     /**
      * Opens finder
-     * @namespace FinderController
+     * @memberOf FinderController
      */
     this.show = function () {
         $finder.modal('show');
+        return this;
     };
     /**
      * Run finder for user
-     * @namespace FinderController
+     * @memberOf FinderController
      */
     this.find = async function () {
         setTitle(param.title);
@@ -77,5 +104,6 @@ function FinderController(param) {
             callBackConfirm: param.callBackConfirm,
             callBackClose: param.callBackClose
         });
+        return this;
     };
 }

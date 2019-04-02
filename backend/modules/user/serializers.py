@@ -44,3 +44,16 @@ class UserSerializer(serializers.ModelSerializer):
             'is_active',
             'institution',
         )
+
+
+class UserSmallSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'institution',
+        )

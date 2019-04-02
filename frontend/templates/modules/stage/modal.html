@@ -1,3 +1,9 @@
 {% load static %}
 
 <script src="{% static "modules/stage/StageController.js" %}"></script>
+
+<script>
+	function getSettings() {
+		return new StageController().getSettings();
+    }
+</script>

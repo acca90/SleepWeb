@@ -9,8 +9,13 @@
  */
 function GroupController($container) {
     /**
+     * AllowForm Controller
+     * @memberOf GroupController
+     */
+    let allowForm = null;
+    /**
      * DataTable Settings
-     * @namespace GroupController
+     * @memberOf GroupController
      */
     const getDatatableSettings = function () {
         return [
@@ -42,10 +47,9 @@ function GroupController($container) {
             datatableSettings: getDatatableSettings(),
             serialize: serialize,
             toForm: toForm,
-            clean: null
+            clean: clean
         };
     };
-
     /**
      * Fill form fields for update data
      * @memberOf GroupController
@@ -62,11 +66,20 @@ function GroupController($container) {
         return $('form').serializeToJson();
     };
     /**
+     * Extend clean functionality on AbstractController
+     * @memberOf GroupController
+     */
+    const clean = function () {
+        allowForm.clean();
+        return this;
+    };
+    /**
      * Module Initialize
      * @memberOf GroupController
      */
     this.init = function () {
         new AbstractController(getParams()).init();
-        new GroupAllowFormController().init()
+        allowForm = new GroupAllowFormController().init();
+        return this;
     };
 }
