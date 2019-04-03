@@ -81,7 +81,7 @@ function GroupAllowFormController() {
         datatable = new DataTableController(datatableSettings)
             .buildTable()
             .place($('#datatableAllowContainer'))
-            .setOrder([1,'desc'])
+            .setOrder([1, 'desc'])
             .strechtIt()
             .selectable()
             .mountStatic();
@@ -114,8 +114,26 @@ function GroupAllowFormController() {
         datatable
             .ajustColumns()
             .clear();
-
         return this;
+    };
+    /**
+     * Serialize data for submit
+     * @memberOf GroupAllowFormController
+     */
+    this.serialize = function () {
+        let allowed = {users: [], institutions: []};
+        let dataArray = datatable.getDataArray();
+        if ($.isEmpty(dataArray) || dataArray.length < 1) {
+            return allowed;
+        }
+        dataArray.forEach(row => {
+            if (row.type === 'Researcher') {
+                allowed.users.push(row.id)
+            } else {
+                allowed.institutions.push(row.id)
+            }
+        });
+        return allowed;
     };
     /**
      * Initialize form

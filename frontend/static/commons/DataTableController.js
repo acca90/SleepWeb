@@ -166,6 +166,13 @@ function DataTableController(settings) {
         return this;
     };
     /**
+     * Returns DataTables data array
+     * @memberOf DataTableController
+     */
+    this.getDataArray = function () {
+        return $table.DataTable().rows().data().toArray();
+    };
+    /**
      * Mount DataTable static
      * @memberOf DataTableController
      */

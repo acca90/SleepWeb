@@ -12,7 +12,7 @@ from backend.modules.institution.serializers import InstitutionSerializer
 from backend.modules.institution.models import Institution
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserWriteSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if 'request' in self.context and self.context['request'].method == 'GET':
@@ -46,7 +46,7 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
 
-class UserSmallSerializer(serializers.ModelSerializer):
+class UserReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (

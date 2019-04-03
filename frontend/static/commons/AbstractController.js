@@ -362,7 +362,7 @@ function AbstractController(params) {
             url: getApiUrlForDefinedMethod(),
             success: submitSuccess,
             error: submitError
-        }).send();
+        }).submit();
     };
     /**
      * Test condition of update flag to handle the correct method for persistence

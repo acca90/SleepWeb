@@ -63,7 +63,11 @@ function GroupController($container) {
      * @memberOf GroupController
      */
     const serialize = function () {
-        return $('form').serializeToJson();
+        let form = {};
+        let group = $('form').serializeToJson();
+        let allowed = allowForm.serialize();
+        $.extend(form, group, allowed);
+        return form;
     };
     /**
      * Extend clean functionality on AbstractController
@@ -83,3 +87,5 @@ function GroupController($container) {
         return this;
     };
 }
+
+

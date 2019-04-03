@@ -37,7 +37,7 @@
 			<form data-parsley-validate>
 				<div class="form-row">
 					<div class="form-group col-md-3">
-						<label for="user.id">Identification</label>
+						<label for="patientId">Identification</label>
 						<input type="text"
 							   class="form-control form-control-sm"
 							   id="patientId"
@@ -49,7 +49,7 @@
 
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label for="user.id">First Name</label>
+						<label for="patientFirstName">First Name</label>
 						<input type="text"
 							   class="form-control form-control-sm"
 							   data-parsley-required-message="Enter the first name of the patient"
@@ -58,7 +58,7 @@
 							   name="first_name">
 					</div>
 					<div class="form-group col-md-6">
-						<label for="user.id">Last Name</label>
+						<label for="patientLastName">Last Name</label>
 						<input type="text"
 							   class="form-control form-control-sm"
 							   data-parsley-required-message="Enter the last name of the patient"
@@ -71,7 +71,7 @@
 
 				<div class="form-row">
 					<div class="form-group col-md-6 mb-3">
-						<label for="user.id">Birth Date</label>
+						<label for="patientBirthDate">Birth Date</label>
 						<input type="text"
 							   isDatePicker
 							   class="form-control form-control-sm"
@@ -83,7 +83,7 @@
 						<div id="birthDateValidateMessage"></div>
 					</div>
 					<div class="form-group col-md-6">
-						<label for="user.id">Gender</label>
+						<label for="patientGender">Gender</label>
 						<select class="form-control form-control-sm"
 								data-parsley-required-message="Enter the gender of the patient"
 								autocomplete="off"
@@ -96,7 +96,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="user.name">Comments</label>
+					<label for="patientObs">Comments</label>
 					<textarea cols="30"
 							  rows="5"
 							  class="form-control"
