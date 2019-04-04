@@ -44,6 +44,16 @@ function GroupFormController() {
      */
     let datatablePatientsSettings = null;
     /**
+     * Tab for allowed
+     * @memberOf GroupFormController
+     */
+    let sharewith = null;
+    /**
+     * Tab for patients
+     * @memberOf GroupFormController
+     */
+    let patientstab = null;
+    /**
      * Render for name
      * @memberOf GroupFormController
      */
@@ -161,6 +171,20 @@ function GroupFormController() {
             .mountStatic();
     };
     /**
+     * Corrects datatables column alignment
+     * @memberOf GroupFormController
+     */
+    const initTabCorrections = function () {
+        sharewith = $('#sharewith');
+        sharewith.on('shown.bs.tab', function () {
+            datatableAllowed.ajustColumns();
+        });
+        patientstab = $('#patientstab');
+        patientstab.on('shown.bs.tab', function () {
+            datatablePatients.ajustColumns();
+        });
+    };
+    /**
      * Initilize click events
      * @memberOf GroupFormController
      */
@@ -199,6 +223,8 @@ function GroupFormController() {
      * @memberOf GroupFormController
      */
     this.clean = function () {
+        sharewith.trigger('click');
+
         datatableAllowed
             .ajustColumns()
             .clear();
@@ -237,7 +263,7 @@ function GroupFormController() {
      * Check if user or institution is already in datatable
      * @memberOf GroupFormController
      */
-    const isPatientInTable = function ( patient ) {
+    const isPatientInTable = function (patient) {
         let isInTable = false;
         for (let row of datatablePatients.getDataArray()) {
             if (row.id === patient.id) {
@@ -251,7 +277,7 @@ function GroupFormController() {
      * Check if patient is already in datatable
      * @memberOf GroupFormController
      */
-    const isAllowedInTable = function ( allowed ) {
+    const isAllowedInTable = function (allowed) {
         let isInTable = false;
         for (let row of datatableAllowed.getDataArray()) {
             if (row.id === allowed.id && row.type === allowed.type) {
@@ -281,6 +307,7 @@ function GroupFormController() {
     this.init = function () {
         initSettings();
         initDatatable();
+        initTabCorrections();
         initEvents();
         return this;
     };
