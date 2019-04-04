@@ -28,11 +28,15 @@ class UserViewSet(ModelViewSet):
         return super(self.__class__, self).get_permissions()
 
     def retrieve(self, request, *args, **kwargs):
+
         queryset = User.objects.get(pk=request.GET['pk'])
         serializer = UserWriteSerializer(queryset, many=False, context={"request": request})
         return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
+        """
+        Method for create new users
+        """
         serializer = UserWriteSerializer(data=request.data, context={"request": request})
         if serializer.is_valid():
             user = serializer.create(serializer.validated_data)
@@ -42,6 +46,9 @@ class UserViewSet(ModelViewSet):
             return Response(serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def partial_update(self, request, *args, **kwargs):
+        """
+         Method for update users
+         """
         user = User.objects.get(pk=request.data['id'])
         serializer = UserWriteSerializer(
             instance=user, data=request.data, partial=True, context={"request": request}

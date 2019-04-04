@@ -197,10 +197,10 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const toForm = function (data) {
-        isUpdate = true;
         DOM.divs.list.hide();
         DOM.divs.form.show();
         clean();
+        isUpdate = true;
         params.toForm(data);
     };
     /**

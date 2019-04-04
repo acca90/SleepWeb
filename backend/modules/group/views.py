@@ -37,3 +37,21 @@ class GroupViewSet(viewsets.ModelViewSet):
             return Response(read_serializer.data, status.HTTP_200_OK)
         else:
             return Response(write_serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def partial_update(self, request, *args, **kwargs):
+        """
+        Method for update groups
+        """
+        instance = Group.objects.get(pk=request.data['id'])
+        write_serializer = GroupWriteSerializer(
+            partial=True,
+            instance=instance,
+            data=request.data,
+            context={"request": request}
+        )
+        if write_serializer.is_valid():
+            instance = write_serializer.update(instance, write_serializer.validated_data)
+            read_serializer = GroupReadSerializer(instance)
+            return Response(read_serializer.data, status.HTTP_200_OK)
+        else:
+            return Response(write_serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
