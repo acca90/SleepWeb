@@ -5,22 +5,22 @@
  *
  * @author Matheus Hernandes
  * @since 28/03/2019
- * @namespace FinderController
+ * @namespace FinderComponent
  */
-function FinderController(param) {
+function FinderComponent(param) {
     /**
      * Finder modal
-     * @memberOf FinderController
+     * @memberOf FinderComponent
      */
     let $finder = $('#finder');
     /**
      * Finder DataTable
-     * @memberOf FinderController
+     * @memberOf FinderComponent
      */
     let dataTable = null;
     /**
      * Load module for Finder
-     * @memberOf FinderController
+     * @memberOf FinderComponent
      */
     const load = async function (url, callBacks) {
         $.ajax({
@@ -38,7 +38,7 @@ function FinderController(param) {
     };
     /**
      * Update bind of finder's buttons
-     * @memberOf FinderController
+     * @memberOf FinderComponent
      */
     const updateBindButtonEvents = function (callBacks) {
         $('#finderConfirm').off('click').on('click', function () {
@@ -55,17 +55,17 @@ function FinderController(param) {
     };
     /**
      * Set title for finder
-     * @memberOf FinderController
+     * @memberOf FinderComponent
      */
     const setTitle = function (title) {
         $finder.find('#titleArea').html(title);
     };
     /**
      * Load a modal datatables for search and pick registers
-     * @memberOf FinderController
+     * @memberOf FinderComponent
      */
     const initDatatable = function (param, callBacks) {
-        dataTable = new DataTableController(param.datatableSettings)
+        dataTable = new DataTableComponent(param.datatableSettings)
             .buildTable()
             .place($finder.find('#container'))
             .strechtIt()
@@ -77,7 +77,7 @@ function FinderController(param) {
     };
     /**
      * Custom double click for fiender
-     * @memberOf FinderController
+     * @memberOf FinderComponent
      */
     const customDblClickEvent = function (rowData, callBacks) {
         if ($.isEmpty(callBacks) || $.isEmpty(callBacks.callBackConfirm)) {
@@ -88,7 +88,7 @@ function FinderController(param) {
     };
     /**
      * Opens finder
-     * @memberOf FinderController
+     * @memberOf FinderComponent
      */
     this.show = function () {
         $finder.modal('show');
@@ -96,7 +96,7 @@ function FinderController(param) {
     };
     /**
      * Run finder for user
-     * @memberOf FinderController
+     * @memberOf FinderComponent
      */
     this.find = async function () {
         setTitle(param.title);

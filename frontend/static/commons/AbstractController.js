@@ -197,11 +197,11 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const toForm = function (data) {
-        clean();
         isUpdate = true;
-        params.toForm(data);
         DOM.divs.list.hide();
         DOM.divs.form.show();
+        clean();
+        params.toForm(data);
     };
     /**
      * Handle errors on pick register to update
@@ -485,7 +485,7 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const initDatatable = async function () {
-        moduleDataTable = new DataTableController(params.datatableSettings)
+        moduleDataTable = new DataTableComponent(params.datatableSettings)
             .buildTable()
             .place($('div#datatable'))
             .strechtIt()

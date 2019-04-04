@@ -12,7 +12,7 @@ function GroupController($container) {
      * AllowForm Controller
      * @memberOf GroupController
      */
-    let allowForm = null;
+    let formController = null;
     /**
      * DataTable Settings
      * @memberOf GroupController
@@ -56,7 +56,14 @@ function GroupController($container) {
      */
     const toForm = function (group) {
         let $form = $('form', $container);
-        alert(JSON.stringify(group));
+        $('#groupId', $form).val(group.id);
+        $('#groupName', $form).val(group.name);
+        $('#groupDetails', $form).val(group.details);
+        formController.load(
+            group.users,
+            group.institutions,
+            group.patients,
+        );
     };
     /**
      * Serialize form for API submit
@@ -65,7 +72,7 @@ function GroupController($container) {
     const serialize = function () {
         let form = {};
         let group = $('form').serializeToJson();
-        let allowed = allowForm.serialize();
+        let allowed = formController.serialize();
         $.extend(form, group, allowed);
         return form;
     };
@@ -74,7 +81,7 @@ function GroupController($container) {
      * @memberOf GroupController
      */
     const clean = function () {
-        allowForm.clean();
+        formController.clean();
         return this;
     };
     /**
@@ -83,7 +90,7 @@ function GroupController($container) {
      */
     this.init = function () {
         new AbstractController(getParams()).init();
-        allowForm = new GroupAllowFormController().init();
+        formController = new GroupFormController().init();
         return this;
     };
 }

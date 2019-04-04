@@ -12,7 +12,7 @@
 	{{ block.super }}
 	<script src="{% static "modules/group/GroupController.js" %}"></script>
 	<script src="{% static "modules/group/GroupService.js" %}"></script>
-	<script src="{% static "modules/group/GroupAllowFormController.js" %}"></script>
+	<script src="{% static "modules/group/GroupFormController.js" %}"></script>
 	<script>
         $(document).ready(function () {
             new GroupController($('#group')).init();

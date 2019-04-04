@@ -5,23 +5,28 @@
  *
  * @author Matheus Hernandes
  * @since 28/03/2019
- * @namespace DataTableController
+ * @namespace DataTableComponent
  */
-function DataTableController(settings) {
+function DataTableComponent(settings) {
     /**
      * jQuery object for HTML table
      * @type {null}
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     let $table = null;
     /**
      * Default order for Datatable
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     let defaultOrder = null;
     /**
+     * Default value for datatable search option
+     * @memberOf DataTableComponent
+     */
+    let searchable = true;
+    /**
      * Mount HTML table follow headers
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     this.buildTable = function () {
         $table = $('<table><thead><tr></tr></thead><tbody></tbody></table>');
@@ -32,7 +37,7 @@ function DataTableController(settings) {
 
     /**
      * Makes it width 100%
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     this.strechtIt = function () {
         $table.css('width', '100%');
@@ -41,7 +46,7 @@ function DataTableController(settings) {
     };
     /**
      * Makes DataTable selectable
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     this.dblClickEvent = function (event) {
         $table.on('dblclick', 'tbody > tr', function () {
@@ -56,7 +61,7 @@ function DataTableController(settings) {
     };
     /**
      * Make DataTable selectable
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     this.selectable = function () {
         $table.on('click', 'tbody > tr', function () {
@@ -76,7 +81,7 @@ function DataTableController(settings) {
     };
     /**
      * Place DataTable inside of informed container
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     this.place = function ($container) {
         $container.html($table);
@@ -84,15 +89,23 @@ function DataTableController(settings) {
     };
     /**
      * Define default order for Datatable
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     this.setOrder = function (column) {
         defaultOrder = column;
         return this;
     };
     /**
+     * Defines if datatable is searchable
+     * @memberOf DataTableComponent
+     */
+    this.searchable = function (isSearchable) {
+        searchable = isSearchable;
+        return this;
+    };
+    /**
      * Refresh DataTable
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     this.refresh = function () {
         $table.DataTable().search('');
@@ -101,7 +114,7 @@ function DataTableController(settings) {
     };
     /**
      * Get row from DataTable
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     this.getRowData = function ($tr) {
         if ($.isEmpty($tr) || $tr.length < 1) {
@@ -114,7 +127,7 @@ function DataTableController(settings) {
     };
     /**
      * Clear DataTables
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     this.clear = function () {
         $table.DataTable().clear();
@@ -122,7 +135,7 @@ function DataTableController(settings) {
     };
     /**
      * Ajust columns
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     this.ajustColumns = function () {
         $table.DataTable().columns.adjust().draw();
@@ -130,21 +143,21 @@ function DataTableController(settings) {
     };
     /**
      * Returns DataTable()
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     this.getDataTable = function () {
         return $table.DataTable();
     };
     /**
      * Get selected row for DataTable
-     * @DataTable DataTableController
+     * @DataTable DataTableComponent
      */
     this.getSelectedRow = function () {
         return $table.find('tr.selected');
     };
     /**
      * Add row to DataTable;
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     this.addRow = function (data) {
         $table.DataTable().row.add(data).draw();
@@ -152,7 +165,7 @@ function DataTableController(settings) {
     };
     /**
      * Mount DataTable ajax
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     this.mountAjax = function (url) {
         $table.DataTable({
@@ -161,20 +174,29 @@ function DataTableController(settings) {
             ajax: url + '?format=datatables',
             columns: settings,
             scrollX: true,
-            responsive: true
+            responsive: true,
+            searching: searchable
         });
         return this;
     };
     /**
      * Returns DataTables data array
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     this.getDataArray = function () {
         return $table.DataTable().rows().data().toArray();
     };
     /**
+     * Returns DataTables data array
+     * @memberOf DataTableComponent
+     */
+    this.setDataArray = function ( dataArray ) {
+        $table.DataTable().rows.add(dataArray).draw();
+        return this;
+    };
+    /**
      * Mount DataTable static
-     * @memberOf DataTableController
+     * @memberOf DataTableComponent
      */
     this.mountStatic = function () {
         $table.DataTable({
@@ -184,6 +206,7 @@ function DataTableController(settings) {
             responsive: true,
             scrollY: '300px',
             scrollCollapse: false,
+            searching: searchable,
             paging: false
         });
         return this;
