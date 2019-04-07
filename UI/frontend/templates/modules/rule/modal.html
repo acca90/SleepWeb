@@ -1,0 +1,9 @@
+{% load static %}
+
+<script src="{% static "modules/indicator/IndicatorController.js" %}"></script>
+
+<script>
+	function getSettings() {
+		return new IndicatorController().getSettings();
+    }
+</script>

@@ -20,6 +20,7 @@ from backend.modules.user.views import UserViewSet
 from backend.modules.msystem.views import MSystemViewSet
 from backend.modules.indicator.views import IndicatorViewSet
 from backend.modules.group.views import GroupViewSet
+from backend.modules.rule.views import RuleViewSet
 
 # Front-End
 from frontend.modules.home.views import Home
@@ -31,6 +32,7 @@ from frontend.modules.group.views import Group
 from frontend.modules.patient.views import Patient, PatientFinder
 from frontend.modules.institution.views import Institution, InstitutionFinder
 from frontend.modules.user.views import UserFrontEnd, UserFinder
+from frontend.modules.rule.views import Rule, RuleFinder
 from frontend.modules.analysis.views import AnalysisView
 
 router = routers.DefaultRouter()
@@ -41,6 +43,7 @@ router.register(r'patient', PatientViewSet, base_name='patient')
 router.register(r'msystem', MSystemViewSet, base_name='msystem')
 router.register(r'indicator', IndicatorViewSet, base_name='indicator')
 router.register(r'group', GroupViewSet, base_name='group')
+router.register(r'rule', RuleViewSet, base_name='rule')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -64,6 +67,7 @@ urlpatterns = [
     url(r'^msystem/', login_required(MSystem.as_view()), name='msystem'),
     url(r'^stage/', login_required(Stage.as_view()), name='stage'),
     url(r'^patient/', login_required(Patient.as_view()), name='patient'),
+    url(r'^rule/', login_required(Rule.as_view()), name='rule'),
     url(r'^analysis/', login_required(AnalysisView.as_view()), name='analysis'),
 
     url(r'^finder/user/$', login_required(UserFinder.as_view()), name='userFinder'),
@@ -71,4 +75,5 @@ urlpatterns = [
     url(r'^finder/indicator/$', login_required(IndicatorFinder.as_view()), name='IndicatorFinder'),
     url(r'^finder/stage/$', login_required(StageFinder.as_view()), name='StageFinder'),
     url(r'^finder/patient/$', login_required(PatientFinder.as_view()), name='PatientFinder'),
+    url(r'^finder/rule/$', login_required(RuleFinder.as_view()), name='RuleFinder'),
 ]

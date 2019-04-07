@@ -1,0 +1,19 @@
+{% extends "commons/module.html" %}
+{% load static %}
+
+{% block container %}
+	<div id="rule">
+		{% include 'rule/list.html' %}
+		{% include 'rule/form.html' %}
+	</div>
+{% endblock container %}
+
+{% block scripts %}
+	{{ block.super }}
+	<script src="{% static "modules/rule/RuleController.js" %}"></script>
+	<script>
+        $(document).ready(function () {
+            new RuleController($('#rule')).init();
+        });
+	</script>
+{% endblock %}

@@ -4,10 +4,8 @@ Projeto desenvolvido para o Programa de Pós-Graduação em Computação Aplicad
 Universidade de Passo Fundo - 2018/2019
 
 @author Matheus Hernandes
-@since 09/03/2019
+@since 21/03/2019
 """
-from django.apps import AppConfig
+from django.contrib import admin
 
-
-class FrontendConfig(AppConfig):
-    name = 'frontend'
+# Register your models here.
