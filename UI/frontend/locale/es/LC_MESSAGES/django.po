@@ -20,84 +20,84 @@ msgstr ""
 
 #: templates/commons/components/menu_form.html:6
 msgid "Save"
-msgstr "Save"
+msgstr ""
 
 #: templates/commons/components/menu_form.html:12
 msgid "Cancel"
-msgstr "Cancel"
+msgstr ""
 
 #: templates/commons/components/menu_list.html:6
 msgid "New"
-msgstr "New"
+msgstr ""
 
 #: templates/commons/components/menu_list.html:12
 msgid "Edit"
-msgstr "Edit"
+msgstr ""
 
 #: templates/commons/components/menu_list.html:18
 msgid "Remove"
-msgstr "Remove"
+msgstr ""
 
 #: templates/commons/components/menu_list.html:24
 msgid "Refresh"
-msgstr "Refresh"
+msgstr ""
 
 #: templates/commons/components/navbar.html:18
 msgid "Admin"
-msgstr "Admin"
+msgstr ""
 
 #: templates/commons/components/navbar.html:23
 msgid "Institutions"
-msgstr "Institutions"
+msgstr ""
 
 #: templates/commons/components/navbar.html:26
 msgid "Users"
-msgstr "Users"
+msgstr ""
 
 #: templates/commons/components/navbar.html:29
 msgid "Life Stages"
-msgstr "Life Stages"
+msgstr ""
 
 #: templates/commons/components/navbar.html:32
 msgid "Monitoring Systems"
-msgstr "Monitoring Systems"
+msgstr ""
 
 #: templates/commons/components/navbar.html:35
 msgid "Indicators"
-msgstr "Indicators"
+msgstr ""
 
 #: templates/commons/components/navbar.html:45
 msgid "Registers"
-msgstr "Registers"
+msgstr ""
 
 #: templates/commons/components/navbar.html:49
 msgid "Patients"
-msgstr "Patients"
+msgstr ""
 
 #: templates/commons/components/navbar.html:52
 msgid "Share Groups"
-msgstr "Share Groups"
+msgstr ""
 
 #: templates/commons/components/navbar.html:55
 msgid "Rules"
-msgstr "Rules"
+msgstr ""
 
 #: templates/commons/components/navbar.html:64
 msgid "Data Analysis"
-msgstr "Data Analysis"
+msgstr ""
 
 #: templates/commons/components/navbar.html:68
 msgid "Quality Analysis"
-msgstr "Quality Analysis"
+msgstr ""
 
 #: templates/commons/components/navbar.html:71
 msgid "Compare"
-msgstr "Compare"
+msgstr ""
 
 #: templates/commons/components/navbar.html:84
 msgid "Profile"
-msgstr "Profile"
+msgstr ""
 
 #: templates/commons/components/navbar.html:88
 msgid "Logout"
-msgstr "Logout"
+msgstr ""

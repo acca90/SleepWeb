@@ -35,6 +35,8 @@ from frontend.modules.user.views import UserFrontEnd, UserFinder
 from frontend.modules.rule.views import Rule, RuleFinder
 from frontend.modules.analysis.views import AnalysisView
 
+from frontend.modules.views import locale
+
 router = routers.DefaultRouter()
 router.register(r'institution', InstitutionViewSet, base_name='Institution')
 router.register(r'user', UserViewSet, base_name='user')
@@ -58,6 +60,7 @@ urlpatterns = [
     url(r'login/(?P<logout>\w+)', login_required(Login.as_view()), name='login'),
     url(r'login/', Login.as_view(), name='login'),
     url(r'logout/', login_required(Logout.as_view()), name='logout'),
+    url(r'json/datatables/', login_required(locale), name='logout'),
 
     url(r'^home/', login_required(Home.as_view()), name='home'),
     url(r'^user/', login_required(UserFrontEnd.as_view()), name='user'),

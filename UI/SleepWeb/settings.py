@@ -78,6 +78,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             'frontend/templates',
+            'frontend/templates/commons',
             'frontend/templates/modules',
         ],
         'APP_DIRS': True,
@@ -149,7 +150,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
 )
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'pt_BR'
 
 LANGUAGES = (
     ('en', _('English')),

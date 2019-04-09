@@ -29,7 +29,7 @@ class UserViewSet(ModelViewSet):
 
     def retrieve(self, request, *args, **kwargs):
 
-        queryset = User.objects.get(pk=request.GET['pk'])
+        queryset = get(pk=request.GET['pk'])
         serializer = UserWriteSerializer(queryset, many=False, context={"request": request})
         return Response(serializer.data)
 
@@ -49,7 +49,7 @@ class UserViewSet(ModelViewSet):
         """
          Method for update users
          """
-        user = User.objects.get(pk=request.data['id'])
+        user = get(pk=request.data['id'])
         serializer = UserWriteSerializer(
             instance=user, data=request.data, partial=True, context={"request": request}
         )

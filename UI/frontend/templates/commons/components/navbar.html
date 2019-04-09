@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark 			{% if user.is_superuser %}bg-admin{% else %}bg-dark{% endif %}">
+{% load i18n %}
+<nav class="navbar navbar-expand-lg navbar-dark {% if user.is_superuser %}bg-admin{% else %}bg-dark{% endif %}">
 	<a class="navbar-brand" href="{% url 'home' %}">SleepWeb</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,23 +15,24 @@
 					   data-toggle="dropdown"
 					   aria-haspopup="true" aria-expanded="false">
 						<i class="fa fa-cog"></i>
-						Admin
+						{% trans 'Admin' %}
+
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="{% url 'institution' %}">
-							Institutions
+							{% trans 'Institutions' %}
 						</a>
 						<a class="dropdown-item" href="{% url 'user' %}">
-							Users
+							{% trans 'Users' %}
 						</a>
 						<a class="dropdown-item" href="{% url 'stage' %}">
-							Life Stages
+							{% trans 'Life Stages' %}
 						</a>
 						<a class="dropdown-item" href="{% url 'msystem' %}">
-							Monitoring Systems
+							{% trans 'Monitoring Systems' %}
 						</a>
 						<a class="dropdown-item" href="{% url 'indicator' %}">
-							Indicators
+							{% trans 'Indicators' %}
 						</a>
 					</div>
 				</li>
@@ -40,17 +42,17 @@
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
 				   aria-haspopup="true" aria-expanded="false">
 					<i class="fa fa-archive"></i>
-					Registers
+					{% trans 'Registers' %}
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="{% url 'patient' %}">
-						Patients
+						{% trans 'Patients' %}
 					</a>
 					<a class="dropdown-item" href="{% url 'group' %}">
-						Share Groups
+						{% trans 'Share Groups' %}
 					</a>
 					<a class="dropdown-item" href="{% url 'rule' %}">
-						Rules
+						{% trans 'Rules' %}
 					</a>
 				</div>
 			</li>
@@ -59,16 +61,15 @@
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
 				   aria-haspopup="true" aria-expanded="false">
 					<i class="fa fa-bar-chart"></i>
-					Data Analysis
+					{% trans 'Data Analysis' %}
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="{% url 'analysis' %}">
-						Quality Analysis
+						{% trans 'Quality Analysis' %}
 					</a>
 					<a class="dropdown-item" href="#">
-						Compare
+						{% trans 'Compare' %}
 					</a>
-
 				</div>
 			</li>
 		</ul>
@@ -79,9 +80,13 @@
 					<i class="fa fa-user-circle"></i> <span>{{ user.first_name }} {{ user.last_name }}</span>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="/profile/">Profile</a>
+					<a class="dropdown-item" href="/profile/">
+						{% trans 'Profile' %}
+					</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="/logout/">Logout</a>
+					<a class="dropdown-item" href="/logout/">
+						{% trans 'Logout' %}
+					</a>
 				</div>
 			</li>
 		</ul>

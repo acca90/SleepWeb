@@ -41,6 +41,10 @@
         <option value="$MODULE_DIR$/UI/frontend/templates/modules/stage" />
         <option value="$MODULE_DIR$/UI/frontend/templates/modules/user" />
         <option value="$MODULE_DIR$/UI/frontend/templates/modules/rule" />
+        <option value="$MODULE_DIR$/UI/frontend/templates/commons/base" />
+        <option value="$MODULE_DIR$/UI/frontend/templates/commons/components" />
+        <option value="$MODULE_DIR$/UI/frontend/templates/commons/modals" />
+        <option value="$MODULE_DIR$/UI/frontend/templates/locale" />
       </list>
     </option>
   </component>

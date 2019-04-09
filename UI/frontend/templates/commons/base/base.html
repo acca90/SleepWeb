@@ -1,6 +1,7 @@
 {% load static %}
 {% load compress %}
 {% load sass_tags %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +27,8 @@
 {% endblock base %}
 
 
-{% include 'commons/spinner.html' %}
+
+{% include 'commons/components/spinner.html' %}
 
 {% compress js %}
 	{% block scripts %}

@@ -164,11 +164,29 @@ function DataTableComponent(settings) {
         return this;
     };
     /**
+     * Returns DataTables data array
+     * @memberOf DataTableComponent
+     */
+    this.getDataArray = function () {
+        return $table.DataTable().rows().data().toArray();
+    };
+    /**
+     * Returns DataTables data array
+     * @memberOf DataTableComponent
+     */
+    this.setDataArray = function (dataArray) {
+        $table.DataTable().rows.add(dataArray).draw();
+        return this;
+    };
+    /**
      * Mount DataTable ajax
      * @memberOf DataTableComponent
      */
     this.mountAjax = function (url) {
         $table.DataTable({
+            language: {
+                url: '/json/datatables/'
+            },
             order: ($.isEmpty(defaultOrder) ? [0, 'desc'] : defaultOrder),
             serverSide: true,
             ajax: url + '?format=datatables',
@@ -180,26 +198,14 @@ function DataTableComponent(settings) {
         return this;
     };
     /**
-     * Returns DataTables data array
-     * @memberOf DataTableComponent
-     */
-    this.getDataArray = function () {
-        return $table.DataTable().rows().data().toArray();
-    };
-    /**
-     * Returns DataTables data array
-     * @memberOf DataTableComponent
-     */
-    this.setDataArray = function ( dataArray ) {
-        $table.DataTable().rows.add(dataArray).draw();
-        return this;
-    };
-    /**
      * Mount DataTable static
      * @memberOf DataTableComponent
      */
     this.mountStatic = function () {
         $table.DataTable({
+            language: {
+                url: '/json/datatables/'
+            },
             order: ($.isEmpty(defaultOrder) ? [0, 'desc'] : defaultOrder),
             columns: settings,
             scrollX: true,

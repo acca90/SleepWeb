@@ -1,5 +1,6 @@
-{% extends 'commons/base.html' %}
+{% extends 'commons/base/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block css %}
 	{{ block.super }}
@@ -7,7 +8,7 @@
 
 {% block base %}
 	{% if user.is_authenticated %}
-		{% include 'commons/navbar.html' %}
+		{% include 'commons/components/navbar.html' %}
 		<div class="container mt-3">
 			{% block container %}
 			{% endblock container %}
@@ -15,8 +16,8 @@
 			{% include 'commons/developedby.html' %}
 		</div>
 		<div id="load"></div>
-		{% include 'commons/confirmation.html' %}
-		{% include 'commons/finder.html' %}
+		{% include 'commons/modals/confirmation.html' %}
+		{% include 'commons/modals/finder.html' %}
 	{% else %}
 		<meta http-equiv="REFRESH" content="0;url=/login/?auth=false">
 	{% endif %}
