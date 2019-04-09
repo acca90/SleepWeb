@@ -24,8 +24,6 @@ function RuleController($container) {
      */
     const getParams = function () {
         return {
-            moduleName: 'Rules',
-            moduleIcon: 'fa fa-gavel',
             container: $container,
             apiUrl: '/api/rule/',
             message: {

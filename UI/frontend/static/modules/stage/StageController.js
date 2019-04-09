@@ -25,8 +25,6 @@ function StageController($container) {
      */
     const getParams = function () {
         return {
-            moduleName: 'Stages',
-            moduleIcon: 'fa fa-heart',
             container: $container,
             apiUrl: '/api/stage/',
             message: {

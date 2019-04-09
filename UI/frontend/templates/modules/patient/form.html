@@ -4,9 +4,9 @@
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item active" aria-current="page">
-				<i id="moduleIcon" class=""></i>
+				<i id="moduleIcon" class="fa fa-address-card-o"></i>
 				<b>
-					<span id="moduleName"></span>
+					<span id="moduleName">{% trans 'Patients' %}</span>
 				</b>
 			</li>
 			<li class="breadcrumb-item active" aria-current="page">
@@ -28,7 +28,7 @@
 			<form data-parsley-validate>
 				<div class="form-row">
 					<div class="form-group col-md-3">
-						<label for="patientId">Identification</label>
+						<label for="patientId">{% trans 'Identification' %}</label>
 						<input type="text"
 							   class="form-control form-control-sm"
 							   id="patientId"
@@ -40,19 +40,19 @@
 
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label for="patientFirstName">First Name</label>
+						<label for="patientFirstName">{% trans 'First Name' %}</label>
 						<input type="text"
 							   class="form-control form-control-sm"
-							   data-parsley-required-message="Enter the first name of the patient"
+							   data-parsley-required-message="{% trans 'Enter the first name of the patient' %}"
 							   required
 							   id="patientFirstName"
 							   name="first_name">
 					</div>
 					<div class="form-group col-md-6">
-						<label for="patientLastName">Last Name</label>
+						<label for="patientLastName">{% trans 'Last Name' %}</label>
 						<input type="text"
 							   class="form-control form-control-sm"
-							   data-parsley-required-message="Enter the last name of the patient"
+							   data-parsley-required-message="{% trans 'Enter the last name of the patient' %}"
 							   autocomplete="off"
 							   required
 							   id="patientLastName"
@@ -62,11 +62,11 @@
 
 				<div class="form-row">
 					<div class="form-group col-md-6 mb-3">
-						<label for="patientBirthDate">Birth Date</label>
+						<label for="patientBirthDate">{% trans 'Birth Date' %}</label>
 						<input type="text"
 							   isDatePicker
 							   class="form-control form-control-sm"
-							   data-parsley-required-message="Enter the birth date of the patient"
+							   data-parsley-required-message="{% trans 'Enter the birth date of the patient' %}"
 							   data-parsley-errors-container="#birthDateValidateMessage"
 							   required
 							   id="patientBirthDate"
@@ -74,20 +74,20 @@
 						<div id="birthDateValidateMessage"></div>
 					</div>
 					<div class="form-group col-md-6">
-						<label for="patientGender">Gender</label>
+						<label for="patientGender">{% trans 'Gender' %}</label>
 						<select class="form-control form-control-sm"
-								data-parsley-required-message="Enter the gender of the patient"
+								data-parsley-required-message="{% trans 'Enter the gender of the patient' %}"
 								autocomplete="off"
 								required
 								id="patientGender"
 								name="gender">
-							<option value="1">Masculine</option>
-							<option value="2">Feminine</option>
+							<option value="1">{% trans 'Masculine' %}</option>
+							<option value="2">{% trans 'Feminine' %}</option>
 						</select>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="patientObs">Comments</label>
+					<label for="patientObs">{% trans 'Comments' %}</label>
 					<textarea cols="30"
 							  rows="5"
 							  class="form-control"

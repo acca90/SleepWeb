@@ -44,7 +44,7 @@
         <option value="$MODULE_DIR$/UI/frontend/templates/commons/base" />
         <option value="$MODULE_DIR$/UI/frontend/templates/commons/components" />
         <option value="$MODULE_DIR$/UI/frontend/templates/commons/modals" />
-        <option value="$MODULE_DIR$/UI/frontend/templates/locale" />
+        <option value="$MODULE_DIR$/UI/frontend/templates/json" />
       </list>
     </option>
   </component>

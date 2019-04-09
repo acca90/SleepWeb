@@ -25,8 +25,6 @@ function IndicatorController($container) {
      */
     const getParams = function () {
         return {
-            moduleName: 'Indicators',
-            moduleIcon: 'fa fa-heart',
             container: $container,
             apiUrl: '/api/indicator/',
             message: {

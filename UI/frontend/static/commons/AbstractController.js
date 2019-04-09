@@ -70,17 +70,6 @@ function AbstractController(params) {
         DOM.form.buttons.cancel = $('#btnCancel', params.container);
         DOM.form.alert = $('#formAlert', params.container);
         DOM.form.pk = $('[isPk]', DOM.form.tagForm);
-        DOM.form.option = $('#moduleOption', DOM.divs.form);
-    };
-    /**
-     * Initialize module identity
-     * @memberOf AbstractController
-     */
-    const initModuleIdentity = async function () {
-        $('#moduleIcon', DOM.divs.list).addClass(params.moduleIcon);
-        $('#moduleName', DOM.divs.list).html(params.moduleName);
-        $('#moduleIcon', DOM.divs.form).addClass(params.moduleIcon);
-        $('#moduleName', DOM.divs.form).html(params.moduleName);
     };
     /**
      * Initilize date pickers
@@ -92,7 +81,8 @@ function AbstractController(params) {
         datePickers.parent('div').append(buildCalendarIcon());
         initClickCalendar();
         datePickers.datepicker({
-            'autoclose': true,
+            language: locale,
+            autoclose: true,
             format: 'dd/mm/yyyy',
         });
     };
@@ -137,7 +127,6 @@ function AbstractController(params) {
      */
     const newRegister = function () {
         hideAlerts();
-        DOM.form.option.html('New');
         DOM.divs.list.hide();
         DOM.divs.form.show();
         clean();
@@ -148,7 +137,6 @@ function AbstractController(params) {
      */
     const edit = function () {
         hideAlerts();
-        DOM.form.option.html('Update');
         let $tr = moduleDataTable.getSelectedRow();
         if ($tr.length) {
             return editForSelectedRow($tr);
@@ -514,7 +502,6 @@ function AbstractController(params) {
      */
     this.init = async function () {
         await initMap();
-        await initModuleIdentity();
         await initDatePickers();
         await initDatatable();
         await initEvents();

@@ -40,8 +40,6 @@ function UserController($container) {
      */
     const getParams = function () {
         return {
-            moduleName: 'Users',
-            moduleIcon: 'fa fa-user',
             container: $container,
             apiUrl: '/api/user/',
             message: {

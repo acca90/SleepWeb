@@ -4,9 +4,9 @@
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item active" aria-current="page">
-				<i id="moduleIcon" class=""></i>
+				<i id="moduleIcon" class="fa fa-tv"></i>
 				<b>
-					<span id="moduleName"></span>
+					<span id="moduleName">{% trans 'Monitoring Systems' %}</span>
 				</b>
 			</li>
 			<li class="breadcrumb-item active" aria-current="page">
@@ -27,7 +27,7 @@
 		<form data-parsley-validate>
 			<div class="form-row">
 				<div class="form-group col-md-3">
-					<label for="msystemId">Id</label>
+					<label for="msystemId">{% trans 'Identification' %}</label>
 					<input type="text"
 						   class="form-control form-control-sm"
 						   id="msystemId"
@@ -37,36 +37,36 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="msystemName">Name</label>
+				<label for="msystemName">{% trans 'Name' %}</label>
 				<input type="text"
 					   class="form-control form-control-sm"
 					   required=""
-					   data-parsley-required-message="Enter the description of the monitoring system"
+					   data-parsley-required-message="{% trans 'Enter the description of the monitoring system' %}"
 					   maxlength="255"
 					   id="msystemName"
 					   name="name">
 			</div>
 			<div class="form-group">
-				<label for="msystemUrl">URL</label>
+				<label for="msystemUrl">{% trans 'URL' %}</label>
 				<input type="text"
 					   class="form-control form-control-sm"
 					   required=""
-					   data-parsley-required-message="Enter the description of the monitoring system"
+					   data-parsley-required-message="{% trans 'Enter the description of the monitoring system' %}"
 					   maxlength="255"
 					   id="msystemUrl"
 					   name="url">
 			</div>
 			<div class="form-group">
-				<label for="msystemDescription">Description</label>
+				<label for="msystemDescription">{% trans 'Description' %}</label>
 				<textarea cols="30"
 						  rows="10"
 						  class="form-control"
 						  required=""
-						  data-parsley-required-message="Enter the definition of the monitoring system"
+						  data-parsley-required-message="{% trans 'Enter the definition of the monitoring system' %}"
 						  maxlength="1000"
 						  id="msystemDescription"
-						  name="description"
-				></textarea>
+						  name="description">
+				</textarea>
 			</div>
 		</form>
 

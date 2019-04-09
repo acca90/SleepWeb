@@ -25,8 +25,6 @@ function MSystemController($container) {
      */
     const getParams = function () {
         return {
-            moduleName: 'Monitoring Systems',
-            moduleIcon: 'fa fa-tv',
             container: $container,
             apiUrl: '/api/msystem/',
             message: {

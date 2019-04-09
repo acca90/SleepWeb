@@ -30,8 +30,6 @@ function GroupController($container) {
      */
     const getParams = function () {
         return {
-            moduleName: 'Share Groups',
-            moduleIcon: 'fa fa-group',
             container: $container,
             apiUrl: '/api/group/',
             message: {

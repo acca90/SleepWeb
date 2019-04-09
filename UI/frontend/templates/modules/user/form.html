@@ -1,10 +1,12 @@
+{% load i18n %}
+
 <div id="form" style="display: none">
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item active" aria-current="page">
-				<i id="moduleIcon" class=""></i>
+				<i id="moduleIcon" class="fa fa-user"></i>
 				<b>
-					<span id="moduleName"></span>
+					<span id="moduleName">{% trans 'Users' %}</span>
 				</b>
 			</li>
 			<li class="breadcrumb-item active" aria-current="page">
@@ -26,7 +28,9 @@
 			<form data-parsley-validate>
 				<div class="form-row">
 					<div class="form-group col-md-3">
-						<label for="userId">Identification</label>
+						<label for="userId">
+							{% trans 'Identification' %}
+						</label>
 						<input type="text"
 							   class="form-control form-control-sm"
 							   id="userId"
@@ -39,21 +43,25 @@
 
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label for="parsley">Username</label>
+						<label for="userUsername">
+							{% trans 'Username' %}
+						</label>
 						<input type="text"
 							   class="form-control form-control-sm"
 							   required
-							   data-parsley-required-message="Enter the username"
+							   data-parsley-required-message="{% trans 'Enter the username' %}"
 							   id="userUsername"
 							   name="username"
 							   autocomplete="off">
 					</div>
 					<div class="form-group col-md-6">
-						<label for="userEmail">E-mail</label>
+						<label for="userEmail">
+							{% trans 'E-mail' %}
+						</label>
 						<input type="email"
 							   class="form-control form-control-sm"
 							   required
-							   data-parsley-required-message="Enter the email of the user"
+							   data-parsley-required-message="{% trans 'Enter the email of the user' %}"
 							   autocomplete="off"
 							   id="userEmail"
 							   name="email">
@@ -62,19 +70,23 @@
 
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label for="userFirstName">First Name</label>
+						<label for="userFirstName">
+							{% trans 'First Name' %}
+						</label>
 						<input type="text"
 							   class="form-control form-control-sm"
-							   data-parsley-required-message="Enter the first name of the user"
+							   data-parsley-required-message="{% trans 'Enter the first name of the user' %}"
 							   required
 							   id="userFirstName"
 							   name="first_name">
 					</div>
 					<div class="form-group col-md-6">
-						<label for="userLastName">Last Name</label>
+						<label for="userLastName">
+							{% trans 'Last Name' %}
+						</label>
 						<input type="text"
 							   class="form-control form-control-sm"
-							   data-parsley-required-message="Enter the last name of the user"
+							   data-parsley-required-message="{% trans 'Enter the last name of the user' %}"
 							   autocomplete="off"
 							   required
 							   id="userLastName"
@@ -83,11 +95,14 @@
 				</div>
 
 				<div class="form-group">
-					<label for="userInstitution">Institution</label>
+					<label for="userInstitution">
+						{% trans 'Institution' %}
+					</label>
 					<select id="userInstitution"
 							name="institution"
 							autocomplete="off"
 							required
+							data-parsley-required-message="{% trans 'Enter the institution of the user' %}"
 							class="form-control form-control-sm">
 					</select>
 				</div>
@@ -98,34 +113,37 @@
 								   id="is_active"
 								   name="is_active"
 								   value="true">
-							Is active
+							{% trans 'Is active' %}
 						</label>
-
 					</div>
 				</div>
 
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label for="userPassword">Password</label>
+						<label for="userPassword">
+							{% trans 'Password' %}
+						</label>
 						<input type="password"
 							   class="form-control form-control-sm"
-							   data-parsley-required-message="Enter the password of the user"
+							   data-parsley-required-message="{% trans 'Enter the password of the user' %}"
 							   data-parsley-minlength="8"
-							   data-parsley-minlength-message="Password must have at least 8 characters"
+							   data-parsley-minlength-message="{% trans 'Password must have at least 8 characters' %}"
 							   required
 							   autocomplete="off"
 							   id="userPassword"
 							   name="password">
 					</div>
 					<div class="form-group col-md-6">
-						<label for="userPasswordConfirm">Confirm Password</label>
+						<label for="userPasswordConfirm">
+							{% trans 'Confirm Password' %}
+						</label>
 						<input type="password"
 							   class="form-control form-control-sm"
-							   data-parsley-required-message="Enter the password of the user"
+							   data-parsley-required-message="{% trans 'Enter the password of the user' %}"
 							   data-parsley-equalto="#userPassword"
-							   data-parsley-equalto-message="Field do not match with password"
+							   data-parsley-equalto-message="{% trans 'Field do not match with password' %}"
 							   data-parsley-minlength="8"
-							   data-parsley-minlength-message="Password must have at least 8 characters"
+							   data-parsley-minlength-message="{% trans 'Password must have at least 8 characters' %}"
 							   required
 							   autocomplete="off"
 							   id="userPasswordConfirm"

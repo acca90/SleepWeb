@@ -10,7 +10,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>SleepWeb - Sleep Monitoring System</title>
-
 	{% compress css inline %}
 		{% block css %}
 			<link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}"/>
@@ -39,8 +38,10 @@
 		<script src="{% static "datatables.net-bs4/js/dataTables.bootstrap4.min.js" %}"></script>
 		<script src="{% static "bootstrap/dist/js/bootstrap.min.js" %}"></script>
 		<script src="{% static "bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" %}"></script>
+		<script src="{% static "commons/settings/datepicker-locale.js" %}"></script>
 		<script src="{% static "commons/SpinnerController.js" %}"></script>
 		<script src="{% static "commons/Extend.js" %}"></script>
+		<script>const locale = '{{ LANGUAGE_CODE }}';</script>
 	{% endblock %}
 {% endcompress %}
 

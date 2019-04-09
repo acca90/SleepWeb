@@ -27,8 +27,6 @@ function PatientController($container) {
      */
     const getParams = function () {
         return {
-            moduleName: 'Patients',
-            moduleIcon: 'fa fa-address-card-o',
             container: $container,
             apiUrl: '/api/patient/',
             message: {

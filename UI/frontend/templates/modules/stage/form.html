@@ -4,9 +4,9 @@
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item active" aria-current="page">
-				<i id="moduleIcon" class=""></i>
+				<i id="moduleIcon" class="fa fa-heart"></i>
 				<b>
-					<span id="moduleName"></span>
+					<span id="moduleName">{% trans 'Stages' %}</span>
 				</b>
 			</li>
 			<li class="breadcrumb-item active" aria-current="page">
@@ -27,7 +27,7 @@
 		<form data-parsley-validate>
 			<div class="form-row">
 				<div class="form-group col-md-3">
-					<label for="stage.id">Identification</label>
+					<label for="stage.id">{% trans 'Identification' %}</label>
 					<input type="text"
 						   class="form-control form-control-sm"
 						   id="stage.id"
@@ -37,22 +37,22 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="stage.description">Description</label>
+				<label for="stage.description">{% trans 'Description' %}</label>
 				<input type="text"
 					   class="form-control form-control-sm"
 					   required=""
-					   data-parsley-required-message="Enter the description of the stage"
+					   data-parsley-required-message="{% trans 'Enter the description of the stage' %}"
 					   maxlength="255"
 					   id="stage.description"
 					   name="description">
 			</div>
 			<div class="form-group">
-				<label for="stage.definition">Definition</label>
+				<label for="stage.definition">{% trans 'Definition' %}</label>
 				<textarea cols="30"
 						  rows="10"
 						  class="form-control"
 						  required=""
-						  data-parsley-required-message="Enter the definition of the stage"
+						  data-parsley-required-message="{% trans 'Enter the definition of the stage' %}"
 						  maxlength="1000"
 						  id="stage.definition"
 						  name="definition"

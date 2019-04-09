@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-08 23:54-0300\n"
+"POT-Creation-Date: 2019-04-09 20:03-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,6 +35,8 @@ msgid "Edit"
 msgstr "Edit"
 
 #: templates/commons/components/menu_list.html:18
+#: templates/modules/group/allowed.html:13
+#: templates/modules/group/patients.html:9
 msgid "Remove"
 msgstr "Remove"
 
@@ -51,6 +53,7 @@ msgid "Institutions"
 msgstr "Institutions"
 
 #: templates/commons/components/navbar.html:26
+#: templates/modules/user/form.html:9 templates/modules/user/list.html:9
 msgid "Users"
 msgstr "Users"
 
@@ -59,10 +62,13 @@ msgid "Life Stages"
 msgstr "Life Stages"
 
 #: templates/commons/components/navbar.html:32
+#: templates/modules/msystem/form.html:9 templates/modules/msystem/list.html:9
 msgid "Monitoring Systems"
 msgstr "Monitoring Systems"
 
 #: templates/commons/components/navbar.html:35
+#: templates/modules/indicator/form.html:9
+#: templates/modules/indicator/list.html:9
 msgid "Indicators"
 msgstr "Indicators"
 
@@ -71,14 +77,18 @@ msgid "Registers"
 msgstr "Registers"
 
 #: templates/commons/components/navbar.html:49
+#: templates/modules/group/form.html:63 templates/modules/patient/form.html:9
+#: templates/modules/patient/list.html:9
 msgid "Patients"
 msgstr "Patients"
 
 #: templates/commons/components/navbar.html:52
+#: templates/modules/group/form.html:9 templates/modules/group/list.html:9
 msgid "Share Groups"
 msgstr "Share Groups"
 
 #: templates/commons/components/navbar.html:55
+#: templates/modules/rule/form.html:7 templates/modules/rule/list.html:9
 msgid "Rules"
 msgstr "Rules"
 
@@ -101,3 +111,195 @@ msgstr "Profile"
 #: templates/commons/components/navbar.html:88
 msgid "Logout"
 msgstr "Logout"
+
+#: templates/modules/group/allowed.html:5
+msgid "Add Researchers"
+msgstr "Add Researchers"
+
+#: templates/modules/group/allowed.html:9
+msgid "Add Institutions"
+msgstr "Add Institutions"
+
+#: templates/modules/group/form.html:30
+#: templates/modules/indicator/form.html:30
+#: templates/modules/institution/form.html:30
+#: templates/modules/msystem/form.html:30
+#: templates/modules/patient/form.html:31 templates/modules/stage/form.html:30
+#: templates/modules/user/form.html:32
+msgid "Identification"
+msgstr "Identification"
+
+#: templates/modules/group/form.html:40
+#: templates/modules/institution/form.html:40
+#: templates/modules/msystem/form.html:40
+msgid "Name"
+msgstr "Name"
+
+#: templates/modules/group/form.html:44
+msgid "Enter the name of the group"
+msgstr "Enter the name of the group"
+
+#: templates/modules/group/form.html:57
+msgid "Share data with"
+msgstr "Share data with"
+
+#: templates/modules/group/form.html:69
+msgid "Details"
+msgstr "Details"
+
+#: templates/modules/group/patients.html:5
+msgid "Add Patients"
+msgstr "Add Patients"
+
+#: templates/modules/indicator/form.html:40
+#: templates/modules/msystem/form.html:60 templates/modules/stage/form.html:40
+msgid "Description"
+msgstr "Description"
+
+#: templates/modules/indicator/form.html:44
+#: templates/modules/stage/form.html:44
+msgid "Enter the description of the stage"
+msgstr "Enter the description of the stage"
+
+#: templates/modules/indicator/form.html:50
+#: templates/modules/stage/form.html:50
+msgid "Definition"
+msgstr "Definition"
+
+#: templates/modules/indicator/form.html:55
+#: templates/modules/stage/form.html:55
+msgid "Enter the definition of the stage"
+msgstr "Enter the definition of the stage"
+
+#: templates/modules/institution/form.html:9
+#: templates/modules/institution/list.html:9
+#: templates/modules/user/form.html:99
+msgid "Institution"
+msgstr "Institution"
+
+#: templates/modules/institution/form.html:44
+msgid "Enter the name of the institution"
+msgstr "Enter the name of the institution"
+
+#: templates/modules/institution/form.html:49
+msgid "Country"
+msgstr "Country"
+
+#: templates/modules/institution/form.html:52
+msgid "Enter the country of the institution"
+msgstr "Enter the country of the institution"
+
+#: templates/modules/msystem/form.html:44
+#: templates/modules/msystem/form.html:54
+msgid "Enter the description of the monitoring system"
+msgstr "Enter the description of the monitoring system"
+
+#: templates/modules/msystem/form.html:50
+msgid "URL"
+msgstr "URL"
+
+#: templates/modules/msystem/form.html:65
+msgid "Enter the definition of the monitoring system"
+msgstr "Enter the definition of the monitoring system"
+
+#: templates/modules/patient/form.html:43 templates/modules/user/form.html:74
+msgid "First Name"
+msgstr "First Name"
+
+#: templates/modules/patient/form.html:46
+msgid "Enter the first name of the patient"
+msgstr "Enter the first name of the patient"
+
+#: templates/modules/patient/form.html:52 templates/modules/user/form.html:85
+msgid "Last Name"
+msgstr "Last Name"
+
+#: templates/modules/patient/form.html:55
+msgid "Enter the last name of the patient"
+msgstr "Enter the last name of the patient"
+
+#: templates/modules/patient/form.html:65
+msgid "Birth Date"
+msgstr "Birth Date"
+
+#: templates/modules/patient/form.html:69
+msgid "Enter the birth date of the patient"
+msgstr "Enter the birth date of the patient"
+
+#: templates/modules/patient/form.html:77
+msgid "Gender"
+msgstr "Gender"
+
+#: templates/modules/patient/form.html:79
+msgid "Enter the gender of the patient"
+msgstr "Enter the gender of the patient"
+
+#: templates/modules/patient/form.html:84
+msgid "Masculine"
+msgstr "Masculine"
+
+#: templates/modules/patient/form.html:85
+msgid "Feminine"
+msgstr "Feminine"
+
+#: templates/modules/patient/form.html:90
+msgid "Comments"
+msgstr "Comments"
+
+#: templates/modules/stage/form.html:9 templates/modules/stage/list.html:9
+msgid "Stages"
+msgstr "Stages"
+
+#: templates/modules/user/form.html:47
+msgid "Username"
+msgstr "Username"
+
+#: templates/modules/user/form.html:52
+msgid "Enter the username"
+msgstr "Enter the username"
+
+#: templates/modules/user/form.html:59
+msgid "E-mail"
+msgstr "E-mail"
+
+#: templates/modules/user/form.html:64
+msgid "Enter the email of the user"
+msgstr "Enter the email of the user"
+
+#: templates/modules/user/form.html:78
+msgid "Enter the first name of the user"
+msgstr "Enter the first name of the user"
+
+#: templates/modules/user/form.html:89
+msgid "Enter the last name of the user"
+msgstr "Enter the last name of the user"
+
+#: templates/modules/user/form.html:105
+#, fuzzy
+#| msgid "Enter the institution of the user"
+msgid "Enter the institution of the user"
+msgstr "Enter the institution of the user"
+
+#: templates/modules/user/form.html:116
+msgid "Is active"
+msgstr "Is active"
+
+#: templates/modules/user/form.html:124
+msgid "Password"
+msgstr "Password"
+
+#: templates/modules/user/form.html:128 templates/modules/user/form.html:142
+msgid "Enter the password of the user"
+msgstr "Enter the password of the user"
+
+#: templates/modules/user/form.html:130 templates/modules/user/form.html:146
+msgid "Password must have at least 8 characters"
+msgstr "Password must have at least 8 characters"
+
+#: templates/modules/user/form.html:138
+msgid "Confirm Password"
+msgstr "Confirm Password"
+
+#: templates/modules/user/form.html:144
+msgid "Field do not match with password"
+msgstr "Field do not match with password"

@@ -25,8 +25,6 @@ function InstitutionController($container) {
      */
     const getParams = function () {
         return {
-            moduleName: 'Institutions',
-            moduleIcon: 'fa fa-building',
             container: $container,
             apiUrl: '/api/institution/',
             message: {
