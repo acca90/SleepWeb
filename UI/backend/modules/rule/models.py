@@ -12,6 +12,16 @@ from backend.modules.indicator.models import Indicator
 from backend.modules.stage.models import Stage
 
 
+class QualityInterval(models.Model):
+    """
+    Model that define a inter of quality
+    this quality follows rules fo National Sleep Foundation
+    """
+    quality = models.CharField(db_column='quality', max_length=255, null=False)
+    minimum = models.IntegerField(db_column='minium', max_length=255, null=False)
+    maximum = models.IntegerField(db_column='maximum', max_length=255, null=False)
+
+
 class RuleWeight(models.Model):
     """
     Model that combine an indicator and stage to represent a weight for evaluation

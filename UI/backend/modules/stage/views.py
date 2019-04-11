@@ -7,20 +7,62 @@ Universidade de Passo Fundo - 2018/2019
 @since 16/03/2019
 """
 from rest_framework import viewsets
-from backend.commons.IsSuperUserPermission import IsSuperUserPermission
+from rest_framework.permissions import IsAuthenticated
+
+from commons.notAllowed import not_allowed_to_do
 from .serializers import StageSerializer
 from .models import Stage
 
 
 class StageViewSet(viewsets.ModelViewSet):
     serializer_class = StageSerializer
-    permission_classes = (IsSuperUserPermission,)
+    permission_classes = (IsAuthenticated,)
+    queryset = Stage.objects.all()
 
-    def get_queryset(self):
+    def list(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        return super().list(request, args, kwargs)
 
-        identification = self.request.query_params.get('pk', None)
-        if identification is not None:
-            self.pagination_class = None
-            return Stage.objects.filter(pk=identification)
+    def retrieve(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        return super().retrieve(request, args, kwargs)
 
-        return Stage.objects.all().order_by('id')
+    def create(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        if not request.user.is_superuser:
+            return not_allowed_to_do()
+
+        return super().create(request, args, kwargs)
+
+    def partial_update(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        if not request.user.is_superuser:
+            return not_allowed_to_do()
+
+        return super().partial_update(request, args, kwargs)
+
+    def update(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        if not request.user.is_superuser:
+            return not_allowed_to_do()
+
+        return super().update(request, args, kwargs)
+
+    def destroy(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        if not request.user.is_superuser:
+            return not_allowed_to_do()
+
+        return super().destroy(request, args, kwargs)

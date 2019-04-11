@@ -15,12 +15,16 @@ from backend.modules.msystem.models import MSystem
 class MSystemViewSet(viewsets.ModelViewSet):
     serializer_class = MSystemSerializer
     permission_classes = (IsSuperUserPermission,)
+    queryset = MSystem.objects.all()
 
-    def get_queryset(self):
+    def list(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        return super().list(request, args, kwargs)
 
-        identification = self.request.query_params.get('pk', None)
-        if identification is not None:
-            self.pagination_class = None
-            return MSystem.objects.filter(pk=identification)
-
-        return MSystem.objects.all().order_by('id')
+    def retrieve(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        return super().retrieve(request, args, kwargs)

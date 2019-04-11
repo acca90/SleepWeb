@@ -10,7 +10,7 @@ from rest_framework import serializers
 from backend.modules.group.models import Group
 
 from backend.modules.institution.serializers import InstitutionSerializer
-from backend.modules.patient.serializers import PatientSerializer
+from backend.modules.patient.serializers import PatientReadSerializer
 from backend.modules.user.serializers import UserReadSerializer
 from backend.modules.patient.models import Patient
 from backend.modules.user.models import User
@@ -62,7 +62,7 @@ class GroupReadSerializer(serializers.ModelSerializer):
     owner = serializers.SlugRelatedField(read_only=True, slug_field='first_name')
     institutions = InstitutionSerializer(many=True)
     users = UserReadSerializer(many=True)
-    patients = PatientSerializer(many=True)
+    patients = PatientReadSerializer(many=True)
 
     class Meta:
         model = Group

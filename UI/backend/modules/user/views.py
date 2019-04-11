@@ -7,36 +7,46 @@ Universidade de Passo Fundo - 2018/2019
 @since 09/03/2019
 """
 from rest_framework import status
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth.hashers import make_password
 
-from backend.commons.IsSuperUserPermission import IsSuperUserPermission
 from backend.modules.user.models import User
 from backend.modules.user.serializers import UserWriteSerializer
+from commons.notAllowed import not_allowed_to_do
 
 
 class UserViewSet(ModelViewSet):
     serializer_class = UserWriteSerializer
-    permission_classes = (IsSuperUserPermission,)
+    permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
 
-    def get_permissions(self):
-        if self.action in ('create',):
-            self.permission_classes = [AllowAny, ]
-        return super(self.__class__, self).get_permissions()
+    def list(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        return super().list(request, args, kwargs)
 
     def retrieve(self, request, *args, **kwargs):
-
-        queryset = get(pk=request.GET['pk'])
-        serializer = UserWriteSerializer(queryset, many=False, context={"request": request})
+        """
+        Override method to check permissions
+        """
+        queryset = User.objects.get(pk=request.GET['pk'])
+        serializer = UserWriteSerializer(
+            queryset,
+            many=False,
+            context={"request": request}
+        )
         return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
         """
-        Method for create new users
+        Override method to check permissions
         """
+        if not request.user.is_superuser:
+            return not_allowed_to_do()
+
         serializer = UserWriteSerializer(data=request.data, context={"request": request})
         if serializer.is_valid():
             user = serializer.create(serializer.validated_data)
@@ -49,7 +59,10 @@ class UserViewSet(ModelViewSet):
         """
          Method for update users
          """
-        user = get(pk=request.data['id'])
+        if not request.user.is_superuser:
+            return not_allowed_to_do()
+
+        user = User.objects.get(pk=request.data['id'])
         serializer = UserWriteSerializer(
             instance=user, data=request.data, partial=True, context={"request": request}
         )
@@ -63,4 +76,20 @@ class UserViewSet(ModelViewSet):
         else:
             return Response(serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+    def update(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        if not request.user.is_superuser:
+            return not_allowed_to_do()
 
+        return super().update(request, args, kwargs)
+
+    def destroy(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        if not request.user.is_superuser:
+            return not_allowed_to_do()
+
+        return super().destroy(request, args, kwargs)

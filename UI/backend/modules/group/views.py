@@ -9,6 +9,8 @@ Universidade de Passo Fundo - 2018/2019
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+
+from commons.notAllowed import not_allowed_to_do
 from .models import Group
 from .serializers import GroupReadSerializer, GroupWriteSerializer
 
@@ -17,6 +19,15 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupReadSerializer
     permission_classes = (IsAuthenticated,)
     queryset = Group.objects.all()
+
+    def list(self, request, *args, **kwargs):
+        """
+        Method for list groups
+        """
+        if not request.user.is_superuser:
+            self.queryset = Group.objects.filter(owner__pk=request.user.id)
+
+        return super().list(request, args, kwargs)
 
     def retrieve(self, request, *args, **kwargs):
         """
@@ -43,6 +54,10 @@ class GroupViewSet(viewsets.ModelViewSet):
         Method for update groups
         """
         instance = Group.objects.get(pk=request.data['id'])
+
+        if instance.owner_id != request.user.id and not request.user.is_superuser:
+            return not_allowed_to_do()
+
         write_serializer = GroupWriteSerializer(
             partial=True,
             instance=instance,
@@ -55,3 +70,25 @@ class GroupViewSet(viewsets.ModelViewSet):
             return Response(read_serializer.data, status.HTTP_200_OK)
         else:
             return Response(write_serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def update(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        instance = Group.objects.get(pk=request.data['id'])
+
+        if instance.owner_id != request.user.id and not request.user.is_superuser:
+            return not_allowed_to_do()
+
+        return super().update(request, args, kwargs)
+
+    def destroy(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        instance = Group.objects.get(pk=request.data['id'])
+
+        if instance.owner_id != request.user.id and not request.user.is_superuser:
+            return not_allowed_to_do()
+
+        return super().destroy(request, args, kwargs)

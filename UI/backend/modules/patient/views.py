@@ -7,41 +7,84 @@ Universidade de Passo Fundo - 2018/2019
 @since 16/03/2019
 """
 from rest_framework import viewsets, status
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from commons.notAllowed import not_allowed_to_do
 from .models import Patient
-from .serializers import PatientSerializer
+from .serializers import PatientWriteSerializer, PatientReadSerializer
 
 
 class PatientViewSet(viewsets.ModelViewSet):
-    serializer_class = PatientSerializer
+    serializer_class = PatientReadSerializer
     permission_classes = (IsAuthenticated,)
+    queryset = Patient.objects.all()
 
-    def get_queryset(self):
-        kwargs = {}
-        if not self.request.user.is_superuser:
-            kwargs['user'] = self.request.user
+    def list(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        if not request.user.is_superuser:
+            self.queryset = Patient.objects.filter(user__pk=request.user.id)
 
-        identification = self.request.query_params.get('pk', None)
-        if identification is not None:
-            self.pagination_class = None
-            kwargs['pk'] = identification
-            return Patient.objects.filter(**kwargs)
+        return super().list(request, args, kwargs)
 
-        return Patient.objects.filter(**kwargs).order_by('id')
-
-    def get_permissions(self):
-        if self.action in ('create',):
-            self.permission_classes = [AllowAny, ]
-        return super(self.__class__, self).get_permissions()
+    def retrieve(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        queryset = Patient.objects.get(pk=request.GET['pk'])
+        serializer = PatientReadSerializer(queryset, many=False)
+        return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
-        serializer = PatientSerializer(data=request.data)
+        """
+        Override method to check permissions
+        """
+        serializer = PatientWriteSerializer(data=request.data)
         if serializer.is_valid():
             serializer.validated_data['user'] = self.request.user
-            patient = serializer.create(serializer.validated_data)
-            serializer.validated_data['id'] = patient.id
-            return Response(serializer.data)
+            instance = serializer.create(serializer.validated_data)
+            read_serializer = PatientReadSerializer(instance)
+            return Response(read_serializer.data)
         else:
             return Response(serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def partial_update(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        instance = Patient.objects.get(pk=request.data['id'])
+
+        if instance.user.id != request.user.id and not request.user.is_superuser:
+            return not_allowed_to_do()
+
+        serializer = PatientWriteSerializer(data=request.data)
+        if serializer.is_valid():
+            instance = serializer.update(instance, serializer.validated_data)
+            read_serializer = PatientReadSerializer(instance)
+            return Response(read_serializer.data, status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def update(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        instance = Patient.objects.get(pk=request.data['id'])
+
+        if instance.user.id != request.user.id and not request.user.is_superuser:
+            return not_allowed_to_do()
+
+        return super().update(request, args, kwargs)
+
+    def destroy(self, request, *args, **kwargs):
+        """
+        Override method to check permissions
+        """
+        instance = Patient.objects.get(pk=request.data['id'])
+
+        if instance.user.id != request.user.id and not request.user.is_superuser:
+            return not_allowed_to_do()
+
+        return super().destroy(request, args, kwargs)

@@ -18,7 +18,7 @@ function PatientController($container) {
             {th: 'Name', data: 'first_name', render: renderFullName},
             {th: 'Brith Date', data: 'birth_date', render: renderBirthDateAndAge, width: '200px'},
             {th: 'Gender', data: 'gender', render: renderGender, width: '100px'},
-            {th: 'Stage', data: 'stage', sDefaultContent: '', width: '120px'}
+            {th: 'Stage', data: 'stage', name: 'stage__description', sDefaultContent: '', render: renderStage, width: '120px'}
         ];
     };
     /**
@@ -65,6 +65,13 @@ function PatientController($container) {
      */
     const renderGender = function (data) {
         return data === 1 ? 'Masculine' : 'Feminine';
+    };
+    /**
+     * Render for stage
+     * @memberOf PatientController
+     */
+    const renderStage = function (data) {
+        return $.isEmpty(data) ? 'Not Defined' : data.description;
     };
     /**
      * Fill form fields for update data
