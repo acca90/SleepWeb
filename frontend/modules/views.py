@@ -7,7 +7,7 @@ Universidade de Passo Fundo - 2018/2019
 @since XX
 """
 from django.shortcuts import render
-from UI.SleepWeb import settings
+from SleepWeb import settings
 
 
 def locale(request):

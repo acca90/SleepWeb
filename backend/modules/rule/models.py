@@ -17,12 +17,13 @@ class QualityInterval(models.Model):
     Model that define a inter of quality
     this quality follows rules fo National Sleep Foundation
     """
-    quality = models.CharField(db_column='quality', max_length=255, null=False)
-    minimum = models.IntegerField(db_column='minium', max_length=255, null=False)
-    maximum = models.IntegerField(db_column='maximum', max_length=255, null=False)
+    # GOOD, BAD, UNCERTAIN
+    quality = models.CharField(db_column='quality', max_length=10, null=False)
+    minimum = models.IntegerField(db_column='minimum', null=False)
+    maximum = models.IntegerField(db_column='maximum', null=False)
 
 
-class RuleWeight(models.Model):
+class Weight(models.Model):
     """
     Model that combine an indicator and stage to represent a weight for evaluation
     """
@@ -31,7 +32,7 @@ class RuleWeight(models.Model):
     weight = models.IntegerField(db_column='weight', null=False)
 
     class Meta:
-        db_table = 'RuleWeight'
+        db_table = 'Weight'
         managed = True
         verbose_name = 'Weights'
         verbose_name_plural = 'Weights'
@@ -48,7 +49,7 @@ class Rule(models.Model):
     """
     description = models.CharField(db_column='description', max_length=255, null=False)
     user = models.ForeignKey(User, on_delete=None, null=False)
-    weights = models.ManyToManyField(RuleWeight, related_name='rule_weights')
+    weights = models.ManyToManyField(Weight, related_name='rule_weights')
 
     class Meta:
         db_table = 'Rule'

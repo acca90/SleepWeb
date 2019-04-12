@@ -14,7 +14,7 @@ from django.contrib.auth.hashers import make_password
 
 from backend.modules.user.models import User
 from backend.modules.user.serializers import UserWriteSerializer
-from commons.notAllowed import not_allowed_to_do
+from backend.commons.notAllowed import not_allowed_to_do
 
 
 class UserViewSet(ModelViewSet):

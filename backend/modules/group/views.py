@@ -10,7 +10,7 @@ from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from commons.notAllowed import not_allowed_to_do
+from backend.commons.notAllowed import not_allowed_to_do
 from .models import Group
 from .serializers import GroupReadSerializer, GroupWriteSerializer
 

@@ -4,19 +4,20 @@ Projeto desenvolvido para o Programa de Pós-Graduação em Computação Aplicad
 Universidade de Passo Fundo - 2018/2019
 
 @author Matheus Hernandes
-@since 21/03/2019
+@since 16/03/2019
 """
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from backend.modules.indicator.serializers import IndicatorSerializer
-from backend.modules.indicator.models import Indicator
-from commons.notAllowed import not_allowed_to_do
+
+from backend.commons.notAllowed import not_allowed_to_do
+from .serializers import StageSerializer
+from .models import Stage
 
 
-class IndicatorViewSet(viewsets.ModelViewSet):
-    serializer_class = IndicatorSerializer
+class StageViewSet(viewsets.ModelViewSet):
+    serializer_class = StageSerializer
     permission_classes = (IsAuthenticated,)
-    queryset = Indicator.objects.all()
+    queryset = Stage.objects.all()
 
     def list(self, request, *args, **kwargs):
         """

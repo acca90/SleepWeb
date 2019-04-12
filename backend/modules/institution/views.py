@@ -4,20 +4,20 @@ Projeto desenvolvido para o Programa de Pós-Graduação em Computação Aplicad
 Universidade de Passo Fundo - 2018/2019
 
 @author Matheus Hernandes
-@since 16/03/2019
+@since 09/03/2019
 """
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from commons.notAllowed import not_allowed_to_do
-from .serializers import StageSerializer
-from .models import Stage
+from backend.commons.notAllowed import not_allowed_to_do
+from .models import Institution
+from .serializers import InstitutionSerializer
 
 
-class StageViewSet(viewsets.ModelViewSet):
-    serializer_class = StageSerializer
+class InstitutionViewSet(viewsets.ModelViewSet):
+    serializer_class = InstitutionSerializer
+    queryset = Institution.objects.all()
     permission_classes = (IsAuthenticated,)
-    queryset = Stage.objects.all()
 
     def list(self, request, *args, **kwargs):
         """
@@ -66,3 +66,4 @@ class StageViewSet(viewsets.ModelViewSet):
             return not_allowed_to_do()
 
         return super().destroy(request, args, kwargs)
+

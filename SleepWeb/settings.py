@@ -50,7 +50,7 @@ INSTALLED_APPS = [
 
     # SleepWeb
     'backend',
-    'frontend',
+    'backend.commons',
     'backend.modules.indicator',
     'backend.modules.msystem',
     'backend.modules.institution',
@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'backend.modules.patient',
     'backend.modules.group',
     'backend.modules.rule',
+    'frontend',
 ]
 
 MIDDLEWARE = [
