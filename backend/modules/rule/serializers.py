@@ -31,8 +31,3 @@ class RuleReadSerializer(serializers.ModelSerializer):
             'description',
             'user',
         )
-        datatables_always_serialize = (
-            'id',
-            'description',
-            'user',
-        )

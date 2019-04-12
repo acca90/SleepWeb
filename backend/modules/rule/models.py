@@ -22,6 +22,16 @@ class QualityInterval(models.Model):
     minimum = models.IntegerField(db_column='minimum', null=False)
     maximum = models.IntegerField(db_column='maximum', null=False)
 
+    class Meta:
+        db_table = 'QualityInterval'
+        managed = True
+        verbose_name = 'Quality Intervals'
+        verbose_name_plural = 'Quality Intervals'
+        ordering = ['id']
+
+    def __str__(self):
+        return self.quality
+
 
 class Weight(models.Model):
     """

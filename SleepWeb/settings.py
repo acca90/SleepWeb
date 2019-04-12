@@ -151,11 +151,11 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
 )
 
-LANGUAGE_CODE = 'pt_BR'
+LANGUAGE_CODE = 'pt-BR'
 
 LANGUAGES = (
+    ('pt-BR', _('Portuguese')),
     ('en', _('English')),
-    ('pt_BR', _('Portuguese')),
 )
 
 LOCALE_PATHS = (
