@@ -28,7 +28,7 @@ function MSystemController($container) {
             container: $container,
             apiUrl: '/api/msystem/',
             message: {
-                saveSuccess: gettext(`Monitoring System successfully registered`),
+                saveSuccess: `Monitoring System successfully registered`,
                 editPickError: `Select a user to update`,
                 editAjaxError: `Something went wrong with request, call administrators`,
                 editSuccess: `Monitoring System successfully updated`,
