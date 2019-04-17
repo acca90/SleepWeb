@@ -117,7 +117,7 @@ function UserController($container) {
         //console.log(getParams());
         new AbstractController(getParams()).init();
         let userService = new UserService();
-        userService.findInstitutions();
+        userService.init();
     };
     /**
      * Load a modal datatables for search and pick registers

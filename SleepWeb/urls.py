@@ -11,7 +11,6 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 from rest_framework import routers
-from django.views.i18n import JavaScriptCatalog
 
 # Back-End
 from backend.modules.institution.views import InstitutionViewSet
@@ -55,8 +54,6 @@ urlpatterns = [
     # api
     path('api/rest-auth/', include('rest_auth.urls')),
     path('api/', include(router.urls)),
-
-    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
 
     # views
     url(r'^$', Login.as_view(), name='index'),

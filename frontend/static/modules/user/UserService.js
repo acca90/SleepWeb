@@ -19,7 +19,7 @@ function UserService() {
         }
         for (let result of data.results) {
             $userInstitution.append(
-                `<option value="${result.id}">${result.name}</option>`
+                '<option value="'+result.id+'">'+result.name+'</option>'
             );
         }
     };
@@ -29,11 +29,11 @@ function UserService() {
      */
     const errorInstitutionsHandler = function () {
     };
-        /**
+    /**
      * Method that find institutions
      * @memberOf UserService
      */
-    this.findInstitutions = function () {
+    this.init = function () {
         new AjaxController({
             data: {},
             method: 'GET',

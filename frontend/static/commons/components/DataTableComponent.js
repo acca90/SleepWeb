@@ -25,23 +25,22 @@ function DataTableComponent(settings) {
      */
     let searchable = true;
     /**
-     * Mount HTML table follow headers
-     * @memberOf DataTableComponent
-     */
-    this.buildTable = function () {
-        $table = $('<table><thead><tr></tr></thead><tbody></tbody></table>');
-        $table.addClass('table table-striped table-hover table-sm');
-        settings.forEach(column => $table.find('thead').find('tr').append(`<th>${column.th}</th>`));
-        return this;
-    };
-
-    /**
      * Makes it width 100%
      * @memberOf DataTableComponent
      */
     this.strechtIt = function () {
         $table.css('width', '100%');
         $table.css('min-width', '1000px');
+        return this;
+    };
+    /**
+     * Mount HTML table follow headers
+     * @memberOf DataTableComponent
+     */
+    this.buildTable = function () {
+        $table = $('<table><thead><tr></tr></thead><tbody></tbody></table>');
+        $table.addClass('table table-striped table-hover table-sm');
+        settings.forEach(column => $table.find('thead').find('tr').append('<th>' + column.th + '</th>'));
         return this;
     };
     /**
