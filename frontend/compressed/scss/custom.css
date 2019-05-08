@@ -18,7 +18,7 @@ input, select, textarea { font-size: 13px !important; }
 
 table.dataTable tbody tr.selected { background-color: #f9e300; color: #000; }
 
-table.table-hover tbody tr:hover td, .table-hover tbody tr:hover th { background-color: #f9f585; color: #000; }
+table.table-hover tbody tr:not(.dtrg-group):hover td, .table-hover tbody tr:not(.dtrg-group):hover th { background-color: #f9f585; color: #000; }
 
 .invalid-feedback { display: block; }
 

@@ -62,6 +62,7 @@ function RuleController($container) {
      */
     this.init = function () {
         new AbstractController(getParams()).init();
+        new RuleFormController().init();
     };
     /**
      * Load a modal datatables for search and pick registers

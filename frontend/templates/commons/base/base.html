@@ -13,7 +13,10 @@
 	{% compress css inline %}
 		{% block css %}
 			<link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}"/>
+			<!-- Inicio DataTable -->
 			<link rel="stylesheet" href="{% static 'datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}"/>
+			<link rel="stylesheet" href="{% static "datatables.net-rowgroup-bs4/css/rowGroup.bootstrap4.min.css" %}"/>
+			<!-- Fim  DataTable -->
 			<link rel="stylesheet" href="{% static 'bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}"/>
 			<link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}"/>
 			<link rel="stylesheet" href="{% sass_src "scss/custom.scss" %}"/>
@@ -32,8 +35,12 @@
 		<script src="{% static "jquery/dist/jquery.min.js" %}"></script>
 		<script src="{% static "popper.js/dist/umd/popper-utils.min.js" %}"></script>
 		<script src="{% static "popper.js/dist/umd/popper.min.js" %}"></script>
+		<!-- Inicio DataTable -->
 		<script src="{% static "datatables.net/js/jquery.dataTables.js" %}"></script>
 		<script src="{% static "datatables.net-bs4/js/dataTables.bootstrap4.min.js" %}"></script>
+		<script src="{% static "datatables.net-rowgroup/js/dataTables.rowGroup.min.js" %}"></script>
+		<script src="{% static "datatables.net-rowgroup-bs4/js/rowGroup.bootstrap4.min.js" %}"></script>
+		<!-- Fim  DataTable -->
 		<script src="{% static "bootstrap/dist/js/bootstrap.min.js" %}"></script>
 		<script src="{% static "bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" %}"></script>
 		<script src="{% static "commons/settings/datepicker-locale.js" %}"></script>

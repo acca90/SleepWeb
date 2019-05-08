@@ -23,43 +23,187 @@
 				{% include 'components/menu_form.html' %}
 			</ul>
 		</div>
-	<div class="card-body">
-		<form data-parsley-validate>
-			<div class="form-row">
-				<div class="form-group col-md-3">
-					<label for="indicatorId">Identification</label>
+		<div class="card-body">
+			<form data-parsley-validate>
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label for="indicatorId">Identification</label>
+						<input type="text"
+							   class="form-control form-control-sm"
+							   id="indicatorId"
+							   name="id"
+							   isPk
+							   disabled>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="indicatorDescription">Description</label>
 					<input type="text"
 						   class="form-control form-control-sm"
-						   id="indicatorId"
-						   name="id"
-						   isPk
-						   disabled>
+						   required=""
+						   data-parsley-required-message="Enter the description of the stage"
+						   maxlength="255"
+						   id="indicatorDescription"
+						   name="description">
 				</div>
-			</div>
-			<div class="form-group">
-				<label for="indicatorDescription">Description</label>
-				<input type="text"
-					   class="form-control form-control-sm"
-					   required=""
-					   data-parsley-required-message="Enter the description of the stage"
-					   maxlength="255"
-					   id="indicatorDescription"
-					   name="description">
-			</div>
-			<div class="form-group">
-				<label for="indicatorDefinition">Definition</label>
-				<textarea cols="30"
-						  rows="10"
-						  class="form-control"
-						  required=""
-						  data-parsley-required-message="Enter the definition of the stage"
-						  maxlength="1000"
-						  id="indicatorDefinition"
-						  name="definition"
-				></textarea>
-			</div>
-		</form>
 
+
+				<div class="card">
+					<div class="card-header">
+						<ul class="nav nav-tabs card-header-tabs">
+							<li class="nav-item">
+								<a class="nav-link active"
+								   id="sharewith"
+								   data-toggle="tab"
+								   href="#"
+								   role="tab"
+								   title="{% trans 'Sleep Efficiency' %}"
+								   aria-controls="allow"
+								   aria-selected="true">
+									<b>{% trans 'SE' %}</b>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link"
+								   id="sharewith"
+								   data-toggle="tab"
+								   href="#"
+								   role="tab"
+								   title="{% trans 'Sleep Latency' %}"
+								   aria-controls="allow"
+								   aria-selected="true">
+									<b>{% trans 'SL' %}</b>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link"
+								   id="sharewith"
+								   data-toggle="tab"
+								   href="#"
+								   role="tab"
+								   title="{% trans 'REM Sleep' %}"
+								   aria-controls="allow"
+								   aria-selected="true">
+									<b>{% trans 'REM' %}</b>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link"
+								   id="sharewith"
+								   data-toggle="tab"
+								   href="#"
+								   role="tab"
+								   title="{% trans 'non-REM 1-2' %}"
+								   aria-controls="allow"
+								   aria-selected="true">
+									<b>{% trans 'NR12' %}</b>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link"
+								   id="sharewith"
+								   data-toggle="tab"
+								   href="#"
+								   role="tab"
+								   title="{% trans 'non-REM 3-4' %}"
+								   aria-controls="allow"
+								   aria-selected="true">
+									<b>{% trans 'NR34' %}</b>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link"
+								   id="sharewith"
+								   data-toggle="tab"
+								   href="#"
+								   role="tab"
+								   title="{% trans 'Arousals' %}"
+								   aria-controls="allow"
+								   aria-selected="true">
+									<b>{% trans 'ARO' %}</b>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link"
+								   id="sharewith"
+								   data-toggle="tab"
+								   href="#"
+								   role="tab"
+								   title="{% trans 'Awakenings' %}"
+								   aria-controls="allow"
+								   aria-selected="true">
+									<b>{% trans 'AW' %}</b>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link"
+								   id="sharewith"
+								   data-toggle="tab"
+								   href="#"
+								   role="tab"
+								   title="{% trans 'Wake after sleep onset' %}"
+								   aria-controls="allow"
+								   aria-selected="true">
+									<b>{% trans 'WASO' %}</b>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link"
+								   id="sharewith"
+								   data-toggle="tab"
+								   href="#"
+								   role="tab"
+								   title="{% trans 'Number of nap episodes' %}"
+								   aria-controls="allow"
+								   aria-selected="true">
+									<b>{% trans 'NAPQ' %}</b>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link"
+								   id="sharewith"
+								   data-toggle="tab"
+								   href="#"
+								   role="tab"
+								   title="{% trans 'Nap duration' %}"
+								   aria-controls="allow"
+								   aria-selected="true">
+									<b>{% trans 'NAPT' %}</b>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link"
+								   id="sharewith"
+								   data-toggle="tab"
+								   href="#"
+								   role="tab"
+								   title="{% trans 'Number of days, in the past 7, that a nap occurred Arousals' %}"
+								   aria-controls="allow"
+								   aria-selected="true">
+									<b>{% trans 'NAPD' %}</b>
+								</a>
+							</li>
+
+						</ul>
+					</div>
+					<div class="card-body">
+						<div class="tab-content" id="myTabContent">
+
+							<div class="tab-pane fade show active" id="containerSE" role="tabpanel" aria-labelledby="home-tab">
+
+							</div>
+
+							<div class="tab-pane fade" id="patients-form" role="tabpanel" aria-labelledby="profile-tab">
+							</div>
+
+							<div class="tab-pane fade" id="detail-form" role="tabpanel" aria-labelledby="profile-tab">
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</form>
+
+		</div>
 	</div>
-</div>
 </div>

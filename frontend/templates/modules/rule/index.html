@@ -12,6 +12,7 @@
 {% block scripts %}
 	{{ block.super }}
 	<script src="{% static "modules/rule/RuleController.js" %}"></script>
+	<script src="{% static "modules/rule/RuleFormController.js" %}"></script>
 	<script>
         $(document).ready(function () {
             new RuleController($('#rule')).init();

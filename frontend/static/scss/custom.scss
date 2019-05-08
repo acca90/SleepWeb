@@ -38,7 +38,7 @@ table.dataTable {
   }
 }
 
-table.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+table.table-hover tbody tr:not(.dtrg-group):hover td, .table-hover tbody tr:not(.dtrg-group):hover th {
   background-color: $sleep_web_table_hover;
   color: $sleep_web_black;
 }
