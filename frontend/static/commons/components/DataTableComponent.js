@@ -83,7 +83,7 @@ function DataTableComponent(settings) {
      * @memberOf DataTableComponent
      */
     this.place = function ($container) {
-        $container.html($table);
+        $container.append($table);
         return this;
     };
     /**

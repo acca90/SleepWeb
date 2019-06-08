@@ -67,8 +67,8 @@ class Threshold(models.Model):
     """
     # GOOD, BAD, UNCERTAIN
     quality = models.CharField(db_column='quality', max_length=10, null=False)
-    top = models.IntegerField(db_column='top', null=False)
-    bottom = models.IntegerField(db_column='bottom', null=False)
+    begin = models.IntegerField(db_column='threshold_begin', null=False)
+    end = models.IntegerField(db_column='threshold_end', null=False)
     rule = models.ForeignKey(Rule, on_delete=models.CASCADE)
 
     class Meta:

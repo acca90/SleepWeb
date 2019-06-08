@@ -9,8 +9,13 @@
  */
 function RuleController($container) {
     /**
+     * Form controller reference
+     * @memberOf RuleController
+     */
+    let formController = null;
+    /**
      * DataTable Settings
-     * @namespace RuleController
+     * @memberOf RuleController
      */
     const getDatatableSettings = function () {
         return [
@@ -39,7 +44,7 @@ function RuleController($container) {
             datatableSettings: getDatatableSettings(),
             serialize: serialize,
             toForm: toForm,
-            clean: null
+            clean: clean
         };
     };
     /**
@@ -48,6 +53,13 @@ function RuleController($container) {
      */
     const toForm = function (rule) {
         let $form = $('form', $container);
+    };
+    /**
+     * Clean method that set form for its default state
+     * @memberOf RuleController
+     */
+    const clean = function () {
+        formController.ajustColumns();
     };
     /**
      * Serialize form for API submit
@@ -62,7 +74,7 @@ function RuleController($container) {
      */
     this.init = function () {
         new AbstractController(getParams()).init();
-        new RuleFormController().init();
+        formController = new RuleFormController().init();
     };
     /**
      * Load a modal datatables for search and pick registers

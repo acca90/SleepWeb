@@ -1,9 +1,9 @@
 {% load static %}
 
-<script src="{% static "modules/indicator/IndicatorController.js" %}"></script>
+<script src="{% static "modules/rule/RuleController.js" %}"></script>
 
 <script>
 	function getSettings() {
-		return new IndicatorController().getSettings();
+		return new RuleController().getSettings();
     }
 </script>

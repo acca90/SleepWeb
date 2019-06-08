@@ -48,14 +48,14 @@
 				</div>
 
 
-				<div class="card">
+				<div id="datatableCards" class="card">
 					<div class="card-header">
 						<ul class="nav nav-tabs card-header-tabs">
 							<li class="nav-item">
 								<a class="nav-link active"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#"
+								   href="#containerSE"
 								   role="tab"
 								   title="{% trans 'Sleep Efficiency' %}"
 								   aria-controls="allow"
@@ -67,7 +67,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#"
+								   href="#containerSL"
 								   role="tab"
 								   title="{% trans 'Sleep Latency' %}"
 								   aria-controls="allow"
@@ -79,7 +79,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#"
+								   href="#containerREM"
 								   role="tab"
 								   title="{% trans 'REM Sleep' %}"
 								   aria-controls="allow"
@@ -91,7 +91,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#"
+								   href="#containerNR12"
 								   role="tab"
 								   title="{% trans 'non-REM 1-2' %}"
 								   aria-controls="allow"
@@ -103,7 +103,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#"
+								   href="#containerNR34"
 								   role="tab"
 								   title="{% trans 'non-REM 3-4' %}"
 								   aria-controls="allow"
@@ -115,7 +115,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#"
+								   href="#containerARO"
 								   role="tab"
 								   title="{% trans 'Arousals' %}"
 								   aria-controls="allow"
@@ -127,7 +127,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#"
+								   href="#containerAW"
 								   role="tab"
 								   title="{% trans 'Awakenings' %}"
 								   aria-controls="allow"
@@ -139,7 +139,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#"
+								   href="#containerWASO"
 								   role="tab"
 								   title="{% trans 'Wake after sleep onset' %}"
 								   aria-controls="allow"
@@ -151,7 +151,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#"
+								   href="#containerNAPQ"
 								   role="tab"
 								   title="{% trans 'Number of nap episodes' %}"
 								   aria-controls="allow"
@@ -163,7 +163,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#"
+								   href="#containerNAPT"
 								   role="tab"
 								   title="{% trans 'Nap duration' %}"
 								   aria-controls="allow"
@@ -175,7 +175,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#"
+								   href="#containerNAPD"
 								   role="tab"
 								   title="{% trans 'Number of days, in the past 7, that a nap occurred Arousals' %}"
 								   aria-controls="allow"
@@ -183,21 +183,43 @@
 									<b>{% trans 'NAPD' %}</b>
 								</a>
 							</li>
-
 						</ul>
 					</div>
 					<div class="card-body">
 						<div class="tab-content" id="myTabContent">
+							<button type="button" class="btn btn-success btn-sm" id="btnAddThreshold">
+								<i class="fa fa-plus"></i>
+								<b>{% trans "Add Rule" %}</b>
+							</button>
 
-							<div class="tab-pane fade show active" id="containerSE" role="tabpanel" aria-labelledby="home-tab">
-
+							<div class="tab-pane fade show active"
+								 id="containerSE"
+								 role="tabpanel"
+								 aria-labelledby="home-tab">
 							</div>
 
-							<div class="tab-pane fade" id="patients-form" role="tabpanel" aria-labelledby="profile-tab">
-							</div>
-
-							<div class="tab-pane fade" id="detail-form" role="tabpanel" aria-labelledby="profile-tab">
-							</div>
+							<div class="tab-pane fade show" id="containerSE" role="tabpanel"
+								 aria-labelledby="home-tab"></div>
+							<div class="tab-pane fade show" id="containerSL" role="tabpanel"
+								 aria-labelledby="home-tab"></div>
+							<div class="tab-pane fade show" id="containerREM" role="tabpanel"
+								 aria-labelledby="home-tab"></div>
+							<div class="tab-pane fade show" id="containerNR12" role="tabpanel"
+								 aria-labelledby="home-tab"></div>
+							<div class="tab-pane fade show" id="containerNR34" role="tabpanel"
+								 aria-labelledby="home-tab"></div>
+							<div class="tab-pane fade show" id="containerARO" role="tabpanel"
+								 aria-labelledby="home-tab"></div>
+							<div class="tab-pane fade show" id="containerAW" role="tabpanel"
+								 aria-labelledby="home-tab"></div>
+							<div class="tab-pane fade show" id="containerWASO" role="tabpanel"
+								 aria-labelledby="home-tab"></div>
+							<div class="tab-pane fade show" id="containerNAPQ" role="tabpanel"
+								 aria-labelledby="home-tab"></div>
+							<div class="tab-pane fade show" id="containerNAPT" role="tabpanel"
+								 aria-labelledby="home-tab"></div>
+							<div class="tab-pane fade show" id="containerNAPD" role="tabpanel"
+								 aria-labelledby="home-tab"></div>
 
 						</div>
 					</div>
@@ -206,4 +228,5 @@
 
 		</div>
 	</div>
+	{% include 'rule/threshold.html' %}
 </div>
