@@ -7,12 +7,14 @@ Universidade de Passo Fundo - 2018/2019
 @since 16/03/2019
 """
 from django.db import models
+import uuid
 
 from backend.modules.stage.models import Stage
 from backend.modules.user.models import User
 
 
 class Patient(models.Model):
+    uuid = models.UUIDField(unique=True, editable=False, default=uuid.uuid4)
     first_name = models.CharField(db_column='first_name', max_length=255, null=False)
     last_name = models.CharField(db_column='last_name', max_length=255, null=False)
     birth_date = models.DateField(db_column='brith_date', null=False)

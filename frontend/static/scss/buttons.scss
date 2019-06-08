@@ -1,0 +1,33 @@
+table.dataTable {
+  tbody {
+
+    tr.dtrg-group {
+      td {
+        background-color: #e0e0e0;
+        border-top: solid 1px #d4d4d4;
+        border-bottom: solid 1px #d4d4d4;
+      }
+    }
+
+    button.control {
+      height: 29.5px;
+      width: 40px;
+      border-radius: 2px;
+      color: white;
+      background: #4475ff;
+      border: solid 1px #4272f8;
+
+      i:before {
+        content: "\f068" !important;
+      }
+    }
+
+    tr.collapsed {
+      button.control {
+        i:before {
+          content: "\f067" !important;
+        }
+      }
+    }
+  }
+}

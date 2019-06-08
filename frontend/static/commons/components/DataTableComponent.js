@@ -217,47 +217,11 @@ function DataTableComponent(settings) {
         return this;
     };
     /**
-     * Mount DataTable for row group
+     * Custom mount for datatables
      * @memberOf DataTableComponent
      */
-    this.mountRowGroup = function (column) {
-        let collapsedGroups = {};
-
-        $table.on('click', 'a.control', function () {
-            let name = $(this).closest('tr').data('name');
-            collapsedGroups[name] = !collapsedGroups[name];
-            $table.DataTable().draw();
-
-        }).DataTable({
-            language: {
-                url: '/json/datatables/'
-            },
-            columns: settings,
-            scrollX: true,
-            responsive: true,
-            scrollY: '300px',
-            scrollCollapse: false,
-            searching: searchable,
-            paging: false,
-            rowGroup: {
-                dataSrc: column,
-                startRender: function ( rows, group) {
-                    let collapsed = !!collapsedGroups[group];
-
-                    rows.nodes().each(function (r) {
-                        r.style.display = collapsed ? 'none' : '';
-                    });
-
-                    // Add category name to the <tr>. NOTE: Hardcoded colspan
-                    return $('<tr/>')
-                        .append('<td colspan="'+(settings.length-2)+'"> <a class="control">CONTROL<a> ' + group + '</td>')
-                        .append('<td colspan="1" class="text-right">Weight:')
-                        .append('<td colspan="1"><input type="text"></td>')
-                        .attr('data-name', group)
-                        .toggleClass('collapsed', collapsed);
-                }
-            }
-        });
+    this.mountCustom = function (customMountFunction) {
+        customMountFunction($table, settings, searchable);
         return this;
     };
 }

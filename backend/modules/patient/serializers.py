@@ -10,12 +10,16 @@ from rest_framework import serializers
 
 from backend.modules.stage.serializers import StageSerializer
 from backend.modules.user.serializers import UserReadSerializer
+from backend.modules.user.models import User
 from .models import Patient
 
 
 class PatientWriteSerializer(serializers.ModelSerializer):
-    users = UserReadSerializer()
-    stage = StageSerializer()
+    users = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        many=True,
+        required=False
+    )
 
     def create(self, validated_data):
         return Patient.objects.create(**validated_data)
@@ -25,12 +29,12 @@ class PatientWriteSerializer(serializers.ModelSerializer):
         fields = '__all__'
         datatables_always_serialize = (
             'id',
+            'uuid',
             'first_name',
             'last_name',
             'birth_date',
             'gender',
             'obs',
-            'stage',
             'user',
         )
 
@@ -44,6 +48,7 @@ class PatientReadSerializer(serializers.ModelSerializer):
         fields = '__all__'
         datatables_always_serialize = (
             'id',
+            'uuid',
             'first_name',
             'last_name',
             'birth_date',
