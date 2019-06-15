@@ -10,6 +10,11 @@
  */
 function AbstractController(params) {
     /**
+     * Current version for API
+     * @memberOf AbstractController
+     */
+    const apiVersion = 'v1';
+    /**
      * Flag indicate if form is being updated
      * @memberOf AbstractController
      */
@@ -92,10 +97,10 @@ function AbstractController(params) {
      */
     const buildCalendarIcon = function () {
         return '<div class="input-group-append calendar">'
-				+ '    <span class="input-group-text">'
-				+ '	    <i class="fa fa-calendar"></i>'
-				+ '	</span>'
-				+ '</div>';
+            + '    <span class="input-group-text">'
+            + '	    <i class="fa fa-calendar"></i>'
+            + '	</span>'
+            + '</div>';
     };
     /**
      * Build a calendar icon for input
@@ -158,7 +163,7 @@ function AbstractController(params) {
         new AjaxController({
             data: {pk: id},
             method: 'GET',
-            url: params.apiUrl + id + '/',
+            url: buildUrl(params.apiUrl, id),
             success: editPickSuccess,
             error: editPickError
         }).send();
@@ -246,7 +251,7 @@ function AbstractController(params) {
         new AjaxController({
             data: params.serialize(),
             method: 'DELETE',
-            url: params.apiUrl + getId($tr) + '/',
+            url: buildUrl(params.apiUrl, getId($tr)),
             success: removeSuccess,
             error: removeError
         }).send();
@@ -347,7 +352,7 @@ function AbstractController(params) {
         new AjaxController({
             data: params.serialize(),
             method: getMethodForPersistence(),
-            url: getApiUrlForDefinedMethod(),
+            url: buildUrl(params.apiUrl, getPk()),
             success: submitSuccess,
             error: submitError
         }).submit();
@@ -358,13 +363,6 @@ function AbstractController(params) {
      */
     const getMethodForPersistence = function () {
         return isUpdate ? 'PATCH' : 'POST'
-    };
-    /**
-     * Test condition of update flag to handle the correct URL for persistence
-     * @memberOf AbstractController
-     */
-    const getApiUrlForDefinedMethod = function () {
-        return isUpdate ? params.apiUrl + getPk() + '/' : params.apiUrl
     };
     /**
      * Return PK for register in update
@@ -479,7 +477,7 @@ function AbstractController(params) {
             .strechtIt()
             .selectable()
             .dblClickEvent(edit)
-            .mountAjax(params.apiUrl);
+            .mountAjax(buildUrl(params.apiUrl));
     };
     /**
      * Refresh datatables
@@ -495,6 +493,16 @@ function AbstractController(params) {
     const getId = function ($tr) {
         let rowData = moduleDataTable.getRowData($tr);
         return rowData.id;
+    };
+    /**
+     * Build URL for API consume
+     * @memberOf AbstractController
+     */
+    const buildUrl = function (url, id) {
+        if ($.isEmpty(id)) {
+            return `/api/${apiVersion}/${url}/`;
+        }
+        return `/api/${apiVersion}/${url}/${id}/`;
     };
     /**
      * Module Initialize

@@ -31,7 +31,7 @@ function GroupController($container) {
     const getParams = function () {
         return {
             container: $container,
-            apiUrl: '/api/group/',
+            apiUrl: 'group',
             message: {
                 saveSuccess: `Group successfully registered`,
                 editPickError: `Select a group to update`,

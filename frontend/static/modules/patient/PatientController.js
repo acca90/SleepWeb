@@ -28,7 +28,7 @@ function PatientController($container) {
     const getParams = function () {
         return {
             container: $container,
-            apiUrl: '/api/patient/',
+            apiUrl: 'patient',
             message: {
                 saveSuccess: `Patient successfully registered`,
                 editPickError: `Select a patient to update`,

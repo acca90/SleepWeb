@@ -26,7 +26,7 @@ function MSystemController($container) {
     const getParams = function () {
         return {
             container: $container,
-            apiUrl: '/api/msystem/',
+            apiUrl: 'msystem',
             message: {
                 saveSuccess: `Monitoring System successfully registered`,
                 editPickError: `Select a user to update`,

@@ -26,7 +26,7 @@ function InstitutionController($container) {
     const getParams = function () {
         return {
             container: $container,
-            apiUrl: '/api/institution/',
+            apiUrl: 'institution',
             message: {
                 saveSuccess: `Institution successfully registered`,
                 editPickError: `Select a institution to update`,

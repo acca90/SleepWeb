@@ -49,11 +49,11 @@ router.register(r'rule', RuleViewSet, base_name='rule')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
 
     # api
-    path('api/rest-auth/', include('rest_auth.urls')),
-    path('api/', include(router.urls)),
+    path('api/v1/api-auth/', include('rest_framework.urls')),
+    path('api/v1/rest-auth/', include('rest_auth.urls')),
+    path('api/v1/', include(router.urls)),
 
     # views
     url(r'^$', Login.as_view(), name='index'),

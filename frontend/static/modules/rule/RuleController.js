@@ -30,7 +30,7 @@ function RuleController($container) {
     const getParams = function () {
         return {
             container: $container,
-            apiUrl: '/api/rule/',
+            apiUrl: 'rule',
             message: {
                 saveSuccess: `Rule successfully registered`,
                 editPickError: `Select a rule to update`,

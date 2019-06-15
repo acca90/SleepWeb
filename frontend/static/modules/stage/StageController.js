@@ -26,7 +26,7 @@ function StageController($container) {
     const getParams = function () {
         return {
             container: $container,
-            apiUrl: '/api/stage/',
+            apiUrl: 'stage',
             message: {
                 saveSuccess: `Stage successfully registered`,
                 editPickError: `Select a stage to update`,

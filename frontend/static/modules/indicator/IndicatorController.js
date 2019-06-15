@@ -26,7 +26,7 @@ function IndicatorController($container) {
     const getParams = function () {
         return {
             container: $container,
-            apiUrl: '/api/indicator/',
+            apiUrl: 'indicator',
             message: {
                 saveSuccess: `Indicator successfully registered`,
                 editPickError: `Select a indicator to update`,

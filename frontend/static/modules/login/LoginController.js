@@ -68,7 +68,7 @@ function LoginController() {
                 password: $('#password').val(),
             },
             method: 'POST',
-            url: '/api/rest-auth/login/',
+            url: '/api/v1/rest-auth/login/',
             success: submitSuccess,
             error: submitError
         }).send();

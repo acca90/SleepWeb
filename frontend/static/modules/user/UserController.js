@@ -41,7 +41,7 @@ function UserController($container) {
     const getParams = function () {
         return {
             container: $container,
-            apiUrl: '/api/user/',
+            apiUrl: 'user',
             message: {
                 saveSuccess: `User successfully registered`,
                 editPickError: `Select a user to update`,
