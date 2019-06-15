@@ -37,7 +37,7 @@ function UserService() {
         new AjaxController({
             data: {},
             method: 'GET',
-            url: '/api/institution/',
+            url: 'institution',
             success: successInstitutionsHandler,
             error: errorInstitutionsHandler
         }).send();

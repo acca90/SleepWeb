@@ -9,6 +9,21 @@
  */
 function AjaxController(params) {
     /**
+     * Current version for API
+     * @memberOf AbstractController
+     */
+    const apiVersion = 'v1';
+    /**
+     * Build URL for API consume
+     * @memberOf AbstractController
+     */
+    this.mountUrl = function (url, pk) {
+        if ($.isEmpty(pk)) {
+            return `/api/${apiVersion}/${url}/`;
+        }
+        return `/api/${apiVersion}/${url}/${pk}/`;
+    };
+    /**
      * Execute request for defined parameters
      * @memberOf AjaxController
      */
@@ -18,7 +33,7 @@ function AjaxController(params) {
             return;
         }
         $.ajax({
-            url: params.url,
+            url: this.mountUrl(params.url, params.pk),
             method: params.method,
             headers: {"X-CSRFToken": $("input[name='csrfmiddlewaretoken']").val()},
             data: params.data,
@@ -30,7 +45,7 @@ function AjaxController(params) {
             }
         });
     };
-        /**
+    /**
      * Execute request for defined parameters
      * @memberOf AjaxController
      */
@@ -40,7 +55,7 @@ function AjaxController(params) {
             return;
         }
         $.ajax({
-            url: params.url,
+            url: this.mountUrl(params.url, param.pk),
             method: params.method,
             headers: {"X-CSRFToken": $("input[name='csrfmiddlewaretoken']").val()},
             contentType: "application/json; charset=utf-8",

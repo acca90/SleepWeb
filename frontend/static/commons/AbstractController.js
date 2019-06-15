@@ -10,11 +10,6 @@
  */
 function AbstractController(params) {
     /**
-     * Current version for API
-     * @memberOf AbstractController
-     */
-    const apiVersion = 'v1';
-    /**
      * Flag indicate if form is being updated
      * @memberOf AbstractController
      */
@@ -70,7 +65,7 @@ function AbstractController(params) {
         DOM.list.buttons.remove = $('#btnRemove', params.container);
         DOM.list.buttons.refresh = $('#btnRefresh', params.container);
         DOM.list.alert = $('#listAlert', params.container);
-        DOM.form.tagForm = $('form', params.container);
+        DOM.form.tagForm = $('form[data-parsley-validate]', params.container);
         DOM.form.buttons.save = $('#btnSave', params.container);
         DOM.form.buttons.cancel = $('#btnCancel', params.container);
         DOM.form.alert = $('#formAlert', params.container);
@@ -161,9 +156,10 @@ function AbstractController(params) {
     const editForSelectedRow = function ($tr) {
         let id = getId($tr);
         new AjaxController({
+            pk: id,
             data: {pk: id},
             method: 'GET',
-            url: buildUrl(params.apiUrl, id),
+            url: params.apiUrl,
             success: editPickSuccess,
             error: editPickError
         }).send();
@@ -249,9 +245,10 @@ function AbstractController(params) {
      */
     const sendRemoveRequest = function ($tr) {
         new AjaxController({
+            pk: getId($tr),
             data: params.serialize(),
             method: 'DELETE',
-            url: buildUrl(params.apiUrl, getId($tr)),
+            url: params.apiUrl,
             success: removeSuccess,
             error: removeError
         }).send();
@@ -350,9 +347,10 @@ function AbstractController(params) {
      */
     const serializeAndSubmit = function () {
         new AjaxController({
+            pk: getPk(),
             data: params.serialize(),
             method: getMethodForPersistence(),
-            url: buildUrl(params.apiUrl, getPk()),
+            url: params.apiUrl,
             success: submitSuccess,
             error: submitError
         }).submit();
@@ -477,7 +475,7 @@ function AbstractController(params) {
             .strechtIt()
             .selectable()
             .dblClickEvent(edit)
-            .mountAjax(buildUrl(params.apiUrl));
+            .mountAjax(params.apiUrl);
     };
     /**
      * Refresh datatables
@@ -493,16 +491,6 @@ function AbstractController(params) {
     const getId = function ($tr) {
         let rowData = moduleDataTable.getRowData($tr);
         return rowData.id;
-    };
-    /**
-     * Build URL for API consume
-     * @memberOf AbstractController
-     */
-    const buildUrl = function (url, id) {
-        if ($.isEmpty(id)) {
-            return `/api/${apiVersion}/${url}/`;
-        }
-        return `/api/${apiVersion}/${url}/${id}/`;
     };
     /**
      * Module Initialize

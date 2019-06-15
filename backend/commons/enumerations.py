@@ -9,9 +9,9 @@ Universidade de Passo Fundo - 2018/2019
 
 
 class ThresholdQuality:
-    APPROPRIATE = -1
+    APPROPRIATE = 1
     UNCERTAIN = 0
-    INAPPROPRIATE = 1
+    INAPPROPRIATE = -1
 
 
 class Indicator:

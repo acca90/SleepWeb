@@ -1,34 +1,87 @@
+{% load i18n %}
+
 <div id="threshold_modal"
 	 class="modal fade bd-example-modal-lg"
 	 tabindex="-1"
 	 role="dialog"
 	 aria-labelledby="myLargeModalLabel"
 	 aria-hidden="true">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog modal-md">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Modal title</h5>
+				<h5 class="modal-title">{% trans 'Include Threshold' %}</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				<p>Modal body text goes here.</p>
+
+				<form id="formThreshold">
+					<div class="form-group">
+						<label for="threshold_indicator" class="col-form-label">
+							<b>{% trans 'Indicator' %}</b>
+						</label>
+						<input type="text" class="form-control form-control-sm" id="threshold_indicator" disabled>
+					</div>
+
+					<div class="form-group">
+						<label for="threshold_stage" class="col-form-label">
+							<b>{% trans 'Stage' %}</b>
+						</label>
+						<select class="form-control form-control-sm" id="threshold_stage">
+							<option value="">{% trans 'Select' %}</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="threshold_indicator" class="col-form-label">
+							<b>{% trans 'Stage Definition' %}</b>
+						</label>
+						<input type="text" class="form-control form-control-sm" id="threshold_stage_definition" disabled>
+					</div>
+
+
+					<div class="form-row">
+						<div class="form-group col-md-3">
+							<label for="threshold_begin">
+								<b>{% trans 'Begin' %}</b>
+							</label>
+							<input type="text" class="form-control form-control-sm text-right" id="threshold_begin">
+						</div>
+						<div class="form-group col-md-3">
+							<label for="threshold_end">
+								<b>{% trans 'End' %}</b>
+							</label>
+							<input type="text" class="form-control form-control-sm text-right" id="threshold_end">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="threshold_quality">
+								<b>{% trans 'Quality' %}</b>
+							</label>
+							<select class="form-control form-control-sm" id="threshold_quality">
+								<option value="1">{% trans 'Appropriate (Good)' %}</option>
+								<option value="0">{% trans 'Uncertain' %}</option>
+								<option value="-1">{% trans 'Unappropriate (Bad)' %}</option>
+							</select>
+						</div>
+					</div>
+				</form>
+
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-success btn-sm">
 					<i class="fa fa-plus"></i>
-					<b>Include</b>
+					<b>{% trans 'Include' %}</b>
 				</button>
 				<button type="button" class="btn btn-primary btn-sm">
 					<i class="fa fa-plus"></i>
-					<b>Include and Continue</b>
+					<b>{% trans 'Include and Continue' %}</b>
 				</button>
 				<button type="button"
 						class="btn btn-danger btn-sm"
 						data-dismiss="modal">
 					<i class="fa fa-remove"></i>
-					<b>Cancel</b>
+					<b>{% trans 'Cancel' %}</b>
 				</button>
 			</div>
 		</div>

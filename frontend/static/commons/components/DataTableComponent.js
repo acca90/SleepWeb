@@ -188,7 +188,7 @@ function DataTableComponent(settings) {
             },
             order: ($.isEmpty(defaultOrder) ? [0, 'desc'] : defaultOrder),
             serverSide: true,
-            ajax: url + '?format=datatables',
+            ajax: new AjaxController().mountUrl(url) + '?format=datatables',
             columns: settings,
             scrollX: true,
             responsive: true,
