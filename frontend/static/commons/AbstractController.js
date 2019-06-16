@@ -162,7 +162,7 @@ function AbstractController(params) {
             url: params.apiUrl,
             success: editPickSuccess,
             error: editPickError
-        }).send();
+        }).send(true);
     };
     /**
      * Handle success on pick register to update
@@ -251,7 +251,7 @@ function AbstractController(params) {
             url: params.apiUrl,
             success: removeSuccess,
             error: removeError
-        }).send();
+        }).send(true);
     };
 
     /**

@@ -40,6 +40,6 @@ function UserService() {
             url: 'institution',
             success: successInstitutionsHandler,
             error: errorInstitutionsHandler
-        }).send();
+        }).send(true);
     };
 }

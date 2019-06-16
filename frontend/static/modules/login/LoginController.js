@@ -71,7 +71,7 @@ function LoginController() {
             url: '/api/v1/rest-auth/login/',
             success: submitSuccess,
             error: submitError
-        }).send();
+        }).send(false);
     };
     /**
      * Handle success on auth request

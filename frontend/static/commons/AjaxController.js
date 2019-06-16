@@ -27,13 +27,13 @@ function AjaxController(params) {
      * Execute request for defined parameters
      * @memberOf AjaxController
      */
-    this.send = function () {
+    this.send = function (proccessUrl) {
         if (!params) {
             console.error('No parameters informed for submit');
             return;
         }
         $.ajax({
-            url: this.mountUrl(params.url, params.pk),
+            url: proccessUrl ? this.mountUrl(params.url, params.pk) : params.url,
             method: params.method,
             headers: {"X-CSRFToken": $("input[name='csrfmiddlewaretoken']").val()},
             data: params.data,

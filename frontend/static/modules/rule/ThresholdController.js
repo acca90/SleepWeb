@@ -105,6 +105,6 @@ function ThresholdController() {
             method: 'GET',
             data: {},
             success: callBackSucess
-        }).send();
+        }).send(true);
     };
 }
