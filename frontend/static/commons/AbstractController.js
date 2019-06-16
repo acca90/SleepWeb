@@ -252,7 +252,6 @@ function AbstractController(params) {
             error: removeError
         }).send(true);
     };
-
     /**
      * Handle success when remove
      * @memberOf AbstractController

@@ -189,6 +189,14 @@ function DataTableComponent(settings) {
         return this;
     };
     /**
+     * Remove row to DataTable;
+     * @memberOf DataTableComponent
+     */
+    this.removeRow = function ($tr) {
+        $table.DataTable().row($tr).remove().draw();
+        return this;
+    };
+    /**
      * Returns DataTables data array
      * @memberOf DataTableComponent
      */

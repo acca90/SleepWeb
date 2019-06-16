@@ -54,6 +54,15 @@ function GroupFormController() {
      */
     let patientstab = null;
     /**
+     * Messages fro easy internacionalization
+     * @memberOf GroupFormController
+     */
+    let msg = {
+        SELECT_ROW_TO_REMOVE: 'Select at least one row to remove from list',
+        NEED_CONFIRMATION: 'Need confirmation',
+        CONFIRM_REMOVE_ITEM_FROM_LIST: 'Are you sure to remove this item from list?'
+    };
+    /**
      * Render for name
      * @memberOf GroupFormController
      */
@@ -198,6 +207,68 @@ function GroupFormController() {
         $('#addPatients').on('click', function () {
             new FinderComponent(finderSettingsPatients).find();
         });
+        $('#removeAllowed').on('click', function () {
+            removeAllowed();
+        });
+        $('#removePatient').on('click', function () {
+            removePatient();
+        });
+    };
+    /**
+     * Remove allowed agent from the list
+     * @memberOf GroupFormController
+     */
+    const removeAllowed = function () {
+        let $tr = datatableAllowed.getSelectedRow();
+        if (!$tr.length) {
+            alert(msg.SELECT_ROW_TO_REMOVE);
+            return;
+        }
+        removeSelectedAllowed($tr);
+    };
+    /**
+     * Remove selected allowed from the list
+     * @memberOf GroupFormController
+     */
+    const removeSelectedAllowed = function ($tr) {
+        new ConfirmationController(
+            msg.NEED_CONFIRMATION,
+            msg.CONFIRM_REMOVE_ITEM_FROM_LIST,
+            $modal => {
+                datatableAllowed.removeRow($tr);
+                $modal.modal('toggle');
+            },
+            () => {
+            },
+        ).open();
+    };
+    /**
+     * Remove patient from the list
+     * @memberOf GroupFormController
+     */
+    const removePatient = function () {
+        let $tr = datatablePatients.getSelectedRow();
+        if (!$tr.length) {
+            alert(msg.SELECT_ROW_TO_REMOVE);
+            return;
+        }
+        removeSelectedPatient($tr);
+    };
+    /**
+     * Remove selected patient from the list
+     * @memberOf GroupFormController
+     */
+    const removeSelectedPatient = function ($tr) {
+        new ConfirmationController(
+            msg.NEED_CONFIRMATION,
+            msg.CONFIRM_REMOVE_ITEM_FROM_LIST,
+            $modal => {
+                datatablePatients.removeRow($tr);
+                $modal.modal('toggle');
+            },
+            () => {
+            },
+        ).open();
     };
     /**
      * Load form for allowed
