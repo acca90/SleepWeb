@@ -53,7 +53,7 @@ class GroupViewSet(viewsets.ModelViewSet):
         """
         Method for update groups
         """
-        instance = Group.objects.get(pk=request.data['id'])
+        instance = Group.objects.get(pk=rkwargs['pk'])
 
         if instance.owner_id != request.user.id and not request.user.is_superuser:
             return not_allowed_to_do()
@@ -75,7 +75,7 @@ class GroupViewSet(viewsets.ModelViewSet):
         """
         Override method to check permissions
         """
-        instance = Group.objects.get(pk=request.data['id'])
+        instance = Group.objects.get(pk=kwargs['pk'])
 
         if instance.owner_id != request.user.id and not request.user.is_superuser:
             return not_allowed_to_do()
@@ -86,7 +86,7 @@ class GroupViewSet(viewsets.ModelViewSet):
         """
         Override method to check permissions
         """
-        instance = Group.objects.get(pk=request.data['id'])
+        instance = Group.objects.get(pk=kwargs['pk'])
 
         if instance.owner_id != request.user.id and not request.user.is_superuser:
             return not_allowed_to_do()

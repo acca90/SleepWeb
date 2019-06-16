@@ -54,7 +54,7 @@ class PatientViewSet(viewsets.ModelViewSet):
         """
         Override method to check permissions
         """
-        instance = Patient.objects.get(pk=request.data['id'])
+        instance = Patient.objects.get(pk=kwargs['pk'])
 
         if instance.user.id != request.user.id and not request.user.is_superuser:
             return not_allowed_to_do()
@@ -71,7 +71,7 @@ class PatientViewSet(viewsets.ModelViewSet):
         """
         Override method to check permissions
         """
-        instance = Patient.objects.get(pk=request.data['id'])
+        instance = Patient.objects.get(pk=kwargs['pk'])
 
         if instance.user.id != request.user.id and not request.user.is_superuser:
             return not_allowed_to_do()
@@ -82,7 +82,7 @@ class PatientViewSet(viewsets.ModelViewSet):
         """
         Override method to check permissions
         """
-        instance = Patient.objects.get(pk=request.data['id'])
+        instance = Patient.objects.get(pk=kwargs['pk'])
 
         if instance.user.id != request.user.id and not request.user.is_superuser:
             return not_allowed_to_do()

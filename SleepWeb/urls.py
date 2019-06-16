@@ -14,6 +14,7 @@ from rest_framework import routers
 
 # Back-End
 from backend.modules.institution.views import InstitutionViewSet
+from backend.modules.monitoring.views import MonitoringReadOnlyViewSet
 from backend.modules.patient.views import PatientViewSet
 from backend.modules.stage.views import StageViewSet
 from backend.modules.user.views import UserViewSet
@@ -46,6 +47,7 @@ router.register(r'msystem', MSystemViewSet, base_name='msystem')
 router.register(r'indicator', IndicatorViewSet, base_name='indicator')
 router.register(r'group', GroupViewSet, base_name='group')
 router.register(r'rule', RuleViewSet, base_name='rule')
+router.register(r'monitoring', MonitoringReadOnlyViewSet, base_name='monitoring')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

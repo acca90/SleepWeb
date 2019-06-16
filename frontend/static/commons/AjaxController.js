@@ -55,7 +55,7 @@ function AjaxController(params) {
             return;
         }
         $.ajax({
-            url: this.mountUrl(params.url, param.pk),
+            url: this.mountUrl(params.url, params.pk),
             method: params.method,
             headers: {"X-CSRFToken": $("input[name='csrfmiddlewaretoken']").val()},
             contentType: "application/json; charset=utf-8",

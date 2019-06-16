@@ -62,7 +62,7 @@ class UserViewSet(ModelViewSet):
         if not request.user.is_superuser:
             return not_allowed_to_do()
 
-        user = User.objects.get(pk=request.data['id'])
+        user = User.objects.get(pk=kwargs['pk'])
         serializer = UserWriteSerializer(
             instance=user, data=request.data, partial=True, context={"request": request}
         )

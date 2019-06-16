@@ -25,6 +25,16 @@ function DataTableComponent(settings) {
      */
     let searchable = true;
     /**
+     * Default value for paginated option
+     * @memberOf DataTableComponent
+     */
+    let paginated = true;
+    /**
+     * Default value for scroll horizontal option
+     * @memberOf DataTableComponent
+     */
+    let scrollX = true;
+    /**
      * Makes it width 100%
      * @memberOf DataTableComponent
      */
@@ -83,7 +93,7 @@ function DataTableComponent(settings) {
      * @memberOf DataTableComponent
      */
     this.place = function ($container) {
-        $container.append($table);
+        $container.html($table);
         return this;
     };
     /**
@@ -100,6 +110,22 @@ function DataTableComponent(settings) {
      */
     this.searchable = function (isSearchable) {
         searchable = isSearchable;
+        return this;
+    };
+    /**
+     * Defines if datatable is paginated
+     * @memberOf DataTableComponent
+     */
+    this.paginated = function (isPaginated) {
+        paginated = isPaginated;
+        return this;
+    };
+    /**
+     * Defines if datatable is paginated
+     * @memberOf DataTableComponent
+     */
+    this.scrollX = function (isScrollX) {
+        scrollX = isScrollX;
         return this;
     };
     /**
@@ -190,9 +216,10 @@ function DataTableComponent(settings) {
             serverSide: true,
             ajax: new AjaxController().mountUrl(url) + '?format=datatables',
             columns: settings,
-            scrollX: true,
+            scrollX: scrollX,
             responsive: true,
-            searching: searchable
+            searching: searchable,
+            paging: paginated
         });
         return this;
     };

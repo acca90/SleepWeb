@@ -3,12 +3,36 @@
 {% load i18n %}
 
 {% block container %}
-	<div class="card bg-light mb-3">
-		<div class="card-header">
-			<i class="fa fa-home"></i>
-			Home
-		</div>
-		<div class="card-body">
-		</div>
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" aria-current="page">
+				<i id="moduleIcon" class="fa fa-home"></i>
+				<b>
+					<span id="moduleName">{% trans 'Home' %}</span>
+				</b>
+			</li>
+		</ol>
+	</nav>
+
+	<div class="row">
+		{% include 'home/monitoring.html' %}
+		{% include 'home/alert.html' %}
 	</div>
+
 {% endblock container %}
+
+{% block scripts %}
+	{{ block.super }}
+	<script src="{% static "modules/home/HomeController.js" %}"></script>
+	<script src="{% static "modules/home/HomeMonitoringController.js" %}"></script>
+	<script src="{% static "modules/home/HomeAlertController.js" %}"></script>
+	<script>
+        $(document).ready(function () {
+            new HomeController($('#group')).init();
+        });
+	</script>
+{% endblock %}
+
+
+
+

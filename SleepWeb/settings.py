@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     # SleepWeb
     'backend',
     'backend.commons',
+    'backend.modules.monitoring',
     'backend.modules.indicator',
     'backend.modules.msystem',
     'backend.modules.institution',

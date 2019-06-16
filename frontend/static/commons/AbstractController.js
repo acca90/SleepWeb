@@ -246,7 +246,6 @@ function AbstractController(params) {
     const sendRemoveRequest = function ($tr) {
         new AjaxController({
             pk: getId($tr),
-            data: params.serialize(),
             method: 'DELETE',
             url: params.apiUrl,
             success: removeSuccess,

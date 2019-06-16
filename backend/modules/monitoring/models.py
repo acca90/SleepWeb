@@ -26,6 +26,6 @@ class MonitoringIndicator(models.Model):
     """
     MonitoringIndicator is used to store collected indicadores
     """
-    rule = models.ForeignKey(Monitoring, on_delete=models.CASCADE)
+    monitoring = models.ForeignKey(Monitoring, on_delete=models.CASCADE)
     indicator = models.IntegerField(db_column='indicator', null=False)
     value = models.DecimalField(db_column='value', null=False, decimal_places=2, max_digits=30)
