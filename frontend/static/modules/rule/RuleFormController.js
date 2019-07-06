@@ -27,18 +27,32 @@ function RuleFormController() {
      * Controller for threshold
      * @memberOf RuleFormController
      */
-    let thresholdController = new ThresholdController().init();
+    let thresholdController = new ThresholdController(self).init();
     /**
-     * Keeps datatable settings for rules
+     * Render for Stage
      * @memberOf RuleFormController
      */
-    let datatableSettings = [
-        {th: 'Stage', data: 'stage', orderable: false},
-        {th: 'Quality', data: 'quality', width: '100px', orderable: false},
-        {th: 'Begin', data: 'begin', width: '100px', orderable: false},
-        {th: 'End', data: 'end', width: '100px', orderable: false},
-        {th: 'Weight', data: 'weight', width: '100px', sDefaultContent: 'Not Available', orderable: false},
-    ];
+    const renderStage = function (data) {
+        return data.description;
+    };
+    /**
+     * Render for quality
+     * @memberOf RuleFormController
+     */
+    const renderQuality = function (data) {
+        let quality, color;
+        if (data == 1) {
+            color = 'text-success';
+            quality = "Appropriate";
+        } else if (data == 0) {
+            color = 'text-warning';
+            quality = "Uncertain";
+        } else {
+            color = 'text-danger';
+            quality = "Unappropriate";
+        }
+        return `<b class="${color}">${quality}</b>`
+    };
     /**
      * Custom datatables mount
      * @memberOf RuleFormController
@@ -66,7 +80,7 @@ function RuleFormController() {
             paging: false,
             bInfo: false,
             rowGroup: {
-                dataSrc: 'stage',
+                dataSrc: 'stage.description',
                 startRender: function (rows, group) {
                     let collapsed = !!collapsedGroups[group];
 
@@ -110,7 +124,7 @@ function RuleFormController() {
      * @memberOf RuleFormController
      */
     const initDatatables = function () {
-        [
+        let tables = [
             $('#SLEEP_EFFICIENCY'),
             $('#SLEEP_LATENCY'),
             $('#REM_SLEEP_PERC'),
@@ -122,8 +136,17 @@ function RuleFormController() {
             $('#AROUSALS'),
             $('#AWAKENINGS '),
             $('#WASO')
-        ].forEach($this => {
-            elementMap.dt[$this.attr('id')] = new DataTableComponent(datatableSettings)
+        ];
+        let settings = [
+            {th: 'Stage', data: 'stage', orderable: false, render: renderStage},
+            {th: 'Quality', data: 'quality', width: '100px', orderable: false, render: renderQuality},
+            {th: 'Begin', data: 'begin', width: '100px', orderable: false},
+            {th: 'End', data: 'end', width: '100px', orderable: false},
+            {th: 'Weight', data: 'weight', width: '100px', sDefaultContent: 'Not Available', orderable: false},
+
+        ];
+        tables.forEach($this => {
+            elementMap.dt[$this.attr('id')] = new DataTableComponent(settings)
                 .buildTable()
                 .place($this)
                 .setOrder([1, 'desc'])
@@ -161,6 +184,13 @@ function RuleFormController() {
      */
     const manageIndicator = function (indicator) {
         activeIndicator = indicator.attr('href');
+    };
+    /**
+     * Add row to active datatables
+     * @memberOf RuleFormController
+     */
+    this.addRow = function (row) {
+        elementMap.dt[activeIndicator.replace(/#/g, '')].addRow(row);
     };
     /**
      * Ajust columns for its header

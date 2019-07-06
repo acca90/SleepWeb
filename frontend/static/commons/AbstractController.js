@@ -296,7 +296,7 @@ function AbstractController(params) {
      */
     const parsleyFieldValidated = function () {
         DOM.form.tagForm.parsley().on('field:validated', function () {
-            if (this.validationResult === true) {
+            if (this.validationResult) {
                 this.$element.removeClass('is-invalid');
             } else {
                 this.$element.addClass('is-invalid');
@@ -310,7 +310,7 @@ function AbstractController(params) {
     const parsleyFormError = function () {
         DOM.form.tagForm.parsley().on('form:error', function () {
             $.each(this.fields, function (key, field) {
-                if (field.validationResult !== true) {
+                if (!field.validationResult) {
                     field.$element.addClass('is-invalid');
                 }
             });
@@ -322,7 +322,7 @@ function AbstractController(params) {
      */
     const parsleyFormValidated = function () {
         DOM.form.tagForm.parsley().on('form:validated', function () {
-            if (this.validationResult === true) {
+            if (this.validationResult) {
                 $('.parsley-errors-list').removeClass('invalid-feedback');
             } else {
                 $('.parsley-errors-list').addClass('invalid-feedback');

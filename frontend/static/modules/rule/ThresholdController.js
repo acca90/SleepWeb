@@ -7,12 +7,17 @@
  * @since 08/06/2019
  * @namespace ThresholdController
  */
-function ThresholdController(indicator) {
+function ThresholdController(ruleFormController) {
     /**
-     * Keeps active indicator for reference
+     * Keeps reference active indicator
      * @memberOf ThresholdController
      */
-    let activeIndicator = indicator;
+    let activeIndicator = null;
+    /**
+     * Keeps reference for form controller
+     * @memberOf ThresholdController
+     */
+    let controller = ruleFormController;
     /**
      * Map of elements from DOM
      * @memberOf ThresholdController
@@ -66,11 +71,13 @@ function ThresholdController(indicator) {
      * Set initial state for form
      * @memberOf ThresholdController
      */
-    const setInitialState = function () {
+    const clean = function (resetStage) {
         let $indicator = $(activeIndicator);
         elementsMap.indicator.val($indicator.attr('indicator'));
         elementsMap.indicatorId.val($indicator.attr('enum'));
-        elementsMap.stage.val(elementsMap.stage.find('option:first').val());
+        if (resetStage) {
+            elementsMap.stage.val(elementsMap.stage.find('option:first').val());
+        }
         elementsMap.quality.val(elementsMap.quality.find('option:first').val());
         elementsMap.definition.val('');
         elementsMap.begin.val('');
@@ -93,8 +100,8 @@ function ThresholdController(indicator) {
      * @memberOf ThresholdController
      */
     const bindMask = function () {
-        elementsMap.begin.mask('000.00', {reverse: true});
-        elementsMap.end.mask('000.00', {reverse: true});
+        elementsMap.begin.mask('000', {reverse: true});
+        elementsMap.end.mask('000', {reverse: true});
     };
     /**
      * Bind events to DOM
@@ -118,22 +125,26 @@ function ThresholdController(indicator) {
         parsleyFieldValidated();
         parsleyFormError();
         parsleyFormValidated();
-        parsleyFormSubmit();
+        parsleyFormSubmit(true);
         elementsMap.form.submit();
     };
     /**
      * @memberOf ThresholdController
      */
     const include_continue = function () {
-
+        parsleyFieldValidated();
+        parsleyFormError();
+        parsleyFormValidated();
+        parsleyFormSubmit(false);
+        elementsMap.form.submit();
     };
     /**
      * Method responsable to apply events when field is validated
-     * @memberOf AbstractController
+     * @memberOf ThresholdController
      */
     const parsleyFieldValidated = function () {
         elementsMap.form.parsley().on('field:validated', function () {
-            if (this.validationResult === true) {
+            if (this.validationResult) {
                 this.$element.removeClass('is-invalid');
             } else {
                 this.$element.addClass('is-invalid');
@@ -142,12 +153,12 @@ function ThresholdController(indicator) {
     };
     /**
      * Method responsable to apply events when form has error
-     * @memberOf AbstractController
+     * @memberOf ThresholdController
      */
     const parsleyFormError = function () {
         elementsMap.form.parsley().on('form:error', function () {
             $.each(this.fields, function (key, field) {
-                if (field.validationResult !== true) {
+                if (!field.validationResult) {
                     field.$element.addClass('is-invalid');
                 }
             });
@@ -155,11 +166,11 @@ function ThresholdController(indicator) {
     };
     /**
      * Method responsable to apply events when form is valited
-     * @memberOf AbstractController
+     * @memberOf ThresholdController
      */
     const parsleyFormValidated = function () {
         elementsMap.form.parsley().on('form:validated', function () {
-            if (this.validationResult === true) {
+            if (this.validationResult) {
                 $('.parsley-errors-list').removeClass('invalid-feedback');
             } else {
                 $('.parsley-errors-list').addClass('invalid-feedback');
@@ -167,12 +178,38 @@ function ThresholdController(indicator) {
         });
     };
     /**
-     * Method responsable to apply events when form is submited
-     * @memberOf AbstractController
+     * Serialize to include on datatables
+     * @memberOf ThresholdController
      */
-    const parsleyFormSubmit = function () {
+    const serialize = function () {
+        return {
+            indicator: {
+                id: elementsMap.indicatorId.val(),
+                description: elementsMap.indicator.val()
+            },
+            stage: {
+                id: elementsMap.stage.val(),
+                description: elementsMap.stage.find('option:selected').text()
+            },
+            quality: elementsMap.quality.val(),
+            begin: elementsMap.begin.val(),
+            end: elementsMap.end.val(),
+            weight: 1
+        };
+    };
+    /**
+     * Method responsable to apply events when form is submited
+     * @memberOf ThresholdController
+     */
+    const parsleyFormSubmit = function (closeModal) {
         elementsMap.form.parsley().on('form:submit', function () {
-            console.log('foi');
+            controller.addRow(serialize());
+            clean(false);
+            if (closeModal) {
+                elementsMap.modal.modal('hide');
+            } else {
+                elementsMap.begin.focus();
+            }
             return false;
         });
     };
@@ -195,7 +232,7 @@ function ThresholdController(indicator) {
      */
     this.show = function (indicator) {
         activeIndicator = indicator;
-        setInitialState();
+        clean(true);
         showModal();
     }
 }
