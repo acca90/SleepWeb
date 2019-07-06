@@ -69,6 +69,7 @@ function AbstractController(params) {
         DOM.form.buttons.save = $('#btnSave', params.container);
         DOM.form.buttons.cancel = $('#btnCancel', params.container);
         DOM.form.alert = $('#formAlert', params.container);
+        DOM.form.option = $('#moduleOption', params.container);
         DOM.form.pk = $('[isPk]', DOM.form.tagForm);
     };
     /**
@@ -126,6 +127,7 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const newRegister = function () {
+        DOM.form.option.html('New');
         hideAlerts();
         DOM.divs.list.hide();
         DOM.divs.form.show();
@@ -186,6 +188,7 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const toForm = function (data) {
+        DOM.form.option.html('Update');
         DOM.divs.list.hide();
         DOM.divs.form.show();
         clean();

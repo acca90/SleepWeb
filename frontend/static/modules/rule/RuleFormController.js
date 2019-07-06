@@ -29,6 +29,23 @@ function RuleFormController() {
      */
     let thresholdController = new ThresholdController(self).init();
     /**
+     * Containers for each table
+     * @memberOf RuleFormController
+     */
+    let containers = [
+        $('#SLEEP_EFFICIENCY'),
+        $('#SLEEP_LATENCY'),
+        $('#REM_SLEEP_PERC'),
+        $('#NON_REM_SLEEP_1_2_PERC'),
+        $('#NON_REM_SLEEP_3_4_PERC'),
+        $('#NAP_EPISODE'),
+        $('#NAP_DURATION'),
+        $('#NAP_FREQUENCY'),
+        $('#AROUSALS'),
+        $('#AWAKENINGS '),
+        $('#WASO')
+    ];
+    /**
      * Render for Stage
      * @memberOf RuleFormController
      */
@@ -91,7 +108,7 @@ function RuleFormController() {
                     // Add category name to the <tr>. NOTE: Hardcoded colspan
                     return $('<tr/>')
                         .append('<td colspan="' + (settings.length - 1) + '"> ' + makeButton(group) + '</td>')
-                        .append('<td colspan="1">' + makeForm() + '</td>')
+                        .append('<td colspan="1">' + makeForm(group, rows) + '</td>')
                         .attr('data-name', group)
                         .toggleClass('collapsed', collapsed);
                 }
@@ -116,36 +133,31 @@ function RuleFormController() {
      * Mount form for weight for indicator
      * @memberOf RuleFormController
      */
-    const makeForm = function () {
-        return `<input type="text" class="form-control form-control-sm" placeholder="Weight">`
+    const makeForm = function (group, rows) {
+        let value = '';
+        if (!$.isEmpty(rows.data()) && !$.isEmpty(rows.data()[0])) {
+            value = rows.data()[0].weight;
+        }
+        return `<input type="text" 
+                       stage="${group}" 
+                       class="form-control form-control-sm weight" 
+                       value="${value}"
+                       placeholder="Weight">`
     };
     /**
      * Initialize datatables for each tab
      * @memberOf RuleFormController
      */
     const initDatatables = function () {
-        let tables = [
-            $('#SLEEP_EFFICIENCY'),
-            $('#SLEEP_LATENCY'),
-            $('#REM_SLEEP_PERC'),
-            $('#NON_REM_SLEEP_1_2_PERC'),
-            $('#NON_REM_SLEEP_3_4_PERC'),
-            $('#NAP_EPISODE'),
-            $('#NAP_DURATION'),
-            $('#NAP_FREQUENCY'),
-            $('#AROUSALS'),
-            $('#AWAKENINGS '),
-            $('#WASO')
-        ];
         let settings = [
             {th: 'Stage', data: 'stage', orderable: false, render: renderStage},
-            {th: 'Quality', data: 'quality', width: '100px', orderable: false, render: renderQuality},
             {th: 'Begin', data: 'begin', width: '100px', orderable: false},
             {th: 'End', data: 'end', width: '100px', orderable: false},
+            {th: 'Quality', data: 'quality', width: '100px', orderable: false, render: renderQuality},
             {th: 'Weight', data: 'weight', width: '100px', sDefaultContent: 'Not Available', orderable: false},
 
         ];
-        tables.forEach($this => {
+        containers.forEach($this => {
             elementMap.dt[$this.attr('id')] = new DataTableComponent(settings)
                 .buildTable()
                 .place($this)
@@ -177,6 +189,35 @@ function RuleFormController() {
         elementMap.btnAddThreshold.on('click', function () {
             thresholdController.show(activeIndicator);
         });
+        containers.forEach($container => bindWeightChangeEvent($container));
+    };
+    /**
+     * Bind event for weight change on container
+     * @memberOf RuleFormController
+     */
+    const bindWeightChangeEvent = function ($container) {
+        let ref = $container.attr('id');
+        $container.on('change', '.weight', function () {
+            let $this = $(this);
+            updateWeightDt(ref, $this.val(), $this.attr('stage'));
+        })
+    };
+    /**
+     * Update weight value on datatables
+     * @param dt datatables changed
+     * @param value Value changed
+     * @param stage Stage changed
+     * @memberOf RuleFormController
+     */
+    const updateWeightDt = function (dt, value, stage) {
+        let table = elementMap.dt[dt].getDataTable();
+        table.rows().every(function () {
+            let data = this.data();
+            if (stage == data.stage.description) {
+                data.weight = value;
+                table.row(this).data(data).draw();
+            }
+        });
     };
     /**
      * Save indicator for reference
@@ -186,11 +227,26 @@ function RuleFormController() {
         activeIndicator = indicator.attr('href');
     };
     /**
+     * Check rows of same life stage to get correct weight
+     * @memberOf RuleFormController
+     */
+    const fillWeight = function (table, newRow) {
+        let dataArray = table.getDataArray();
+        for (let row of dataArray) {
+            if (newRow.stage.description == row.stage.description) {
+                newRow.weight = row.weight;
+                break;
+            }
+        }
+        return newRow;
+    };
+    /**
      * Add row to active datatables
      * @memberOf RuleFormController
      */
     this.addRow = function (row) {
-        elementMap.dt[activeIndicator.replace(/#/g, '')].addRow(row);
+        let table = elementMap.dt[activeIndicator.replace(/#/g, '')];
+        table.addRow(fillWeight(table,row));
     };
     /**
      * Ajust columns for its header
