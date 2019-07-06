@@ -19,6 +19,16 @@ function RuleFormController() {
      */
     let elementMap = {};
     /**
+     * Keeps the active indicator for threshold definitions
+     * @memberOf RuleFormController
+     */
+    let activeIndicator = '#SLEEP_EFFICIENCY';
+    /**
+     * Controller for threshold
+     * @memberOf RuleFormController
+     */
+    let thresholdController = new ThresholdController().init();
+    /**
      * Keeps datatable settings for rules
      * @memberOf RuleFormController
      */
@@ -29,61 +39,6 @@ function RuleFormController() {
         {th: 'End', data: 'end', width: '100px', orderable: false},
         {th: 'Weight', data: 'weight', width: '100px', sDefaultContent: 'Not Available', orderable: false},
     ];
-    /**
-     * Datatables that keeps rules for Sleep Efficiency
-     * @memberOf RuleFormController
-     */
-    let datatable_se = null;
-    /**
-     * Datatables that keeps rules for Sleep Latency
-     * @memberOf RuleFormController
-     */
-    let datatable_sl = null;
-    /**
-     * Datatables that keeps rules for REM sleep %
-     * @memberOf RuleFormController
-     */
-    let datatable_rem = null;
-    /**
-     * Datatables that keeps rules for non-REM sleep 1-2 %
-     * @memberOf RuleFormController
-     */
-    let datatable_nr12 = null;
-    /**
-     * Datatables that keeps rules for non-REM sleep 3-4 %
-     * @memberOf RuleFormController
-     */
-    let datatable_nr34 = null;
-    /**
-     * Datatables that keeps rules for arousals
-     * @memberOf RuleFormController
-     */
-    let datatable_aro = null;
-    /**
-     * Datatables that keeps rules for awakenings
-     * @memberOf RuleFormController
-     */
-    let datatable_aw = null;
-    /**
-     * Datatables that keeps rules for wake after sleep onset
-     * @memberOf RuleFormController
-     */
-    let datatable_waso = null;
-    /**
-     * Datatables that keeps rules for nap episodes during 24 hours
-     * @memberOf RuleFormController
-     */
-    let datatable_napq = null;
-    /**
-     * Datatables that keeps rules for nap duration
-     * @memberOf RuleFormController
-     */
-    let datatable_napt = null;
-    /**
-     * Datatables that keeps rules for number of days with naps in a week
-     * @memberOf RuleFormController
-     */
-    let datatable_napd = null;
     /**
      * Custom datatables mount
      * @memberOf RuleFormController
@@ -155,111 +110,35 @@ function RuleFormController() {
      * @memberOf RuleFormController
      */
     const initDatatables = function () {
-        datatable_se = new DataTableComponent(datatableSettings)
-            .buildTable()
-            .place($('#containerSE'))
-            .setOrder([1, 'desc'])
-            .searchable(false)
-            .strechtIt()
-            .selectable()
-            .mountCustom(customMountFunction);
-
-        datatable_sl = new DataTableComponent(datatableSettings)
-            .buildTable()
-            .place($('#containerSL'))
-            .setOrder([1, 'desc'])
-            .searchable(false)
-            .strechtIt()
-            .selectable()
-            .mountCustom(customMountFunction);
-
-        datatable_rem = new DataTableComponent(datatableSettings)
-            .buildTable()
-            .place($('#containerREM'))
-            .setOrder([1, 'desc'])
-            .searchable(false)
-            .strechtIt()
-            .selectable()
-            .mountCustom(customMountFunction);
-
-        datatable_nr12 = new DataTableComponent(datatableSettings)
-            .buildTable()
-            .place($('#containerNR12'))
-            .setOrder([1, 'desc'])
-            .searchable(false)
-            .strechtIt()
-            .selectable()
-            .mountCustom(customMountFunction);
-
-        datatable_nr34 = new DataTableComponent(datatableSettings)
-            .buildTable()
-            .place($('#containerNR34'))
-            .setOrder([1, 'desc'])
-            .searchable(false)
-            .strechtIt()
-            .selectable()
-            .mountCustom(customMountFunction);
-
-        datatable_aro = new DataTableComponent(datatableSettings)
-            .buildTable()
-            .place($('#containerARO'))
-            .setOrder([1, 'desc'])
-            .searchable(false)
-            .strechtIt()
-            .selectable()
-            .mountCustom(customMountFunction);
-
-        datatable_aw = new DataTableComponent(datatableSettings)
-            .buildTable()
-            .place($('#containerAW'))
-            .setOrder([1, 'desc'])
-            .searchable(false)
-            .strechtIt()
-            .selectable()
-            .mountCustom(customMountFunction);
-
-        datatable_waso = new DataTableComponent(datatableSettings)
-            .buildTable()
-            .place($('#containerWASO'))
-            .setOrder([1, 'desc'])
-            .searchable(false)
-            .strechtIt()
-            .selectable()
-            .mountCustom(customMountFunction);
-
-        datatable_napq = new DataTableComponent(datatableSettings)
-            .buildTable()
-            .place($('#containerNAPQ'))
-            .setOrder([1, 'desc'])
-            .searchable(false)
-            .strechtIt()
-            .selectable()
-            .mountCustom(customMountFunction);
-
-        datatable_napt = new DataTableComponent(datatableSettings)
-            .buildTable()
-            .place($('#containerNAPT'))
-            .setOrder([1, 'desc'])
-            .searchable(false)
-            .strechtIt()
-            .selectable()
-            .mountCustom(customMountFunction);
-
-        datatable_napd = new DataTableComponent(datatableSettings)
-            .buildTable()
-            .place($('#containerNAPD'))
-            .setOrder([1, 'desc'])
-            .searchable(false)
-            .strechtIt()
-            .selectable()
-            .mountCustom(customMountFunction);
-
+        [
+            $('#SLEEP_EFFICIENCY'),
+            $('#SLEEP_LATENCY'),
+            $('#REM_SLEEP_PERC'),
+            $('#NON_REM_SLEEP_1_2_PERC'),
+            $('#NON_REM_SLEEP_3_4_PERC'),
+            $('#NAP_EPISODE'),
+            $('#NAP_DURATION'),
+            $('#NAP_FREQUENCY'),
+            $('#AROUSALS'),
+            $('#AWAKENINGS '),
+            $('#WASO')
+        ].forEach($this => {
+            elementMap.dt[$this.attr('id')] = new DataTableComponent(datatableSettings)
+                .buildTable()
+                .place($this)
+                .setOrder([1, 'desc'])
+                .searchable(false)
+                .strechtIt()
+                .selectable()
+                .mountCustom(customMountFunction);
+        });
     };
     /**
      * Initialize elements map
      * @memberOf RuleFormController
      */
     const initElementsMap = function () {
+        elementMap.dt = {};
         elementMap.datatableCards = $('#datatableCards');
         elementMap.btnAddThreshold = $('#btnAddThreshold');
     };
@@ -268,29 +147,29 @@ function RuleFormController() {
      * @memberOf RuleFormController
      */
     const initEvents = function () {
-        elementMap.datatableCards.find('.nav-link').on('shown.bs.tab', () => {
+        elementMap.datatableCards.find('.nav-link').on('shown.bs.tab', function () {
+            manageIndicator($(this));
             self.ajustColumns();
         });
-        elementMap.btnAddThreshold.on('click', () => {
-            new ThresholdController().init();
+        elementMap.btnAddThreshold.on('click', function () {
+            thresholdController.show(activeIndicator);
         });
+    };
+    /**
+     * Save indicator for reference
+     * @memberOf RuleFormController
+     */
+    const manageIndicator = function (indicator) {
+        activeIndicator = indicator.attr('href');
     };
     /**
      * Ajust columns for its header
      * @memberOf RuleFormController
      */
     this.ajustColumns = function () {
-        datatable_se.ajustColumns();
-        datatable_sl.ajustColumns();
-        datatable_rem.ajustColumns();
-        datatable_nr12.ajustColumns();
-        datatable_nr34.ajustColumns();
-        datatable_aro.ajustColumns();
-        datatable_aw.ajustColumns();
-        datatable_waso.ajustColumns();
-        datatable_napq.ajustColumns();
-        datatable_napt.ajustColumns();
-        datatable_napd.ajustColumns();
+        for (let dt in elementMap.dt) {
+            elementMap.dt[dt].ajustColumns();
+        }
     };
     /**
      * Initialize module form

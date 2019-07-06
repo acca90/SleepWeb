@@ -24,7 +24,7 @@
 			</ul>
 		</div>
 		<div class="card-body">
-			<form data-parsley-validate>
+			<form id="main" data-parsley-validate>
 				<div class="form-row">
 					<div class="form-group col-md-3">
 						<label for="indicatorId">Identification</label>
@@ -41,12 +41,11 @@
 					<input type="text"
 						   class="form-control form-control-sm"
 						   required=""
-						   data-parsley-required-message="Enter the description of the stage"
+						   data-parsley-required-message="Enter the description for rule"
 						   maxlength="255"
 						   id="indicatorDescription"
 						   name="description">
 				</div>
-
 
 				<div id="datatableCards" class="card">
 					<div class="card-header">
@@ -55,7 +54,7 @@
 								<a class="nav-link active"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#containerSE"
+								   href="#SLEEP_EFFICIENCY"
 								   role="tab"
 								   title="{% trans 'Sleep Efficiency' %}"
 								   aria-controls="allow"
@@ -67,7 +66,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#containerSL"
+								   href="#SLEEP_LATENCY"
 								   role="tab"
 								   title="{% trans 'Sleep Latency' %}"
 								   aria-controls="allow"
@@ -79,7 +78,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#containerREM"
+								   href="#REM_SLEEP_PERC"
 								   role="tab"
 								   title="{% trans 'REM Sleep' %}"
 								   aria-controls="allow"
@@ -91,7 +90,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#containerNR12"
+								   href="#NON_REM_SLEEP_1_2_PERC"
 								   role="tab"
 								   title="{% trans 'non-REM 1-2' %}"
 								   aria-controls="allow"
@@ -103,7 +102,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#containerNR34"
+								   href="#NON_REM_SLEEP_3_4_PERC"
 								   role="tab"
 								   title="{% trans 'non-REM 3-4' %}"
 								   aria-controls="allow"
@@ -115,7 +114,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#containerARO"
+								   href="#AROUSALS"
 								   role="tab"
 								   title="{% trans 'Arousals' %}"
 								   aria-controls="allow"
@@ -127,7 +126,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#containerAW"
+								   href="#AWAKENINGS"
 								   role="tab"
 								   title="{% trans 'Awakenings' %}"
 								   aria-controls="allow"
@@ -139,7 +138,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#containerWASO"
+								   href="#WASO"
 								   role="tab"
 								   title="{% trans 'Wake after sleep onset' %}"
 								   aria-controls="allow"
@@ -151,7 +150,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#containerNAPQ"
+								   href="#NAP_EPISODE"
 								   role="tab"
 								   title="{% trans 'Number of nap episodes' %}"
 								   aria-controls="allow"
@@ -163,7 +162,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#containerNAPT"
+								   href="#NAP_DURATION"
 								   role="tab"
 								   title="{% trans 'Nap duration' %}"
 								   aria-controls="allow"
@@ -175,7 +174,7 @@
 								<a class="nav-link"
 								   id="sharewith"
 								   data-toggle="tab"
-								   href="#containerNAPD"
+								   href="#NAP_FREQUENCY"
 								   role="tab"
 								   title="{% trans 'Number of days, in the past 7, that a nap occurred Arousals' %}"
 								   aria-controls="allow"
@@ -192,34 +191,87 @@
 								<b>{% trans "Add Rule" %}</b>
 							</button>
 
+							<button type="button" class="btn btn-danger btn-sm" id="btnRemThreshold">
+								<i class="fa fa-trash"></i>
+								<b>{% trans 'Remove' %}</b>
+							</button>
+
 							<div class="tab-pane fade show active"
-								 id="containerSE"
+								 id="SLEEP_EFFICIENCY"
 								 role="tabpanel"
+								 enum="1"
+								 indicator="{% trans 'Sleep Efficiency' %}"
 								 aria-labelledby="home-tab">
 							</div>
-
-							<div class="tab-pane fade show" id="containerSE" role="tabpanel"
+							<div class="tab-pane fade show"
+								 id="SLEEP_LATENCY"
+								 role="tabpanel"
+								 enum="2"
+								 indicator="{% trans 'Sleep Latency' %}"
 								 aria-labelledby="home-tab"></div>
-							<div class="tab-pane fade show" id="containerSL" role="tabpanel"
-								 aria-labelledby="home-tab"></div>
-							<div class="tab-pane fade show" id="containerREM" role="tabpanel"
-								 aria-labelledby="home-tab"></div>
-							<div class="tab-pane fade show" id="containerNR12" role="tabpanel"
-								 aria-labelledby="home-tab"></div>
-							<div class="tab-pane fade show" id="containerNR34" role="tabpanel"
-								 aria-labelledby="home-tab"></div>
-							<div class="tab-pane fade show" id="containerARO" role="tabpanel"
-								 aria-labelledby="home-tab"></div>
-							<div class="tab-pane fade show" id="containerAW" role="tabpanel"
-								 aria-labelledby="home-tab"></div>
-							<div class="tab-pane fade show" id="containerWASO" role="tabpanel"
-								 aria-labelledby="home-tab"></div>
-							<div class="tab-pane fade show" id="containerNAPQ" role="tabpanel"
-								 aria-labelledby="home-tab"></div>
-							<div class="tab-pane fade show" id="containerNAPT" role="tabpanel"
-								 aria-labelledby="home-tab"></div>
-							<div class="tab-pane fade show" id="containerNAPD" role="tabpanel"
-								 aria-labelledby="home-tab"></div>
+							<div class="tab-pane fade show"
+								 id="REM_SLEEP_PERC"
+								 role="tabpanel"
+								 enum="3"
+								 indicator="{% trans 'REM Sleep' %}"
+								 aria-labelledby="home-tab">
+							</div>
+							<div class="tab-pane fade show"
+								 id="NON_REM_SLEEP_1_2_PERC"
+								 role="tabpanel"
+								 enum="4"
+								 indicator="{% trans 'non-REM 1-2' %}"
+								 aria-labelledby="home-tab">
+							</div>
+							<div class="tab-pane fade show"
+								 id="NON_REM_SLEEP_3_4_PERC"
+								 role="tabpanel"
+								 enum="5"
+								 indicator="{% trans 'non-REM 3-4' %}"
+								 aria-labelledby="home-tab">
+							</div>
+							<div class="tab-pane fade show"
+								 id="AROUSALS"
+								 role="tabpanel"
+								 enum="9"
+								 indicator="{% trans 'Arousals' %}"
+								 aria-labelledby="home-tab">
+							</div>
+							<div class="tab-pane fade show"
+								 id="AWAKENINGS"
+								 role="tabpanel"
+								 enum="10"
+								 indicator="{% trans 'Awakenings' %}"
+								 aria-labelledby="home-tab">
+							</div>
+							<div class="tab-pane fade show"
+								 id="WASO"
+								 role="tabpanel"
+								 enum="11"
+								 indicator="{% trans 'Wake after sleep onset' %}"
+								 aria-labelledby="home-tab">
+							</div>
+							<div class="tab-pane fade show"
+								 id="NAP_EPISODE"
+								 role="tabpanel"
+								 enum="6"
+								 indicator="{% trans 'Number of nap episodes' %}"
+								 aria-labelledby="home-tab">
+							</div>
+							<div class="tab-pane fade show"
+								 id="NAP_DURATION"
+								 role="tabpanel"
+								 enum="7"
+								 indicator="{% trans 'Nap duration' %}"
+								 aria-labelledby="home-tab">
+							</div>
+							<div class="tab-pane fade show"
+								 id="NAP_FREQUENCY"
+								 role="tabpanel"
+								 enum="8"
+								 indicator="{% trans 'Nap frequency' %}"
+								 aria-labelledby="home-tab">
+							</div>
 
 						</div>
 					</div>

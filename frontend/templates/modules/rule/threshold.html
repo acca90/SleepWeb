@@ -16,19 +16,23 @@
 			</div>
 			<div class="modal-body">
 
-				<form id="formThreshold">
+				<form id="formThreshold" data-parsley-validate>
 					<div class="form-group">
 						<label for="threshold_indicator" class="col-form-label">
 							<b>{% trans 'Indicator' %}</b>
 						</label>
 						<input type="text" class="form-control form-control-sm" id="threshold_indicator" disabled>
+						<input type="hidden" id="threshold_indicator_id">
 					</div>
-
 					<div class="form-group">
 						<label for="threshold_stage" class="col-form-label">
 							<b>{% trans 'Stage' %}</b>
 						</label>
-						<select class="form-control form-control-sm" id="threshold_stage">
+						<select class="form-control form-control-sm"
+								id="threshold_stage"
+								required=""
+								data-parsley-required-message="{% trans 'Enter the stage' %}"
+						>
 							<option value="">{% trans 'Select' %}</option>
 						</select>
 					</div>
@@ -37,28 +41,42 @@
 						<label for="threshold_indicator" class="col-form-label">
 							<b>{% trans 'Stage Definition' %}</b>
 						</label>
-						<input type="text" class="form-control form-control-sm" id="threshold_stage_definition" disabled>
+						<input type="text"
+							   class="form-control form-control-sm"
+							   id="threshold_stage_definition"
+							   disabled>
 					</div>
-
-
 					<div class="form-row">
 						<div class="form-group col-md-3">
 							<label for="threshold_begin">
 								<b>{% trans 'Begin' %}</b>
 							</label>
-							<input type="text" class="form-control form-control-sm text-right" id="threshold_begin">
+							<input type="text"
+								   class="form-control form-control-sm text-right"
+								   id="threshold_begin"
+								   required=""
+								   data-parsley-required-message="{% trans 'Enter the begin for the threshold' %}"
+								   maxlength="255">
 						</div>
 						<div class="form-group col-md-3">
 							<label for="threshold_end">
 								<b>{% trans 'End' %}</b>
 							</label>
-							<input type="text" class="form-control form-control-sm text-right" id="threshold_end">
+							<input type="text"
+								   class="form-control form-control-sm text-right"
+								   id="threshold_end"
+								   required=""
+								   data-parsley-required-message="{% trans 'Enter the end for the threshold' %}"
+								   maxlength="255">
 						</div>
 						<div class="form-group col-md-6">
 							<label for="threshold_quality">
 								<b>{% trans 'Quality' %}</b>
 							</label>
-							<select class="form-control form-control-sm" id="threshold_quality">
+							<select class="form-control form-control-sm"
+									id="threshold_quality"
+									required=""
+									data-parsley-required-message="{% trans 'Enter the quality level for the threshold' %}">
 								<option value="1">{% trans 'Appropriate (Good)' %}</option>
 								<option value="0">{% trans 'Uncertain' %}</option>
 								<option value="-1">{% trans 'Unappropriate (Bad)' %}</option>
@@ -69,11 +87,11 @@
 
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-success btn-sm">
+				<button type="button" id="include" class="btn btn-success btn-sm">
 					<i class="fa fa-plus"></i>
 					<b>{% trans 'Include' %}</b>
 				</button>
-				<button type="button" class="btn btn-primary btn-sm">
+				<button type="button" id="continue" class="btn btn-primary btn-sm">
 					<i class="fa fa-plus"></i>
 					<b>{% trans 'Include and Continue' %}</b>
 				</button>

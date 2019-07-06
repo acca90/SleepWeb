@@ -65,7 +65,7 @@ function AbstractController(params) {
         DOM.list.buttons.remove = $('#btnRemove', params.container);
         DOM.list.buttons.refresh = $('#btnRefresh', params.container);
         DOM.list.alert = $('#listAlert', params.container);
-        DOM.form.tagForm = $('form[data-parsley-validate]', params.container);
+        DOM.form.tagForm = $('form#main', params.container);
         DOM.form.buttons.save = $('#btnSave', params.container);
         DOM.form.buttons.cancel = $('#btnCancel', params.container);
         DOM.form.alert = $('#formAlert', params.container);
