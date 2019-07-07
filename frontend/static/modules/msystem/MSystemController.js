@@ -16,7 +16,7 @@ function MSystemController($container) {
         return [
             {th: '#', data: 'id', width: '50px', sDefaultContent: ''},
             {th: 'Name', data: 'name', sDefaultContent: ''},
-            {th: 'URL', data: 'url', sDefaultContent: ''}
+            {th: 'URL', data: 'url', sDefaultContent: '', width: '400px'}
         ]
     };
     /**

@@ -81,4 +81,6 @@ urlpatterns = [
     url(r'^finder/stage/$', login_required(StageFinder.as_view()), name='StageFinder'),
     url(r'^finder/patient/$', login_required(PatientFinder.as_view()), name='PatientFinder'),
     url(r'^finder/rule/$', login_required(RuleFinder.as_view()), name='RuleFinder'),
+
+    url(r'^django_task/', include('django_task.urls', namespace='django_task')),
 ]

@@ -47,6 +47,10 @@ INSTALLED_APPS = [
     'compressor',
     'compressor_toolkit',
     'sass_processor',
+    'apscheduler',
+
+    # apps
+    'backend.jobs.apps.JobsConfig',
 
     # SleepWeb
     'backend',
@@ -228,3 +232,6 @@ REST_FRAMEWORK = {
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SITE_ID = 1
+
+# aasdsad
+
