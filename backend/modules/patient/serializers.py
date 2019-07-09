@@ -37,6 +37,12 @@ class PatientWriteSerializer(serializers.ModelSerializer):
             'obs',
             'user',
         )
+        extra_kwargs = {
+            'obs': {
+                'required': False,
+                'allow_blank': True,
+            },
+        }
 
 
 class PatientReadSerializer(serializers.ModelSerializer):

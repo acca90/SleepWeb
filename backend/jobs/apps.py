@@ -7,11 +7,11 @@ Universidade de Passo Fundo - 2018/2019
 @since 06/07/2019
 """
 from django.apps import AppConfig
-from backend.jobs.jobmanager import JobManager
+from backend.jobs.jobmonitoringmanager import JobMonitoringManager
 
 
 class JobsConfig(AppConfig):
     name = 'backend.jobs'
 
     def ready(self):
-        JobManager().start()
+        JobMonitoringManager().schedule_start()

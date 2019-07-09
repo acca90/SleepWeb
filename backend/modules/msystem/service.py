@@ -15,3 +15,4 @@ class MSystemTaskService:
     """
     def fetch(self):
         return MSystem.objects.all()
+

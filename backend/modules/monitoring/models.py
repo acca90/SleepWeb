@@ -21,6 +21,12 @@ class Monitoring(models.Model):
     begin = models.DateTimeField()
     end = models.DateTimeField()
 
+    def copy(self, monitoring):
+        self.patient = Patient.objects.get(uuid=monitoring['patient'])
+        self.begin = monitoring['begin']
+        self.end = monitoring['end']
+        return self
+
 
 class MonitoringIndicator(models.Model):
     """
