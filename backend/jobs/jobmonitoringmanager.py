@@ -34,14 +34,10 @@ class JobMonitoringManager:
         """
         Start method initialize JobManger with scheduler
         """
-
+        self.initialize_scheduler()
         # todo Verificar sempre os sistemas existentes
         # todo flag de ativação inativação
         # todo request para URL de reconhecimento
-
-        self.collect_systems()
-        self.initialize_scheduler()
-        # pass
 
     def initialize_scheduler(self):
         """
@@ -55,6 +51,7 @@ class JobMonitoringManager:
         """
         Method defined to repeat requests and store monitorings received
         """
+        self.collect_systems()
         self.execute_request()
         self.store_monitorings()
 
