@@ -10,13 +10,13 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('patient', '0001_initial'),
+        ('rule', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='patient',
+            model_name='recomendation',
             name='user',
-            field=models.ForeignKey(null=True, on_delete=None, to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(on_delete=None, to=settings.AUTH_USER_MODEL),
         ),
     ]

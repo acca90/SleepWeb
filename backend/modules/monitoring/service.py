@@ -14,4 +14,7 @@ class MonitoringService:
     def store(self, monitorings):
         for monitoring in monitorings:
             new_monitoring = Monitoring()
-            new_monitoring.copy(monitoring).save()
+            new_monitoring.copy(monitoring)
+
+            if not new_monitoring.exists():
+                new_monitoring.save()

@@ -6,9 +6,9 @@ Universidade de Passo Fundo - 2018/2019
 @author Matheus Hernandes
 @since 16/03/2019
 """
-from django.db import models
 import uuid
-
+from django.db import models
+from backend.modules.institution.models import Institution
 from backend.modules.stage.models import Stage
 from backend.modules.user.models import User
 
@@ -23,6 +23,7 @@ class Patient(models.Model):
 
     stage = models.ForeignKey(Stage, on_delete=None, null=True)
     user = models.ForeignKey(User, on_delete=None, null=True)
+    institutions = models.ManyToManyField(Institution, related_name='user_institution')
 
     class Meta:
         db_table = 'Patient'

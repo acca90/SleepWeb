@@ -6,8 +6,10 @@ Universidade de Passo Fundo - 2018/2019
 @author Matheus Hernandes
 @since 06/07/2019
 """
+import arrow
 import requests
 from apscheduler.schedulers.background import BackgroundScheduler
+from SleepWeb import settings
 
 
 class JobMonitoringManager:
@@ -46,6 +48,7 @@ class JobMonitoringManager:
         scheduler = BackgroundScheduler()
         scheduler.add_job(self.do, 'interval', minutes=1)
         scheduler.start()
+        self.do()
 
     def do(self):
         """
@@ -67,14 +70,22 @@ class JobMonitoringManager:
         Execute requests for each instaled monitoring system
         """
         for msystem in self.systems:
-            self.process_responses(requests.post(msystem.url, data={}))
+            response = requests.post(
+                msystem.url,
+                data=self.today()
+            )
+            self.process_responses(response)
 
     def process_responses(self, response):
         """
         Store response to persist collected monitorings
         """
         if response.status_code == 200:
-            self.monitorings.append(response.json()[0])
+            json = response.json()
+            if len(json) > 0:
+                self.monitorings.append(json[0])
+            else:
+                print('No data found')
         else:
             # Store request errors
             pass
@@ -84,10 +95,15 @@ class JobMonitoringManager:
         Store monitoring systems collected
         """
         self.monitoring_service.store(self.monitorings)
-        print('monitoring persisted')
         pass
 
-
-
-
-
+    def today(self):
+        """
+        Returns a dict with current day begin and and timestamos
+        """
+        utc = arrow.utcnow().replace(hours=settings.TIME_ZONE_VALUE)
+        time_format = 'YYYY-MM-DD HH:mm:ss'
+        return {
+            "begin": str(utc.floor('day').format(time_format)),
+            "end": str(utc.ceil('day').format(time_format))
+        }

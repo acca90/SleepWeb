@@ -6,9 +6,8 @@ Universidade de Passo Fundo - 2018/2019
 @author Matheus Hernandes
 @since 09/03/2019
 """
-from django.contrib.auth.models import AbstractUser
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
 from backend.modules.institution.models import Institution
 
 

@@ -55,10 +55,10 @@ INSTALLED_APPS = [
     # SleepWeb
     'backend',
     'backend.commons',
-    'backend.modules.monitoring',
-    'backend.modules.indicator',
-    'backend.modules.msystem',
     'backend.modules.institution',
+    'backend.modules.msystem',
+    'backend.modules.indicator',
+    'backend.modules.monitoring',
     'backend.modules.stage',
     'backend.modules.user',
     'backend.modules.patient',
@@ -141,6 +141,7 @@ AUTH_USER_MODEL = 'user.User'
 
 
 TIME_ZONE = 'UTC'
+TIME_ZONE_VALUE = -3
 
 USE_L10N = True
 
@@ -148,7 +149,6 @@ USE_TZ = True
 
 # internationalization
 USE_I18N = True
-
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -167,13 +167,11 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'frontend/locale'),
 )
 
-
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'node_modules'),
 )
-
 
 STATIC_ROOT = 'frontend/compressed/'
 
@@ -234,4 +232,3 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SITE_ID = 1
 
 # aasdsad
-
