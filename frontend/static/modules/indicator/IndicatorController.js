@@ -10,7 +10,7 @@
 function IndicatorController($container) {
     /**
      * DataTable Settings
-     * @namespace PatientController
+     * @namespace IndicatorController
      */
     const getDatatableSettings = function () {
         return [

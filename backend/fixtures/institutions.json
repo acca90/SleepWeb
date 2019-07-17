@@ -1,0 +1,10 @@
+[
+    {
+        "pk": 1,
+        "model": "institution.Institution",
+        "fields": {
+            "name": "Universidade de Passo Fundo",
+            "country": "Brazil"
+        }
+    }
+]

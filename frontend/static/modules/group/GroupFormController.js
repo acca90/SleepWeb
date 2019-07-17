@@ -9,7 +9,7 @@
  */
 function GroupFormController() {
     /**
-     * Datatable with allowed researchers (users) and institutions
+     * Datatable with allowed researchers (users) and institutions.json
      * @memberOf GroupFormController
      */
     let datatableAllowed = null;
@@ -24,7 +24,7 @@ function GroupFormController() {
      */
     let finderSettingsUser = null;
     /**
-     * Settings for find institutions
+     * Settings for find institutions.json
      * @memberOf GroupFormController
      */
     let finderSettingsInstitution = null;

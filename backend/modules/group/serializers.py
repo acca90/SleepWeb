@@ -49,7 +49,7 @@ class GroupWriteSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'details',
-            'institutions',
+            'institutions.json',
             'users',
             'patients',
         )
@@ -71,7 +71,7 @@ class GroupReadSerializer(serializers.ModelSerializer):
             'name',
             'details',
             'owner',
-            'institutions',
+            'institutions.json',
             'users',
             'patients',
         )

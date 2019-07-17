@@ -30,7 +30,7 @@ function UserService() {
     const errorInstitutionsHandler = function () {
     };
     /**
-     * Method that find institutions
+     * Method that find institutions.json
      * @memberOf UserService
      */
     this.init = function () {

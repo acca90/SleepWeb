@@ -23,35 +23,36 @@
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/frontend/templates" />
-        <option value="$MODULE_DIR$/frontend/templates/commons" />
         <option value="$MODULE_DIR$/frontend/templates/commons/base" />
         <option value="$MODULE_DIR$/frontend/templates/commons/components" />
         <option value="$MODULE_DIR$/frontend/templates/commons/modals" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/analysis/locale" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/auth/locale" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/group/locale" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/home/locale" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/indicator/locale" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/institution/locale" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/msystem/locale" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/patient/locale" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/rule/locale" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/stage/locale" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/user/locale" />
+        <option value="$MODULE_DIR$/frontend/templates" />
+        <option value="$MODULE_DIR$/frontend/templates/commons" />
         <option value="$MODULE_DIR$/frontend/templates/json" />
         <option value="$MODULE_DIR$/frontend/templates/modules" />
         <option value="$MODULE_DIR$/frontend/templates/modules/analysis" />
-        <option value="$MODULE_DIR$/frontend/templates/modules/analysis/locale" />
         <option value="$MODULE_DIR$/frontend/templates/modules/auth" />
-        <option value="$MODULE_DIR$/frontend/templates/modules/auth/locale" />
         <option value="$MODULE_DIR$/frontend/templates/modules/group" />
-        <option value="$MODULE_DIR$/frontend/templates/modules/group/locale" />
         <option value="$MODULE_DIR$/frontend/templates/modules/home" />
-        <option value="$MODULE_DIR$/frontend/templates/modules/home/locale" />
         <option value="$MODULE_DIR$/frontend/templates/modules/indicator" />
-        <option value="$MODULE_DIR$/frontend/templates/modules/indicator/locale" />
         <option value="$MODULE_DIR$/frontend/templates/modules/institution" />
-        <option value="$MODULE_DIR$/frontend/templates/modules/institution/locale" />
+        <option value="$MODULE_DIR$/frontend/templates/modules/monitoring" />
         <option value="$MODULE_DIR$/frontend/templates/modules/msystem" />
-        <option value="$MODULE_DIR$/frontend/templates/modules/msystem/locale" />
         <option value="$MODULE_DIR$/frontend/templates/modules/patient" />
-        <option value="$MODULE_DIR$/frontend/templates/modules/patient/locale" />
         <option value="$MODULE_DIR$/frontend/templates/modules/rule" />
-        <option value="$MODULE_DIR$/frontend/templates/modules/rule/locale" />
         <option value="$MODULE_DIR$/frontend/templates/modules/stage" />
-        <option value="$MODULE_DIR$/frontend/templates/modules/stage/locale" />
         <option value="$MODULE_DIR$/frontend/templates/modules/user" />
-        <option value="$MODULE_DIR$/frontend/templates/modules/user/locale" />
       </list>
     </option>
   </component>

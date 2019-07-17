@@ -276,7 +276,7 @@ msgstr "Instituição"
 
 #: templates/modules/user/form.html:105
 #, fuzzy
-#| msgid "Enter the institutions of the user"
+#| msgid "Enter the institutions.json of the user"
 msgid "Enter the institution of the user"
 msgstr "Informe a instituição do usuário"
 

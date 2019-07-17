@@ -1,0 +1,27 @@
+{% load i18n %}
+
+<div id="list">
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+				<li class="breadcrumb-item active" aria-current="page">
+				<i id="moduleIcon" class="fa fa-building"></i>
+				<b>
+					<span id="moduleName">{% trans 'Monitorings' %}</span>
+				</b>
+			</li>
+		</ol>
+	</nav>
+	<div id="listAlert" class="alert" role="alert" style="display: none">
+	</div>
+	<div class="card bg-light">
+		<div class="card-header">
+			<ul class="nav nav-pills card-header-pills ">
+				{% include 'components/menu_read_only_list.html' %}
+			</ul>
+		</div>
+		<div id="datatable" class="card-body">
+		</div>
+	</div>
+</div>
+
+

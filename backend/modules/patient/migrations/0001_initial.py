@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('birth_date', models.DateField(db_column='brith_date')),
                 ('gender', models.IntegerField(db_column='gender')),
                 ('obs', models.CharField(db_column='obs', max_length=3000, null=True)),
-                ('institutions', models.ManyToManyField(related_name='user_institution', to='institution.Institution')),
+                ('institutions.json', models.ManyToManyField(related_name='user_institution', to='institution.Institution')),
                 ('stage', models.ForeignKey(null=True, on_delete=None, to='stage.Stage')),
             ],
             options={

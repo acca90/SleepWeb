@@ -26,6 +26,7 @@ from backend.modules.rule.views import RuleViewSet
 # Front-End
 from frontend.modules.home.views import Home
 from frontend.modules.login.views import Login, Logout
+from frontend.modules.monitoring.views import Monitoring, MonitoringFinder
 from frontend.modules.stage.views import Stage, StageFinder
 from frontend.modules.msystem.views import MSystem
 from frontend.modules.indicator.views import Indicator, IndicatorFinder
@@ -34,7 +35,7 @@ from frontend.modules.patient.views import Patient, PatientFinder
 from frontend.modules.institution.views import Institution, InstitutionFinder
 from frontend.modules.user.views import UserFrontEnd, UserFinder
 from frontend.modules.rule.views import Rule, RuleFinder
-from frontend.modules.analysis.views import AnalysisView
+from frontend.modules.analysis.views import Analysis
 
 from frontend.modules.views import locale
 
@@ -73,7 +74,8 @@ urlpatterns = [
     url(r'^stage/', login_required(Stage.as_view()), name='stage'),
     url(r'^patient/', login_required(Patient.as_view()), name='patient'),
     url(r'^rule/', login_required(Rule.as_view()), name='rule'),
-    url(r'^analysis/', login_required(AnalysisView.as_view()), name='analysis'),
+    url(r'^analysis/', login_required(Analysis.as_view()), name='analysis'),
+    url(r'^monitoring/', login_required(Monitoring.as_view()), name='monitoring'),
 
     url(r'^finder/user/$', login_required(UserFinder.as_view()), name='userFinder'),
     url(r'^finder/institution/$', login_required(InstitutionFinder.as_view()), name='InstitutionFinder'),
@@ -81,6 +83,7 @@ urlpatterns = [
     url(r'^finder/stage/$', login_required(StageFinder.as_view()), name='StageFinder'),
     url(r'^finder/patient/$', login_required(PatientFinder.as_view()), name='PatientFinder'),
     url(r'^finder/rule/$', login_required(RuleFinder.as_view()), name='RuleFinder'),
+    url(r'^finder/monitoring/$', login_required(MonitoringFinder.as_view()), name='MonitoringFinder'),
 
     url(r'^django_task/', include('django_task.urls', namespace='django_task')),
 ]
