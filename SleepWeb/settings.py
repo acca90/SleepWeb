@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'apscheduler',
 
     # apps
-    'backend.jobs.apps.JobsConfig',
+    'backend.jobs.apps.JobManager',
 
     # SleepWeb
     'backend',

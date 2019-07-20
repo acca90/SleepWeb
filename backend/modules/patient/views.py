@@ -9,10 +9,9 @@ Universidade de Passo Fundo - 2018/2019
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-
 from backend.commons.notAllowed import not_allowed_to_do
-from .models import Patient
-from .serializers import PatientWriteSerializer, PatientReadSerializer
+from backend.modules.patient.models import Patient
+from backend.modules.patient.serializers import PatientWriteSerializer, PatientReadSerializer
 
 
 class PatientViewSet(viewsets.ModelViewSet):

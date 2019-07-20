@@ -9,15 +9,29 @@
  */
 function MSystemController($container) {
     /**
+     * Institution Service
+     * @memberOf MSystemController
+     */
+    let institutionService = new InstitutionService();
+    /**
      * DataTable Settings
-     * @namespace MSystemController
+     * @memberOf MSystemController
      */
     const getDatatableSettings = function () {
         return [
             {th: '#', data: 'id', width: '50px', sDefaultContent: ''},
             {th: 'Name', data: 'name', sDefaultContent: ''},
-            {th: 'URL', data: 'url', sDefaultContent: '', width: '400px'}
+            {th: 'URL', data: 'url', sDefaultContent: ''},
+            {th: 'Institution', data: 'institution', sDefaultContent: '', render: institutionService.render},
+            {th: 'Is Active', data: 'is_active', sDefaultContent: '', render: activeRender}
         ]
+    };
+    /**
+     * Render for user active situation
+     * @memberOf UserController
+     */
+    const activeRender = function (data) {
+        return data ? 'Active' : 'Inactive'
     };
     /**
      * Return params for AbstractController
@@ -52,7 +66,9 @@ function MSystemController($container) {
         $('#msystemId', $form).val(msystem.id);
         $('#msystemName', $form).val(msystem.name);
         $('#msystemUrl', $form).val(msystem.url);
+        $('#msystemInstitution', $form).val(msystem.institution.id);
         $('#msystemDescription', $form).val(msystem.description);
+        $('#is_active', $form).prop('checked', msystem.is_active);
 
     };
     /**
@@ -68,5 +84,6 @@ function MSystemController($container) {
      */
     this.init = function () {
         new AbstractController(getParams()).init();
+        institutionService.populate('#msystemInstitution');
     };
 }

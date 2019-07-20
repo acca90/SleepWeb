@@ -12,7 +12,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from SleepWeb import settings
 
 
-class JobMonitoringManager:
+class JobMonitoring:
     """
     Class defined to manage requests and store of new monitoring records
     """
@@ -37,9 +37,6 @@ class JobMonitoringManager:
         Start method initialize JobManger with scheduler
         """
         self.initialize_scheduler()
-        # todo Verificar sempre os sistemas existentes
-        # todo flag de ativação inativação
-        # todo request para URL de reconhecimento
 
     def initialize_scheduler(self):
         """
@@ -55,7 +52,7 @@ class JobMonitoringManager:
         Method defined to repeat requests and store monitorings received
         """
         self.collect_systems()
-        self.execute_request()
+        self.execute_request('/monitoring', self.process_responses)
         self.store_monitorings()
 
     def collect_systems(self):
@@ -65,18 +62,22 @@ class JobMonitoringManager:
         """
         self.systems = self.msystem_service.fetch()
 
-    def execute_request(self):
+    def execute_request(self, model, callback):
         """
         Execute requests for each instaled monitoring system
         """
-        for msystem in self.systems:
-            response = requests.post(
-                msystem.url,
-                data=self.today()
-            )
-            self.process_responses(response)
+        if len(self.systems) == 0:
+            print('No active monitoring systems')
+            pass
 
-    def process_responses(self, response):
+        for msystem in self.systems:
+            try:
+                response = requests.post(msystem.url + model, data=self.today())
+                callback(msystem, response)
+            except Exception as e:
+                print("Monitoring request failed: ", e)
+
+    def process_responses(self, msystem, response):
         """
         Store response to persist collected monitorings
         """
@@ -85,7 +86,7 @@ class JobMonitoringManager:
             if len(json) > 0:
                 self.monitorings.append(json[0])
             else:
-                print('No data found')
+                print(msystem.name + ' -> No data found')
         else:
             # Store request errors
             pass

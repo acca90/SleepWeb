@@ -8,6 +8,8 @@
 		"email": "105786@upf.br",
 		"password": "pbkdf2_sha256$150000$NRMOiTKZ7GVk$6eOVPnmMzYRhuOxjpTGt1VG8Et7YC4zK3bS0wdKsj24=",
 		"is_active": true,
+		"is_staff": true,
+		"is_superuser": true,
 		"institution": 1
 	}
 }]

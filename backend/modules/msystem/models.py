@@ -15,6 +15,7 @@ class MSystem(models.Model):
     url = models.CharField(db_column='url', max_length=500, null=False)
     description = models.CharField(db_column='description', max_length=1000, null=False)
     institution = models.ForeignKey(Institution, on_delete=None, null=True, blank=True)
+    is_active = models.BooleanField(db_column='is_active', null=False, blank=False, default=False)
 
     class Meta:
         db_table = 'MSystem'

@@ -23,53 +23,76 @@
 				{% include 'components/menu_form.html' %}
 			</ul>
 		</div>
-	<div class="card-body">
-		<form id="main" data-parsley-validate>
-			<div class="form-row">
-				<div class="form-group col-md-3">
-					<label for="msystemId">{% trans 'Identification' %}</label>
+		<div class="card-body">
+			<form id="main" data-parsley-validate>
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label for="msystemId">{% trans 'Identification' %}</label>
+						<input type="text"
+							   class="form-control form-control-sm"
+							   id="msystemId"
+							   name="id"
+							   isPk
+							   disabled>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="msystemName">{% trans 'Name' %}</label>
 					<input type="text"
 						   class="form-control form-control-sm"
-						   id="msystemId"
-						   name="id"
-						   isPk
-						   disabled>
+						   required=""
+						   data-parsley-required-message="{% trans 'Enter the description of the monitoring system' %}"
+						   maxlength="255"
+						   id="msystemName"
+						   name="name">
 				</div>
-			</div>
-			<div class="form-group">
-				<label for="msystemName">{% trans 'Name' %}</label>
-				<input type="text"
-					   class="form-control form-control-sm"
-					   required=""
-					   data-parsley-required-message="{% trans 'Enter the description of the monitoring system' %}"
-					   maxlength="255"
-					   id="msystemName"
-					   name="name">
-			</div>
-			<div class="form-group">
-				<label for="msystemUrl">{% trans 'URL' %}</label>
-				<input type="text"
-					   class="form-control form-control-sm"
-					   required=""
-					   data-parsley-required-message="{% trans 'Enter the description of the monitoring system' %}"
-					   maxlength="255"
-					   id="msystemUrl"
-					   name="url">
-			</div>
-			<div class="form-group">
-				<label for="msystemDescription">{% trans 'Description' %}</label>
-				<textarea cols="30"
-						  rows="10"
-						  class="form-control"
-						  required=""
-						  data-parsley-required-message="{% trans 'Enter the definition of the monitoring system' %}"
-						  maxlength="1000"
-						  id="msystemDescription"
-						  name="description">
+				<div class="form-group">
+					<label for="msystemUrl">{% trans 'URL' %}</label>
+					<input type="text"
+						   class="form-control form-control-sm"
+						   required=""
+						   data-parsley-required-message="{% trans 'Enter the description of the monitoring system' %}"
+						   maxlength="255"
+						   id="msystemUrl"
+						   name="url">
+				</div>
+				<div class="form-group">
+					<label for="msystemInstitution">
+						{% trans 'Institution' %}
+					</label>
+					<select id="msystemInstitution"
+							name="institution"
+							autocomplete="off"
+							required
+							data-parsley-required-message="{% trans 'Enter the institution of the monitoring system' %}"
+							class="form-control form-control-sm">
+					</select>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label>
+							<input type="checkbox"
+								   id="is_active"
+								   name="is_active"
+								   value="true">
+							{% trans 'Is active' %}
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="msystemDescription">{% trans 'Description' %}</label>
+					<textarea cols="30"
+							  rows="10"
+							  class="form-control"
+							  required=""
+							  data-parsley-required-message="{% trans 'Enter the definition of the monitoring system' %}"
+							  maxlength="1000"
+							  id="msystemDescription"
+							  name="description">
 				</textarea>
-			</div>
-		</form>
+				</div>
+			</form>
 
+		</div>
 	</div>
-</div>
 </div>

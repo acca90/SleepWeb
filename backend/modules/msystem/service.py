@@ -14,5 +14,5 @@ class MSystemTaskService:
     Class defined to keep queries and security content for consume monitoring systems in taks
     """
     def fetch(self):
-        return MSystem.objects.all()
+        return MSystem.objects.filter(is_active=True)
 

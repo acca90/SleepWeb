@@ -9,8 +9,13 @@
  */
 function UserController($container) {
     /**
+     * Institution Service
+     * @memberOf UserController
+     */
+    let institutionService = new InstitutionService();
+    /**
      * DataTable Settings
-     * @namespace UserController
+     * @memberOf UserController
      */
     const getDatatableSettings = function () {
         return [
@@ -23,7 +28,7 @@ function UserController($container) {
                 data: 'institution',
                 name: 'institution__name',
                 sDefaultContent: 'Not Available',
-                render: renderInstitution
+                render: institutionService.render
             },
             {
                 th: 'Is Active',
@@ -64,13 +69,6 @@ function UserController($container) {
      */
     const nameRender = function (data, type, row) {
         return data + " " + row.last_name;
-    };
-    /**
-     * Render for institution
-     * @memberOf UserController
-     */
-    const renderInstitution = function (data) {
-        return $.isEmpty(data) ? 'Not Available' : data.name
     };
     /**
      * Render for user active situation
@@ -116,8 +114,7 @@ function UserController($container) {
     this.init = function () {
         //console.log(getParams());
         new AbstractController(getParams()).init();
-        let userService = new UserService();
-        userService.init();
+        institutionService.populate('#userInstitution');
     };
     /**
      * Load a modal datatables for search and pick registers

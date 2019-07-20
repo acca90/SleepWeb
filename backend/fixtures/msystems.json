@@ -6,6 +6,7 @@
             "name": "Heart Rate Frequency Monitoring System",
             "url": "http://localhost:5000/api/v1/",
             "description": "Heart Rate Frequency Monitoring System",
+            "is_active": true,
             "institution": 1
         }
     }

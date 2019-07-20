@@ -12,6 +12,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth.hashers import make_password
 
+from backend.commons.utils import check_active
 from backend.modules.user.models import User
 from backend.modules.user.serializers import UserWriteSerializer
 from backend.commons.notAllowed import not_allowed_to_do
@@ -71,6 +72,7 @@ class UserViewSet(ModelViewSet):
             if 'password' in serializer.validated_data:
                 serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
 
+            serializer.validated_data['is_active'] = check_active(serializer.validated_data)
             serializer.update(user, serializer.validated_data)
             return Response(serializer.data, status.HTTP_200_OK)
         else:

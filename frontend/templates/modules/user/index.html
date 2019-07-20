@@ -17,7 +17,7 @@
 {% if user.is_superuser %}
 	{% block scripts %}
 		{{ block.super }}
-		<script src="{% static "modules/user/UserService.js" %}"></script>
+		<script src="{% static "modules/institution/InstitutionService.js" %}"></script>
 		<script src="{% static "modules/user/UserController.js" %}"></script>
 		<script>
             $(document).ready(function () {
