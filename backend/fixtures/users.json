@@ -1,15 +1,56 @@
-[{
-	"pk": 1,
-	"model": "user.User",
-	"fields": {
-		"username": "matheus",
-		"first_name": "Matheus",
-		"last_name": "Hernandes",
-		"email": "105786@upf.br",
-		"password": "pbkdf2_sha256$150000$NRMOiTKZ7GVk$6eOVPnmMzYRhuOxjpTGt1VG8Et7YC4zK3bS0wdKsj24=",
-		"is_active": true,
-		"is_staff": true,
-		"is_superuser": true,
-		"institution": 1
-	}
-}]
+[
+    {
+        "pk": 1,
+        "model": "user.User",
+        "fields": {
+            "username": "matheus",
+            "first_name": "Matheus",
+            "last_name": "Hernandes",
+            "email": "105786@upf.br",
+            "password": "pbkdf2_sha256$150000$NRMOiTKZ7GVk$6eOVPnmMzYRhuOxjpTGt1VG8Et7YC4zK3bS0wdKsj24=",
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true,
+            "institution": 1
+        }
+    },
+    {
+        "pk": 2,
+        "model": "user.User",
+        "fields": {
+            "username": "jaspion",
+            "first_name": "Jaspion",
+            "last_name": "Daileon",
+            "email": "jaspion@daileon.jp",
+            "password": "pbkdf2_sha256$150000$wXS5rn4JfBn4$rLdC+z3BH87tJI5zAfDKhwk9BXloCZwLLnTX5iCvwiU=",
+            "is_active": true,
+            "institution": 2
+        }
+    },
+    {
+        "pk": 3,
+        "model": "user.User",
+        "fields": {
+            "username": "Jiraya",
+            "first_name": "Jiraya",
+            "last_name": "Daileon",
+            "email": "jiraya@daileon.jp",
+            "password": "pbkdf2_sha256$150000$XD9bgxwRwHwq$C5r2yIElmppCmo01VLWiI/ox6TSSGYA5SeIRWUAhGss=",
+            "is_active": true,
+            "institution": 3
+        }
+    },
+    {
+        "pk": 4,
+        "model": "user.User",
+        "fields": {
+            "username": "donald",
+            "first_name": "Donald",
+            "last_name": "Trump",
+            "email": "donald@trump.com",
+            "password": "pbkdf2_sha256$150000$ey25Y3uzMFf2$f04BU+IKOy33lDxeRdy9ADUEkDXYOIG0HkIXTNylHXo=",
+            "is_active": true,
+            "institution": 4
+        }
+    }
+]

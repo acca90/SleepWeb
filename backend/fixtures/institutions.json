@@ -6,5 +6,29 @@
             "name": "Universidade de Passo Fundo",
             "country": "Brazil"
         }
+    },
+    {
+        "pk": 2,
+        "model": "institution.Institution",
+        "fields": {
+            "name": "Universidade Federal do Rio Grande do Sul",
+            "country": "Brazil"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "institution.Institution",
+        "fields": {
+            "name": "Universidade de São Paulo",
+            "country": "Brazil"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "institution.Institution",
+        "fields": {
+            "name": "Hardvard University",
+            "country": "United States"
+        }
     }
 ]
