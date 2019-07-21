@@ -7,7 +7,11 @@
  * @since 10/03/2019
  * @namespace ConfirmationController
  */
-function ConfirmationController(title, msg, confirmFunction, dismissFunction) {
+function ConfirmationController(
+    title='Need confirmation',
+    msg='Need confirmation',
+    confirmFunction=null,
+    dismissFunction=null) {
     /**
      * Modal DOM object
      * @memberOf ConfirmationController

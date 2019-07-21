@@ -13,6 +13,7 @@
 
 {% block scripts %}
 	{{ block.super }}
+	<script src="{% static "modules/patient/PatientFormController.js" %}"></script>
 	<script src="{% static "modules/patient/PatientController.js" %}"></script>
 	<script>
         $(document).ready(function () {

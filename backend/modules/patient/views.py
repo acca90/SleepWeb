@@ -40,7 +40,7 @@ class PatientViewSet(viewsets.ModelViewSet):
         """
         Override method to check permissions
         """
-        serializer = PatientWriteSerializer(data=request.data)
+        serializer = PatientWriteSerializer(data=request.data, context={"request": request})
         if serializer.is_valid():
             serializer.validated_data['user'] = self.request.user
             instance = serializer.create(serializer.validated_data)
@@ -58,7 +58,12 @@ class PatientViewSet(viewsets.ModelViewSet):
         if instance.user.id != request.user.id and not request.user.is_superuser:
             return not_allowed_to_do()
 
-        serializer = PatientWriteSerializer(data=request.data)
+        serializer = PatientWriteSerializer(
+            partial=True,
+            data=request.data,
+            instance=instance,
+            context={"request": request}
+        )
         if serializer.is_valid():
             instance = serializer.update(instance, serializer.validated_data)
             read_serializer = PatientReadSerializer(instance)

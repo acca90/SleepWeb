@@ -44,6 +44,7 @@ function InstitutionService() {
             },
             error: errorInstitutionsHandler
         }).send(true);
+        return this;
     };
     /**
      * Render for institutions

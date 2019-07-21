@@ -9,16 +9,28 @@
  */
 function PatientController($container) {
     /**
+     * Form controller
+     * @memberOf PatientController
+     */
+    let formController = null;
+    /**
      * DataTable Settings
-     * @namespace PatientController
+     * @memberOf PatientController
      */
     const getDatatableSettings = function () {
         return [
             {th: '#', data: 'id', width: '60px'},
             {th: 'Name', data: 'first_name', render: renderFullName},
-            {th: 'Brith Date', data: 'birth_date', render: renderBirthDateAndAge, width: '200px'},
+            {th: 'Birth Date', data: 'birth_date', render: renderBirthDateAndAge, width: '200px'},
             {th: 'Gender', data: 'gender', render: renderGender, width: '100px'},
-            {th: 'Stage', data: 'stage', name: 'stage__description', sDefaultContent: '', render: renderStage, width: '120px'}
+            {
+                th: 'Stage',
+                data: 'stage',
+                name: 'stage__description',
+                sDefaultContent: '',
+                render: renderStage,
+                width: '120px'
+            }
         ];
     };
     /**
@@ -42,7 +54,7 @@ function PatientController($container) {
             datatableSettings: getDatatableSettings(),
             serialize: serialize,
             toForm: toForm,
-            clean: null
+            clean: clean
         };
     };
     /**
@@ -85,18 +97,29 @@ function PatientController($container) {
         $('#patientBirthDate', $form).val($.dateFormat(patient.birth_date));
         $('#patientGender', $form).val(patient.gender);
         $('#patientObs', $form).val(patient.obs);
+        formController.load(patient.institutions);
     };
     /**
      * Serialize form for API submit
      * @memberOf PatientController
      */
     const serialize = function () {
+        let form = {};
+        let patient = $('form', $container).serializeToJson();
+        let allowed = formController.serialize();
+        $.extend(form, patient, allowed);
+        return form;
+    };
+    /**
+     * Extend clean functionality on AbstractController
+     * @memberOf PatientController
+     */
+    const clean = function () {
         let $form = $('form', $container);
-        let json = $form.serializeToJson();
-        if ($.isEmpty($('#patientObs', $form).val())) {
-            json.obs = '';
-        }
-        return json;
+        let gender = $('#patientGender', $form);
+        gender.val(gender.find('option:first').val());
+        formController.clean();
+        return this;
     };
     /**
      * Module Initialize
@@ -104,6 +127,7 @@ function PatientController($container) {
      */
     this.init = function () {
         new AbstractController(getParams()).init();
+        formController = new PatientFormController().init()
     };
     /**
      * Load a modal datatables for search and pick registers

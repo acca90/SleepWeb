@@ -9,7 +9,7 @@
  */
 function GroupFormController() {
     /**
-     * Datatable with allowed researchers (users) and institutions.json
+     * Datatable with allowed researchers (users) and institutions
      * @memberOf GroupFormController
      */
     let datatableAllowed = null;
@@ -95,6 +95,7 @@ function GroupFormController() {
     };
     /**
      * Initialize settings
+     * @memberOf GroupFormController
      */
     const initSettings = function () {
         datatableAllowedSettings = [
@@ -271,7 +272,7 @@ function GroupFormController() {
         ).open();
     };
     /**
-     * Load form for allowed
+     * Load collections
      * @memberOf GroupFormController
      */
     this.load = function (users, institutions, patients) {

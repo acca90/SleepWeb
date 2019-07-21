@@ -23,7 +23,7 @@ class Patient(models.Model):
 
     stage = models.ForeignKey(Stage, on_delete=None, null=True)
     user = models.ForeignKey(User, on_delete=None, null=True)
-    institutions = models.ManyToManyField(Institution, related_name='user_institution')
+    institutions = models.ManyToManyField(Institution, related_name='patient_institution')
 
     class Meta:
         db_table = 'Patient'

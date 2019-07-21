@@ -7,26 +7,46 @@ Universidade de Passo Fundo - 2018/2019
 @since 16/03/2019
 """
 from rest_framework import serializers
-
+from backend.modules.institution.serializers import InstitutionSerializer
 from backend.modules.stage.serializers import StageSerializer
 from backend.modules.user.serializers import UserReadSerializer
 from backend.modules.user.models import User
-from .models import Patient
+from backend.modules.institution.models import Institution
+from backend.modules.patient.models import Patient
 
 
 class PatientWriteSerializer(serializers.ModelSerializer):
-    users = serializers.PrimaryKeyRelatedField(
+    """
+     Serializer defined to write operations
+    """
+    institutions = serializers.PrimaryKeyRelatedField(
+        queryset=Institution.objects.all(),
+        many=True,
+        required=False
+    )
+
+    user = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
         many=True,
         required=False
     )
 
     def create(self, validated_data):
-        return Patient.objects.create(**validated_data)
+        return super().create(validated_data)
 
     class Meta:
         model = Patient
-        fields = '__all__'
+        fields = (
+            'id',
+            'uuid',
+            'first_name',
+            'last_name',
+            'birth_date',
+            'gender',
+            'obs',
+            'institutions',
+            'user',
+        )
         datatables_always_serialize = (
             'id',
             'uuid',
@@ -35,6 +55,7 @@ class PatientWriteSerializer(serializers.ModelSerializer):
             'birth_date',
             'gender',
             'obs',
+            'institutions',
             'user',
         )
         extra_kwargs = {
@@ -46,12 +67,27 @@ class PatientWriteSerializer(serializers.ModelSerializer):
 
 
 class PatientReadSerializer(serializers.ModelSerializer):
-    users = UserReadSerializer(read_only=True)
+    """
+     Serializer defined to read operations
+    """
+    user = UserReadSerializer(read_only=True)
     stage = StageSerializer(read_only=True)
+    institutions = InstitutionSerializer(many=True)
 
     class Meta:
         model = Patient
-        fields = '__all__'
+        fields = (
+            'id',
+            'uuid',
+            'first_name',
+            'last_name',
+            'birth_date',
+            'gender',
+            'obs',
+            'stage',
+            'institutions',
+            'user',
+        )
         datatables_always_serialize = (
             'id',
             'uuid',
@@ -61,5 +97,6 @@ class PatientReadSerializer(serializers.ModelSerializer):
             'gender',
             'obs',
             'stage',
+            'institutions',
             'user',
         )

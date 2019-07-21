@@ -1,7 +1,7 @@
 {% load static %}
 
+<script src="{% static "modules/institution/InstitutionService.js" %}"></script>
 <script src="{% static "modules/user/UserController.js" %}"></script>
-
 <script>
 	function getSettings() {
 		return new UserController().getSettings();
