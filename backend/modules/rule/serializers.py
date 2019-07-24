@@ -8,14 +8,13 @@ Universidade de Passo Fundo - 2018/2019
 """
 from rest_framework import serializers
 
-from .models import Rule
+from backend.modules.rule.models import Rule
+from backend.modules.user.serializers import UserReadSerializer
 
 
 class RuleReadSerializer(serializers.ModelSerializer):
-    """
-    Serialzier for read-only operations
-    """
-    user = serializers.SlugRelatedField(read_only=True, slug_field='first_name')
+
+    user = UserReadSerializer(read_only=True)
 
     def create(self, validated_data):
         """
@@ -25,9 +24,33 @@ class RuleReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Rule
-        fields = '__all__'
+        fields = (
+            'id',
+            'description',
+            'user',
+        )
         datatables_always_serialize = (
             'id',
             'description',
             'user',
+        )
+
+
+class RuleWriteSerializer(serializers.ModelSerializer):
+    """
+    Serializer defined to write operations
+    """
+    def create(self, validated_data):
+        validated_data['user'] = self.context['request'].user
+        return super().create(validated_data)
+
+    class Meta:
+        model = Rule
+        fields = (
+            'id',
+            'description',
+        )
+        datatables_always_serialize = (
+            'id',
+            'description',
         )

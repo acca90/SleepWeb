@@ -11,8 +11,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from backend.commons.notAllowed import not_allowed_to_do
-from .models import Group
-from .serializers import GroupReadSerializer, GroupWriteSerializer
+from backend.modules.group.models import Group
+from backend.modules.group.serializers import GroupReadSerializer, GroupWriteSerializer
 
 
 class GroupViewSet(viewsets.ModelViewSet):

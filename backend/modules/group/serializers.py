@@ -8,7 +8,6 @@ Universidade de Passo Fundo - 2018/2019
 """
 from rest_framework import serializers
 from backend.modules.group.models import Group
-
 from backend.modules.institution.serializers import InstitutionSerializer
 from backend.modules.patient.serializers import PatientReadSerializer
 from backend.modules.user.serializers import UserReadSerializer

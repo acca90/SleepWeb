@@ -16,7 +16,6 @@ class Group(models.Model):
     name = models.CharField(db_column='name', max_length=255, null=False)
     details = models.CharField(db_column='details', max_length=1000, null=True)
     owner = models.ForeignKey(User, db_column='owner', on_delete=None, null=True)
-
     users = models.ManyToManyField(User, related_name='group_user')
     institutions = models.ManyToManyField(Institution, related_name='group_institution')
     patients = models.ManyToManyField(Patient, related_name='group_patients')
