@@ -227,10 +227,17 @@ function RuleFormController() {
         activeIndicator = indicator.attr('href');
     };
     /**
+     * Returns the name of active indicator
+     * @memberOf RuleFormController
+     */
+    const getActiveIndicator = function () {
+        return activeIndicator.replace(/#/g, '');
+    };
+    /**
      * Check rows of same life stage to get correct weight
      * @memberOf RuleFormController
      */
-    const fillWeight = function (table, newRow) {
+    const completeData = function (table, newRow) {
         let dataArray = table.getDataArray();
         for (let row of dataArray) {
             if (newRow.stage.description == row.stage.description) {
@@ -241,12 +248,41 @@ function RuleFormController() {
         return newRow;
     };
     /**
+     * Returns an array of all datatables
+     * @memberOf RuleFormController
+     */
+    const superDataArray = function () {
+        let array = [];
+        for (let dt in elementMap.dt) {
+            let dataArray = elementMap.dt[dt].getDataArray();
+            if (dataArray.length > 0)
+                array = array.concat(dataArray);
+        }
+        return array;
+    };
+    /**
+     * Serialize data for submit
+     * @memberOf RuleFormController
+     */
+    this.serialize = function () {
+        return superDataArray().map(threshold => {
+            return {
+                begin: threshold.begin,
+                end: threshold.end,
+                indicator: threshold.indicator.id,
+                stage: threshold.stage.id,
+                quality: threshold.quality,
+                weight: threshold.weight
+            }
+        });
+    };
+    /**
      * Add row to active datatables
      * @memberOf RuleFormController
      */
     this.addRow = function (row) {
-        let table = elementMap.dt[activeIndicator.replace(/#/g, '')];
-        table.addRow(fillWeight(table,row));
+        let table = elementMap.dt[getActiveIndicator()];
+        table.addRow(completeData(table, row));
     };
     /**
      * Ajust columns for its header

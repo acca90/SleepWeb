@@ -66,7 +66,9 @@ function RuleController($container) {
      * @memberOf RuleController
      */
     const serialize = function () {
-        return $('form').serializeToJson();
+        let json = $('form').serializeToJson();
+        json.thresholds = formController.serialize();
+        return json;
     };
     /**
      * Module Initialize

@@ -39,7 +39,7 @@ class Threshold(models.Model):
     threshold 2 = quality=UNCERTAIN top=85%  bottom=75%
     threshold 3 = quality=GOOD      top=75%  bottom=0%
     """
-    rule = models.ForeignKey(Rule, on_delete=models.CASCADE)
+    rule = models.ForeignKey(Rule, related_name='thresholds', on_delete=models.CASCADE)
     indicator = models.ForeignKey(Indicator, on_delete=None, null=False)
     stage = models.ForeignKey(Stage, on_delete=None, null=False)
     # thresholds
