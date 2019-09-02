@@ -17,6 +17,12 @@
 		<div class="card-header">
 			<ul class="nav nav-pills card-header-pills ">
 				{% include 'components/menu_list.html' %}
+				<li class="nav-item">
+					<button type="button" class="btn btn-warning btn-sm" id="btnSendPatient">
+						<i class="fa fa-paper-plane"></i>
+						<b>{% trans "Send Patients" %}</b>
+					</button>
+				</li>
 			</ul>
 		</div>
 		<div id="datatable" class="card-body">

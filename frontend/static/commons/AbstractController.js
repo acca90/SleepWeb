@@ -57,7 +57,7 @@ function AbstractController(params) {
      * Initilize map of DOM's elements
      * @memberOf AbstractController
      */
-    const initMap = async function () {
+    const initMap = function () {
         DOM.divs.list = $('div#list', params.container);
         DOM.divs.form = $('div#form', params.container);
         DOM.list.buttons.new = $('#btnNew', params.container);
@@ -76,7 +76,7 @@ function AbstractController(params) {
      * Initilize date pickers
      * @memberOf AbstractController
      */
-    const initDatePickers = async function () {
+    const initDatePickers = function () {
         let datePickers = $('[isDatePicker]');
         datePickers.wrap('<div class="input-group"></div>');
         datePickers.parent('div').append(buildCalendarIcon());
@@ -111,7 +111,7 @@ function AbstractController(params) {
      * Iinitilize events for module navigation
      * @memberOf AbstractController
      */
-    const initEvents = async function () {
+    const initEvents = function () {
         DOM.list.buttons.new.on('click', newRegister);
         DOM.list.buttons.edit.on('click', edit);
         DOM.list.buttons.remove.on('click', remove);
@@ -469,7 +469,7 @@ function AbstractController(params) {
      * Initialize datatable for module
      * @memberOf AbstractController
      */
-    const initDatatable = async function () {
+    const initDatatable = function () {
         moduleDataTable = new DataTableComponent(params.datatableSettings)
             .buildTable()
             .place($('div#datatable'))
@@ -494,13 +494,21 @@ function AbstractController(params) {
         return rowData.id;
     };
     /**
+     * Returns module datatable instance
+     * @memberOf AbstractController
+     */
+    this.getModuleDataTable = function () {
+        return moduleDataTable;
+    };
+    /**
      * Module Initialize
      * @memberOf AbstractController
      */
-    this.init = async function () {
-        await initMap();
-        await initDatePickers();
-        await initDatatable();
-        await initEvents();
+    this.init = function () {
+        initMap();
+        initDatePickers();
+        initDatatable();
+        initEvents();
+        return this;
     };
 }

@@ -25,14 +25,22 @@ class ThresholdWriteSerializer(serializers.ModelSerializer):
         )
 
 
-class RuleReadSerializer(serializers.ModelSerializer):
-    user = UserReadSerializer(read_only=True)
+class ThresholdReadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Threshold
+        fields = (
+            'indicator',
+            'stage',
+            'begin',
+            'end',
+            'quality',
+            'weight',
+        )
 
-    def create(self, validated_data):
-        """
-        Override default create
-        """
-        return Rule.objects.create(**validated_data)
+
+class RuleListSerializer(serializers.ModelSerializer):
+
+    user = UserReadSerializer(read_only=True)
 
     class Meta:
         model = Rule
@@ -41,10 +49,20 @@ class RuleReadSerializer(serializers.ModelSerializer):
             'description',
             'user',
         )
-        datatables_always_serialize = (
+        datatables_always_serialize = fields
+
+
+class RuleReadSerializer(serializers.ModelSerializer):
+
+    thresholds = ThresholdWriteSerializer(many=True)
+
+    class Meta:
+        model = Rule
+        fields = (
             'id',
             'description',
             'user',
+            'thresholds'
         )
 
 
@@ -53,13 +71,14 @@ class RuleWriteSerializer(serializers.ModelSerializer):
     Serializer defined to write operations
     """
     thresholds = ThresholdWriteSerializer(many=True)
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     def create(self, validated_data):
-        validated_data['user'] = self.context['request'].user
         threshold_data = validated_data.pop('thresholds')
         rule = Rule.objects.create(**validated_data)
         for threshold in threshold_data:
             Threshold.objects.create(rule=rule, **threshold)
+
         return rule
 
     class Meta:
@@ -67,6 +86,7 @@ class RuleWriteSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'description',
+            'user',
             'thresholds'
         )
         datatables_always_serialize = (

@@ -7,11 +7,13 @@ Universidade de Passo Fundo - 2018/2019
 @since 16/03/2019
 """
 from rest_framework import viewsets, status
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from backend.commons.notAllowed import not_allowed_to_do
 from backend.modules.patient.models import Patient
 from backend.modules.patient.serializers import PatientWriteSerializer, PatientReadSerializer
+from backend.modules.patient.service import PatientService
 
 
 class PatientViewSet(viewsets.ModelViewSet):
@@ -92,3 +94,13 @@ class PatientViewSet(viewsets.ModelViewSet):
             return not_allowed_to_do()
 
         return super().destroy(request, args, kwargs)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def patient_send(request, pk):
+    try:
+        PatientService.send(pk)
+        return Response(data={}, status=status.HTTP_200_OK)
+    except Exception:
+        return Response(data={}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

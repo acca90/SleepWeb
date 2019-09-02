@@ -11,11 +11,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from backend.commons.notAllowed import not_allowed_to_do
 from backend.modules.rule.models import Rule
-from backend.modules.rule.serializers import RuleReadSerializer, RuleWriteSerializer
+from backend.modules.rule.serializers import RuleListSerializer, RuleWriteSerializer, RuleReadSerializer
 
 
 class RuleViewSet(viewsets.ModelViewSet):
-    serializer_class = RuleReadSerializer
+    serializer_class = RuleListSerializer
     permission_classes = (IsAuthenticated,)
     queryset = Rule.objects.all()
 
@@ -43,7 +43,7 @@ class RuleViewSet(viewsets.ModelViewSet):
         write_serializer = RuleWriteSerializer(data=request.data, context={"request": request})
         if write_serializer.is_valid():
             instance = write_serializer.create(write_serializer.validated_data)
-            read_serializer = RuleReadSerializer(instance)
+            read_serializer = RuleListSerializer(instance)
             return Response(read_serializer.data, status.HTTP_200_OK)
         else:
             return Response(write_serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -65,7 +65,7 @@ class RuleViewSet(viewsets.ModelViewSet):
         )
         if write_serializer.is_valid():
             instance = write_serializer.update(instance, write_serializer.validated_data)
-            read_serializer = RuleReadSerializer(instance)
+            read_serializer = RuleListSerializer(instance)
             return Response(read_serializer.data, status.HTTP_200_OK)
         else:
             return Response(write_serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)

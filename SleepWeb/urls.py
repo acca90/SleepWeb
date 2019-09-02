@@ -15,7 +15,7 @@ from rest_framework import routers
 # Back-End
 from backend.modules.institution.views import InstitutionViewSet
 from backend.modules.monitoring.views import MonitoringReadOnlyViewSet
-from backend.modules.patient.views import PatientViewSet
+from backend.modules.patient.views import PatientViewSet, patient_send
 from backend.modules.stage.views import StageViewSet
 from backend.modules.user.views import UserViewSet
 from backend.modules.msystem.views import MSystemViewSet
@@ -54,6 +54,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # api
+    path('api/v1/patient/send/<int:pk>', patient_send),
     path('api/v1/api-auth/', include('rest_framework.urls')),
     path('api/v1/rest-auth/', include('rest_auth.urls')),
     path('api/v1/', include(router.urls)),

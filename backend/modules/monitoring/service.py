@@ -15,7 +15,7 @@ from backend.modules.user.models import User
 
 class MonitoringService:
     """
-    Service to keep complex rules and exposing methods for monitoring
+    Service to keep logics and exposing methods for monitoring
     """
 
     def store(self, monitorings):

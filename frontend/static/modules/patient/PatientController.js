@@ -9,10 +9,20 @@
  */
 function PatientController($container) {
     /**
+     * Instance of AbstractController
+     * @memberOf PatientController
+     */
+    let abstractController = null;
+    /**
      * Form controller
      * @memberOf PatientController
      */
     let formController = null;
+    /**
+     * Serivce for patient
+     * @memberOf PatientController
+     */
+    let service = null;
     /**
      * DataTable Settings
      * @memberOf PatientController
@@ -122,12 +132,35 @@ function PatientController($container) {
         return this;
     };
     /**
+     * @memberOf PatientController
+     */
+    const initControllers = function () {
+        abstractController = new AbstractController(getParams()).init();
+        formController = new PatientFormController().init();
+    };
+    /**
+     * @memberOf PatientController
+     */
+    const initServices = function () {
+        service = new PatientService();
+    };
+    /**
+     * @memberOf PatientController
+     */
+    const initEvents = function () {
+        $('#btnSendPatient').off('click').on('click', function () {
+            let dataTable = abstractController.getModuleDataTable();
+            console.log(dataTable.getRowData());
+        });
+    };
+    /**
      * Module Initialize
      * @memberOf PatientController
      */
     this.init = function () {
-        new AbstractController(getParams()).init();
-        formController = new PatientFormController().init()
+        initControllers();
+        initServices();
+        initEvents();
     };
     /**
      * Load a modal datatables for search and pick registers
