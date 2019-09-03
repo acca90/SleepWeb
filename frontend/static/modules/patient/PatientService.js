@@ -8,29 +8,29 @@
  * @namespace PatientService
  */
 function PatientService() {
-        /**
+    /**
      * Handle success on request
      * @memberOf PatientService
      */
     const successInstitutionsHandler = function (data, id) {
-        console.log(id);
     };
     /**
      * Handle erros on request
      * @memberOf PatientService
      */
     const errorInstitutionsHandler = function () {
-        console.error("Could not populate institutions")
+        console.error("Could not send patient")
     };
     /**
      * Submit patient for external instances
      * @memberOf PatientService
      */
     this.submit_patient = function (id) {
-         new AjaxController({
+        new AjaxController({
             data: {},
+            pk: id,
             method: 'POST',
-            url: 'patient/send/' + id,
+            url: 'patient/send',
             success: function (data) {
                 successInstitutionsHandler(data, id)
             },

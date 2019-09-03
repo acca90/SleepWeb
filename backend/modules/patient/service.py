@@ -6,13 +6,12 @@ Universidade de Passo Fundo - 2018/2019
 @author Matheus Hernandes
 @since 02/09/2019
 """
-import requests
+import requests, json
 from rest_framework import status
-
+from django.core import serializers
 from backend.modules.institution.models import Institution
 from backend.modules.msystem.models import MSystem
 from backend.modules.patient.models import Patient
-from backend.modules.patient.serializers import PatientReadSerializer
 
 
 class PatientService:
@@ -26,20 +25,21 @@ class PatientService:
         """
         try:
             # Patient
-            patient = Patient.objects.get(pk=patient_pk)
-            serialized = PatientReadSerializer(patient)
+            patient = Patient.objects.filter(pk=patient_pk)
+            serialized = serializers.serialize("json", patient)
 
             # Instances to send patient
             msystems = MSystem.objects.filter(
-                institution_id__in=Institution.objects.filter(patient_institution__id=patient.id).values('pk')
+                institution_id__in=Institution.objects.filter(patient_institution__id=patient_pk).values('pk')
             )
 
             # Send patient for each instance
             for location in msystems:
-                response = requests.post(location.url + 'patient', data=serialized.data)
+                response = requests.post(location.url + 'patient', json=json.loads(serialized)[0].fields)
                 if response.status_code != 200:
                     raise Exception(response.status_code)
 
-        except Exception:
+        except Exception as e:
+            print(e)
             raise Exception(status.HTTP_500_INTERNAL_SERVER_ERROR)
 

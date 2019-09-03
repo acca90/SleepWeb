@@ -54,7 +54,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # api
-    path('api/v1/patient/send/<int:pk>', patient_send),
+    path('api/v1/patient/send/<int:pk>/', patient_send),
     path('api/v1/api-auth/', include('rest_framework.urls')),
     path('api/v1/rest-auth/', include('rest_auth.urls')),
     path('api/v1/', include(router.urls)),

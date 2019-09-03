@@ -132,6 +132,7 @@ function PatientController($container) {
         return this;
     };
     /**
+     * Initialize controllers
      * @memberOf PatientController
      */
     const initControllers = function () {
@@ -139,19 +140,40 @@ function PatientController($container) {
         formController = new PatientFormController().init();
     };
     /**
+     * Initialize services
      * @memberOf PatientController
      */
     const initServices = function () {
         service = new PatientService();
     };
     /**
+     * Initialize events
      * @memberOf PatientController
      */
     const initEvents = function () {
         $('#btnSendPatient').off('click').on('click', function () {
-            let dataTable = abstractController.getModuleDataTable();
-            console.log(dataTable.getRowData());
+            send_patient();
         });
+    };
+    /**
+     * Send patient to its institutions instances
+     * @memberOf PatientController
+     */
+    const send_patient = function () {
+        let dataTable = abstractController.getModuleDataTable();
+        let rowData = dataTable.getRowData();
+        if ($.isEmpty(rowData)) {
+            return;
+        }
+        new ConfirmationController(
+            'Need confirmation',
+            'Send patient for its institutions',
+            $modal => {
+                $modal.modal('toggle');
+                service.submit_patient(rowData.id);
+            },
+            null
+        ).open();
     };
     /**
      * Module Initialize
