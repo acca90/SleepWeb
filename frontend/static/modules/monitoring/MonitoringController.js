@@ -14,11 +14,27 @@ function MonitoringController($container) {
      */
     const getDatatableSettings = function () {
         return [
-            {th: 'Patient', width: '', data: 'patient'},
-            {th: 'Date Begin', width: '100px', data: 'begin'},
-            {th: 'Date End', width: '100px', data: 'end'},
-            {th: 'Quality', width: '100px', data: 'quality'}
+            {th: 'Patient', width: '', data: 'patient.first_name', render: renderPatient},
+            {th: 'Date Begin', width: '140px', data: 'begin', render: renderDatetime},
+            {th: 'Date End', width: '140px', data: 'end', render: renderDatetime}
         ]
+    };
+    /**
+     * Render for patient
+     * @memberOf MonitoringController
+     */
+    const renderPatient = function (data, type, full ) {
+        console.log(full.patient);
+        return full.patient.first_name + " " + full.patient.last_name
+    };
+    /**
+     * Render for datetime
+     * @memberOf MonitoringController
+     */
+    const renderDatetime = function ( data ) {
+        let string = data.replace("Z","");
+        string = string.split("T");
+        return (string[0].split("-").reverse().join("/")) + ' ' + string[1];
     };
     /**
      * Return params for AbstractController

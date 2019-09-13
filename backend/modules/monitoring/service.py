@@ -26,15 +26,17 @@ class MonitoringService:
             new_monitoring = Monitoring()
             new_monitoring.copy(monitoring)
 
-            if not new_monitoring.exists():
+            if new_monitoring.exists():
+                print("Monitoring -> " + new_monitoring.uuid + " already stored")
+            else:
                 new_monitoring.save()
 
     def filter(self, request):
         """
         Method defined to filter monitoring follower user privilege and group restrictions
         """
-        # if request.user.is_superuser:
-        #     return Monitoring.objects.all()
+        if request.user.is_superuser:
+            return Monitoring.objects.all()
 
         user = User.objects.get(pk=request.user.id)
         shared_patients = Group.objects.filter(Q(users=user) | Q(institutions=user.institution)).values('patients')

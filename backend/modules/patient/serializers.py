@@ -100,3 +100,29 @@ class PatientReadSerializer(serializers.ModelSerializer):
             'institutions',
             'user',
         )
+
+
+class PatientMinimalSerializer(serializers.ModelSerializer):
+    """
+     Serializer defined to read operations
+    """
+    stage = StageSerializer(read_only=True)
+
+    class Meta:
+        model = Patient
+        fields = (
+            'first_name',
+            'last_name',
+            'birth_date',
+            'gender',
+            'obs',
+            'stage',
+        )
+        datatables_always_serialize = (
+            'first_name',
+            'last_name',
+            'birth_date',
+            'gender',
+            'obs',
+            'stage',
+        )

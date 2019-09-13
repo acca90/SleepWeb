@@ -36,6 +36,7 @@ class JobMonitoring:
         """
         Start method initialize JobManger with scheduler
         """
+        print("Scheduler for monitoring request is running")
         self.initialize_scheduler()
 
     def initialize_scheduler(self):
@@ -52,7 +53,7 @@ class JobMonitoring:
         Method defined to repeat requests and store monitorings received
         """
         self.collect_systems()
-        self.execute_request('/monitoring', self.process_responses)
+        self.execute_request('monitoring', self.process_responses)
         self.store_monitorings()
 
     def collect_systems(self):
@@ -82,9 +83,13 @@ class JobMonitoring:
         Store response to persist collected monitorings
         """
         if response.status_code == 200:
-            json = response.json()
-            if len(json) > 0:
-                self.monitorings.append(json[0])
+            monitoring_package = response.json()
+            if len(monitoring_package) > 0:
+
+                for monitoring in monitoring_package:
+                    monitoring['system'] = msystem.pk
+
+                self.monitorings += monitoring_package
             else:
                 print(msystem.name + ' -> No data found')
         else:
@@ -105,6 +110,6 @@ class JobMonitoring:
         utc = arrow.utcnow().replace(hours=settings.TIME_ZONE_VALUE)
         time_format = 'YYYY-MM-DD HH:mm:ss'
         return {
-            "begin": str(utc.floor('day').format(time_format)),
+            "begin": "1990-01-01 00:00:00", # str(utc.floor('day').format(time_format)),
             "end": str(utc.ceil('day').format(time_format))
         }

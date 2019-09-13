@@ -7,7 +7,7 @@ Universidade de Passo Fundo - 2018/2019
 @since 15/06/2019
 """
 from rest_framework import serializers
-from backend.modules.patient.serializers import PatientReadSerializer
+from backend.modules.patient.serializers import PatientMinimalSerializer
 from backend.modules.monitoring.models import Monitoring
 
 
@@ -15,7 +15,7 @@ class MonitoringReadSerializer(serializers.ModelSerializer):
     """
     Serializer for readonly monitoring list
     """
-    patient = PatientReadSerializer(read_only=True)
+    patient = PatientMinimalSerializer(read_only=True)
 
     class Meta:
         model = Monitoring

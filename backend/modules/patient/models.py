@@ -17,7 +17,7 @@ class Patient(models.Model):
     uuid = models.UUIDField(unique=True, editable=False, default=uuid.uuid4)
     first_name = models.CharField(db_column='first_name', max_length=255, null=False)
     last_name = models.CharField(db_column='last_name', max_length=255, null=False)
-    birth_date = models.DateField(db_column='brith_date', null=False)
+    birth_date = models.DateField(db_column='birth_date', null=False)
     gender = models.IntegerField(db_column='gender', null=False)
     obs = models.CharField(db_column='obs', max_length=3000, null=True)
 

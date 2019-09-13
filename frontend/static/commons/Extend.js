@@ -55,5 +55,8 @@ jQuery.extend({
             return year + ' years';
         }
         return month + ' Months';
+    },
+    zeroLeft: function ( value ) {
+        return (value < 10 ? "0" : "") + value;
     }
 });
