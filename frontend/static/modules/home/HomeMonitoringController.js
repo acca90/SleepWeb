@@ -12,15 +12,31 @@ function HomeMonitoringController() {
      * URL for data monitoring
      * @memberOf HomeMonitoringController
      */
-    const apiUrl = 'monitoring';
+    const apiUrl = 'dashboard/monitoring';
+    /**
+     * Render for patient name
+     * @memberOf HomeMonitoringController
+     */
+    const renderPatientName = function (data, type, full) {
+        return full.patient.first_name + " " + full.patient.last_name
+    };
+    /**
+     * Render for datetime
+     * @memberOf HomeMonitoringController
+     */
+    const renderDatetime = function (data) {
+        let string = data.replace("Z", "");
+        string = string.split("T");
+        return (string[0].split("-").reverse().join("/")) + ' ' + string[1];
+    };
     /**
      * Settings for datatable
      * @memberOf HomeMonitoringController
      */
     const datatableSettings = [
-        {th: 'Date Begin', width: '100px', data: 'begin'},
-        {th: 'Date End', width: '100px', data: 'end'},
-        {th: 'Patient', width: '', data: 'patient'},
+        {th: 'Patient', width: '', data: 'patient.first_name', render: renderPatientName},
+        {th: 'Date Begin', width: '140px', data: 'begin', render: renderDatetime},
+        {th: 'Date End', width: '140px', data: 'end', render: renderDatetime}
     ];
     /**
      * Initialize controller

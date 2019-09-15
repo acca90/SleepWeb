@@ -24,7 +24,6 @@ function MonitoringController($container) {
      * @memberOf MonitoringController
      */
     const renderPatient = function (data, type, full ) {
-        console.log(full.patient);
         return full.patient.first_name + " " + full.patient.last_name
     };
     /**
