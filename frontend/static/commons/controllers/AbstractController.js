@@ -10,6 +10,11 @@
  */
 function AbstractController(params) {
     /**
+     * Indicate if the controller is for a readonly form
+     * @memberOf AbstractController
+     */
+    let isReadOnly = false;
+    /**
      * Flag indicate if form is being updated
      * @memberOf AbstractController
      */
@@ -111,16 +116,15 @@ function AbstractController(params) {
      * Iinitilize events for module navigation
      * @memberOf AbstractController
      */
-    const initEvents = function () {
-        DOM.list.buttons.new.on('click', newRegister);
+    const initEvents = function (readOnly) {
         DOM.list.buttons.edit.on('click', edit);
-        DOM.list.buttons.remove.on('click', remove);
-        DOM.list.buttons.refresh.on('click', () => {
-            spinner.pop();
-            refresh();
-        });
-        DOM.form.buttons.save.on('click', validate);
+        DOM.list.buttons.refresh.on('click', btnRefresh);
         DOM.form.buttons.cancel.on('click', cancel);
+        if (!readOnly) {
+            DOM.list.buttons.new.on('click', newRegister);
+            DOM.list.buttons.remove.on('click', remove);
+            DOM.form.buttons.save.on('click', validate);
+        }
     };
     /**
      * Method responsable to toggle form for new registers
@@ -188,7 +192,9 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const toForm = function (data) {
-        DOM.form.option.html('Update');
+        DOM.form.option.html(
+            isReadOnly ? 'Details' : 'Update'
+        );
         DOM.divs.list.hide();
         DOM.divs.form.show();
         clean();
@@ -460,7 +466,9 @@ function AbstractController(params) {
         DOM.form.tagForm.find('input[type=radio],input[type=checkbox]').prop('checked', false);
         DOM.form.tagForm.find('select').val('');
         DOM.form.tagForm.find('.is-invalid').removeClass('is-invalid');
-        DOM.form.tagForm.parsley().reset();
+        if (!isReadOnly) {
+            DOM.form.tagForm.parsley().reset();
+        }
         if (!$.isEmpty(params.clean)) {
             params.clean();
         }
@@ -477,6 +485,14 @@ function AbstractController(params) {
             .selectable()
             .dblClickEvent(edit)
             .mountAjax(params.apiUrl);
+    };
+    /**
+     * Handle refresh click
+     * @memberOf AbstractController
+     */
+    const btnRefresh = function () {
+        spinner.pop();
+        refresh();
     };
     /**
      * Refresh datatables
@@ -504,11 +520,12 @@ function AbstractController(params) {
      * Module Initialize
      * @memberOf AbstractController
      */
-    this.init = function () {
+    this.init = function (readOnly = false) {
+        isReadOnly = readOnly;
         initMap();
         initDatePickers();
         initDatatable();
-        initEvents();
+        initEvents(readOnly);
         return this;
     };
 }

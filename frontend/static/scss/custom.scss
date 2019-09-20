@@ -76,3 +76,12 @@ nav > ol.breadcrumb {
   margin-top: 50%;
   margin-left: 15px;
 }
+
+fieldset {
+  legend {
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: solid 1px;
+    text-transform: uppercase;
+  }
+}

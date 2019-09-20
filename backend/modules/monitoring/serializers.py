@@ -19,8 +19,14 @@ class MonitoringReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Monitoring
-        fields = '__all__'
+        fields = (
+            'id',
+            'patient',
+            'begin',
+            'end',
+        )
         datatables_always_serialize = (
+            'id',
             'patient',
             'begin',
             'end',

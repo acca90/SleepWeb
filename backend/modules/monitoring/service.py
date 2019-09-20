@@ -57,3 +57,23 @@ class MonitoringService:
                     Q(patient__user=user) | Q(patient__in=shared_patients)
                 )[:limit].values('id')
             )
+
+    def get(self, request):
+        """
+        Returns monitoring if user has permissions to read it
+        """
+        if request.user.is_superuser:
+            return Monitoring.objects.get(pk=request.GET['pk'])
+
+        user = User.objects.get(pk=request.user.id)
+        shared_patients = Group.objects.filter(Q(users=user) | Q(institutions=user.institution)).values('patients')
+        monitoring = Monitoring.objects.filter(
+            Q(pk=request.GET['pk']) & (Q(patient__user=user) | Q(patient__in=shared_patients))
+        ).values('id')
+
+        if len(monitoring) != 1:
+            return None
+
+        return Monitoring.objects.get(pk=monitoring[0]['id'])
+
+

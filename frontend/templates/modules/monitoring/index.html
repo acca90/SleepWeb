@@ -5,11 +5,13 @@
 {% block container %}
 	<div id="monitoring">
 		{% include 'monitoring/list.html' %}
+		{% include 'monitoring/form.html' %}
 	</div>
 {% endblock container %}
 
 {% block scripts %}
 	{{ block.super }}
+	<script src="{% static "commons/controllers/ProfileController.js" %}"></script>
 	<script src="{% static "modules/monitoring/MonitoringController.js" %}"></script>
 	<script>
         $(document).ready(function () {

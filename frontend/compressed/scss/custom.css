@@ -42,4 +42,6 @@ nav > ol.breadcrumb { background-color: #f8f9fa; border: 1px solid rgba(0, 0, 0,
 
 .modal-dialog.bottom-right { margin-top: 50%; margin-left: 15px; }
 
+fieldset legend { font-size: 12px; font-weight: bold; border-bottom: solid 1px; text-transform: uppercase; }
+
 /*# sourceMappingURL=custom.css.map */

@@ -94,7 +94,7 @@
 	{% if not user.is_authenticated %}
 		{{ block.super }}
 		<script src="{% static "parsleyjs/dist/parsley.min.js" %}"></script>
-		<script src="{% static "commons/AjaxController.js" %}"></script>
+		<script src="{% static "commons/controllers/AjaxController.js" %}"></script>
 		<script src="{% static "modules/login/LoginController.js" %}"></script>
 		<script>
             $(document).ready(function () {

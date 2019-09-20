@@ -35,7 +35,8 @@ class PatientService:
 
             # Instances to send patient
             msystems = MSystem.objects.filter(
-                institution_id__in=Institution.objects.filter(patient_institution__id=patient_pk).values('pk')
+                institution_id__in=Institution.objects.filter(patient_institution__id=patient_pk).values('pk'),
+                is_active=True
             )
 
             # Send patient for each instance

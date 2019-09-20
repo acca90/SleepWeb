@@ -9,8 +9,13 @@
  */
 function MonitoringController($container) {
     /**
+     * Controller for profile
+     * @memberOf MonitoringController
+     */
+    let profileController = new ProfileController($('#profile_container'));
+    /**
      * DataTable Settings
-     * @namespace MonitoringController
+     * @memberOf MonitoringController
      */
     const getDatatableSettings = function () {
         return [
@@ -23,15 +28,15 @@ function MonitoringController($container) {
      * Render for patient
      * @memberOf MonitoringController
      */
-    const renderPatient = function (data, type, full ) {
+    const renderPatient = function (data, type, full) {
         return full.patient.first_name + " " + full.patient.last_name
     };
     /**
      * Render for datetime
      * @memberOf MonitoringController
      */
-    const renderDatetime = function ( data ) {
-        let string = data.replace("Z","");
+    const renderDatetime = function (data) {
+        let string = data.replace("Z", "");
         string = string.split("T");
         return (string[0].split("-").reverse().join("/")) + ' ' + string[1];
     };
@@ -49,16 +54,24 @@ function MonitoringController($container) {
             },
             datatableSettings: getDatatableSettings(),
             serialize: null,
-            toForm: null,
+            toForm: toForm,
             clean: null
         };
+    };
+    /**
+     * Load form for monitoring view
+     * @memberOf MonitoringController
+     */
+    const toForm = function ( monitoring ) {
+        profileController.clean().load(monitoring.patient);
     };
     /**
      * Module Initialize
      * @memberOf MonitoringController
      */
     this.init = function () {
-        new AbstractController(getParams()).init();
+        new AbstractController(getParams()).init(true);
+        profileController.init();
     };
     /**
      * Load a modal datatables for search and pick registers

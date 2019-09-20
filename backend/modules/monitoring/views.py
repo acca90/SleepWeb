@@ -36,7 +36,10 @@ class MonitoringReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
         """
         Override method to check permissions
         """
-        queryset = self.monitoring_service.filter(request)
+        queryset = self.monitoring_service.get(request)
+        if queryset is None:
+            return not_allowed_to_do()
+
         serializer = MonitoringReadSerializer(queryset, many=False)
         return Response(serializer.data)
 
