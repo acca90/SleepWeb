@@ -63,11 +63,18 @@ function MonitoringController($container) {
      * @memberOf MonitoringController
      */
     const toForm = function ( monitoring ) {
-                console.log(monitoring)
+        let $teste = $('#teste');
         profileController.clean().load(monitoring.patient);
         $("#monitoring_begin").html(renderDatetime(monitoring.begin));
         $("#monitoring_end").html(renderDatetime(monitoring.end));
-        $("#monitoring_result").html(monitoring.result);
+        monitoring.indicators.forEach(indicator => {
+            $teste.append(`
+                <li>
+                    ${indicator.indicator.description}:
+                     <b class="text-info">${indicator.value}</b>
+                </li>
+            `)
+        });
     };
     /**
      * Module Initialize

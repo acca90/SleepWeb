@@ -8,14 +8,14 @@ Universidade de Passo Fundo - 2018/2019
 """
 from rest_framework import serializers
 
-from backend.modules.indicator.serializers import IndicatorSerializer
+from backend.modules.indicator.serializers import IndicatorMinimalSerializer
 from backend.modules.patient.serializers import PatientMinimalSerializer
 from backend.modules.monitoring.models import Monitoring, MonitoringIndicator
 
 
 class MonitoringIndicatorSerializer(serializers.ModelSerializer):
 
-    indicator = IndicatorSerializer(read_only=True)
+    indicator = IndicatorMinimalSerializer(read_only=True)
 
     class Meta:
         model = MonitoringIndicator

@@ -16,3 +16,11 @@ class IndicatorSerializer(serializers.ModelSerializer):
         model = Indicator
         fields = '__all__'
         datatables_always_serialize = ('id', 'description')
+
+
+class IndicatorMinimalSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Indicator
+        fields = ('id', 'description')
+
