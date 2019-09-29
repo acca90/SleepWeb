@@ -1,0 +1,91 @@
+{% load i18n %}
+
+<div id="form" style="display: none">
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" aria-current="page">
+				<i id="moduleIcon" class="fa fa-building"></i>
+				<b>
+					<span id="moduleName">{% trans 'Institutions' %}</span>
+				</b>
+			</li>
+			<li class="breadcrumb-item active" aria-current="page">
+				<span id="moduleOption"></span>
+			</li>
+		</ol>
+	</nav>
+	<div id="formAlert" class="alert" role="alert" style="display: none">
+	</div>
+	{% csrf_token %}
+	<div class="card bg-light">
+		<div class="card-header">
+			<ul class="nav nav-pills card-header-pills ">
+				<li class="nav-item">
+					<button type="button" class="btn btn-dark btn-sm" id="btnCancel">
+						<i class="fa fa-step-backward"></i>
+						<b>{% trans "Back" %}</b>
+					</button>
+				</li>
+			</ul>
+		</div>
+		<div class="card-body">
+			<form>
+				<div class="row">
+					<div id="profile_container" class="col-4">
+						{% include 'monitoring/../../commons/components/profile.html' %}
+					</div>
+					<div class="col-8">
+
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-4">
+
+										<fieldset>
+											<legend>{% trans 'Record details' %}</legend>
+
+											<div class="row">
+												<div class="col-4 text-right">
+													<b>{% trans 'Begin' %}:</b>
+												</div>
+												<div class="col-8">
+													<span id="monitoring_begin"></span>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-4 text-right">
+													<b>{% trans 'End' %}:</b>
+												</div>
+												<div class="col-8">
+													<span id="monitoring_end"></span>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-4 text-right">
+													<b>{% trans 'Result' %}:</b>
+												</div>
+												<div class="col-8">
+													<span id="monitoring_result"></span>
+												</div>
+											</div>
+
+										</fieldset>
+
+									</div>
+									<div class="col-8">
+
+										<fieldset>
+											<legend>{% trans 'Recorded quality indicators' %}</legend>
+										</fieldset>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

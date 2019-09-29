@@ -53,7 +53,7 @@ class JobMonitoring:
         Method defined to repeat requests and store monitorings received
         """
         self.collect_systems()
-        self.execute_request('monitoring', self.process_responses)
+        self.execute_request(self.process_responses)
         self.store_monitorings()
 
     def collect_systems(self):
@@ -63,7 +63,7 @@ class JobMonitoring:
         """
         self.systems = self.msystem_service.fetch()
 
-    def execute_request(self, model, callback):
+    def execute_request(self, callback):
         """
         Execute requests for each instaled monitoring system
         """
@@ -73,7 +73,7 @@ class JobMonitoring:
 
         for msystem in self.systems:
             try:
-                response = requests.post(msystem.url + model, data=self.today())
+                response = requests.post(msystem.url + 'monitoring', json=self.today())
                 callback(msystem, response)
             except Exception as e:
                 print("Monitoring request failed: ", e)
@@ -100,7 +100,7 @@ class JobMonitoring:
         """
         Store monitoring systems collected
         """
-        self.monitoring_service.store(self.monitorings)
+        self.monitoring_service.split_and_store(self.monitorings)
         pass
 
     def today(self):
