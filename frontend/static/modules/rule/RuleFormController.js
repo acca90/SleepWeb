@@ -277,12 +277,34 @@ function RuleFormController() {
         });
     };
     /**
+     * Clean tables to initial state
+     * @memberOf RuleFormController
+     */
+    this.clean = function () {
+        for (let dt in elementMap.dt) {
+            elementMap.dt[dt].clear();
+        }
+        return this;
+    };
+    /**
+     * Load thresholds to each table
+     * @memberOf RuleFormController
+     */
+    this.load = function (thresholds) {
+        thresholds.forEach(threshold => {
+            let element = containers[threshold.indicator - 1];
+            elementMap.dt[element.attr('id')].addRow(threshold);
+        });
+        return this;
+    };
+    /**
      * Add row to active datatables
      * @memberOf RuleFormController
      */
     this.addRow = function (row) {
         let table = elementMap.dt[getActiveIndicator()];
         table.addRow(completeData(table, row));
+        return this;
     };
     /**
      * Ajust columns for its header
@@ -292,6 +314,7 @@ function RuleFormController() {
         for (let dt in elementMap.dt) {
             elementMap.dt[dt].ajustColumns();
         }
+        return this;
     };
     /**
      * Initialize module form

@@ -3,7 +3,7 @@
 <div id="list">
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
-				<li class="breadcrumb-item active" aria-current="page">
+			<li class="breadcrumb-item active" aria-current="page">
 				<i id="moduleIcon" class="fa fa-building"></i>
 				<b>
 					<span id="moduleName">{% trans 'Monitorings' %}</span>
@@ -17,6 +17,12 @@
 		<div class="card-header">
 			<ul class="nav nav-pills card-header-pills ">
 				{% include 'components/menu_read_only_list.html' %}
+				<li class="nav-item">
+					<button type="button" class="btn btn-warning btn-sm" id="btnRequestMonitoring">
+						<i class="fa fa-cloud"></i>
+						<b>{% trans "Update monitorings" %}</b>
+					</button>
+				</li>
 			</ul>
 		</div>
 		<div id="datatable" class="card-body">

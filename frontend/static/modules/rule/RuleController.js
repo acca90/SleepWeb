@@ -53,13 +53,14 @@ function RuleController($container) {
      */
     const toForm = function (rule) {
         let $form = $('form', $container);
+        formController.load(rule.thresholds)
     };
     /**
      * Clean method that set form for its default state
      * @memberOf RuleController
      */
     const clean = function () {
-        formController.ajustColumns();
+        formController.ajustColumns().clean();
     };
     /**
      * Serialize form for API submit

@@ -9,6 +9,7 @@ Universidade de Passo Fundo - 2018/2019
 from rest_framework import serializers
 
 from backend.modules.rule.models import Rule, Threshold
+from backend.modules.stage.serializers import StageSerializer
 from backend.modules.user.serializers import UserReadSerializer
 
 
@@ -26,6 +27,9 @@ class ThresholdWriteSerializer(serializers.ModelSerializer):
 
 
 class ThresholdReadSerializer(serializers.ModelSerializer):
+
+    stage = StageSerializer(read_only=True)
+
     class Meta:
         model = Threshold
         fields = (
@@ -35,6 +39,7 @@ class ThresholdReadSerializer(serializers.ModelSerializer):
             'end',
             'quality',
             'weight',
+            'stage'
         )
 
 
@@ -54,7 +59,7 @@ class RuleListSerializer(serializers.ModelSerializer):
 
 class RuleReadSerializer(serializers.ModelSerializer):
 
-    thresholds = ThresholdWriteSerializer(many=True)
+    thresholds = ThresholdReadSerializer(many=True)
 
     class Meta:
         model = Rule

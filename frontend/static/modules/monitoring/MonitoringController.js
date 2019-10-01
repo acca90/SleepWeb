@@ -55,20 +55,27 @@ function MonitoringController($container) {
             datatableSettings: getDatatableSettings(),
             serialize: null,
             toForm: toForm,
-            clean: null
+            clean: clean
         };
+    };
+    /**
+     * Clean form to its original state
+     * @memberOf MonitoringController
+     */
+    const clean = function () {
+        $('#indicators').html("");
     };
     /**
      * Load form for monitoring view
      * @memberOf MonitoringController
      */
     const toForm = function ( monitoring ) {
-        let $teste = $('#teste');
+        let $indicators = $('#indicators');
         profileController.clean().load(monitoring.patient);
         $("#monitoring_begin").html(renderDatetime(monitoring.begin));
         $("#monitoring_end").html(renderDatetime(monitoring.end));
         monitoring.indicators.forEach(indicator => {
-            $teste.append(`
+            $indicators.append(`
                 <li>
                     ${indicator.indicator.description}:
                      <b class="text-info">${indicator.value}</b>
