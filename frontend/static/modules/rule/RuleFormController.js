@@ -9,6 +9,14 @@
  */
 function RuleFormController() {
     /**
+     * Keeps messages strings
+     * @memberOf RuleFormController
+     */
+    const strings = {
+        removeTitle: 'Need Confirmation',
+        removeMsg: 'Are you sure to remove this threshold from the rule?'
+    };
+    /**
      * Reference for controller
      * @memberOf RuleFormController
      */
@@ -176,6 +184,7 @@ function RuleFormController() {
         elementMap.dt = {};
         elementMap.datatableCards = $('#datatableCards');
         elementMap.btnAddThreshold = $('#btnAddThreshold');
+        elementMap.btnRemThreshold = $('#btnRemThreshold');
     };
     /**
      * Initialize events
@@ -188,6 +197,9 @@ function RuleFormController() {
         });
         elementMap.btnAddThreshold.on('click', function () {
             thresholdController.show(activeIndicator);
+        });
+        elementMap.btnRemThreshold.on('click', function () {
+            removeActiveIndicatorSelected();
         });
         containers.forEach($container => bindWeightChangeEvent($container));
     };
@@ -259,6 +271,24 @@ function RuleFormController() {
                 array = array.concat(dataArray);
         }
         return array;
+    };
+    /**
+     * Method define to remove the selected indicator
+     * @memberOf RuleFormController
+     */
+    const removeActiveIndicatorSelected = function () {
+        let dt = elementMap.dt[getActiveIndicator()];
+        new ConfirmationController(
+            strings.removeTitle,
+            strings.removeMsg,
+            $modal => {
+                $modal.modal('toggle');
+                dt.removeRow(dt.getSelectedRow());
+            },
+            () => {
+                console.log('dismiss');
+            },
+        ).open();
     };
     /**
      * Serialize data for submit
