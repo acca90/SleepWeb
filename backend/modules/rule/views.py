@@ -7,11 +7,13 @@ Universidade de Passo Fundo - 2018/2019
 @since 21/03/2019
 """
 from rest_framework import viewsets, status
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from backend.commons.notAllowed import not_allowed_to_do
 from backend.modules.rule.models import Rule
 from backend.modules.rule.serializers import RuleListSerializer, RuleWriteSerializer, RuleReadSerializer
+from backend.modules.rule.service import RuleService
 
 
 class RuleViewSet(viewsets.ModelViewSet):
@@ -40,46 +42,33 @@ class RuleViewSet(viewsets.ModelViewSet):
         """
         Method for create new groups
         """
-        write_serializer = RuleWriteSerializer(data=request.data, context={"request": request})
-        if write_serializer.is_valid():
-            instance = write_serializer.create(write_serializer.validated_data)
-            read_serializer = RuleListSerializer(instance)
-            return Response(read_serializer.data, status.HTTP_200_OK)
-        else:
-            return Response(write_serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
+        self.serializer_class = RuleWriteSerializer
+        return super().create(request, *args, **kwargs)
 
     def partial_update(self, request, *args, **kwargs):
         """
         Method for update groups
         """
         instance = Rule.objects.get(pk=kwargs['pk'])
-
         if instance.user_id != request.user.id and not request.user.is_superuser:
             return not_allowed_to_do()
 
-        write_serializer = RuleWriteSerializer(
-            partial=True,
-            instance=instance,
-            data=request.data,
-            context={"request": request}
-        )
-        if write_serializer.is_valid():
-            instance = write_serializer.update(instance, write_serializer.validated_data)
-            read_serializer = RuleListSerializer(instance)
-            return Response(read_serializer.data, status.HTTP_200_OK)
-        else:
-            return Response(write_serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
+        self.serializer_class = RuleWriteSerializer
+        return super().partial_update(request, *args, **kwargs)
 
     def update(self, request, *args, **kwargs):
         """
         Override method to check permissions
         """
-        instance = Rule.objects.get(pk=kwargs['pk'])
+        if kwargs['partial']:
+            instance = Rule.objects.get(pk=request.data['id'])
+        else:
+            instance = Rule.objects.get(pk=kwargs['pk'])
 
         if instance.user_id != request.user.id and not request.user.is_superuser:
             return not_allowed_to_do()
 
-        return super().update(request, args, kwargs)
+        return super().update(request, *args, **kwargs)
 
     def destroy(self, request, *args, **kwargs):
         """
@@ -92,3 +81,12 @@ class RuleViewSet(viewsets.ModelViewSet):
 
         return super().destroy(request, args, kwargs)
 
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def monitoring_evaluate(request, rule_id, monitoring_id):
+    try:
+        RuleService().evaluate(rule_id, monitoring_id)
+        return Response(data={}, status=status.HTTP_200_OK)
+    except Exception:
+        return Response(data={}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

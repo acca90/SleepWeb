@@ -53,6 +53,8 @@ function RuleController($container) {
      */
     const toForm = function (rule) {
         let $form = $('form', $container);
+        $('#ruleId', $form).val(rule.id);
+        $('#ruleDescription', $form).val(rule.description);
         formController.load(rule.thresholds)
     };
     /**

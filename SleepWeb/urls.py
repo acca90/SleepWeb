@@ -21,7 +21,7 @@ from backend.modules.user.views import UserViewSet
 from backend.modules.msystem.views import MSystemViewSet
 from backend.modules.indicator.views import IndicatorViewSet
 from backend.modules.group.views import GroupViewSet
-from backend.modules.rule.views import RuleViewSet
+from backend.modules.rule.views import RuleViewSet, monitoring_evaluate
 
 # Front-End
 from frontend.modules.home.views import Home
@@ -55,6 +55,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # api
+    path('api/v1/monitoring/evaluate/<int:rule_id>/<int:monitoring_id>/', monitoring_evaluate),
     path('api/v1/patient/send/<int:pk>/', patient_send),
     path('api/v1/api-auth/', include('rest_framework.urls')),
     path('api/v1/rest-auth/', include('rest_auth.urls')),

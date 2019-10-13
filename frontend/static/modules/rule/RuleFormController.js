@@ -297,6 +297,7 @@ function RuleFormController() {
     this.serialize = function () {
         return superDataArray().map(threshold => {
             return {
+                id: threshold.id,
                 begin: threshold.begin,
                 end: threshold.end,
                 indicator: threshold.indicator.id,

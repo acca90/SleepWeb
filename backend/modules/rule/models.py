@@ -56,3 +56,15 @@ class Threshold(models.Model):
         verbose_name = 'Thresholds'
         verbose_name_plural = 'Thresholds'
         ordering = ['id']
+
+    def copy(self, threshold):
+        """
+        Create new instance with data
+        """
+        self.indicator = threshold['indicator']
+        self.stage = threshold['stage']
+        self.begin = threshold['begin']
+        self.end = threshold['end']
+        self.quality = threshold['quality']
+        self.weight = threshold['weight']
+        return self
