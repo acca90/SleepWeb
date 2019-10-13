@@ -81,39 +81,6 @@ class RuleWriteSerializer(WritableNestedModelSerializer):
     thresholds = ThresholdWriteSerializer(many=True)
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
-    '''
-    def create(self, validated_data):
-        """
-        Overrides default implementation for create process
-        """
-        threshold_data = validated_data.pop('thresholds')
-        rule = Rule.objects.create(**validated_data)
-        for threshold in threshold_data:
-            Threshold.objects.create(rule=rule, **threshold)
-
-        return rule
-
-    def update(self, instance, validated_data):
-        """
-        Overrides default implementation for update process
-        """
-        instance.description = validated_data['description']
-        instance.save()
-
-        # Delete excluded
-        thresholds_updated = [item['id'] for item in validated_data['thresholds']]
-        for threshold in instance.thresholds:
-            if threshold.id not in thresholds_updated:
-                threshold.delete()
-
-        # Create or update
-        for item in validated_data['thresholds']:
-            threshold = Threshold().copy(item)
-            threshold.save()
-
-        return instance
-    '''
-
     class Meta:
         model = Rule
         fields = (

@@ -1,0 +1,32 @@
+INSERT INTO public."Threshold"
+(
+ threshold_begin,
+ threshold_end,
+ quality,
+ weight,
+ indicator_id,
+ rule_id,
+ stage_id
+)
+VALUES
+(0,74,-1,1,1,12,1),
+(75,86,0,1,1,12,1),
+(87,100,1,1,1,12,1),
+(0,74,-1,1,1,12,2),
+(75,86,0,1,1,12,2),
+(87,100;1,1,1,12,2),
+(0,74,-1,1,1,12,3),
+(75,86,0,1,1,12,3),
+(87,10,1,1,1,12,3),
+(0,74,-1,1,1,12,4),
+(75,86,0,1,1,12,4),
+(87,100,1,1,1,12,4),
+
+
+
+Fórmula:
+
+Para cada Indicador APROPRIADO coletado: +1
+Para cada Indicador INCERTO coletado: 0
+Para cada Indicador INAPROPRIADO coletado: -1
+Indicador é multiplicado pelo peso informado

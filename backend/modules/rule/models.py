@@ -46,7 +46,7 @@ class Threshold(models.Model):
     begin = models.IntegerField(db_column='threshold_begin', null=False)
     end = models.IntegerField(db_column='threshold_end', null=False)
     # GOOD, BAD, UNCERTAIN
-    quality = models.CharField(db_column='quality', max_length=10, null=False)
+    quality = models.IntegerField(db_column='quality', null=False)
     # How much it will be relevant for final result
     weight = models.IntegerField(db_column='weight', null=False)
 

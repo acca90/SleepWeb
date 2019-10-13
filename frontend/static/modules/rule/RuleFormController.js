@@ -57,8 +57,8 @@ function RuleFormController() {
      * Render for Stage
      * @memberOf RuleFormController
      */
-    const renderStage = function (data) {
-        return data.description;
+    const renderStage = function (data, type, full) {
+        return `(${full.stage.id}) - ` + full.stage.description;
     };
     /**
      * Render for quality
@@ -158,7 +158,7 @@ function RuleFormController() {
      */
     const initDatatables = function () {
         let settings = [
-            {th: 'Stage', data: 'stage', orderable: false, render: renderStage},
+            {th: 'Stage', data: 'stage.id', orderable: true, render: renderStage},
             {th: 'Begin', data: 'begin', width: '100px', orderable: false},
             {th: 'End', data: 'end', width: '100px', orderable: false},
             {th: 'Quality', data: 'quality', width: '100px', orderable: false, render: renderQuality},

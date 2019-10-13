@@ -35,6 +35,11 @@ function DataTableComponent(settings) {
      */
     let scrollX = true;
     /**
+     * Default column def for static datatables
+     * @memberOf DataTableComponent
+     */
+    let columnDefs = {};
+    /**
      * Makes it width 100%
      * @memberOf DataTableComponent
      */
@@ -127,6 +132,13 @@ function DataTableComponent(settings) {
     this.scrollX = function (isScrollX) {
         scrollX = isScrollX;
         return this;
+    };
+    /**
+     * Defines ordering for datatables
+     * @memberOf DataTableComponent
+     */
+    this.columnDefs = function (defs) {
+        columnDefs = defs;
     };
     /**
      * Refresh DataTable
@@ -248,6 +260,7 @@ function DataTableComponent(settings) {
             scrollCollapse: false,
             searching: searchable,
             paging: false,
+            columnDefs: columnDefs,
         });
         return this;
     };
