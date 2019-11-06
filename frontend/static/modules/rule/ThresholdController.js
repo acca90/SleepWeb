@@ -9,6 +9,11 @@
  */
 function ThresholdController(ruleFormController) {
     /**
+     * Default weight value for a threshold
+     * @memberOf ThresholdController
+     */
+    const default_weight = 100;
+    /**
      * Keeps reference active indicator
      * @memberOf ThresholdController
      */
@@ -39,12 +44,6 @@ function ThresholdController(ruleFormController) {
         elementsMap.end = $('#threshold_end');
         elementsMap.include = $('#include');
         elementsMap.continue = $('#continue');
-    };
-    /**
-     * Request data for composee form
-     * @memberOf ThresholdController
-     */
-    const requestData = function () {
     };
     /**
      * Populate form with data
@@ -90,7 +89,6 @@ function ThresholdController(ruleFormController) {
      */
     const callBackStageSuccess = async function (data) {
         await initElements();
-        await requestData();
         await bindMask();
         await populateForm(data);
         await bindEvents();
@@ -194,7 +192,7 @@ function ThresholdController(ruleFormController) {
             quality: elementsMap.quality.val(),
             begin: elementsMap.begin.val(),
             end: elementsMap.end.val(),
-            weight: 1
+            weight: default_weight
         };
     };
     /**

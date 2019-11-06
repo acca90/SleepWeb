@@ -14,20 +14,38 @@ class RuleService:
     """
     Service that keeps methods relatives to rules
     """
-    def evaluate(self, rule_id, monitoring_id):
+    def evaluate(self, monitoring_id, rule_id):
         """
         Method that evaluate monitoring with rule
+        Steps =>
+
+        1. FB = Sum weight from all indicators in the rule
+        2. FA = Calc FA from each collected indicator in the monitoring
+        3. FD = Sum all FA
+        4. IDX = Generate index
         """
+        quality_array = []
 
         indicators = MonitoringIndicator.objects.filter(monitoring__id=monitoring_id)
 
-        quality_array = []
+        FB = 0
+        FD = 0
 
-        for indicator in indicators:
+        for item in indicators:
             thresholds = Threshold.objects.filter(
-                rule__id=rule_id, begin__gte=indicator.value, end__lte=indicator.value
+                rule__id=rule_id,
+                indicator__id=item.indicator.id,
+                begin__lte=item.value,
+                end__gte=item.value,
             )
-            quality_array.append(thresholds)
+            FB += thresholds[0].weight
+            FD += self.calc_fa(thresholds[0].weight, thresholds[0].quality)
 
         print(quality_array)
         pass
+
+    def calc_fa(self, weight, quality):
+        """
+        Calculacted FA Avaliation Factor from weight and quality
+        """
+        return 1

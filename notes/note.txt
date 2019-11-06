@@ -9,24 +9,115 @@ INSERT INTO public."Threshold"
  stage_id
 )
 VALUES
-(0,74,-1,1,1,12,1),
-(75,86,0,1,1,12,1),
-(87,100,1,1,1,12,1),
-(0,74,-1,1,1,12,2),
-(75,86,0,1,1,12,2),
-(87,100;1,1,1,12,2),
-(0,74,-1,1,1,12,3),
-(75,86,0,1,1,12,3),
-(87,10,1,1,1,12,3),
-(0,74,-1,1,1,12,4),
-(75,86,0,1,1,12,4),
-(87,100,1,1,1,12,4),
+(0,74,-1,100,1,12,1),
+(75,86,0,100,1,12,1),
+(87,100,1,100,1,12,1),
+(0,74,-1,100,1,12,2),
+(75,86,0,100,1,12,2),
+(87,100;1,100,1,12,2),
+(0,74,-1,100,1,12,3),
+(75,86,0,100,1,12,3),
+(87,10,1,100,1,12,3),
+(0,74,-1,100,1,12,4),
+(75,86,0,100,1,12,4),
+(87,100,1,100,1,12,4),
 
 
 
-Fórmula:
+select threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id from public."Threshold";
 
-Para cada Indicador APROPRIADO coletado: +1
-Para cada Indicador INCERTO coletado: 0
-Para cada Indicador INAPROPRIADO coletado: -1
-Indicador é multiplicado pelo peso informado
+
+select value from public."Monitoring_Indicators" where indicator = 2 group by value order by value desc;
+
+
+
+
+
+
+
+
+
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 15, 100, 100, 2, 12, 1);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 15, 100, 100, 2, 12, 2);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 15, 100, 100, 2, 12, 3);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 15, 100, 100, 2, 12, 4);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 15, 100, 100, 2, 12, 5);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 15, 100, 100, 2, 12, 6);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 15, 100, 100, 2, 12, 7);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 15, 100, 100, 2, 12, 8);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 15, 100, 100, 2, 12, 9);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (16, 30, 50, 100, 2, 12, 1);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (16, 30, 50, 100, 2, 12, 2);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (16, 30, 50, 100, 2, 12, 3);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (16, 30, 50, 100, 2, 12, 4);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (16, 30, 50, 100, 2, 12, 5);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (16, 30, 50, 100, 2, 12, 6);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (16, 30, 50, 100, 2, 12, 7);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (16, 30, 50, 100, 2, 12, 8);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (16, 30, 50, 100, 2, 12, 9);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (30, 99999, 0, 100, 2, 12, 1);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (30, 99999, 0, 100, 2, 12, 2);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (30, 99999, 0, 100, 2, 12, 3);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (30, 99999, 0, 100, 2, 12, 4);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (30, 99999, 0, 100, 2, 12, 5);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (30, 99999, 0, 100, 2, 12, 6);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (30, 99999, 0, 100, 2, 12, 7);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (30, 99999, 0, 100, 2, 12, 8);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (30, 99999, 0, 100, 2, 12, 9);
+
+
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 1, 100, 100, 10, 12, 1);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 1, 100, 100, 10, 12, 2);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 1, 100, 100, 10, 12, 3);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 1, 100, 100, 10, 12, 4);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 1, 100, 100, 10, 12, 5);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 1, 100, 100, 10, 12, 6);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 1, 100, 100, 10, 12, 7);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 1, 100, 100, 10, 12, 8);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (0, 1, 100, 100, 10, 12, 9);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (2, 3, 50, 100, 10, 12, 1);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (2, 3, 50, 100, 10, 12, 2);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (2, 3, 50, 100, 10, 12, 3);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (2, 3, 50, 100, 10, 12, 4);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (2, 3, 50, 100, 10, 12, 5);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (2, 3, 50, 100, 10, 12, 6);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (2, 3, 50, 100, 10, 12, 7);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (2, 3, 50, 100, 10, 12, 8);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (2, 3, 50, 100, 10, 12, 9);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (4, 100, 0, 100, 10, 12, 1);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (4, 100, 0, 100, 10, 12, 2);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (4, 100, 0, 100, 10, 12, 3);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (4, 100, 0, 100, 10, 12, 4);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (4, 100, 0, 100, 10, 12, 5);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (4, 100, 0, 100, 10, 12, 6);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (4, 100, 0, 100, 10, 12, 7);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (4, 100, 0, 100, 10, 12, 8);
+INSERT INTO public."Threshold" (threshold_begin, threshold_end, quality, weight, indicator_id, rule_id, stage_id) VALUES (4, 100, 0, 100, 10, 12, 9);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

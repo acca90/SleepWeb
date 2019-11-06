@@ -66,15 +66,15 @@ function RuleFormController() {
      */
     const renderQuality = function (data) {
         let quality, color;
-        if (data == 1) {
+        if (data == 100) {
             color = 'text-success';
             quality = "Appropriate";
         } else if (data == 0) {
-            color = 'text-warning';
-            quality = "Uncertain";
-        } else {
             color = 'text-danger';
             quality = "Unappropriate";
+        } else {
+            color = 'text-warning';
+            quality = "Uncertain";
         }
         return `<b class="${color}">${quality}</b>`
     };
