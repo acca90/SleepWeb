@@ -35,8 +35,7 @@
 						{% include 'monitoring/../../commons/components/profile.html' %}
 					</div>
 					<div class="col-8">
-
-						<div class="card">
+						<div class="card" style="height: 165px;">
 							<div class="card-body">
 								<div class="row">
 									<div class="col-4">
@@ -72,7 +71,23 @@
 
 							</div>
 						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 mt-2">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-12">
+										<fieldset>
+											<legend>{% trans 'Evaluate' %}</legend>
+											{% include 'modules/monitoring/evaluate.html' %}
+										</fieldset>
+									</div>
+								</div>
 
+							</div>
+						</div>
 					</div>
 				</div>
 			</form>

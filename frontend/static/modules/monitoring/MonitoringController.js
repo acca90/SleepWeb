@@ -90,6 +90,7 @@ function MonitoringController($container) {
     this.init = function () {
         new AbstractController(getParams()).init(true);
         profileController.init();
+        new EvaluateController().init();
     };
     /**
      * Load a modal datatables for search and pick registers

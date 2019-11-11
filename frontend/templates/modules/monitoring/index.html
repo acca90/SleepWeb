@@ -13,6 +13,7 @@
 	{{ block.super }}
 	<script src="{% static "commons/controllers/ProfileController.js" %}"></script>
 	<script src="{% static "modules/monitoring/MonitoringController.js" %}"></script>
+	<script src="{% static "modules/monitoring/EvaluateController.js" %}"></script>
 	<script>
         $(document).ready(function () {
             new MonitoringController($('#monitoring')).init();
