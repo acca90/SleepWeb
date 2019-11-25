@@ -9,6 +9,11 @@
  */
 function EvaluateController() {
     /**
+     * Graph controller
+     * @memberOf EvaluateController
+     */
+    const graphController = new GraphController();
+    /**
      * Request API for bring user rules to populate select
      * @memberOf EvaluateController
      */
@@ -59,7 +64,7 @@ function EvaluateController() {
     const evaluate = function (rule) {
         if ($.isEmpty(rule)) {
             clean();
-            return;
+
         }
     };
     /**
@@ -75,5 +80,6 @@ function EvaluateController() {
     this.init = function () {
         populateSelectWithUserRules();
         initializeEvents();
+        graphController.init();
     };
 }

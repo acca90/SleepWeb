@@ -1,12 +1,28 @@
 {% load i18n %}
 
 <div class="row">
-	<div class="col-6">
+	<div class="col-md-6 col-xs-12 col-sm-12">
 		<div class="form-group">
 			<label for="ruleForEvaluation">{% trans 'Choose the Rule' %}</label>
 			<select class="form-control" id="ruleForEvaluation">
 				<option value="">{% trans 'Select' %}</option>
 			</select>
 		</div>
+	</div>
+	<div class="col-md-6 col-xs-12 col-sm-12">
+		<div class="form-group">
+			<label for="monitoringIndicators">{% trans 'Indicator curve' %}</label>
+			<select class="form-control" id="monitoringIndicators">
+				<option value="">{% trans 'Select' %}</option>
+			</select>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6 col-xs-12 col-sm-12">
+		<canvas id="overall" width="500" height="400"></canvas>
+	</div>
+	<div class="col-md-6 col-xs-12 col-sm-12">
+		<canvas id="curve" width="500" height="400"></canvas>
 	</div>
 </div>

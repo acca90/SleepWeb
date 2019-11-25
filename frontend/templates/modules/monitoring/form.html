@@ -40,7 +40,7 @@
 								<div class="row">
 									<div class="col-4">
 										<fieldset>
-											<legend>{% trans 'Record details' %}</legend>
+											<legend><i class="fa fa-calendar"></i> {% trans 'Record details' %}</legend>
 											<div class="row">
 												<div class="col-4 text-right">
 													<b>{% trans 'Begin' %}:</b>
@@ -61,7 +61,10 @@
 									</div>
 									<div class="col-8">
 										<fieldset>
-											<legend>{% trans 'Recorded quality indicators' %}</legend>
+											<legend>
+												<i class="fa fa-eye"></i>
+												{% trans 'Recorded quality indicators' %}
+											</legend>
 											<ul id="indicators">
 
 											</ul>
@@ -80,17 +83,23 @@
 								<div class="row">
 									<div class="col-12">
 										<fieldset>
-											<legend>{% trans 'Evaluate' %}</legend>
+											<legend><i class="fa fa-line-chart"></i> {% trans 'Evaluate' %}</legend>
 											{% include 'modules/monitoring/evaluate.html' %}
 										</fieldset>
 									</div>
 								</div>
-
+								<div class="col-12">
+									<fieldset>
+										<legend><i class="fa fa-indent"></i> {% trans 'Index' %}</legend>
+										Index table
+									</fieldset>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</form>
 		</div>
+		</form>
 	</div>
+</div>
 </div>
