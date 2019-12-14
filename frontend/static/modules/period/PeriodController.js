@@ -5,36 +5,37 @@
  *
  * @author Matheus Hernandes
  * @since 09/03/2019
- * @namespace InstitutionController
+ * @namespace PeriodController
  */
-function InstitutionController($container) {
+function PeriodController($container) {
     /**
      * DataTable Settings
-     * @namespace InstitutionController
+     * @namespace PeriodController
      */
     const getDatatableSettings = function () {
         return [
             {th: '#', data: 'id'},
-            {th: 'Name', data: 'name'},
-            {th: 'Contry', data: 'country'}
+            {th: 'patient', data: 'country'},
+            {th: 'begin', data: 'name'},
+            {th: 'end', data: 'country'},
         ];
     };
     /**
      * Return params for AbstractController
-     * @memberOf InstitutionController
+     * @memberOf PeriodController
      */
     const getParams = function () {
         return {
             container: $container,
-            apiUrl: 'institution',
+            apiUrl: 'period',
             message: {
-                saveSuccess: `Institution successfully registered`,
-                editPickError: `Select a institution to update`,
+                saveSuccess: `Period successfully registered`,
+                editPickError: `Select a period to update`,
                 editAjaxError: `Something went wrong with request, call administrators`,
-                editSuccess: `Institution successfully updated`,
-                removePickError: `Select a institution to remove`,
-                removeConfirmationMsg: `Are you sure to remove this institution? You cannot revert if it is done.`,
-                removeSuccess: `Institution successfully removed`,
+                editSuccess: `Period successfully updated`,
+                removePickError: `Select a period to remove`,
+                removeConfirmationMsg: `Are you sure to remove this period? You cannot revert if it is done.`,
+                removeSuccess: `Period successfully removed`,
                 removeError: `Something went wrong with request, call administrators`,
             },
             datatableSettings: getDatatableSettings(),
@@ -45,31 +46,28 @@ function InstitutionController($container) {
     };
     /**
      * Fill form fields for update data
-     * @memberOf InstitutionController
+     * @memberOf PeriodController
      */
-    const toForm = function (institution) {
+    const toForm = function (period) {
         let $form = $('form', $container);
-        $('#institution\\.id', $form).val(institution.id);
-        $('#institution\\.name', $form).val(institution.name);
-        $('#institution\\.country', $form).val(institution.country);
     };
     /**
      * Serialize form for API submit
-     * @memberOf InstitutionController
+     * @memberOf PeriodController
      */
     const serialize = function () {
         return $('form').serializeToJson();
     };
     /**
      * Module Initialize
-     * @memberOf InstitutionController
+     * @memberOf PeriodController
      */
     this.init = function () {
         new AbstractController(getParams()).init();
     };
     /**
      * Load a settings for modal datatables
-     * @memberOf InstitutionController
+     * @memberOf PeriodController
      */
     this.getSettings = function () {
         return {

@@ -10,8 +10,8 @@ from django.shortcuts import render
 from django.views import View
 
 
-class Analysis(View):
-    template_name = 'analysis/index.html'
+class Period(View):
+    template_name = 'period/index.html'
 
     def get(self, request):
         return render(request, self.template_name)

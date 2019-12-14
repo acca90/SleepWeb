@@ -16,6 +16,7 @@ from rest_framework import routers
 from backend.modules.institution.views import InstitutionViewSet
 from backend.modules.monitoring.views import MonitoringReadOnlyViewSet, MonitoringDashboardViewSet
 from backend.modules.patient.views import PatientViewSet, patient_send
+from backend.modules.period.views import PeriodViewSet
 from backend.modules.stage.views import StageViewSet
 from backend.modules.user.views import UserViewSet
 from backend.modules.msystem.views import MSystemViewSet
@@ -35,7 +36,7 @@ from frontend.modules.patient.views import Patient, PatientFinder
 from frontend.modules.institution.views import Institution, InstitutionFinder
 from frontend.modules.user.views import UserFrontEnd, UserFinder
 from frontend.modules.rule.views import Rule, RuleFinder
-from frontend.modules.analysis.views import Analysis
+from frontend.modules.period.views import Period
 
 from frontend.modules.views import locale
 
@@ -48,6 +49,7 @@ router.register(r'msystem', MSystemViewSet, base_name='msystem')
 router.register(r'indicator', IndicatorViewSet, base_name='indicator')
 router.register(r'group', GroupViewSet, base_name='group')
 router.register(r'rule', RuleViewSet, base_name='rule')
+router.register(r'period', PeriodViewSet, base_name='period')
 router.register(r'monitoring', MonitoringReadOnlyViewSet, base_name='monitoring')
 router.register(r'dashboard/monitoring', MonitoringDashboardViewSet, base_name='dashboard_monitoring')
 
@@ -77,7 +79,7 @@ urlpatterns = [
     url(r'^stage/', login_required(Stage.as_view()), name='stage'),
     url(r'^patient/', login_required(Patient.as_view()), name='patient'),
     url(r'^rule/', login_required(Rule.as_view()), name='rule'),
-    url(r'^analysis/', login_required(Analysis.as_view()), name='analysis'),
+    url(r'^period/', login_required(Period.as_view()), name='period'),
     url(r'^monitoring/', login_required(Monitoring.as_view()), name='monitoring'),
 
     url(r'^finder/user/$', login_required(UserFinder.as_view()), name='userFinder'),

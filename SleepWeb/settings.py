@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     # SleepWeb
     'backend',
     'backend.commons',
+    'backend.modules.period',
     'backend.modules.institution',
     'backend.modules.msystem',
     'backend.modules.indicator',
@@ -110,7 +111,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'sleepweb',
         'USER': 'postgres',
-        'PASSWORD': 'f12345',
+        'PASSWORD': 'f1234',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -156,7 +157,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
 )
 
-LANGUAGE_CODE = 'pt'
+LANGUAGE_CODE = 'en'
 
 LANGUAGES = (
     ('pt', _('Portuguese')),
