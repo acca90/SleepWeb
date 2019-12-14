@@ -1,0 +1,102 @@
+{% load i18n %}
+
+<div id="form" style="display: none">
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" aria-current="page">
+				<i id="moduleIcon" class="fa fa-building"></i>
+				<b>
+					<span id="moduleName">{% trans 'Monitoring Periods' %}</span>
+				</b>
+			</li>
+			<li class="breadcrumb-item active" aria-current="page">
+				<span id="moduleOption"></span>
+			</li>
+		</ol>
+	</nav>
+	<div id="formAlert" class="alert" role="alert" style="display: none">
+	</div>
+	{% csrf_token %}
+	<div class="card bg-light">
+		<div class="card-header">
+			<ul class="nav nav-pills card-header-pills ">
+				{% include 'components/menu_form.html' %}
+			</ul>
+		</div>
+		<div class="card-body">
+			<form id="main" data-parsley-validate>
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label for="period.id">{% trans 'Identification' %}</label>
+						<input type="text"
+							   class="form-control form-control-sm"
+							   id="period.id"
+							   name="id"
+							   isPk
+							   disabled>
+					</div>
+				</div>
+
+                <div id="divPatient" class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="patientField">{% trans 'Patient' %}</label>
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fa fa-address-card-o"></i>
+                                </div>
+                            </div>
+                            <input type="text"
+                                   class="form-control form-control-sm"
+                                   data-parsley-required-message="{% trans 'Enter the patient for the monitoring period' %}"
+                                   data-parsley-errors-container="#patientValidateMessage"
+                                   required
+                                   readonly
+                                   id="patientField"
+                                   name="patientField" />
+                            <input type="hidden" id="patientId" name="patient">
+                            <div class="input-group-append">
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-primary btn-sm" id="findPatient">
+                                        <i class="fa fa-search"></i>
+                                        <b>{% trans 'Find Patient' %}</b>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="patientValidateMessage"></div>
+                    </div>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-3 mb-3">
+                        <label for="periodStartDate">{% trans 'Start Date' %}</label>
+                        <input type="text"
+                               isDatePicker
+                               class="form-control form-control-sm"
+                               data-parsley-required-message="{% trans 'Enter the start date for the monitoring period' %}"
+                               data-parsley-errors-container="#beginDateValidateMessage"
+                               required
+                               id="periodStartDate"
+                               name="begin">
+                        <div id="beginDateValidateMessage"></div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="periodEndDate">{% trans 'End Date' %}</label>
+                        <input type="text"
+                               isDatePicker
+                               class="form-control form-control-sm"
+                               data-parsley-required-message="{% trans 'Enter the end date for the monitoring period' %}"
+                               data-parsley-errors-container="#endDateValidateMessage"
+                               required
+                               id="periodEndDate"
+                               name="end">
+                        <div id="endDateValidateMessage"></div>
+                    </div>
+                </div>
+
+            </form>
+		</div>
+	</div>
+</div>

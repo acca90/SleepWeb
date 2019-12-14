@@ -19,7 +19,7 @@ function MonitoringController($container) {
      */
     const getDatatableSettings = function () {
         return [
-            {th: 'Patient', width: '', data: 'patient.first_name', render: renderPatient},
+            {th: 'Patient', width: '', data: 'patient.last_name', render: renderPatient},
             {th: 'Date Begin', width: '140px', data: 'begin', render: renderDatetime},
             {th: 'Date End', width: '140px', data: 'end', render: renderDatetime}
         ]

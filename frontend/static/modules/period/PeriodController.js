@@ -4,7 +4,7 @@
  * Universidade de Passo Fundo - 2018/2019
  *
  * @author Matheus Hernandes
- * @since 09/03/2019
+ * @since 14/12/2019
  * @namespace PeriodController
  */
 function PeriodController($container) {
@@ -14,11 +14,18 @@ function PeriodController($container) {
      */
     const getDatatableSettings = function () {
         return [
-            {th: '#', data: 'id'},
-            {th: 'patient', data: 'country'},
-            {th: 'begin', data: 'name'},
-            {th: 'end', data: 'country'},
+            {th: '#', width: '50px', data: 'id'},
+            {th: 'Patient', width: '', data: 'patient.last_name', render: renderPatient},
+            {th: 'begin',  width: '180px', data: 'begin'},
+            {th: 'end',  width: '180px', data: 'end'},
         ];
+    };
+    /**
+     * Render for patient
+     * @memberOf MonitoringController
+     */
+    const renderPatient = function (data, type, full) {
+        return full.patient.first_name + " " + full.patient.last_name
     };
     /**
      * Return params for AbstractController
@@ -64,6 +71,7 @@ function PeriodController($container) {
      */
     this.init = function () {
         new AbstractController(getParams()).init();
+        new PeriodFormController().init();
     };
     /**
      * Load a settings for modal datatables

@@ -27,7 +27,6 @@ class PatientWriteSerializer(serializers.ModelSerializer):
 
     user = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
-        many=True,
         required=False
     )
 

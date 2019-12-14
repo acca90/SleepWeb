@@ -42,6 +42,7 @@ class PeriodViewSet(viewsets.ModelViewSet):
         """
         serializer = PeriodWriteSerializer(data=request.data, context={"request": request})
         if serializer.is_valid():
+            serializer.validated_data['user'] = self.request.user
             instance = serializer.create(serializer.validated_data)
             read_serializer = PeriodReadSerializer(instance)
             return Response(read_serializer.data)

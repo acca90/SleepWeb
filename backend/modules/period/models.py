@@ -15,10 +15,10 @@ class Period(models.Model):
     """
     Model defined to set a monitoring period starting and ending on specific dates
     """
-    user = models.ForeignKey(User, db_column='owner', on_delete=None, null=True)
+    user = models.ForeignKey(User, db_column='user', on_delete=None, null=True)
     patient = models.ForeignKey(Patient, on_delete=None, null=True)
-    begin = models.DateTimeField()
-    end = models.DateTimeField()
+    begin = models.DateField(db_column='begin', null=False)
+    end = models.DateField(db_column='end', null=False)
 
     class Meta:
         db_table = 'Period'

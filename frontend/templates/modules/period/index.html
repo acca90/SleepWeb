@@ -1,27 +1,21 @@
-{% extends "commons/base/container.html" %}
+{% extends "commons/base/module.html" %}
 {% load static %}
 {% load i18n %}
 
-{% block css %}
-	{{ block.super }}
-	<link rel="stylesheet" href="{% static "chart.js/dist/Chart.min.css" %}"/>
-{% endblock %}
-
 {% block container %}
-	<div id="analysis" class="">
-		<canvas id="myChart" style="max-height: 400px !important; max-width: 800px !important; height: 400px !important; width: 800px !important;"></canvas>
-	</div>
+    <div id="period">
+        {% include 'period/list.html' %}
+        {% include 'period/form.html' %}
+    </div>
 {% endblock container %}
 
 {% block scripts %}
-	{{ block.super }}
-	<script src="{% static "chart.js/dist/Chart.min.js" %}"></script>
-	<script src="{% static "modules/analysis/AnalysisService.js" %}"></script>
-	<script src="{% static "modules/analysis/AnalysisController.js" %}"></script>
-	<script>
-		$(document).ready(function () {
-			new AnalysisController().init();
+    {{ block.super }}
+    <script src="{% static "modules/period/PeriodController.js" %}"></script>
+    <script src="{% static "modules/period/PeriodFormController.js" %}"></script>
+    <script>
+        $(document).ready(function () {
+            new PeriodController($('#period')).init();
         });
-	</script>
+    </script>
 {% endblock %}
-

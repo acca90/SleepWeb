@@ -11,7 +11,6 @@ from rest_framework import serializers
 from backend.modules.patient.models import Patient
 from backend.modules.patient.serializers import PatientMinimalSerializer
 from backend.modules.period.models import Period
-from backend.modules.user.models import User
 from backend.modules.user.serializers import UserReadSerializer
 
 
@@ -46,7 +45,6 @@ class PeriodWriteSerializer(serializers.ModelSerializer):
     """
     patient = serializers.PrimaryKeyRelatedField(
         queryset=Patient.objects.all(),
-        many=True,
         required=False
     )
     user = serializers.PrimaryKeyRelatedField(
