@@ -57,9 +57,9 @@ function PeriodFormController() {
      */
     const initElementsMap = function () {
         elementsMap.container = $('#divPatient');
-        elementsMap.finderBtn = $('#findPatient', elementsMap.container)
-        elementsMap.patientField = $('#patientField', elementsMap.container)
-        elementsMap.patientId = $('#patientId', elementsMap.container)
+        elementsMap.finderBtn = $('#findPatient', elementsMap.container);
+        elementsMap.patientField = $('#patientField', elementsMap.container);
+        elementsMap.patientId = $('#patientId', elementsMap.container);
     };
     /**
      * Initialize events for the form

@@ -19,7 +19,6 @@ class PeriodReadSerializer(serializers.ModelSerializer):
     Serializer for read operations
     """
     patient = PatientMinimalSerializer(read_only=True)
-    user = UserReadSerializer(read_only=True)
 
     class Meta:
         model = Period
@@ -27,15 +26,13 @@ class PeriodReadSerializer(serializers.ModelSerializer):
             'id',
             'begin',
             'end',
-            'patient',
-            'user'
+            'patient'
         )
         datatables_always_serialize = (
             'id',
             'begin',
             'end',
-            'patient',
-            'user'
+            'patient'
         )
 
 

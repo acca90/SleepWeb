@@ -57,6 +57,13 @@ function PeriodController($container) {
      */
     const toForm = function (period) {
         let $form = $('form', $container);
+        $('#period\\.id', $form).val(period.id);
+        $('#periodStartDate', $form).val($.dateFormat(period.begin));
+        $('#periodEndDate', $form).val($.dateFormat(period.end));
+        $('#patientId', $form).val(period.patient.id);
+        $('#patientField', $form).val(
+            period.patient.first_name + " " + period.patient.last_name
+        );
     };
     /**
      * Serialize form for API submit
