@@ -88,8 +88,12 @@ class PeriodViewSet(viewsets.ModelViewSet):
         """
         instance = Period.objects.get(pk=kwargs['pk'])
 
-        if instance.user.id != request.user.id and not request.user.is_superuser:
-            return not_allowed_to_do()
+        if request.user.is_superuser:
+            return super().destroy(request, args, kwargs)
 
-        return super().destroy(request, args, kwargs)
+        if instance.user.id == request.user.id:
+            return super().destroy(request, args, kwargs)
+
+        return not_allowed_to_do()
+
 

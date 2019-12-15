@@ -1,105 +1,107 @@
 {% load i18n %}
 
 <div id="form" style="display: none">
-	<nav aria-label="breadcrumb">
-		<ol class="breadcrumb">
-			<li class="breadcrumb-item active" aria-current="page">
-				<i id="moduleIcon" class="fa fa-building"></i>
-				<b>
-					<span id="moduleName">{% trans 'Institutions' %}</span>
-				</b>
-			</li>
-			<li class="breadcrumb-item active" aria-current="page">
-				<span id="moduleOption"></span>
-			</li>
-		</ol>
-	</nav>
-	<div id="formAlert" class="alert" role="alert" style="display: none">
-	</div>
-	{% csrf_token %}
-	<div class="card bg-light">
-		<div class="card-header">
-			<ul class="nav nav-pills card-header-pills ">
-				<li class="nav-item">
-					<button type="button" class="btn btn-dark btn-sm" id="btnCancel">
-						<i class="fa fa-step-backward"></i>
-						<b>{% trans "Back" %}</b>
-					</button>
-				</li>
-			</ul>
-		</div>
-		<div class="card-body">
-			<form>
-				<div class="row">
-					<div id="profile_container" class="col-4">
-						{% include 'monitoring/../../commons/components/profile.html' %}
-					</div>
-					<div class="col-8">
-						<div class="card" style="height: 165px;">
-							<div class="card-body">
-								<div class="row">
-									<div class="col-4">
-										<fieldset>
-											<legend><i class="fa fa-calendar"></i> {% trans 'Record details' %}</legend>
-											<div class="row">
-												<div class="col-4 text-right">
-													<b>{% trans 'Begin' %}:</b>
-												</div>
-												<div class="col-8">
-													<span id="monitoring_begin"></span>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-4 text-right">
-													<b>{% trans 'End' %}:</b>
-												</div>
-												<div class="col-8">
-													<span id="monitoring_end"></span>
-												</div>
-											</div>
-										</fieldset>
-									</div>
-									<div class="col-8">
-										<fieldset>
-											<legend>
-												<i class="fa fa-eye"></i>
-												{% trans 'Recorded quality indicators' %}
-											</legend>
-											<ul id="indicators">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+                <i id="moduleIcon" class="fa fa-building"></i>
+                <b>
+                    <span id="moduleName">{% trans 'Institutions' %}</span>
+                </b>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                <span id="moduleOption"></span>
+            </li>
+        </ol>
+    </nav>
+    <div id="formAlert" class="alert" role="alert" style="display: none">
+    </div>
+    {% csrf_token %}
+    <div class="card bg-light">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills ">
+                <li class="nav-item">
+                    <button type="button" class="btn btn-dark btn-sm" id="btnCancel">
+                        <i class="fa fa-step-backward"></i>
+                        <b>{% trans "Back" %}</b>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <form>
+                <input type="hidden" id="monitoring_id">
+                <div class="row">
+                    <div id="profile_container" class="col-4">
+                        {% include 'monitoring/../../commons/components/profile.html' %}
+                    </div>
+                    <div class="col-8">
+                        <div class="card" style="height: 165px;">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <fieldset>
+                                            <legend><i class="fa fa-calendar"></i> {% trans 'Record details' %}</legend>
+                                            <div class="row">
+                                                <div class="col-4 text-right">
+                                                    <b>{% trans 'Begin' %}:</b>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span id="monitoring_begin"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-4 text-right">
+                                                    <b>{% trans 'End' %}:</b>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span id="monitoring_end"></span>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-8">
+                                        <fieldset>
+                                            <legend>
+                                                <i class="fa fa-eye"></i>
+                                                {% trans 'Recorded quality indicators' %}
+                                            </legend>
+                                            <ul id="indicators">
 
-											</ul>
-										</fieldset>
-									</div>
-								</div>
+                                            </ul>
+                                        </fieldset>
+                                    </div>
+                                </div>
 
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12 mt-2">
-						<div class="card">
-							<div class="card-body">
-								<div class="row">
-									<div class="col-12">
-										<fieldset>
-											<legend><i class="fa fa-line-chart"></i> {% trans 'Evaluate' %}</legend>
-											{% include 'modules/monitoring/evaluate.html' %}
-										</fieldset>
-									</div>
-								</div>
-								<div class="col-12">
-									<fieldset>
-										<legend><i class="fa fa-indent"></i> {% trans 'Index' %}</legend>
-										Index table
-									</fieldset>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-		</div>
-		</form>
-	</div>
-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mt-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <fieldset>
+                                            <legend><i class="fa fa-line-chart"></i> {% trans 'Evaluate' %}</legend>
+                                            {% include 'modules/monitoring/evaluate.html' %}
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <fieldset>
+                                        <legend><i class="fa fa-indent"></i> {% trans 'Index' %}</legend>
+                                        <div class="row">
+                                            {% include 'commons/components/idx.html' %}
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

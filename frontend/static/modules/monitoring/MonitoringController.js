@@ -72,6 +72,7 @@ function MonitoringController($container) {
     const toForm = function ( monitoring ) {
         let $indicators = $('#indicators');
         profileController.clean().load(monitoring.patient);
+        $("#monitoring_id").val(monitoring.id);
         $("#monitoring_begin").html(renderDatetime(monitoring.begin));
         $("#monitoring_end").html(renderDatetime(monitoring.end));
         monitoring.indicators.forEach(indicator => {
@@ -89,8 +90,8 @@ function MonitoringController($container) {
      */
     this.init = function () {
         new AbstractController(getParams()).init(true);
-        profileController.init();
         new EvaluateController().init();
+        profileController.init();
     };
     /**
      * Load a modal datatables for search and pick registers
