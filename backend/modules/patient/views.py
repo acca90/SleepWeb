@@ -14,12 +14,14 @@ from backend.commons.notAllowed import not_allowed_to_do
 from backend.modules.patient.models import Patient
 from backend.modules.patient.serializers import PatientWriteSerializer, PatientReadSerializer
 from backend.modules.patient.service import PatientService
+from backend.modules.stage.service import StageService
 
 
 class PatientViewSet(viewsets.ModelViewSet):
     serializer_class = PatientReadSerializer
     permission_classes = (IsAuthenticated,)
     queryset = Patient.objects.all()
+    stage_service = StageService()
 
     def list(self, request, *args, **kwargs):
         """
@@ -46,6 +48,7 @@ class PatientViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.validated_data['user'] = self.request.user
             instance = serializer.create(serializer.validated_data)
+            self.stage_service.rank_by_object(instance)
             read_serializer = PatientReadSerializer(instance)
             return Response(read_serializer.data)
         else:
@@ -69,6 +72,7 @@ class PatientViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             instance = serializer.update(instance, serializer.validated_data)
             read_serializer = PatientReadSerializer(instance)
+            self.stage_service.rank_by_object(instance)
             return Response(read_serializer.data, status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)

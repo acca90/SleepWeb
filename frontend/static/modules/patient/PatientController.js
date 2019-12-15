@@ -39,7 +39,7 @@ function PatientController($container) {
                 name: 'stage__description',
                 sDefaultContent: '',
                 render: renderStage,
-                width: '120px'
+                width: '200px'
             }
         ];
     };
