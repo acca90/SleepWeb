@@ -86,8 +86,8 @@ class RuleViewSet(viewsets.ModelViewSet):
 @permission_classes([IsAuthenticated])
 def monitoring_evaluate(request, monitoring_id, rule_id):
     try:
-        RuleService().evaluate(monitoring_id, rule_id)
-        return Response(data={}, status=status.HTTP_200_OK)
+        data = RuleService().evaluate(monitoring_id, rule_id)
+        return Response(data=data, status=status.HTTP_200_OK)
     except Exception as e:
         print(e)
         return Response(data={}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

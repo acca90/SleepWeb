@@ -62,11 +62,4 @@ class MonitoringReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
         self.serializer_class = MonitoringReadSerializer
         self.queryset = Monitoring.objects.all()
         return super().retrieve(request, args, kwargs)
-        '''
-        queryset = self.monitoring_service.get(request)
-        if queryset is None:
-            return not_allowed_to_do()
 
-        serializer = MonitoringReadSerializer(queryset, many=False)
-        return Response(serializer.data)
-        '''

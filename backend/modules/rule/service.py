@@ -6,7 +6,11 @@ Universidade de Passo Fundo - 2018/2019
 @author Matheus Hernandes
 @since 12/10/2019
 """
-from backend.modules.monitoring.models import MonitoringIndicator
+from django.forms import model_to_dict
+
+from backend.modules.indicator.models import Indicator
+from backend.modules.monitoring.models import MonitoringIndicator, Monitoring
+from backend.modules.patient.models import Patient
 from backend.modules.rule.models import Threshold
 
 
@@ -24,28 +28,47 @@ class RuleService:
         3. FD = Sum all FA
         4. IDX = Generate index
         """
-        quality_array = []
-
+        stage_id = Patient.objects.get(pk=Monitoring.objects.get(pk=monitoring_id).patient.id).stage.id
         indicators = MonitoringIndicator.objects.filter(monitoring__id=monitoring_id)
 
-        FB = 0
-        FD = 0
+        fb = 0
+        fd = 0
+        results = []
 
-        for item in indicators:
-            thresholds = Threshold.objects.filter(
-                rule__id=rule_id,
-                indicator__id=item.indicator.id,
-                begin__lte=item.value,
-                end__gte=item.value,
-            )
-            FB += thresholds[0].weight
-            FD += self.calc_fa(thresholds[0].weight, thresholds[0].quality)
+        for indicator in indicators:
+            threshold = self.load_threshold(rule_id, indicator, stage_id)
+            fb += threshold['weight']
+            fa = self.calc_fa(threshold['weight'], threshold['quality'])
+            fd += fa
+            results.append({
+                'indicator': model_to_dict(Indicator.objects.get(pk=indicator.indicator.id)),
+                'fc': threshold['weight'],
+                'fa': fa
+            })
 
-        print(quality_array)
-        pass
+        idx = self.calc_idx(fb, fd)
+        return {'idx': idx, 'results': results}
 
-    def calc_fa(self, weight, quality):
+    def load_threshold(self, rule_id, indicator, stage_id):
         """
-        Calculacted FA Avaliation Factor from weight and quality
+        Method defined to query rule's thresholds
         """
-        return 1
+        return Threshold.objects.filter(
+            rule__id=rule_id,
+            indicator__id=indicator.indicator.id,
+            stage__id=stage_id,
+            begin__lte=indicator.value,
+            end__gte=indicator.value,
+        ).values('quality', 'weight')[0]
+
+    def calc_fa(self, fc, quality):
+        """
+        Calc FA Avaliation Factor from weight and quality
+        """
+        return fc - (fc - quality)
+
+    def calc_idx(self, fb, fd):
+        """
+        Calc FD b
+        """
+        return ((fd*100) / fb) / 10
