@@ -14,6 +14,11 @@ function MonitoringController($container) {
      */
     let profileController = new ProfileController($('#profile_container'));
     /**
+     * Evaluate controller
+     * @memberOf MonitoringController
+     */
+    let evaluateController = null;
+    /**
      * DataTable Settings
      * @memberOf MonitoringController
      */
@@ -64,6 +69,7 @@ function MonitoringController($container) {
      */
     const clean = function () {
         $('#indicators').html("");
+        evaluateController.clean();
     };
     /**
      * Load form for monitoring view
@@ -89,8 +95,8 @@ function MonitoringController($container) {
      * @memberOf MonitoringController
      */
     this.init = function () {
-        new AbstractController(getParams()).init(true);
-        new EvaluateController().init();
+        let controller = new AbstractController(getParams()).init(true);
+        evaluateController = new EvaluateController(controller).init();
         profileController.init();
     };
     /**

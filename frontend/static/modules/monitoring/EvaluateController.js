@@ -7,7 +7,7 @@
  * @since 10/11/2019
  * @namespace EvaluateController
  */
-function EvaluateController() {
+function EvaluateController(controller) {
     /**
      * Map of elements
      * @memberOf EvaluateController
@@ -19,12 +19,23 @@ function EvaluateController() {
      */
     const graphController = new GraphController();
     /**
+     * Module controller
+     * @memberOf EvaluateController
+     */
+    const moduleController = controller;
+    /**
+     * Indx controller
+     * @memberOf EvaluateController
+     */
+    const idx = new IdxComponent();
+    /**
      * Initialize a map of elevents
      * @memberOf EvaluateController
      */
     const initElementsMap = function () {
         elementsMap.monitoringId = $('#monitoring_id');
         elementsMap.ruleForEvaluation = $('#ruleForEvaluation');
+        elementsMap.indicators = $('#monitoringIndicators');
         //elementsMap.id = $('#');
         //elementsMap.id = $('#');
     };
@@ -100,20 +111,42 @@ function EvaluateController() {
      * @memberOf EvaluateController
      */
     const successEvaluateHandler = function (data) {
-        console.log(data);
+        if ($.isEmpty(data)) {
+            return;
+        }
+        populateIndicatorsSelect(data.results);
+        idx.clean().load(data.idx);
+    };
+    /**
+     * Populate indicatros on select
+     * @memberOf EvaluateController
+     */
+    const populateIndicatorsSelect = function ( results ) {
+        $('.indicator').remove();
+        results.forEach(result => {
+            elementsMap.indicators.append(`
+                <option class="indicator" value="${result.indicator.id}">
+                    ${result.indicator.initials} - ${result.indicator.description}
+                </option>
+            `)
+        })
     };
     /**
      * Handle erros from evaluate request
      * @memberOf EvaluateController
      */
-    const errorEvaluateHandler = function (data) {
-        console.error(data);
+    const errorEvaluateHandler = function () {
+        moduleController.message('danger', 'Fail to evaluate this monitoring with selected rule')
     };
     /**
      * Clean evaluation
      * @memberOf EvaluateController
      */
-    const clean = function () {
+    this.clean = function () {
+        idx.clean();
+        elementsMap.ruleForEvaluation.val('');
+        elementsMap.indicator.html('<option value="">Select</option>');
+        elementsMap.indicator.val('');
     };
     /**
      * Initialize controller
@@ -124,5 +157,7 @@ function EvaluateController() {
         initUserRules();
         initEvents();
         graphController.init();
+        idx.init();
+        return this;
     };
 }

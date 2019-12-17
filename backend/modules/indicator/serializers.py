@@ -11,15 +11,13 @@ from .models import Indicator
 
 
 class IndicatorSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Indicator
         fields = '__all__'
-        datatables_always_serialize = ('id', 'description')
+        datatables_always_serialize = '__all__'
 
 
 class IndicatorMinimalSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Indicator
         fields = ('id', 'description')

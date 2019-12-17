@@ -88,14 +88,6 @@ fieldset {
 
 
 .table-idx-row-10,
-.table-idx-row-8,
-.table-idx-row-6,
-.table-idx-row-4,
-.table-idx-row-0 {
-  font-weight: bold;
-}
-
-.table-idx-row-10,
 .table-idx-row-10 > th,
 .table-idx-row-10 > td {
   background-color: #00df25;
@@ -137,4 +129,6 @@ fieldset {
 .table-idx-row-4.that,
 .table-idx-row-0.that {
   text-transform: uppercase;
+  font-weight: bold;
+  font-style: italic;
 }

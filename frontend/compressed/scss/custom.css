@@ -44,8 +44,6 @@ nav > ol.breadcrumb { background-color: #f8f9fa; border: 1px solid rgba(0, 0, 0,
 
 fieldset legend { font-size: 12px; font-weight: bold; border-bottom: solid 1px; text-transform: uppercase; }
 
-.table-idx-row-10, .table-idx-row-8, .table-idx-row-6, .table-idx-row-4, .table-idx-row-0 { font-weight: bold; }
-
 .table-idx-row-10, .table-idx-row-10 > th, .table-idx-row-10 > td { background-color: #00df25; border-color: #00df25; color: #000; }
 
 .table-idx-row-8, .table-idx-row-8 > th, .table-idx-row-8 > td { background-color: #f1ff97; border-color: #d4e282; color: #000; }
@@ -56,6 +54,6 @@ fieldset legend { font-size: 12px; font-weight: bold; border-bottom: solid 1px; 
 
 .table-idx-row-0, .table-idx-row-0 > th, .table-idx-row-0 > td { background-color: #ff8c87; border-color: #e27974; color: #000; }
 
-.table-idx-row-10.that, .table-idx-row-8.that, .table-idx-row-6.that, .table-idx-row-4.that, .table-idx-row-0.that { text-transform: uppercase; }
+.table-idx-row-10.that, .table-idx-row-8.that, .table-idx-row-6.that, .table-idx-row-4.that, .table-idx-row-0.that { text-transform: uppercase; font-weight: bold; font-style: italic; }
 
 /*# sourceMappingURL=custom.css.map */
