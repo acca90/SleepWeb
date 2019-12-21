@@ -1,109 +1,102 @@
 [
     {
+        "model": "indicator.indicator",
         "pk": 1,
-        "model": "indicator.Indicator",
         "fields": {
-            "description": "Eficiência do sono",
-            "definition": "Percentual total de inconsciência enquanto estiver deitado"
+            "initials": "SE",
+            "measurement": "Percentual",
+            "description": "Efici\u00eancia do sono",
+            "definition": "Percentual total de inconsci\u00eancia enquanto estiver deitado"
         }
-    },
-    {
+    }, {
+        "model": "indicator.indicator",
         "pk": 2,
-        "model": "indicator.Indicator",
         "fields": {
-            "description": "Latência do sono",
-            "definition": "Tempo em minutos necessário em minutos para transição do estado de consciência para o inconsciência"
+            "initials": "SL",
+            "measurement": "Minutos",
+            "description": "Lat\u00eancia do sono",
+            "definition": "Tempo em minutos necess\u00e1rio em minutos para transi\u00e7\u00e3o do estado de consci\u00eancia para o inconsci\u00eancia"
         }
-    },
-    {
+    }, {
+        "model": "indicator.indicator",
         "pk": 3,
-        "model": "indicator.Indicator",
         "fields": {
+            "initials": "REM",
+            "measurement": "Percentual",
             "description": "Sono REM",
             "definition": "Percentual de sono REM"
         }
-    },
-    {
+    }, {
+        "model": "indicator.indicator",
         "pk": 4,
-        "model": "indicator.Indicator",
         "fields": {
-            "description": "Sono não-REM 1-2",
-            "definition": "Percentual de sono e grau (N1,N2)"
+            "initials": "NR12",
+            "measurement": "Percentual",
+            "description": "Sono n\u00e3o-REM 1-2",
+            "definition": "Percentual de sono e grau (N1, N2)"
         }
-    },
-    {
+    }, {
+        "model": "indicator.indicator",
         "pk": 5,
-        "model": "indicator.Indicator",
         "fields": {
-            "description": "Sono não-REM 3-4",
-            "definition": "Percentual de sono e grau (N3,N4)"
+            "initials": "NR34",
+            "measurement": "Percentual",
+            "description": "Sono n\u00e3o-REM 3-4",
+            "definition": "Percentual de sono e grau (N3, N4)"
         }
-    },
-    {
+    }, {
+        "model": "indicator.indicator",
         "pk": 6,
-        "model": "indicator.Indicator",
         "fields": {
+            "initials": "NAPE",
+            "measurement": "Epis\u00f3dios",
             "description": "Cochilos",
-            "definition": "Número de cochilos em um período de 24 horas"
+            "definition": "N\u00famero de cochilos em um per\u00edodo de 24 horas"
         }
-    },
-    {
+    }, {
+        "model": "indicator.indicator",
         "pk": 7,
-        "model": "indicator.Indicator",
         "fields": {
-            "description": "Duração de cochilo",
-            "definition": "Duração média dos cochilos em minutos"
+            "initials": "NAPD",
+            "measurement": "Minutos",
+            "description": "Dura\u00e7\u00e3o de cochilo",
+            "definition": "Dura\u00e7\u00e3o m\u00e9dia dos cochilos em minutos"
         }
-    },
-    {
+    }, {
+        "model": "indicator.indicator",
         "pk": 8,
-        "model": "indicator.Indicator",
         "fields": {
-            "description": "Frequência de cochilo",
-            "definition": "Número de dias em um período de uma semana com registros de cochilos"
+            "initials": "NAPF",
+            "measurement": "Episodes per week",
+            "description": "Frequ\u00eancia de cochilo",
+            "definition": "N\u00famero de dias em um per\u00edodo de uma semana com registros de cochilos"
         }
-    },
-    {
+    }, {
+        "model": "indicator.indicator",
         "pk": 9,
-        "model": "indicator.Indicator",
         "fields": {
-            "description": "Excitações",
-            "definition": "Mudanças abruptas do estágio de sono"
+            "initials": "AR",
+            "measurement": "Epis\u00f3dios",
+            "description": "Excita\u00e7\u00f5es",
+            "definition": "Mudan\u00e7as abruptas do est\u00e1gio de sono"
         }
-    },
-    {
+    }, {
+        "model": "indicator.indicator",
         "pk": 10,
-        "model": "indicator.Indicator",
         "fields": {
+            "initials": "AWE",
+            "measurement": "Epis\u00f3dios",
             "description": "Despertar",
-            "definition": "Número de vezes que a pessoa acordou durante a noite de sono"
+            "definition": "N\u00famero de vezes que a pessoa acordou durante a noite de sono"
         }
-    },
-    {
+    }, {
+        "model": "indicator.indicator",
         "pk": 11,
-        "model": "indicator.Indicator",
         "fields": {
-            "description": "WASO",
-            "definition": "Duração em minutos do estado de consciência após o início do sono e antes de despertar final"
+            "initials": "WASO",
+            "measurement": "Minutes",
+            "description": "Wake after sleep onset",
+            "definition": "Dura\u00e7\u00e3o em minutos do estado de consci\u00eancia ap\u00f3s o in\u00edcio do sono e antes de despertar final"
         }
     }
 ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

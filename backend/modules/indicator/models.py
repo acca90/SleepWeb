@@ -12,7 +12,7 @@ from django.db import models
 class Indicator(models.Model):
 
     initials = models.CharField(db_column='initials', max_length=5, null=False)
-    measurement = models.CharField(db_column='measurement', max_length=3, null=False)
+    measurement = models.CharField(db_column='measurement', max_length=255, null=False)
     description = models.CharField(db_column='description', max_length=255, null=False)
     definition = models.CharField(db_column='definition', max_length=1000, null=False)
 

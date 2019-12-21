@@ -15,7 +15,8 @@ function IndicatorController($container) {
     const getDatatableSettings = function () {
         return [
             {th: '#', data: 'id', width: '60px'},
-            {th: 'Description', data: 'description'},
+            {th: 'Initials', data: 'initials', width: '100px'},
+            {th: 'Description', data: 'description', width: '200px'},
             {th: 'Definition', data: 'definition'},
         ]
     };
@@ -51,6 +52,8 @@ function IndicatorController($container) {
         let $form = $('form', $container);
         $('#indicatorId', $form).val(indicator.id);
         $('#indicatorDescription', $form).val(indicator.description);
+        $('#indicatorInitials', $form).val(indicator.initials);
+        $('#indicatorMeasurement', $form).val(indicator.measurement);
         $('#indicatorDefinition', $form).val(indicator.definition);
     };
     /**
