@@ -72,7 +72,7 @@ function GraphController() {
             }],
         };
         let options = {
-            responsive: false,
+            responsive: true,
             tooltips: {
                 enabled: false
             },
@@ -125,7 +125,7 @@ function GraphController() {
             }],
         };
         let options = {
-            responsive: false,
+            responsive: true,
             tooltips: {
                 enabled: false
             },

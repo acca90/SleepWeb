@@ -35,7 +35,7 @@ function EvaluateController(controller) {
     const initElementsMap = function () {
         elementsMap.monitoringId = $('#monitoring_id');
         elementsMap.ruleForEvaluation = $('#ruleForEvaluation');
-        elementsMap.indicators = $('#monitoringIndicators');
+        elementsMap.indicator = $('#monitoringIndicators');
         //elementsMap.id = $('#');
         //elementsMap.id = $('#');
     };
@@ -124,7 +124,7 @@ function EvaluateController(controller) {
     const populateIndicatorsSelect = function ( results ) {
         $('.indicator').remove();
         results.forEach(result => {
-            elementsMap.indicators.append(`
+            elementsMap.indicator.append(`
                 <option class="indicator" value="${result.indicator.id}">
                     ${result.indicator.initials} - ${result.indicator.description}
                 </option>
@@ -142,7 +142,7 @@ function EvaluateController(controller) {
      * Clean evaluation
      * @memberOf EvaluateController
      */
-    this.clean = function () {
+    const clean = function () {
         idx.clean();
         elementsMap.ruleForEvaluation.val('');
         elementsMap.indicator.html('<option value="">Select</option>');
@@ -160,4 +160,9 @@ function EvaluateController(controller) {
         idx.init();
         return this;
     };
+    /**
+     * Expose clean function for public access
+     * @memberOf EvaluateController
+     */
+    this.clean = clean;
 }
