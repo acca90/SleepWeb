@@ -123,18 +123,9 @@ function GraphController() {
      */
     this.loadOverall = function () {
         let data = {
-            labels: [
-                'Sleep Eficiency',
-                'Sleep Latency',
-                'Awakenings',
-                'REM Sleep',
-                'NREM 1-2',
-                'NREM 3-4'
-            ],
+            labels: [],
             datasets: [{
-                data: [
-                    50, 50, 100, 50, 100, 100
-                ],
+                data: [],
                 backgroundColor: backgroundColor,
                 borderColor: borderColor,
                 label: 'Monitoring'
@@ -174,7 +165,7 @@ function GraphController() {
      * Method defined to clear graph
      * @memberOf GraphController
      */
-    const clearGraph = function ( chart, update = true ) {
+    const cleanGraph = function (chart, update = true ) {
         chart.data.labels = [];
         chart.data.datasets.forEach(dataset => dataset.data = []);
         if (update) {
@@ -182,32 +173,44 @@ function GraphController() {
         }
     };
     /**
+     * Method defined to update overall graph
+     * @memberOf GraphController
+     */
+    this.updateOverall = function ( data ) {
+        cleanGraph(overall, false);
+        if ($.isEmpty(data.results) || data.results.length === 0) {
+            return;
+        }
+        data.results.forEach(result => {
+            console.log(result);
+            overall.data.labels.push(result.indicator.description);
+            overall.data.datasets[0].data.push(result.fa)
+        });
+        overall.update();
+    };
+    /**
      * Method defined to update quality curve
      * @memberOf GraphController
      */
     this.updateCurve = function ( data ) {
-        clearGraph(curve, false);
-        let intervals = []
-
+        cleanGraph(curve, false);
+        let intervals = [];
         data.thresholds.forEach(threshold => {
             intervals.push(threshold.quality);
             curve.data.datasets[0].data.push(threshold.quality)
         });
-
         curve.data.labels = intervals;
         value = data.monitoring_quality[0].value;
-        curve.data.datasets[1].data.push({
-            x: 100,
-            y: value
-        });
+        curve.data.datasets[1].data.push({ x: 100, y: value });
         curve.update();
     };
     /**
      * Method defined to clear graphics
      * @memberOf GraphController
      */
-    this.clear = function () {
-        clearGraph();
+    this.clean = function () {
+        cleanGraph(overall);
+        cleanGraph(curve);
     };
     /**
      * Initialize graph controller

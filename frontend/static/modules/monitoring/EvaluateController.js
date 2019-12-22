@@ -63,7 +63,7 @@ function EvaluateController(controller) {
                 `<option class="rule" value="${rule.id}">${rule.description}</option>`
             );
         });
-    };
+;    };
     /**
      * Handle erros on request
      * @memberOf EvaluateController
@@ -88,8 +88,8 @@ function EvaluateController(controller) {
      * @memberOf EvaluateController
      */
     const evaluate = function (rule) {
+        fastClean();
         if ($.isEmpty(rule)) {
-            clean();
             return;
         }
         ajaxEvaluate(elementsMap.monitoringId.val(), rule);
@@ -115,6 +115,7 @@ function EvaluateController(controller) {
         if ($.isEmpty(data)) {
             return;
         }
+        graphController.updateOverall(data);
         populateIndicatorsSelect(data.results);
         idx.clean().load(data.idx);
     };
@@ -174,10 +175,18 @@ function EvaluateController(controller) {
      * @memberOf EvaluateController
      */
     const clean = function () {
-        idx.clean();
+        fastClean();
         elementsMap.ruleForEvaluation.val('');
         elementsMap.indicator.html('<option value="">Select</option>');
         elementsMap.indicator.val('');
+    };
+    /**
+     * Clean fields keeping requested information
+     * @memberOf EvaluateController
+     */
+    const fastClean = function () {
+        graphController.clean();
+        idx.clean();
     };
     /**
      * Initialize controller
