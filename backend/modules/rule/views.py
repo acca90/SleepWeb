@@ -98,12 +98,12 @@ def monitoring_evaluate(request, monitoring_id, rule_id):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def thresholds_view(request, rule_id, indicator_id, stage_id):
+def thresholds_view(request, rule_id, indicator_id, monitoring_id):
     """
     API defined to bring to front-end a json with thresholds of from a rule and indicator
     """
     try:
-        data = RuleService().threholds(rule_id, indicator_id, stage_id)
+        data = RuleService().threholds(rule_id, indicator_id, monitoring_id)
         return Response(data=data, status=status.HTTP_200_OK)
     except Exception as e:
         print(e)

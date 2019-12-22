@@ -74,13 +74,22 @@ class RuleService:
         """
         return ((fd * 100) / fb) / 10
 
-    def threholds(self, rule_id, indicator_id, stage_id):
+    def threholds(self, rule_id, indicator_id, monitoring_id):
         """
         Method defined to query end serialize threholds for graphical visualization
         """
         thresholds = Threshold.objects.filter(
             rule__id=rule_id,
             indicator__id=indicator_id,
-            stage__id=stage_id
+            stage__id=Monitoring.objects.get(pk=monitoring_id).patient.stage.id
         ).values()
-        return {'thresholds': thresholds}
+
+        monitoring_quality = MonitoringIndicator.objects.filter(
+            monitoring__id=monitoring_id,
+            indicator__id=indicator_id
+        ).values('value')
+
+        return {
+            'monitoring_quality': monitoring_quality,
+            'thresholds': thresholds
+        }

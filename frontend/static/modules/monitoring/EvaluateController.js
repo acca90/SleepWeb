@@ -80,7 +80,7 @@ function EvaluateController(controller) {
             evaluate(this.value)
         });
         elementsMap.indicator.on('change', function () {
-            thresholds(elementsMap.ruleForEvaluation.val(), this.value, 1)
+            thresholds(elementsMap.ruleForEvaluation.val(), this.value)
         });
     };
     /**
@@ -143,14 +143,15 @@ function EvaluateController(controller) {
      * Request data for thresholds visualization
      * @memberOf EvaluateController
      */
-    const thresholds = function ( rule, indicator, stage ) {
+    const thresholds = function ( rule, indicator ) {
         if ($.isEmpty(indicator) || $.isEmpty(rule)) {
             return;
         }
+        let monitoring = elementsMap.monitoringId.val();
         new AjaxController({
             data: {},
             method: 'GET',
-            url: `rule/thresholds/${rule}/${indicator}/${stage}`,
+            url: `rule/thresholds/${rule}/${indicator}/${monitoring}`,
             success: successThresholdHandler,
             error: errorThresholdHandler
         }).send(true);
@@ -159,7 +160,7 @@ function EvaluateController(controller) {
      * @memberOf EvaluateController
      */
     const successThresholdHandler = function ( data ) {
-        graphController.updateCurve(data.thresholds);
+        graphController.updateCurve(data);
     };
     /**
      * Handle erros from threhold request

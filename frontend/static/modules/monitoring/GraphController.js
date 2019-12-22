@@ -61,13 +61,22 @@ function GraphController() {
     const initCurve = function (values = [] ) {
         let data = {
             labels: [],
-            datasets: [{
-                data: values,
-                fill: false,
-                backgroundColor: backgroundColor,
-                borderColor: borderColor,
-                label: 'Monitoring'
-            }],
+            datasets: [
+                {
+                    data: values,
+                    fill: false,
+                    backgroundColor: backgroundColor,
+                    borderColor: borderColor,
+                    label: 'Quality Curve'
+                },
+                {
+                    data: [],
+                    fill: true,
+                    backgroundColor: '#0088ff',
+                    borderColor: '#0074d9',
+                    label: 'Result'
+                }
+            ],
         };
         let options = {
             backgroundColor: '#FF0000',
@@ -75,12 +84,19 @@ function GraphController() {
             tooltips: {
                 enabled: false
             },
-            legend: false,
             scales: {
                 yAxes: [{
                     ticks: {
                         display: true,
                         beginAtZero: true,
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        display: true,
+                        position: 'bottom',
+                        beginAtZero: true,
+                        autoSkip: true,
                         callback: function (value) {
                             if (value === 100) {
                                 return "Appropriated";
@@ -91,13 +107,6 @@ function GraphController() {
                             }
                             return "";
                         }
-                    }
-                }],
-                xAxes: [{
-                    ticks: {
-                        display: true,
-                        position: 'bottom',
-                        beginAtZero: true,
                     }
                 }]
             }
@@ -176,17 +185,20 @@ function GraphController() {
      * Method defined to update quality curve
      * @memberOf GraphController
      */
-    this.updateCurve = function ( thresholds ) {
+    this.updateCurve = function ( data ) {
         clearGraph(curve, false);
-        thresholds.forEach(threshold => {
-            curve.data.labels.push(threshold.begin);
-            curve.data.labels.push(threshold.end);
-            curve.data.datasets[0].data.push({
-                y: threshold.quality
-            });
-            curve.data.datasets[0].data.push({
-                y: threshold.quality
-            });
+        let intervals = []
+
+        data.thresholds.forEach(threshold => {
+            intervals.push(threshold.quality);
+            curve.data.datasets[0].data.push(threshold.quality)
+        });
+
+        curve.data.labels = intervals;
+        value = data.monitoring_quality[0].value;
+        curve.data.datasets[1].data.push({
+            x: 100,
+            y: value
         });
         curve.update();
     };

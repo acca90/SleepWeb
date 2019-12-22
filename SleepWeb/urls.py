@@ -58,7 +58,7 @@ urlpatterns = [
 
     # api
     path('api/v1/monitoring/evaluate/<int:monitoring_id>/<int:rule_id>/', monitoring_evaluate),
-    path('api/v1/rule/thresholds/<int:rule_id>/<int:indicator_id>/<int:stage_id>/', thresholds_view),
+    path('api/v1/rule/thresholds/<int:rule_id>/<int:indicator_id>/<int:monitoring_id>/', thresholds_view),
     path('api/v1/patient/send/<int:pk>/', patient_send),
     path('api/v1/api-auth/', include('rest_framework.urls')),
     path('api/v1/rest-auth/', include('rest_auth.urls')),
