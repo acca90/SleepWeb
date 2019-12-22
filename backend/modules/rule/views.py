@@ -85,8 +85,25 @@ class RuleViewSet(viewsets.ModelViewSet):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def monitoring_evaluate(request, monitoring_id, rule_id):
+    """
+    API defined to evaluate monitorings
+    """
     try:
         data = RuleService().evaluate(monitoring_id, rule_id)
+        return Response(data=data, status=status.HTTP_200_OK)
+    except Exception as e:
+        print(e)
+        return Response(data={}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def thresholds_view(request, rule_id, indicator_id, stage_id):
+    """
+    API defined to bring to front-end a json with thresholds of from a rule and indicator
+    """
+    try:
+        data = RuleService().threholds(rule_id, indicator_id, stage_id)
         return Response(data=data, status=status.HTTP_200_OK)
     except Exception as e:
         print(e)

@@ -20,7 +20,6 @@ class JobStage:
         """
         Start method initialize JobManger with scheduler
         """
-        print("Scheduler for stage classification")
         self.initialize_scheduler()
 
     def initialize_scheduler(self):

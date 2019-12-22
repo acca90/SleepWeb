@@ -18,6 +18,7 @@ class RuleService:
     """
     Service that keeps methods relatives to rules
     """
+
     def evaluate(self, monitoring_id, rule_id):
         """
         Method that evaluate monitoring with rule
@@ -71,4 +72,15 @@ class RuleService:
         """
         Calc FD b
         """
-        return ((fd*100) / fb) / 10
+        return ((fd * 100) / fb) / 10
+
+    def threholds(self, rule_id, indicator_id, stage_id):
+        """
+        Method defined to query end serialize threholds for graphical visualization
+        """
+        thresholds = Threshold.objects.filter(
+            rule__id=rule_id,
+            indicator__id=indicator_id,
+            stage__id=stage_id
+        ).values()
+        return {'thresholds': thresholds}

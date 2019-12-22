@@ -24,17 +24,17 @@ function GraphController() {
      */
     const backgroundColor = [
         '#e48f98',
-        '#cdffd2',
-        '#fffcb6',
+        '#ffab00',
         '#99c4ff',
+        '#fffcb6',
         '#d9baff',
         '#ffc1f4',
-        '#ffab00',
         '#cd87ff',
         '#bbf1ff',
         '#9584ff',
         '#e2ffc8',
-        '#b8ffe0'
+        '#b8ffe0',
+        '#cdffd2',
     ];
     /**
      * Border colors
@@ -42,36 +42,35 @@ function GraphController() {
      */
     const borderColor = [
         '#e4425b',
-        '#42ff5a',
-        '#ffff0c',
+        '#ffab00',
         '#0065ff',
+        '#ffff0c',
         '#9711ff',
         '#ff20df',
-        '#ffab00',
         '#cd87ff',
         '#14e9ff',
         '#4a1aff',
         '#d4ff0b',
-        '#06ffa2'
+        '#06ffa2',
+        '#42ff5a',
     ];
     /**
      * Load indicator
      * @memberOf GraphController
      */
-    this.loadCurve = function () {
+    const initCurve = function (values = [] ) {
         let data = {
-            labels: [
-            ],
+            labels: [],
             datasets: [{
-                data: [
-                    50, 0, 100, 100, 50, 0
-                ],
+                data: values,
+                fill: false,
                 backgroundColor: backgroundColor,
                 borderColor: borderColor,
                 label: 'Monitoring'
             }],
         };
         let options = {
+            backgroundColor: '#FF0000',
             responsive: true,
             tooltips: {
                 enabled: false
@@ -80,17 +79,25 @@ function GraphController() {
             scales: {
                 yAxes: [{
                     ticks: {
+                        display: true,
                         beginAtZero: true,
                         callback: function (value) {
-                            if (value == 100) {
+                            if (value === 100) {
                                 return "Appropriated";
-                            } else if (value == 50) {
+                            } else if (value === 50) {
                                 return "Uncertain";
-                            } else if (value == 0) {
+                            } else if (value === 0) {
                                 return "Unappropriated";
                             }
                             return "";
                         }
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        display: true,
+                        position: 'bottom',
+                        beginAtZero: true,
                     }
                 }]
             }
@@ -135,11 +142,11 @@ function GraphController() {
                     ticks: {
                         beginAtZero: true,
                         callback: function (value) {
-                            if (value == 100) {
+                            if (value === 100) {
                                 return "Appropriated";
-                            } else if (value == 50) {
+                            } else if (value === 50) {
                                 return "Uncertain";
-                            } else if (value == 0) {
+                            } else if (value === 0) {
                                 return "Unappropriated";
                             }
                             return "";
@@ -155,11 +162,47 @@ function GraphController() {
         });
     };
     /**
+     * Method defined to clear graph
+     * @memberOf GraphController
+     */
+    const clearGraph = function ( chart, update = true ) {
+        chart.data.labels = [];
+        chart.data.datasets.forEach(dataset => dataset.data = []);
+        if (update) {
+            chart.update();
+        }
+    };
+    /**
+     * Method defined to update quality curve
+     * @memberOf GraphController
+     */
+    this.updateCurve = function ( thresholds ) {
+        clearGraph(curve, false);
+        thresholds.forEach(threshold => {
+            curve.data.labels.push(threshold.begin);
+            curve.data.labels.push(threshold.end);
+            curve.data.datasets[0].data.push({
+                y: threshold.quality
+            });
+            curve.data.datasets[0].data.push({
+                y: threshold.quality
+            });
+        });
+        curve.update();
+    };
+    /**
+     * Method defined to clear graphics
+     * @memberOf GraphController
+     */
+    this.clear = function () {
+        clearGraph();
+    };
+    /**
      * Initialize graph controller
      * @memberOf GraphController
      */
     this.init = function () {
         this.loadOverall();
-        this.loadCurve();
-    }
+        initCurve();
+    };
 }

@@ -36,8 +36,6 @@ function EvaluateController(controller) {
         elementsMap.monitoringId = $('#monitoring_id');
         elementsMap.ruleForEvaluation = $('#ruleForEvaluation');
         elementsMap.indicator = $('#monitoringIndicators');
-        //elementsMap.id = $('#');
-        //elementsMap.id = $('#');
     };
     /**
      * Request API for bring user rules to populate select
@@ -78,8 +76,11 @@ function EvaluateController(controller) {
      * @memberOf EvaluateController
      */
     const initEvents = function () {
-        $('#ruleForEvaluation').on('change', function () {
+        elementsMap.ruleForEvaluation.on('change', function () {
             evaluate(this.value)
+        });
+        elementsMap.indicator.on('change', function () {
+            thresholds(elementsMap.ruleForEvaluation.val(), this.value, 1)
         });
     };
     /**
@@ -137,6 +138,35 @@ function EvaluateController(controller) {
      */
     const errorEvaluateHandler = function () {
         moduleController.message('danger', 'Fail to evaluate this monitoring with selected rule')
+    };
+    /**
+     * Request data for thresholds visualization
+     * @memberOf EvaluateController
+     */
+    const thresholds = function ( rule, indicator, stage ) {
+        if ($.isEmpty(indicator) || $.isEmpty(rule)) {
+            return;
+        }
+        new AjaxController({
+            data: {},
+            method: 'GET',
+            url: `rule/thresholds/${rule}/${indicator}/${stage}`,
+            success: successThresholdHandler,
+            error: errorThresholdHandler
+        }).send(true);
+    };
+    /**
+     * @memberOf EvaluateController
+     */
+    const successThresholdHandler = function ( data ) {
+        graphController.updateCurve(data.thresholds);
+    };
+    /**
+     * Handle erros from threhold request
+     * @memberOf EvaluateController
+     */
+    const errorThresholdHandler = function () {
+        moduleController.message('danger', 'Fail to request thresholds quality curve')
     };
     /**
      * Clean evaluation

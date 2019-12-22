@@ -15,5 +15,6 @@ class JobManager(AppConfig):
     name = 'backend.jobs'
 
     def ready(self):
-        JobStage().schedule_start()
+        # JobStage().schedule_start()
         # JobMonitoring().schedule_start()
+        pass
