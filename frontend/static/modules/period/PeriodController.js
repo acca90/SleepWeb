@@ -9,6 +9,21 @@
  */
 function PeriodController($container) {
     /**
+     * Instance of AbstractController
+     * @memberOf PeriodController
+     */
+    let abstractController = null;
+    /**
+     * Instance of PeriodFormController
+     * @memberOf PeriodController
+     */
+    let periodFormController = null;
+    /**
+     * Instance of PeriodViewController
+     * @memberOf PeriodController
+     */
+    let periodViewController = null;
+    /**
      * DataTable Settings
      * @namespace PeriodController
      */
@@ -73,12 +88,35 @@ function PeriodController($container) {
         return $('form').serializeToJson();
     };
     /**
+     * Analyzes selected period
+     * @memberOf PeriodController
+     */
+    const analyzePeriod = function () {
+        let dataTable = abstractController.getModuleDataTable();
+        let rowData = dataTable.getRowData();
+        if ($.isEmpty(rowData)) {
+            return;
+        }
+        periodViewController.analyze(rowData);
+    };
+    /**
+     * Initialize events
+     * @memberOf PeriodController
+     */
+    const initEvents = function () {
+        $('#btnAnalyze').off('click').on('click', function () {
+            analyzePeriod();
+        });
+    };
+    /**
      * Module Initialize
      * @memberOf PeriodController
      */
     this.init = function () {
-        new AbstractController(getParams()).init();
-        new PeriodFormController().init();
+        abstractController = new AbstractController(getParams()).init();
+        periodFormController = new PeriodFormController().init();
+        periodViewController = new PeriodViewController().init();
+        initEvents();
     };
     /**
      * Load a settings for modal datatables

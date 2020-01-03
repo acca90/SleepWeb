@@ -2,17 +2,26 @@
 {% load static %}
 {% load i18n %}
 
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'jquery-calendar-heatmap/dist/jquery.CalendarHeatmap.min.css' %}"/>
+{% endblock %}
+
 {% block container %}
     <div id="period">
         {% include 'period/list.html' %}
         {% include 'period/form.html' %}
+        {% include 'period/view.html' %}
     </div>
 {% endblock container %}
 
 {% block scripts %}
     {{ block.super }}
+    <script src="{% static "moment/min/moment.min.js" %}"></script>
+    <script src="{% static "jquery-calendar-heatmap/dist/jquery.CalendarHeatmap.min.js" %}"></script>
     <script src="{% static "modules/period/PeriodController.js" %}"></script>
     <script src="{% static "modules/period/PeriodFormController.js" %}"></script>
+    <script src="{% static "modules/period/PeriodViewController.js" %}"></script>
     <script>
         $(document).ready(function () {
             new PeriodController($('#period')).init();
