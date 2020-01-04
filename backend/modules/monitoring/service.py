@@ -11,6 +11,9 @@ from django.db.models import Q
 
 from backend.modules.group.models import Group
 from backend.modules.monitoring.models import Monitoring, MonitoringIndicator
+from backend.modules.msystem.models import MSystem
+from backend.modules.msystem.service import MSystemsRequestService
+from backend.modules.patient.models import Patient
 from backend.modules.user.models import User
 
 
@@ -18,7 +21,6 @@ class MonitoringService:
     """
     Service to keep logics and exposing methods for monitoring
     """
-
     def split_and_store(self, monitorings):
         """
         Method defined to store new monitoring records
@@ -103,3 +105,19 @@ class MonitoringService:
             monitoring = Monitoring.objects.get(pk=monitoring[0]['id'])
 
         return monitoring
+
+    def fetch_dynamic(self, request):
+        """
+        Method defined to handle requests made by user
+        """
+        systems = MSystem.objects.filter(
+            institution__in=Patient.objects.filter(user__id=request.user.id).values('institutions__id'),
+            is_active=True
+        )
+
+        MSystemsRequestService().execute_request(systems)
+        return True
+
+
+
+

@@ -6,7 +6,8 @@ Universidade de Passo Fundo - 2018/2019
 @author Matheus Hernandes
 @since 30/05/2019
 """
-from rest_framework import viewsets
+from rest_framework import viewsets, status
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
@@ -63,3 +64,16 @@ class MonitoringReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
         self.queryset = Monitoring.objects.all()
         return super().retrieve(request, args, kwargs)
 
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def monitoring_sync(request):
+    """
+    API defined to evaluate monitorings
+    """
+    try:
+        data = MonitoringService().fetch_dynamic(request)
+        return Response(data=data, status=status.HTTP_200_OK)
+    except Exception as e:
+        print(e)
+        return Response(data={}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

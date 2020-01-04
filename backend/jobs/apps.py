@@ -16,5 +16,4 @@ class JobManager(AppConfig):
 
     def ready(self):
         # JobStage().schedule_start()
-        # JobMonitoring().schedule_start()
-        pass
+        JobMonitoring().schedule_start()

@@ -91,6 +91,25 @@ function MonitoringController($container) {
         });
     };
     /**
+     * Initialize events
+     * @memberOf MonitoringController
+     */
+    const initEvents = function () {
+        $('#btnRequestMonitoring').on('click', function () {
+            new AjaxController({
+                data: {},
+                method: 'POST',
+                url: 'monitoring/sync',
+                success: function ( data ) {
+                    console.log('ok', data)
+                },
+                error:  function () {
+                    console.log('not ok')
+                }
+            }).send(true);
+        });
+    };
+    /**
      * Module Initialize
      * @memberOf MonitoringController
      */
@@ -98,6 +117,7 @@ function MonitoringController($container) {
         let controller = new AbstractController(getParams()).init(true);
         evaluateController = new EvaluateController(controller).init();
         profileController.init();
+        initEvents();
     };
     /**
      * Load a modal datatables for search and pick registers
