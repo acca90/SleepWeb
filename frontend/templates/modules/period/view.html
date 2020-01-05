@@ -1,7 +1,44 @@
 {% load i18n %}
 
 <div id="view" style="display: none">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+                <i id="moduleIcon" class="fa fa-building"></i>
+                <b>
+                    <span id="moduleName">{% trans 'Period Analyzis' %}</span>
+                </b>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                <span id="moduleOption"></span>
+            </li>
+        </ol>
+    </nav>
+    <div id="formAlert" class="alert" role="alert" style="display: none">
+    </div>
+    {% csrf_token %}
+    <div class="card bg-light">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills ">
+                <li class="nav-item">
+                    <button type="button" class="btn btn-dark btn-sm" id="btnReturn">
+                        <i class="fa fa-step-backward"></i>
+                        <b>{% trans "Return" %}</b>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
 
-    <div id="heatmap"></div>
+            <div class="col-md-12">
+                <div id="heatmap" class="row">
 
+                </div>
+            </div>
+
+
+        </div>
+    </div>
 </div>
+
+

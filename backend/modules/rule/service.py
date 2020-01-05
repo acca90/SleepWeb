@@ -29,8 +29,9 @@ class RuleService:
         3. FD = Sum all FA
         4. IDX = Generate index
         """
-        stage_id = Patient.objects.get(pk=Monitoring.objects.get(pk=monitoring_id).patient.id).stage.id
-        indicators = MonitoringIndicator.objects.filter(monitoring__id=monitoring_id)
+        monitoring = Monitoring.objects.get(pk=monitoring_id)
+        stage_id = Patient.objects.get(pk=Monitoring.objects.get(pk=monitoring.id).patient.id).stage.id
+        indicators = MonitoringIndicator.objects.filter(monitoring__id=monitoring.id)
 
         fb = 0
         fd = 0
@@ -48,7 +49,12 @@ class RuleService:
             })
 
         idx = self.calc_idx(fb, fd)
-        return {'idx': idx, 'results': results}
+        return {
+            'idx': idx,
+            'begin': monitoring.begin,
+            'end': monitoring.end,
+            'results': results
+        }
 
     def load_threshold(self, rule_id, indicator, stage_id):
         """

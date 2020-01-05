@@ -54,6 +54,16 @@ fieldset legend { font-size: 12px; font-weight: bold; border-bottom: solid 1px; 
 
 .table-idx-row-0, .table-idx-row-0 > th, .table-idx-row-0 > td { background-color: #ff8c87; border-color: #e27974; color: #000; }
 
+.quality-0 { background-color: #ff8c87 !important; }
+
+.quality-1 { background-color: #ffb089 !important; }
+
+.quality-2 { background-color: #ffd390 !important; }
+
+.quality-3 { background-color: #f1ff97 !important; }
+
+.quality-4 { background-color: #00df25 !important; }
+
 .table-idx-row-10.that, .table-idx-row-8.that, .table-idx-row-6.that, .table-idx-row-4.that, .table-idx-row-0.that { text-transform: uppercase; font-weight: bold; font-style: italic; }
 
 /*# sourceMappingURL=custom.css.map */

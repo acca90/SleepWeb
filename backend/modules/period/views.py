@@ -14,6 +14,7 @@ from backend.commons.notAllowed import not_allowed_to_do, not_allowed_to_see
 from backend.commons.utils import check_owner
 from backend.modules.period.models import Period
 from backend.modules.period.serializers import PeriodReadSerializer, PeriodWriteSerializer
+from backend.modules.period.service import PeriodService
 
 
 class PeriodViewSet(viewsets.ModelViewSet):
@@ -106,10 +107,12 @@ def period_analyze(request, period_id):
     if not check_owner(request.user, period.user):
         return not_allowed_to_see()
 
-    response = {
-        "begin": period.begin,
-        "end": period.end,
-        "data": None
-    }
-
-    return response
+    try:
+        return Response(data={
+            'begin': period.begin,
+            'end': period.end,
+            'data': PeriodService().evaluate(period)
+        }, status=status.HTTP_200_OK)
+    except Exception as e:
+        print(e)
+        return Response(data={}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -57,7 +57,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # api
-    path('api/v1/period/analyze/<int:period_id>', period_analyze),
+    path('api/v1/period/analyze/<int:period_id>/', period_analyze),
     path('api/v1/monitoring/sync/', monitoring_sync),
     path('api/v1/monitoring/evaluate/<int:monitoring_id>/<int:rule_id>/', monitoring_evaluate),
     path('api/v1/rule/thresholds/<int:rule_id>/<int:indicator_id>/<int:monitoring_id>/', thresholds_view),
