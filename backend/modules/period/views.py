@@ -7,9 +7,11 @@ Universidade de Passo Fundo - 2018/2019
 @since 14/12/2019
 """
 from rest_framework import viewsets, status
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from backend.commons.notAllowed import not_allowed_to_do
+from backend.commons.notAllowed import not_allowed_to_do, not_allowed_to_see
+from backend.commons.utils import check_owner
 from backend.modules.period.models import Period
 from backend.modules.period.serializers import PeriodReadSerializer, PeriodWriteSerializer
 
@@ -97,3 +99,11 @@ class PeriodViewSet(viewsets.ModelViewSet):
         return not_allowed_to_do()
 
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def period_analyze(request, period_id):
+    period = Period.objects.get(pk=period_id)
+    if not check_owner(request.user, period.user):
+        return not_allowed_to_see()
+
+    pass

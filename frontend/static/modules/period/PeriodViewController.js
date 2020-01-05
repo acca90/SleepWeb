@@ -33,25 +33,20 @@ function PeriodViewController() {
 
 
         var data = [
-            {count: 2, date: "2017-09-23"},
-            {count: 1, date: "2017-10-23"},
-            {count: 4, date: "2017-11-11"},
-            {count: 5, date: "2017-11-13"},
-            {count: 3, date: "2017-11-21"},
+            {count: 2, date: "2020-01-17"},
+            {count: 1, date: "2020-02-17"},
+            {count: 4, date: "2020-03-17"},
+            {count: 3, date: "2020-04-17"},
+            {count: 3, date: "2020-05-17"},
         ];
 
         $("#heatmap").CalendarHeatmap(data, {
             // title of the calendar heatmap
-            title: null,
-            // the number of months to display
-            months: 12,
-            // last month
-            lastMonth: moment().month() + 1,
-            // last year
-            lastYear: moment().year(),
-            // color gradients
+            title: 'teste',
+            months: 6,
+            lastMonth: '05',
+            lastYear: '2020',
             coloring: null,
-
             labels: {
                 days: false,
                 months: true,
@@ -60,15 +55,12 @@ function PeriodViewController() {
                     monthLabels: null
                 }
             },
-            // custom legend
             legend: {
                 show: true,
                 align: "right",
-                minLabel: "Less",
-                maxLabel: "More"
+                minLabel: "Bad",
+                maxLabel: "Good"
             },
-            // custom tooltips
-            // requires <a href="https://www.jqueryscript.net/tags.php?/Bootstrap/">Bootstrap</a>
             tooltips: {
                 show: false,
                 options: {}
