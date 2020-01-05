@@ -16,7 +16,7 @@ from rest_framework import routers
 from backend.modules.institution.views import InstitutionViewSet
 from backend.modules.monitoring.views import MonitoringReadOnlyViewSet, MonitoringDashboardViewSet, monitoring_sync
 from backend.modules.patient.views import PatientViewSet, patient_send
-from backend.modules.period.views import PeriodViewSet
+from backend.modules.period.views import PeriodViewSet, period_analyze
 from backend.modules.stage.views import StageViewSet
 from backend.modules.user.views import UserViewSet
 from backend.modules.msystem.views import MSystemViewSet

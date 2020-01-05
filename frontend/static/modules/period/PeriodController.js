@@ -31,9 +31,17 @@ function PeriodController($container) {
         return [
             {th: '#', width: '50px', data: 'id'},
             {th: 'Patient', width: '', data: 'patient.last_name', render: renderPatient},
-            {th: 'begin',  width: '180px', data: 'begin'},
-            {th: 'end',  width: '180px', data: 'end'},
+            {th: 'Rule', width: '', data: 'rule.description'},
+            {th: 'begin',  width: '180px', data: 'begin', render: renderDate},
+            {th: 'end',  width: '180px', data: 'end', render: renderDate},
         ];
+    };
+    /**
+     * Render for birth date and age
+     * @memberOf PatientController
+     */
+    const renderDate = function (data) {
+        return $.dateFormat(data);
     };
     /**
      * Render for patient

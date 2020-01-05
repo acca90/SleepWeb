@@ -68,6 +68,37 @@
                     </div>
                 </div>
 
+                <div id="divRule" class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="patientField">{% trans 'Rule' %}</label>
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fa fa-address-card-o"></i>
+                                </div>
+                            </div>
+                            <input type="text"
+                                   class="form-control form-control-sm"
+                                   data-parsley-required-message="{% trans 'Enter the rule for the monitoring period' %}"
+                                   data-parsley-errors-container="#ruleValidateMessage"
+                                   required
+                                   readonly
+                                   id="ruleField"
+                                   name="ruleField" />
+                            <input type="hidden" id="ruleId" name="rule">
+                            <div class="input-group-append">
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-primary btn-sm" id="findRule">
+                                        <i class="fa fa-search"></i>
+                                        <b>{% trans 'Find Rule' %}</b>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="ruleValidateMessage"></div>
+                    </div>
+                </div>
+
 
                 <div class="form-row">
                     <div class="form-group col-md-3 mb-3">

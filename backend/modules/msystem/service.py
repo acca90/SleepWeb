@@ -39,6 +39,7 @@ class MSystemsRequestService:
             try:
                 response = requests.post(msystem.url + 'monitoring', json=self.today())
                 self.process_responses(msystem, response)
+                self.store_monitorings()
             except Exception as e:
                 print("Monitoring request failed: ", e)
 
@@ -49,11 +50,9 @@ class MSystemsRequestService:
         if response.status_code == 200:
             monitoring_package = response.json()
             if len(monitoring_package) > 0:
-
                 for monitoring in monitoring_package:
                     monitoring['system'] = msystem.pk
-
-                self.monitorings += monitoring_package
+                    self.monitorings.append(monitoring)
             else:
                 print(msystem.name + ' -> No data found')
 

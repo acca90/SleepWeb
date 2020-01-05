@@ -11,6 +11,8 @@ from rest_framework import serializers
 from backend.modules.patient.models import Patient
 from backend.modules.patient.serializers import PatientMinimalSerializer
 from backend.modules.period.models import Period
+from backend.modules.rule.models import Rule
+from backend.modules.rule.serializers import RuleMinimalSerializer
 from backend.modules.user.serializers import UserReadSerializer
 
 
@@ -19,6 +21,7 @@ class PeriodReadSerializer(serializers.ModelSerializer):
     Serializer for read operations
     """
     patient = PatientMinimalSerializer(read_only=True)
+    rule = RuleMinimalSerializer(read_only=True)
 
     class Meta:
         model = Period
@@ -26,13 +29,15 @@ class PeriodReadSerializer(serializers.ModelSerializer):
             'id',
             'begin',
             'end',
-            'patient'
+            'patient',
+            'rule'
         )
         datatables_always_serialize = (
             'id',
             'begin',
             'end',
-            'patient'
+            'patient',
+            'rule'
         )
 
 
@@ -42,6 +47,10 @@ class PeriodWriteSerializer(serializers.ModelSerializer):
     """
     patient = serializers.PrimaryKeyRelatedField(
         queryset=Patient.objects.all(),
+        required=False
+    )
+    rule = serializers.PrimaryKeyRelatedField(
+        queryset=Rule.objects.all(),
         required=False
     )
     user = serializers.PrimaryKeyRelatedField(
@@ -55,6 +64,7 @@ class PeriodWriteSerializer(serializers.ModelSerializer):
             'id',
             'begin',
             'end',
+            'rule',
             'user',
             'patient'
         )

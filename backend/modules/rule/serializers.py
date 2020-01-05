@@ -15,6 +15,7 @@ from backend.modules.user.serializers import UserReadSerializer
 
 
 class ThresholdWriteSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Threshold
         fields = (
@@ -43,6 +44,15 @@ class ThresholdReadSerializer(serializers.ModelSerializer):
             'quality',
             'weight',
             'stage'
+        )
+
+
+class RuleMinimalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rule
+        fields = (
+            'id',
+            'description',
         )
 
 

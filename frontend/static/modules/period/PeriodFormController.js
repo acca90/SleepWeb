@@ -12,7 +12,12 @@ function PeriodFormController() {
      * Settings for patient finder
      * @memberOf GroupFormController
      */
-    let finderSettings = null;
+    let finderPatientSettings = null;
+    /**
+     * Settings for rule finder
+     * @memberOf GroupFormController
+     */
+    let finderRuleSettings = null;
     /**
      * Keeps elements from DOM
      * @memberOf PeriodFormController
@@ -23,7 +28,14 @@ function PeriodFormController() {
      * @memberOf PeriodFormController
      */
     const findPatient = function () {
-        new FinderComponent(finderSettings).find();
+        new FinderComponent(finderPatientSettings).find();
+    };
+    /**
+     * Calls rule finder
+     * @memberOf PeriodFormController
+     */
+    const findRule = function () {
+        new FinderComponent(finderRuleSettings).find();
     };
     /**
      * CallBack for Patients
@@ -41,14 +53,32 @@ function PeriodFormController() {
         );
     };
     /**
+     * CallBack for Rule
+     * @memberOf PeriodFormController
+     */
+    const callBackRule = function (data) {
+        if ($.isEmpty(data)) {
+            elementsMap.ruleField.val('');
+            elementsMap.ruleId.val('');
+            return;
+        }
+        elementsMap.ruleId.val(data.id);
+        elementsMap.ruleField.val(data.description);
+    };
+    /**
      * Initialize finder
      * @memberOf PeriodFormController
      */
     const initFinder = function () {
-        finderSettings = {
+        finderPatientSettings = {
             url: 'patient',
             title: 'Find for Patients',
             callBackConfirm: callBackPatient
+        };
+        finderRuleSettings = {
+            url: 'rule',
+            title: 'Find for Rule',
+            callBackConfirm: callBackRule
         };
     };
     /**
@@ -56,17 +86,22 @@ function PeriodFormController() {
      * @memberOf PeriodFormController
      */
     const initElementsMap = function () {
-        elementsMap.container = $('#divPatient');
-        elementsMap.finderBtn = $('#findPatient', elementsMap.container);
-        elementsMap.patientField = $('#patientField', elementsMap.container);
-        elementsMap.patientId = $('#patientId', elementsMap.container);
+        let containerPatient = $('#divPatient');
+        let containerRule = $('#divRule');
+        elementsMap.patientFinderBtn = $('#findPatient', containerPatient);
+        elementsMap.patientField = $('#patientField', containerPatient);
+        elementsMap.patientId = $('#patientId', containerPatient);
+        elementsMap.ruleFinderBtn = $('#findRule', containerRule);
+        elementsMap.ruleField = $('#ruleField', containerRule);
+        elementsMap.ruleId = $('#ruleId', containerRule);
     };
     /**
      * Initialize events for the form
      * @memberOf PeriodFormController
      */
     const initEvents = function () {
-        elementsMap.finderBtn.on('click', findPatient)
+        elementsMap.patientFinderBtn.on('click', findPatient);
+        elementsMap.ruleFinderBtn.on('click', findRule);
     };
     /**
      * Initializa form controller for monitoring periods form

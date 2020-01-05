@@ -106,4 +106,10 @@ def period_analyze(request, period_id):
     if not check_owner(request.user, period.user):
         return not_allowed_to_see()
 
-    pass
+    response = {
+        "begin": period.begin,
+        "end": period.end,
+        "data": None
+    }
+
+    return response
