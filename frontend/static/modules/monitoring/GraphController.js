@@ -182,7 +182,6 @@ function GraphController() {
             return;
         }
         data.results.forEach(result => {
-            console.log(result);
             overall.data.labels.push(result.indicator.description);
             overall.data.datasets[0].data.push(result.fa)
         });

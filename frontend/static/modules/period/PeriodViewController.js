@@ -14,6 +14,11 @@ function PeriodViewController() {
      */
     let elementsMap = {};
     /**
+     * Reference for line chart
+     * @memberOf PeriodViewController
+     */
+    let lineChart = null;
+    /**
      * Initialize map of elements
      * @memberOf PeriodViewController
      */
@@ -23,6 +28,7 @@ function PeriodViewController() {
         elementsMap.divs.view = $('div#view');
         elementsMap.btnReturn = $('#btnReturn');
         elementsMap.calendar = $("#heatmap");
+        elementsMap.lineChart = $("#lineChart");
     };
     /**
      * Initialize calendar
@@ -74,6 +80,7 @@ function PeriodViewController() {
             lastYear: data.end.split('-')[0],
             data: processDayEvaluations(data.data)
         });
+        updateOverall(processDataForLineGraph(data.data));
         elementsMap.divs.list.hide();
         elementsMap.divs.view.show();
     };
@@ -109,7 +116,88 @@ function PeriodViewController() {
      * @memberOf PeriodViewController
      */
     const callBackAnalyzeError = function () {
-
+    };
+    /**
+     * Method defined to normalize data for line graph
+     * @memberOf PeriodViewController
+     */
+    const processDataForLineGraph = function ( data ) {
+        return data.map(result => {
+            return {
+                idx: result.idx,
+                date: result.end.split('T')[0].split('-').reverse().join("/")
+            }
+        });
+    };
+    /**
+     * Method defined to update overall graph
+     * @memberOf PeriodViewController
+     */
+    const updateOverall = function ( data ) {
+        cleanLineChart(false);
+        data.forEach(result => {
+            lineChart.data.labels.push(result.date);
+            lineChart.data.datasets[0].data.push(result.idx)
+        });
+        lineChart.update();
+    };
+    /**
+     * Method defined to clean line chart
+     * @memberOf PeriodViewController
+     */
+    const cleanLineChart = function ( update = true ) {
+        lineChart.data.labels = [];
+        lineChart.data.datasets.forEach(dataset => dataset.data = []);
+        if (update) {
+            lineChart.update();
+        }
+    };
+    /**
+     * Method defined to initialize chart
+     * @memberOf PeriodViewController
+     */
+    const initChart = function () {
+        lineChart = new Chart(document.getElementById('lineChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        data: [],
+                        fill: false,
+                        backgroundColor: '#ff8b89',
+                        borderColor:  '#FF0000',
+                        label: 'Quality Curve'
+                    }
+                ],
+            },
+            options: {
+                backgroundColor: '#FF0000',
+                responsive: true,
+                tooltips: {
+                    enabled: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            display: true,
+                            beginAtZero: true,
+                            stepSize: 1,
+                            suggestedMin: 0,
+                            suggestedMax: 10,
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            display: true,
+                            position: 'bottom',
+                            beginAtZero: true,
+                            autoSkip: true,
+                        }
+                    }]
+                }
+            }
+        });
     };
     /**
      * Initialize events
@@ -128,6 +216,7 @@ function PeriodViewController() {
     this.init = function () {
         initElementsMap();
         initEvents();
+        initChart();
         return this;
     };
 }
