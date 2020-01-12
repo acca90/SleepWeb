@@ -87,6 +87,8 @@ function PeriodController($container) {
         $('#patientField', $form).val(
             period.patient.first_name + " " + period.patient.last_name
         );
+        $('#ruleId', $form).val(period.rule.id);
+        $('#ruleField', $form).val(period.rule.description);
     };
     /**
      * Serialize form for API submit

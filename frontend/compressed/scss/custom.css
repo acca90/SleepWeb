@@ -66,4 +66,6 @@ fieldset legend { font-size: 12px; font-weight: bold; border-bottom: solid 1px; 
 
 .table-idx-row-10.that, .table-idx-row-8.that, .table-idx-row-6.that, .table-idx-row-4.that, .table-idx-row-0.that { text-transform: uppercase; font-weight: bold; font-style: italic; }
 
+form label { font-weight: bold; }
+
 /*# sourceMappingURL=custom.css.map */
