@@ -6,13 +6,16 @@ Universidade de Passo Fundo - 2018/2019
 @author Matheus Hernandes
 @since 16/03/2019
 """
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, mixins
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.viewsets import GenericViewSet
+
 from backend.commons.notAllowed import not_allowed_to_do
-from backend.modules.patient.models import Patient
-from backend.modules.patient.serializers import PatientWriteSerializer, PatientReadSerializer
+from backend.modules.patient.models import Patient, PatientRemoteReference
+from backend.modules.patient.serializers import PatientWriteSerializer, PatientReadSerializer, \
+    PatientRemoteReferenceSerializer
 from backend.modules.patient.service import PatientService
 from backend.modules.stage.service import StageService
 
@@ -98,6 +101,13 @@ class PatientViewSet(viewsets.ModelViewSet):
             return not_allowed_to_do()
 
         return super().destroy(request, args, kwargs)
+
+
+class PatientRemoteReferenceViwerSet(mixins.CreateModelMixin,
+                                     mixins.ListModelMixin,
+                                     GenericViewSet):
+    serializer_class = PatientRemoteReferenceSerializer
+    queryset = PatientRemoteReference.objects.all()
 
 
 @api_view(['POST'])

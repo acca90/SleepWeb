@@ -30,12 +30,14 @@ class PatientService:
             serialized = serializers.serialize(
                 "json",
                 Patient.objects.filter(pk=patient_pk),
-                fields=('uuid', 'first_name', 'last_name', 'birth_date', 'gender')
+                fields=('first_name', 'last_name', 'birth_date', 'gender')
             )
 
             # Instances to send patient
             msystems = MSystem.objects.filter(
-                institution_id__in=Institution.objects.filter(patient_institution__id=patient_pk).values('pk'),
+                institution_id__in=Institution.objects.filter(
+                    patient_institution__id=patient_pk
+                ).values('pk'),
                 is_active=True
             )
 

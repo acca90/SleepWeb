@@ -8,11 +8,13 @@ Universidade de Passo Fundo - 2018/2019
 """
 from rest_framework import serializers
 from backend.modules.institution.serializers import InstitutionSerializer
+from backend.modules.msystem.models import MSystem
+from backend.modules.msystem.serializers import MSystemReadSerializer
 from backend.modules.stage.serializers import StageSerializer
 from backend.modules.user.serializers import UserReadSerializer
 from backend.modules.user.models import User
 from backend.modules.institution.models import Institution
-from backend.modules.patient.models import Patient
+from backend.modules.patient.models import Patient, PatientRemoteReference
 
 
 class PatientWriteSerializer(serializers.ModelSerializer):
@@ -37,7 +39,6 @@ class PatientWriteSerializer(serializers.ModelSerializer):
         model = Patient
         fields = (
             'id',
-            'uuid',
             'first_name',
             'last_name',
             'birth_date',
@@ -48,7 +49,6 @@ class PatientWriteSerializer(serializers.ModelSerializer):
         )
         datatables_always_serialize = (
             'id',
-            'uuid',
             'first_name',
             'last_name',
             'birth_date',
@@ -77,7 +77,6 @@ class PatientReadSerializer(serializers.ModelSerializer):
         model = Patient
         fields = (
             'id',
-            'uuid',
             'first_name',
             'last_name',
             'birth_date',
@@ -89,7 +88,6 @@ class PatientReadSerializer(serializers.ModelSerializer):
         )
         datatables_always_serialize = (
             'id',
-            'uuid',
             'first_name',
             'last_name',
             'birth_date',
@@ -124,4 +122,22 @@ class PatientMinimalSerializer(serializers.ModelSerializer):
             'gender',
             'obs',
             'stage',
+        )
+
+
+class PatientRemoteReferenceSerializer(serializers.ModelSerializer):
+    """
+     Serializer defined to read operations
+    """
+    system = serializers.PrimaryKeyRelatedField(
+        queryset=MSystem.objects.all(),
+        required=False
+    )
+
+    class Meta:
+        model = PatientRemoteReference
+        fields = (
+            'system',
+            'uuid',
+            'name'
         )

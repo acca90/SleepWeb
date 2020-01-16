@@ -15,7 +15,7 @@ from rest_framework import routers
 # Back-End
 from backend.modules.institution.views import InstitutionViewSet
 from backend.modules.monitoring.views import MonitoringReadOnlyViewSet, MonitoringDashboardViewSet, monitoring_sync
-from backend.modules.patient.views import PatientViewSet, patient_send
+from backend.modules.patient.views import PatientViewSet, patient_send, PatientRemoteReferenceViwerSet
 from backend.modules.period.views import PeriodViewSet, period_analyze
 from backend.modules.stage.views import StageViewSet
 from backend.modules.user.views import UserViewSet
@@ -44,6 +44,7 @@ router = routers.DefaultRouter()
 router.register(r'institution', InstitutionViewSet, base_name='Institution')
 router.register(r'user', UserViewSet, base_name='user')
 router.register(r'stage', StageViewSet, base_name='stage')
+router.register(r'patient/remote', PatientRemoteReferenceViwerSet, base_name='patient_remote')
 router.register(r'patient', PatientViewSet, base_name='patient')
 router.register(r'msystem', MSystemViewSet, base_name='msystem')
 router.register(r'indicator', IndicatorViewSet, base_name='indicator')
