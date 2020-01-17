@@ -25,6 +25,7 @@ class PatientViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Patient.objects.all()
     stage_service = StageService()
+    patient_service = PatientService()
 
     def list(self, request, *args, **kwargs):
         """
@@ -53,6 +54,11 @@ class PatientViewSet(viewsets.ModelViewSet):
             instance = serializer.create(serializer.validated_data)
             self.stage_service.rank_by_object(instance)
             read_serializer = PatientReadSerializer(instance)
+            references = self.patient_service.generate_reference(instance)
+
+            if len(references) > 0:
+                self.patient_service.send(references)
+
             return Response(read_serializer.data)
         else:
             return Response(serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
