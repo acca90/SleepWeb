@@ -41,7 +41,7 @@ class PatientRemoteReference(models.Model):
     This model is defined keep reference for the patient in remote locations
     """
     patient = models.ForeignKey(Patient, on_delete=None, null=True)
-    system = models.ForeignKey(MSystem, on_delete=None, null=False)
+    system = models.ForeignKey(MSystem, on_delete=None, null=True)
     uuid = models.UUIDField(unique=True, editable=False, default=uuid.uuid4)
     name = models.CharField(db_column='name', max_length=255, null=False)
 

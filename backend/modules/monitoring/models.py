@@ -38,12 +38,16 @@ class Monitoring(models.Model):
         """
         Copy json data to a new Monitoring instance
         """
+        reference = PatientRemoteReference.objects.filter(uuid=monitoring['reference'])
+        if len(reference) < 1:
+            return False
+
         self.uuid = monitoring['uuid']
-        self.patient = Patient.objects.get(uuid=monitoring['patient'])
+        self.reference = reference
         self.system = MSystem.objects.get(pk=monitoring['system'])
         self.begin = dateutil.parser.parse(monitoring['begin'])
         self.end = dateutil.parser.parse(monitoring['end'])
-        return self
+        return True
 
     def exists(self):
         """

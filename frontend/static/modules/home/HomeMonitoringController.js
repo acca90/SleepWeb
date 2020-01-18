@@ -34,7 +34,7 @@ function HomeMonitoringController() {
      * @memberOf HomeMonitoringController
      */
     const datatableSettings = [
-        {th: 'Patient', width: '', data: 'patient.first_name', render: renderPatientName},
+        {th: 'Patient', width: '', data: 'reference', render: renderPatientName},
         {th: 'Date Begin', width: '140px', data: 'begin', render: renderDatetime},
         {th: 'Date End', width: '140px', data: 'end', render: renderDatetime}
     ];

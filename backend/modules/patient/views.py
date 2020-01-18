@@ -14,6 +14,7 @@ from rest_framework.viewsets import GenericViewSet
 
 from backend.commons.notAllowed import not_allowed_to_do
 from backend.modules.monitoring.models import Monitoring
+from backend.modules.msystem.models import MSystem
 from backend.modules.patient.models import Patient, PatientRemoteReference
 from backend.modules.patient.serializers import PatientWriteSerializer, PatientReadSerializer, \
     PatientRemoteReferenceSerializer
@@ -31,6 +32,13 @@ def delete_references(instance):
 
     references.delete()
     return True
+
+
+def exists_reference(param):
+    """
+    Method defined to verify if a reference is already stored
+    """
+    return PatientRemoteReference.objects.filter(uuid=param).count() > 0
 
 
 class PatientViewSet(viewsets.ModelViewSet):
@@ -136,6 +144,27 @@ class PatientRemoteReferenceViwerSet(mixins.CreateModelMixin,
                                      GenericViewSet):
     serializer_class = PatientRemoteReferenceSerializer
     queryset = PatientRemoteReference.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        if 'origin' not in request.POST:
+            return Response(data={}, status=status.HTTP_400_BAD_REQUEST)
+
+        systems = MSystem.objects.filter(url__contains=request.POST['origin'])
+        if len(systems) == 0:
+            return Response(data={}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = PatientRemoteReferenceSerializer(data=request.data, context={"request": request})
+        if not serializer.is_valid():
+            return Response(serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        if exists_reference(request.POST['uuid']):
+            return Response(serializer.data, status.HTTP_200_OK);
+
+        system = systems[0]
+        serializer.validated_data['uuid'] = request.POST['uuid']
+        serializer.validated_data['system'] = system
+        serializer.create(serializer.validated_data)
+        return Response(serializer.data)
 
 
 @api_view(['POST'])

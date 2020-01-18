@@ -39,14 +39,19 @@ class MonitoringService:
         Method defined to store monitorings
         """
         new_monitoring = Monitoring()
-        new_monitoring.copy(monitoring)
+        success = new_monitoring.copy(monitoring)
+
+        if not success:
+            print("Monitoring -> monitoring: " + monitoring['uuid'] + " refers to an unknown patient")
+            return
 
         if new_monitoring.exists():
             print("Monitoring -> monitoring: " + new_monitoring.uuid + " is already stored")
-        else:
-            new_monitoring.save()
-            print("Monitoring -> stored monitoring: " + new_monitoring.uuid)
-            self.store_indicators(monitoring['indicators'], new_monitoring)
+            return
+
+        new_monitoring.save()
+        print("Monitoring -> stored monitoring: " + new_monitoring.uuid)
+        self.store_indicators(monitoring['indicators'], new_monitoring)
 
     def store_indicators(self, indicators, new_monitoring):
         """
