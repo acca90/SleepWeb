@@ -13,11 +13,24 @@ from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from backend.commons.notAllowed import not_allowed_to_do
+from backend.modules.monitoring.models import Monitoring
 from backend.modules.patient.models import Patient, PatientRemoteReference
 from backend.modules.patient.serializers import PatientWriteSerializer, PatientReadSerializer, \
     PatientRemoteReferenceSerializer
 from backend.modules.patient.service import PatientService
 from backend.modules.stage.service import StageService
+
+
+def delete_references(instance):
+    """
+    Method defined to clean remote references for patients
+    """
+    references = PatientRemoteReference.objects.filter(patient_id=instance.id)
+    if Monitoring.objects.filter(reference__in=references).count() > 0:
+        return False
+
+    references.delete()
+    return True
 
 
 class PatientViewSet(viewsets.ModelViewSet):
@@ -54,10 +67,13 @@ class PatientViewSet(viewsets.ModelViewSet):
             instance = serializer.create(serializer.validated_data)
             self.stage_service.rank_by_object(instance)
             read_serializer = PatientReadSerializer(instance)
-            references = self.patient_service.generate_reference(instance)
 
-            if len(references) > 0:
-                self.patient_service.send(references)
+            try:
+                references = self.patient_service.generate_reference(instance)
+                if len(references) > 0:
+                    self.patient_service.send(references)
+            except Exception as e:
+                print(e)
 
             return Response(read_serializer.data)
         else:
@@ -105,6 +121,12 @@ class PatientViewSet(viewsets.ModelViewSet):
 
         if instance.user.id != request.user.id and not request.user.is_superuser:
             return not_allowed_to_do()
+
+        if not delete_references(instance):
+            return Response({
+                "Forbidden": "Is not possible to delete this patient, "
+                             "he or she is related with monitoring records"
+            }, status.HTTP_401_UNAUTHORIZED)
 
         return super().destroy(request, args, kwargs)
 

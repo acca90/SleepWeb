@@ -10,7 +10,6 @@ import json
 import requests
 from django.core import serializers
 from rest_framework import status
-from backend.modules.institution.models import Institution
 from backend.modules.msystem.models import MSystem
 from backend.modules.patient.models import Patient
 from backend.modules.patient.models import PatientRemoteReference
@@ -20,35 +19,14 @@ class PatientService:
     """
     Service to keep logics and exposing methods for patients
     """
-
     @staticmethod
     def send(patient_pk):
-        # TODO REBUILD
         """
         Method defined to send patient for its institutions
         """
         try:
-            # Patient
-            serialized = serializers.serialize(
-                "json",
-                Patient.objects.filter(pk=patient_pk),
-                fields=('first_name', 'last_name', 'birth_date', 'gender')
-            )
-
-            # Instances to send patient
-            msystems = MSystem.objects.filter(
-                institution_id__in=Institution.objects.filter(
-                    patient_institution__id=patient_pk
-                ).values('pk'),
-                is_active=True
-            )
-
-            # Send patient for each instance
-            for location in msystems:
-                response = requests.post(location.url + 'patient', json=json.loads(serialized)[0]['fields'])
-                if response.status_code != 200:
-                    raise Exception(response.status_code)
-
+            references = PatientRemoteReference.objects.filter(patient_id=patient_pk)
+            PatientService.send_references(references)
         except Exception as e:
             print(e)
             raise Exception(status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -58,19 +36,46 @@ class PatientService:
         """
         Method defined to send patient references to its systems
         """
-        for reference in references:
-            system = MSystem.objects.get(pk=reference.system.id)
-            json_reference = serializers.serialize(
-                "json",
-                reference,
-                fields=('uuid', 'name')
-            )
-            response = requests.post(
-                url=system.url + 'patient',
-                json=json.loads(json_reference)[0]['fields']
-            )
-            if response.status_code != 200:
-                raise Exception(response.status_code)
+        success = []
+        fail = []
+        try:
+            for reference in references:
+                system = MSystem.objects.get(pk=reference.system.id)
+                if not system.is_active:
+                    continue
+
+                json_reference = serializers.serialize(
+                    "json",
+                    [reference],
+                    fields=('uuid', 'name')
+                )
+                print("Requesting for", system.url + 'patient')
+                response = requests.post(
+                    url=system.url + 'patient',
+                    json=json.loads(json_reference)[0]['fields']
+                )
+                if response.status_code != 200:
+                    fail.append({
+                        "system": system.description,
+                        "status": "failed",
+                        "code": response.status_code
+                    })
+                    continue
+
+                success.append({
+                    "system": system.description,
+                    "status": "success",
+                    "code": 200
+                })
+
+        except Exception as e:
+            print(e)
+            raise Exception(status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return {
+            "success": success,
+            "fail": fail
+        }
 
     @staticmethod
     def generate_reference(patient):
