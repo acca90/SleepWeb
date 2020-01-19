@@ -1,0 +1,37 @@
+{% load i18n %}
+
+<div id="reference" style="display: none">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+                <i id="moduleIcon" class="fa fa-address-card-o"></i>
+                <b>
+                    <span id="moduleName">{% trans 'Patients' %}</span>
+                </b>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                <span id="moduleOption"></span>
+            </li>
+        </ol>
+    </nav>
+    <div id="formAlert" class="alert" role="alert" style="display: none">
+    </div>
+    {% csrf_token %}
+    <div class="card bg-light">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills ">
+                {% include 'components/menu_form.html' %}
+            </ul>
+        </div>
+        <div class="card-body">
+            <input type="hidden" id="patientid">
+            <div class="alert alert-info">
+                <i class="fa fa-info-circle"></i> Click on remote references that are related with the patient
+                <b id="patientname"></b>
+            </div>
+            <div id="dtcontainer">
+
+            </div>
+        </div>
+    </div>
+</div>

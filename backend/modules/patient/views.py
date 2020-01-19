@@ -12,7 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from backend.commons.notAllowed import not_allowed_to_do
+from backend.commons.notAllowed import not_allowed_to_do, not_allowed_to_see
 from backend.modules.monitoring.models import Monitoring
 from backend.modules.msystem.models import MSystem
 from backend.modules.patient.models import Patient, PatientRemoteReference
@@ -39,6 +39,20 @@ def exists_reference(param):
     Method defined to verify if a reference is already stored
     """
     return PatientRemoteReference.objects.filter(uuid=param).count() > 0
+
+
+def select_available_references(patientpk):
+    """
+    Method defined to list available references for patient
+    """
+    return PatientRemoteReference.objects.filter(
+        system_id__in=MSystem.objects.filter(
+            institution_id__in=Patient.objects.get(
+                pk=patientpk
+            ).institutions.filter().values('pk')
+        ).values('id'),
+        patient=None
+    ).values('name', 'system__description', 'system__institution__name', 'uuid')
 
 
 class PatientViewSet(viewsets.ModelViewSet):
@@ -141,9 +155,23 @@ class PatientViewSet(viewsets.ModelViewSet):
 
 class PatientRemoteReferenceViwerSet(mixins.CreateModelMixin,
                                      mixins.ListModelMixin,
+                                     mixins.RetrieveModelMixin,
+                                     mixins.UpdateModelMixin,
                                      GenericViewSet):
     serializer_class = PatientRemoteReferenceSerializer
     queryset = PatientRemoteReference.objects.all()
+
+    def retrieve(self, request, *args, **kwargs):
+        """
+        Override default retrieve method
+        """
+        if request.user.id is None:
+            return not_allowed_to_see()
+        try:
+            return Response(select_available_references(kwargs['pk']))
+        except Exception as e:
+            print(e)
+            return super().retrieve(request, *args, **kwargs)
 
     def create(self, request, *args, **kwargs):
         if 'origin' not in request.POST:
@@ -158,13 +186,43 @@ class PatientRemoteReferenceViwerSet(mixins.CreateModelMixin,
             return Response(serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         if exists_reference(request.POST['uuid']):
-            return Response(serializer.data, status.HTTP_200_OK);
+            return Response(serializer.data, status.HTTP_200_OK)
 
         system = systems[0]
         serializer.validated_data['uuid'] = request.POST['uuid']
         serializer.validated_data['system'] = system
         serializer.create(serializer.validated_data)
         return Response(serializer.data)
+
+    def update(self, request, *args, **kwargs):
+        """
+        Update method is completed changed, allowing to link patient references to Patients
+        """
+        references = request.data.getlist('references[]')
+        if len(references) < 1:
+            return Response(data={}, status=status.HTTP_400_BAD_REQUEST)
+
+        available_references = select_available_references(kwargs['pk'])
+
+        found = False
+        for reference in available_references:
+            if str(reference['uuid']) in references:
+                found = True
+                break
+
+        if not found:
+            return Response(data={}, status=status.HTTP_400_BAD_REQUEST)
+
+        patient = Patient.objects.get(pk=kwargs['pk'])
+        if patient.user.id != request.user.id and not request.user.is_superuser:
+            return not_allowed_to_do()
+
+        PatientRemoteReference.objects.filter(
+            uuid__in=references,
+            patient__isnull=True
+        ).update(patient=patient)
+
+        return Response(data={}, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])

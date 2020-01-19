@@ -6,7 +6,8 @@
 
 	<div id="patient">
 		{% include 'patient/list.html' %}
-		{% include 'patient/form.html' %}
+        {% include 'patient/form.html' %}
+        {% include 'patient/reference.html' %}
 	</div>
 
 {% endblock container %}
@@ -15,7 +16,8 @@
 	{{ block.super }}
 	<script src="{% static "modules/patient/PatientService.js" %}"></script>
 	<script src="{% static "modules/patient/PatientFormController.js" %}"></script>
-	<script src="{% static "modules/patient/PatientController.js" %}"></script>
+    <script src="{% static "modules/patient/PatientController.js" %}"></script>
+    <script src="{% static "modules/patient/PatientReferenceController.js" %}"></script>
 	<script>
         $(document).ready(function () {
             new PatientController($('#patient')).init();

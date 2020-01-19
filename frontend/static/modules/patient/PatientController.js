@@ -19,6 +19,11 @@ function PatientController($container) {
      */
     let formController = null;
     /**
+     * Patient reference controller
+     * @memberOf PatientController
+     */
+    let patientReferenceController = null;
+    /**
      * Serivce for patient
      * @memberOf PatientController
      */
@@ -138,6 +143,7 @@ function PatientController($container) {
     const initControllers = function () {
         abstractController = new AbstractController(getParams()).init();
         formController = new PatientFormController().init();
+        patientReferenceController = new PatientReferenceController(abstractController).init();
     };
     /**
      * Initialize services
@@ -153,6 +159,13 @@ function PatientController($container) {
     const initEvents = function () {
         $('#btnSendPatient').off('click').on('click', function () {
             send_patient();
+        });
+        $('#btnReference').off('click').on('click', function () {
+            let rowData =  abstractController.getModuleDataTable().getRowData();
+            if ($.isEmpty(rowData)) {
+                return;
+            }
+            patientReferenceController.load(rowData);
         });
     };
     /**

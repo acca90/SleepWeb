@@ -79,17 +79,34 @@ function DataTableComponent(settings) {
      */
     this.selectable = function () {
         $table.on('click', 'tbody > tr', function () {
-            if ($(this).hasClass('selected')) {
-                $(this).removeClass('selected')
-            } else {
-                if ($(this).find('.dataTables_empty').length > 0) {
-                    return;
-                }
-                $(this)
-                    .addClass('selected')
-                    .siblings('.selected')
-                    .removeClass('selected');
+            if ($(this).find('.dataTables_empty').length > 0) {
+                return;
             }
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+                return;
+            }
+            $(this)
+                .addClass('selected')
+                .siblings('.selected')
+                .removeClass('selected');
+        });
+        return this;
+    };
+    /**
+     * Make datatable multi selectable
+     * @memberOf DataTableComponent
+     */
+    this.multiSelectable = function () {
+        $table.on('click', 'tbody > tr', function () {
+            if ($(this).find('.dataTables_empty').length > 0) {
+                return;
+            }
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+                return;
+            }
+            $(this).addClass('selected');
         });
         return this;
     };
@@ -191,6 +208,13 @@ function DataTableComponent(settings) {
      */
     this.getSelectedRow = function () {
         return $table.find('tr.selected');
+    };
+    /**
+     * Get selected row for DataTable
+     * @DataTable DataTableComponent
+     */
+    this.getSelectedRowData = function () {
+        return $table.DataTable().rows('.selected').data().toArray();
     };
     /**
      * Add row to DataTable;

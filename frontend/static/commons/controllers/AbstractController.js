@@ -524,6 +524,20 @@ function AbstractController(params) {
         );
     };
     /**
+     * Shows message on the top of form
+     * @param type type of message
+     * @param message Message
+     */
+    this.messageList = function (type, message) {
+        fadeOutAlert(
+            applyAlert(
+                type,
+                DOM.list.alert,
+                message
+            ).show()
+        );
+    };
+    /**
      * Returns module datatable instance
      * @memberOf AbstractController
      */
