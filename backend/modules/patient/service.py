@@ -92,6 +92,7 @@ class PatientService:
                 reference.patient = patient
                 reference.system = system
                 reference.name = patient.first_name + " " + patient.last_name
+                reference.is_remote = False
                 reference.save()
                 references.append(reference)
         except Exception as e:

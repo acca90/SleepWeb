@@ -44,6 +44,7 @@ class PatientRemoteReference(models.Model):
     system = models.ForeignKey(MSystem, on_delete=None, null=True)
     uuid = models.UUIDField(unique=True, editable=False, default=uuid.uuid4)
     name = models.CharField(db_column='name', max_length=255, null=False)
+    is_remote = models.BooleanField(db_column='is_remote', default=True, null=False)
 
     class Meta:
         db_table = 'PatientRemoteReference'

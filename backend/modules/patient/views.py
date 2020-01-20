@@ -89,7 +89,6 @@ class PatientViewSet(viewsets.ModelViewSet):
             instance = serializer.create(serializer.validated_data)
             self.stage_service.rank_by_object(instance)
             read_serializer = PatientReadSerializer(instance)
-
             try:
                 references = self.patient_service.generate_reference(instance)
                 if len(references) > 0:
