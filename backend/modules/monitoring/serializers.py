@@ -9,7 +9,7 @@ Universidade de Passo Fundo - 2018/2019
 from rest_framework import serializers
 
 from backend.modules.indicator.serializers import IndicatorMinimalSerializer
-from backend.modules.patient.serializers import PatientMinimalSerializer
+from backend.modules.patient.serializers import PatientRemoteReferenceSerializer, PatientRemoteReferenceViewSerializer
 from backend.modules.monitoring.models import Monitoring, MonitoringIndicator
 
 
@@ -29,19 +29,19 @@ class MonitoringListSerializer(serializers.ModelSerializer):
     """
     Serializer for readonly monitoring list
     """
-    patient = PatientMinimalSerializer(read_only=True)
+    reference = PatientRemoteReferenceViewSerializer(read_only=True)
 
     class Meta:
         model = Monitoring
         fields = (
             'id',
-            'patient',
+            'reference',
             'begin',
             'end',
         )
         datatables_always_serialize = (
             'id',
-            'patient',
+            'reference',
             'begin',
             'end',
         )
@@ -51,7 +51,7 @@ class MonitoringReadSerializer(serializers.ModelSerializer):
     """
     Serializer for readonly monitoring list
     """
-    patient = PatientMinimalSerializer(read_only=True)
+    reference = PatientRemoteReferenceSerializer(read_only=True)
     indicators = MonitoringIndicatorSerializer(read_only=True, many=True)
 
     class Meta:
@@ -60,6 +60,6 @@ class MonitoringReadSerializer(serializers.ModelSerializer):
             'id',
             'begin',
             'end',
-            'patient',
+            'reference',
             'indicators'
         )

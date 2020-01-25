@@ -141,3 +141,18 @@ class PatientRemoteReferenceSerializer(serializers.ModelSerializer):
             'uuid',
             'name'
         )
+
+
+class PatientRemoteReferenceViewSerializer(serializers.ModelSerializer):
+    """
+     Serializer defined to read operations
+    """
+    patient = PatientMinimalSerializer()
+
+    class Meta:
+        model = PatientRemoteReference
+        fields = (
+            'patient',
+            'uuid',
+            'name'
+        )

@@ -66,27 +66,26 @@ class MonitoringService:
         Method defined to filter monitoring follower user privilege and group restrictions
         """
         if request.user.is_superuser:
-            if limit is None:
-                return Monitoring.objects.all()
-            else:
+            if limit is not None:
                 return Monitoring.objects.filter(
                     id__in=Monitoring.objects.all()[:limit].values('id')
                 )
+            return Monitoring.objects.all()
 
         user = User.objects.get(pk=request.user.id)
         shared_patients = Group.objects.filter(Q(users=user) | Q(institutions=user.institution)).values('patients')
 
         if limit is None:
             return Monitoring.objects.filter(
-                Q(patient__user=user) |
-                Q(patient__in=shared_patients)
+                Q(reference__patient__user=user) |
+                Q(reference__patient__in=shared_patients)
             )
-        else:
-            return Monitoring.objects.filter(
-                id__in=Monitoring.objects.filter(
-                    Q(patient__user=user) | Q(patient__in=shared_patients)
-                )[:limit].values('id')
-            )
+
+        return Monitoring.objects.filter(
+            id__in=Monitoring.objects.filter(
+                Q(reference__patient__user=user) | Q(reference__patient__in=shared_patients)
+            )[:limit].values('id')
+        )
 
     def get(self, request):
         """

@@ -18,7 +18,7 @@ function HomeMonitoringController() {
      * @memberOf HomeMonitoringController
      */
     const renderPatientName = function (data, type, full) {
-        return full.patient.first_name + " " + full.patient.last_name
+        return full.reference.patient.first_name + " " + full.reference.patient.last_name
     };
     /**
      * Render for datetime
@@ -34,9 +34,27 @@ function HomeMonitoringController() {
      * @memberOf HomeMonitoringController
      */
     const datatableSettings = [
-        {th: 'Patient', width: '', data: 'reference', render: renderPatientName},
-        {th: 'Date Begin', width: '140px', data: 'begin', render: renderDatetime},
-        {th: 'Date End', width: '140px', data: 'end', render: renderDatetime}
+        {
+            th: 'Patient',
+            width: '',
+            data: 'reference',
+            render: renderPatientName,
+            sDefaultContent: '',
+        },
+        {
+            th: 'Date Begin',
+            width: '140px',
+            data: 'begin',
+            render: renderDatetime,
+            sDefaultContent: '',
+        },
+        {
+            th: 'Date End',
+            width: '140px',
+            data: 'end',
+            render: renderDatetime,
+            sDefaultContent: '',
+        }
     ];
     /**
      * Initialize controller
