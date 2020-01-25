@@ -60,7 +60,10 @@ class MSystemsRequestService:
         """
         Store monitoring systems collected
         """
-        self.monitoring_service.split_and_store(self.monitorings)
+        try:
+            self.monitoring_service.split_and_store(self.monitorings)
+        except Exception as e:
+            print('Monitoring receive couldn\'t be stored', e)
 
     def today(self):
         """

@@ -24,7 +24,7 @@ function MonitoringController($container) {
      */
     const getDatatableSettings = function () {
         return [
-            {th: 'Patient', width: '', data: 'patient.last_name', render: renderPatient},
+            {th: 'Patient', width: '', data: 'reference', render: renderPatient},
             {th: 'Date Begin', width: '140px', data: 'begin', render: renderDatetime},
             {th: 'Date End', width: '140px', data: 'end', render: renderDatetime}
         ]
@@ -34,7 +34,7 @@ function MonitoringController($container) {
      * @memberOf MonitoringController
      */
     const renderPatient = function (data, type, full) {
-        return full.patient.first_name + " " + full.patient.last_name
+        return full.reference.patient.first_name + " " + full.reference.patient.last_name
     };
     /**
      * Render for datetime
@@ -77,7 +77,7 @@ function MonitoringController($container) {
      */
     const toForm = function ( monitoring ) {
         let $indicators = $('#indicators');
-        profileController.clean().load(monitoring.patient);
+        profileController.clean().load(monitoring.reference.patient);
         $("#monitoring_id").val(monitoring.id);
         $("#monitoring_begin").html(renderDatetime(monitoring.begin));
         $("#monitoring_end").html(renderDatetime(monitoring.end));

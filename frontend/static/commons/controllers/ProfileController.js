@@ -38,7 +38,7 @@ function ProfileController($paramContainer) {
         if ($.isEmpty(gender)) {
             return undefined;
         }
-        return gender == 1 ? 'M' : "F";
+        return gender === 1 ? 'M' : "F";
     };
     /**
      * Format date to default string format
@@ -63,12 +63,16 @@ function ProfileController($paramContainer) {
      * @memberOf AbstractController
      */
     this.load = function (patient) {
-        elementMap.title.html("Patient");
-        elementMap.first_name.html(patient.first_name || "-");
-        elementMap.last_name.html(patient.last_name || "-");
-        elementMap.gender.html(gender(patient.gender) || "-");
-        elementMap.birth_date.html(dateFormat(patient.birth_date) || "-");
-        elementMap.details.html(patient.obs || "-");
+        try {
+            elementMap.title.html("Patient");
+            elementMap.first_name.html(patient.first_name || "-");
+            elementMap.last_name.html(patient.last_name || "-");
+            elementMap.gender.html(gender(patient.gender) || "-");
+            elementMap.birth_date.html(dateFormat(patient.birth_date) || "-");
+            elementMap.details.html(patient.obs || "-");
+        } catch (e) {
+            console.error(e);
+        }
         return this;
     };
     /**

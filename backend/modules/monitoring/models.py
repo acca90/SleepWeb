@@ -43,7 +43,7 @@ class Monitoring(models.Model):
             return False
 
         self.uuid = monitoring['uuid']
-        self.reference = reference
+        self.reference = reference[0]
         self.system = MSystem.objects.get(pk=monitoring['system'])
         self.begin = dateutil.parser.parse(monitoring['begin'])
         self.end = dateutil.parser.parse(monitoring['end'])

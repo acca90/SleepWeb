@@ -30,7 +30,7 @@ class RuleService:
         4. IDX = Generate index
         """
         monitoring = Monitoring.objects.get(pk=monitoring_id)
-        stage_id = Patient.objects.get(pk=Monitoring.objects.get(pk=monitoring.id).patient.id).stage.id
+        stage_id = Patient.objects.get(pk=Monitoring.objects.get(pk=monitoring.id).reference.patient.id).stage.id
         indicators = MonitoringIndicator.objects.filter(monitoring__id=monitoring.id)
 
         fb = 0
@@ -60,13 +60,17 @@ class RuleService:
         """
         Method defined to query rule's thresholds
         """
-        return Threshold.objects.filter(
-            rule__id=rule_id,
-            indicator__id=indicator.indicator.id,
-            stage__id=stage_id,
-            begin__lte=indicator.value,
-            end__gte=indicator.value,
-        ).values('quality', 'weight')[0]
+        try:
+            return Threshold.objects.filter(
+                rule__id=rule_id,
+                indicator__id=indicator.indicator.id,
+                stage__id=stage_id,
+                begin__lte=indicator.value,
+                end__gte=indicator.value,
+            ).values('quality', 'weight')[0]
+        except Exception as e:
+            print("Threshold not found -> ", e)
+            raise Exception
 
     def calc_fa(self, fc, quality):
         """
@@ -87,7 +91,7 @@ class RuleService:
         thresholds = Threshold.objects.filter(
             rule__id=rule_id,
             indicator__id=indicator_id,
-            stage__id=Monitoring.objects.get(pk=monitoring_id).patient.stage.id
+            stage__id=Monitoring.objects.get(pk=monitoring_id).reference.patient.stage.id
         ).values()
 
         monitoring_quality = MonitoringIndicator.objects.filter(

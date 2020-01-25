@@ -134,12 +134,15 @@ class PatientRemoteReferenceSerializer(serializers.ModelSerializer):
         required=False
     )
 
+    patient = PatientMinimalSerializer()
+
     class Meta:
         model = PatientRemoteReference
         fields = (
             'system',
             'uuid',
-            'name'
+            'name',
+            'patient'
         )
 
 
