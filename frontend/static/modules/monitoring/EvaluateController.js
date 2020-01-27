@@ -24,11 +24,6 @@ function EvaluateController(controller) {
      */
     const moduleController = controller;
     /**
-     * Indx controller
-     * @memberOf EvaluateController
-     */
-    const idx = new IdxComponent();
-    /**
      * Initialize a map of elevents
      * @memberOf EvaluateController
      */
@@ -117,7 +112,6 @@ function EvaluateController(controller) {
         }
         graphController.updateOverall(data);
         populateIndicatorsSelect(data.results);
-        idx.clean().load(data.idx);
     };
     /**
      * Populate indicatros on select
@@ -186,7 +180,6 @@ function EvaluateController(controller) {
      */
     const fastClean = function () {
         graphController.clean();
-        idx.clean();
     };
     /**
      * Initialize controller
@@ -197,7 +190,6 @@ function EvaluateController(controller) {
         initUserRules();
         initEvents();
         graphController.init();
-        idx.init();
         return this;
     };
     /**

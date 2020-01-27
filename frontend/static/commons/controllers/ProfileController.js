@@ -28,6 +28,7 @@ function ProfileController($paramContainer) {
         elementMap.last_name = $('#profile\\.last_name', $container);
         elementMap.gender = $('#profile\\.gender', $container);
         elementMap.birth_date = $('#profile\\.birth_date', $container);
+        elementMap.age_group = $('#profile\\.age_group', $container);
         elementMap.details = $('#profile\\.details', $container);
     };
     /**
@@ -38,7 +39,7 @@ function ProfileController($paramContainer) {
         if ($.isEmpty(gender)) {
             return undefined;
         }
-        return gender === 1 ? 'M' : "F";
+        return gender === 1 ? 'Male' : "Female";
     };
     /**
      * Format date to default string format
@@ -69,6 +70,7 @@ function ProfileController($paramContainer) {
             elementMap.last_name.html(patient.last_name || "-");
             elementMap.gender.html(gender(patient.gender) || "-");
             elementMap.birth_date.html(dateFormat(patient.birth_date) || "-");
+            elementMap.age_group.html($.isEmpty(patient.stage) ? 'Not Defined' : patient.stage.description);
             elementMap.details.html(patient.obs || "-");
         } catch (e) {
             console.error(e);

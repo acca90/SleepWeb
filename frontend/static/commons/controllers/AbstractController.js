@@ -192,7 +192,6 @@ function AbstractController(params) {
      * @memberOf AbstractController
      */
     const toForm = function (data) {
-        alert(JSON.stringify(data));
         DOM.form.option.html(
             isReadOnly ? 'Details' : 'Update'
         );

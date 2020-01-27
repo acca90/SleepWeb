@@ -68,4 +68,14 @@ fieldset legend { font-size: 12px; font-weight: bold; border-bottom: solid 1px; 
 
 form label { font-weight: bold; }
 
+.alert-quality-0 { color: #3d1e1e; background-color: #ff8c87; border-color: #c56c68; }
+
+.alert-quality-1 { color: #624131; background-color: #ffb089; border-color: #d49372; }
+
+.alert-quality-2 { color: #382c1c; background-color: #ffd390; border-color: #c1a06d; }
+
+.alert-quality-3 { color: #4a552a; background-color: #f1ff97; border-color: #bac872; }
+
+.alert-quality-4 { color: #093110; background-color: #00df25; border-color: #03b521; }
+
 /*# sourceMappingURL=custom.css.map */
