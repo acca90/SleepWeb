@@ -7,6 +7,8 @@ Universidade de Passo Fundo - 2018/2019
 @since 14/12/2019
 """
 from django.db import models
+
+from backend.modules.msystem.models import MSystem
 from backend.modules.patient.models import Patient
 from backend.modules.rule.models import Rule
 from backend.modules.user.models import User
@@ -18,6 +20,7 @@ class Period(models.Model):
     """
     user = models.ForeignKey(User, db_column='user', on_delete=None, null=True)
     patient = models.ForeignKey(Patient, on_delete=None, null=True)
+    system = models.ForeignKey(MSystem, on_delete=None, null=True)
     begin = models.DateField(db_column='begin', null=False)
     end = models.DateField(db_column='end', null=False)
     rule = models.ForeignKey(Rule, db_column='rule', on_delete=None, null=True)

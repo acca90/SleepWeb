@@ -24,8 +24,7 @@ function ProfileController($paramContainer) {
      */
     const initElementMap = function () {
         elementMap.title = $('#profile_title', $container);
-        elementMap.first_name = $('#profile\\.first_name', $container);
-        elementMap.last_name = $('#profile\\.last_name', $container);
+        elementMap.name = $('#profile\\.name', $container);
         elementMap.gender = $('#profile\\.gender', $container);
         elementMap.birth_date = $('#profile\\.birth_date', $container);
         elementMap.age_group = $('#profile\\.age_group', $container);
@@ -66,8 +65,7 @@ function ProfileController($paramContainer) {
     this.load = function (patient) {
         try {
             elementMap.title.html("Patient");
-            elementMap.first_name.html(patient.first_name || "-");
-            elementMap.last_name.html(patient.last_name || "-");
+            elementMap.name.html((patient.first_name || '' ) + ' ' + (patient.last_name || ''));
             elementMap.gender.html(gender(patient.gender) || "-");
             elementMap.birth_date.html(dateFormat(patient.birth_date) || "-");
             elementMap.age_group.html($.isEmpty(patient.stage) ? 'Not Defined' : patient.stage.description);

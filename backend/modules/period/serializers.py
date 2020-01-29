@@ -8,6 +8,8 @@ Universidade de Passo Fundo - 2018/2019
 """
 from rest_framework import serializers
 
+from backend.modules.msystem.models import MSystem
+from backend.modules.msystem.serializers import MSystemReadSerializer
 from backend.modules.patient.models import Patient
 from backend.modules.patient.serializers import PatientMinimalSerializer
 from backend.modules.period.models import Period
@@ -22,6 +24,7 @@ class PeriodReadSerializer(serializers.ModelSerializer):
     """
     patient = PatientMinimalSerializer(read_only=True)
     rule = RuleMinimalSerializer(read_only=True)
+    system = MSystemReadSerializer(read_only=True)
 
     class Meta:
         model = Period
@@ -30,7 +33,8 @@ class PeriodReadSerializer(serializers.ModelSerializer):
             'begin',
             'end',
             'patient',
-            'rule'
+            'rule',
+            'system'
         )
         datatables_always_serialize = (
             'id',
@@ -38,6 +42,7 @@ class PeriodReadSerializer(serializers.ModelSerializer):
             'end',
             'patient',
             'rule'
+            'system'
         )
 
 
@@ -53,6 +58,10 @@ class PeriodWriteSerializer(serializers.ModelSerializer):
         queryset=Rule.objects.all(),
         required=False
     )
+    system = serializers.PrimaryKeyRelatedField(
+        read_only=False,
+        queryset=MSystem.objects.all(),
+    )
     user = serializers.PrimaryKeyRelatedField(
         read_only=True,
         default=serializers.CurrentUserDefault()
@@ -66,5 +75,6 @@ class PeriodWriteSerializer(serializers.ModelSerializer):
             'end',
             'rule',
             'user',
-            'patient'
+            'patient',
+            'system'
         )
