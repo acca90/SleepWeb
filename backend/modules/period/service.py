@@ -21,6 +21,7 @@ class PeriodService:
         data = []
         monitorings = Monitoring.objects.filter(
             reference__patient__id=period.patient.id,
+            system__id=period.system.id,
             begin__gte=period.begin,
             end__lte=period.end
         )

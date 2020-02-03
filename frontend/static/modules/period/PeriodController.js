@@ -89,6 +89,8 @@ function PeriodController($container) {
         );
         $('#ruleId', $form).val(period.rule.id);
         $('#ruleField', $form).val(period.rule.description);
+        $('#systemId', $form).val(period.system.id);
+        $('#systemField', $form).val(period.system.name);
     };
     /**
      * Serialize form for API submit

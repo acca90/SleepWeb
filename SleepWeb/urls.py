@@ -29,7 +29,7 @@ from frontend.modules.home.views import Home
 from frontend.modules.login.views import Login, Logout
 from frontend.modules.monitoring.views import Monitoring, MonitoringFinder
 from frontend.modules.stage.views import Stage, StageFinder
-from frontend.modules.msystem.views import MSystem
+from frontend.modules.msystem.views import MSystem, MSystemFinder
 from frontend.modules.indicator.views import Indicator, IndicatorFinder
 from frontend.modules.group.views import Group
 from frontend.modules.patient.views import Patient, PatientFinder
@@ -92,6 +92,7 @@ urlpatterns = [
     url(r'^finder/stage/$', login_required(StageFinder.as_view()), name='StageFinder'),
     url(r'^finder/patient/$', login_required(PatientFinder.as_view()), name='PatientFinder'),
     url(r'^finder/rule/$', login_required(RuleFinder.as_view()), name='RuleFinder'),
+    url(r'^finder/msystem/$', login_required(MSystemFinder.as_view()), name='SystemFinder'),
     url(r'^finder/monitoring/$', login_required(MonitoringFinder.as_view()), name='MonitoringFinder'),
 
     url(r'^django_task/', include('django_task.urls', namespace='django_task')),

@@ -1,0 +1,9 @@
+{% load static %}
+
+<script src="{% static "modules/msystem/MSystemController.js" %}"></script>
+
+<script>
+	function getSettings() {
+		return new MSystemController().getSettings();
+    }
+</script>

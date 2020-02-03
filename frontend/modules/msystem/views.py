@@ -15,3 +15,10 @@ class MSystem(View):
 
     def get(self, request):
         return render(request, self.template_name)
+
+
+class MSystemFinder(View):
+    template_name = 'msystem/modal.html'
+
+    def get(self, request):
+        return render(request, self.template_name)

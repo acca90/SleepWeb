@@ -12,7 +12,7 @@ function MSystemController($container) {
      * Institution Service
      * @memberOf MSystemController
      */
-    let institutionService = new InstitutionService();
+    let institutionService = null;
     /**
      * DataTable Settings
      * @memberOf MSystemController
@@ -22,7 +22,7 @@ function MSystemController($container) {
             {th: '#', data: 'id', width: '50px', sDefaultContent: ''},
             {th: 'Name', data: 'name', sDefaultContent: ''},
             {th: 'URL', data: 'url', sDefaultContent: ''},
-            {th: 'Institution', data: 'institution', sDefaultContent: '', render: institutionService.render},
+            {th: 'Institution', data: 'institution.name', sDefaultContent: ''},
             {th: 'Is Active', data: 'is_active', sDefaultContent: '', render: activeRender}
         ]
     };
@@ -84,6 +84,17 @@ function MSystemController($container) {
      */
     this.init = function () {
         new AbstractController(getParams()).init();
+        institutionService = new InstitutionService();
         institutionService.populate('#msystemInstitution');
+    };
+    /**
+     * Load a settings for modal datatables
+     * @memberOf MSystemController
+     */
+    this.getSettings = function () {
+        return {
+            apiUrl: getParams().apiUrl,
+            datatableSettings: getDatatableSettings()
+        }
     };
 }
