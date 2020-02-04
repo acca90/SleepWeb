@@ -19,6 +19,58 @@ function PeriodViewController() {
      */
     let lineChart = null;
     /**
+     * Return color for dot base on quality IDX
+     * @param idx
+     */
+    let getColor = function (idx) {
+        return {
+            10: {
+                backgroundColor: '#00df25',
+                borderColor: '#03b521',
+            },
+            9: {
+                backgroundColor: '#f1ff97',
+                borderColor: '#bac872',
+            },
+            8: {
+                backgroundColor: '#f1ff97',
+                borderColor: '#bac872',
+            },
+            7: {
+                backgroundColor: '#ffd390',
+                borderColor: '#c1a06d',
+            },
+            6: {
+                backgroundColor: '#ffd390',
+                borderColor: '#c1a06d',
+            },
+            5: {
+                backgroundColor: '#ffb089',
+                borderColor: '#d49372',
+            },
+            4: {
+                backgroundColor: '#ffb089',
+                borderColor: '#d49372',
+            },
+            3: {
+                backgroundColor: '#ff8c87',
+                borderColor: '#c56c68',
+            },
+            2: {
+                backgroundColor: '#ff8c87',
+                borderColor: '#c56c68',
+            },
+            1: {
+                backgroundColor: '#ff8c87',
+                borderColor: '#c56c68',
+            },
+            0: {
+                backgroundColor: '#ff8c87',
+                borderColor: '#c56c68',
+            },
+        }[parseInt(idx)]
+    };
+    /**
      * Initialize map of elements
      * @memberOf PeriodViewController
      */
@@ -135,9 +187,14 @@ function PeriodViewController() {
      */
     const updateOverall = function ( data ) {
         cleanLineChart(false);
+        lineChart.data.datasets[0].backgroundColor = [];
+        lineChart.data.datasets[0].borderColor = [];
         data.forEach(result => {
             lineChart.data.labels.push(result.date);
-            lineChart.data.datasets[0].data.push(result.idx)
+            lineChart.data.datasets[0].data.push(result.idx);
+            let color = getColor(result.idx);
+            lineChart.data.datasets[0].backgroundColor.push(color.backgroundColor);
+            lineChart.data.datasets[0].borderColor.push(color.borderColor);
         });
         lineChart.update();
     };
@@ -147,7 +204,11 @@ function PeriodViewController() {
      */
     const cleanLineChart = function ( update = true ) {
         lineChart.data.labels = [];
-        lineChart.data.datasets.forEach(dataset => dataset.data = []);
+        lineChart.data.datasets.forEach(dataset => {
+            dataset.data = [];
+            dataset.backgroundColor = ['#acb2c0'];
+            dataset.borderColor = ['#969ba7'];
+        });
         if (update) {
             lineChart.update();
         }
@@ -165,9 +226,11 @@ function PeriodViewController() {
                     {
                         data: [],
                         fill: false,
-                        backgroundColor: '#ff8b89',
-                        borderColor:  '#FF0000',
-                        label: 'Quality Curve'
+                        backgroundColor: ['#acb2c0'],
+                        borderColor:  ['#969ba7'],
+                        label: 'Quality Curve',
+                        pointRadius: 10,
+                        pointHoverRadius: 10,
                     }
                 ],
             },

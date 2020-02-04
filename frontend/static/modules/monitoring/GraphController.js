@@ -23,36 +23,14 @@ function GraphController() {
      * @memberOf GraphController
      */
     const backgroundColor = [
-        '#e48f98',
-        '#ffab00',
-        '#99c4ff',
-        '#fffcb6',
-        '#d9baff',
-        '#ffc1f4',
-        '#cd87ff',
-        '#bbf1ff',
-        '#9584ff',
-        '#e2ffc8',
-        '#b8ffe0',
-        '#cdffd2',
+        '#e48f98'
     ];
     /**
      * Border colors
      * @memberOf GraphController
      */
     const borderColor = [
-        '#e4425b',
-        '#ffab00',
-        '#0065ff',
-        '#ffff0c',
-        '#9711ff',
-        '#ff20df',
-        '#cd87ff',
-        '#14e9ff',
-        '#4a1aff',
-        '#d4ff0b',
-        '#06ffa2',
-        '#42ff5a',
+        '#e4425b'
     ];
     /**
      * Load indicator
