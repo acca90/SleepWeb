@@ -81,6 +81,8 @@ function MonitoringController($container) {
         $("#monitoring_id").val(monitoring.id);
         $("#monitoring_begin").html(renderDatetime(monitoring.begin));
         $("#monitoring_end").html(renderDatetime(monitoring.end));
+        $("#monitoring_system").html(monitoring.reference.system.name);
+
         monitoring.indicators.forEach(indicator => {
             $indicators.append(`
                 <li>

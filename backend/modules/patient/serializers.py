@@ -146,6 +146,23 @@ class PatientRemoteReferenceSerializer(serializers.ModelSerializer):
         )
 
 
+class PatientRemoteReferenceEvaluateSerializer(serializers.ModelSerializer):
+    """
+     Serializer defined to evaluate operations
+    """
+    system = MSystemReadSerializer()
+    patient = PatientMinimalSerializer()
+
+    class Meta:
+        model = PatientRemoteReference
+        fields = (
+            'system',
+            'uuid',
+            'name',
+            'patient'
+        )
+
+
 class PatientRemoteReferenceViewSerializer(serializers.ModelSerializer):
     """
      Serializer defined to read operations

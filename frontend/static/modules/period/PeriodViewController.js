@@ -126,11 +126,13 @@ function PeriodViewController() {
      * @memberOf PeriodViewController
      */
     const callBackAnalyzeSuccess = function ( data ) {
+        let dados = processDayEvaluations(data.data);
+        console.log(dados);
         initCalendar({
             months: processMonths(data.begin,data.end),
-            lastMonth: data.end.split('-')[1],
+            lastMonth: parseInt(data.end.split('-')[1])-1,
             lastYear: data.end.split('-')[0],
-            data: processDayEvaluations(data.data)
+            data: dados
         });
         updateOverall(processDataForLineGraph(data.data));
         elementsMap.divs.list.hide();
@@ -154,14 +156,12 @@ function PeriodViewController() {
      * @memberOf PeriodViewController
      */
     const processDayEvaluations = function ( data ) {
-        let newDataArray = [];
-        data.forEach(monitoring => {
-            newDataArray.push({
-                count: monitoring.idx/2,
-                date: monitoring.end.split('T')[0]
-            });
+        return data.map(monitoring => {
+            return {
+                count: monitoring.idx,
+                date: monitoring.end.split('T')[0],
+            };
         });
-        return newDataArray;
     };
     /**
      * Callback for handle error request
@@ -187,8 +187,6 @@ function PeriodViewController() {
      */
     const updateOverall = function ( data ) {
         cleanLineChart(false);
-        lineChart.data.datasets[0].backgroundColor = [];
-        lineChart.data.datasets[0].borderColor = [];
         data.forEach(result => {
             lineChart.data.labels.push(result.date);
             lineChart.data.datasets[0].data.push(result.idx);
@@ -206,8 +204,8 @@ function PeriodViewController() {
         lineChart.data.labels = [];
         lineChart.data.datasets.forEach(dataset => {
             dataset.data = [];
-            dataset.backgroundColor = ['#acb2c0'];
-            dataset.borderColor = ['#969ba7'];
+            dataset.backgroundColor = [];
+            dataset.borderColor = [];
         });
         if (update) {
             lineChart.update();

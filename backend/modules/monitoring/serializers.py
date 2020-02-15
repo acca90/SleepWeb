@@ -9,7 +9,8 @@ Universidade de Passo Fundo - 2018/2019
 from rest_framework import serializers
 
 from backend.modules.indicator.serializers import IndicatorMinimalSerializer
-from backend.modules.patient.serializers import PatientRemoteReferenceSerializer, PatientRemoteReferenceViewSerializer
+from backend.modules.patient.serializers import PatientRemoteReferenceViewSerializer
+from backend.modules.patient.serializers import PatientRemoteReferenceEvaluateSerializer
 from backend.modules.monitoring.models import Monitoring, MonitoringIndicator
 
 
@@ -51,7 +52,7 @@ class MonitoringReadSerializer(serializers.ModelSerializer):
     """
     Serializer for readonly monitoring list
     """
-    reference = PatientRemoteReferenceSerializer(read_only=True)
+    reference = PatientRemoteReferenceEvaluateSerializer(read_only=True)
     indicators = MonitoringIndicatorSerializer(read_only=True, many=True)
 
     class Meta:

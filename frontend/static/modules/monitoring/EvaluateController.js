@@ -31,6 +31,8 @@ function EvaluateController(controller) {
         elementsMap.monitoringId = $('#monitoring_id');
         elementsMap.ruleForEvaluation = $('#ruleForEvaluation');
         elementsMap.indicator = $('#monitoringIndicators');
+        elementsMap.showResult = $('#showResult');
+        elementsMap.divAlert = $('#divAlert');
     };
     /**
      * Request API for bring user rules to populate select
@@ -112,6 +114,45 @@ function EvaluateController(controller) {
         }
         graphController.updateOverall(data);
         populateIndicatorsSelect(data.results);
+        showResult(data);
+    };
+    /**
+     * Show alert informing the result of evaluation
+     * @memberOf EvaluateController
+     */
+    const showResult = function ( data ) {
+        elementsMap.showResult.show();
+        let idx = parseInt(data.idx);
+        elementsMap
+            .divAlert
+            .removeClass('alert-quality-0')
+            .removeClass('alert-quality-1')
+            .removeClass('alert-quality-2')
+            .removeClass('alert-quality-3')
+            .removeClass('alert-quality-4');
+
+
+        if (idx == 10) {
+            elementsMap.divAlert.html('Result index: ' + idx + ', no disturbs');
+            elementsMap.divAlert.addClass('alert-quality-0')
+
+        } else if (idx > 7 && idx <= 9) {
+            elementsMap.divAlert.html('Result index: ' + idx + ', anormalities');
+            elementsMap.divAlert.addClass('alert-quality-1')
+
+        } else if (idx > 5 && idx <= 7) {
+            elementsMap.divAlert.html('Result index: ' + idx + ', minor disturbs');
+            elementsMap.divAlert.addClass('alert-quality-2')
+
+        } else if (idx > 3 && idx <= 5) {
+            elementsMap.divAlert.html('Result index: ' + idx + ', moderate disturbs');
+            elementsMap.divAlert.addClass('alert-quality-3')
+
+        } else if (idx <= 3) {
+            elementsMap.divAlert.html('Result index: ' + idx + ', strong disturbs');
+            elementsMap.divAlert.addClass('alert-quality-4')
+
+        }
     };
     /**
      * Populate indicatros on select
@@ -180,6 +221,7 @@ function EvaluateController(controller) {
      */
     const fastClean = function () {
         graphController.clean();
+        elementsMap.showResult.hide();
     };
     /**
      * Initialize controller
