@@ -134,11 +134,11 @@ function EvaluateController(controller) {
 
         if (idx == 10) {
             elementsMap.divAlert.html('Result index: ' + idx + ', no disturbs');
-            elementsMap.divAlert.addClass('alert-quality-0')
+            elementsMap.divAlert.addClass('alert-quality-4')
 
         } else if (idx > 7 && idx <= 9) {
             elementsMap.divAlert.html('Result index: ' + idx + ', anormalities');
-            elementsMap.divAlert.addClass('alert-quality-1')
+            elementsMap.divAlert.addClass('alert-quality-3')
 
         } else if (idx > 5 && idx <= 7) {
             elementsMap.divAlert.html('Result index: ' + idx + ', minor disturbs');
@@ -146,11 +146,11 @@ function EvaluateController(controller) {
 
         } else if (idx > 3 && idx <= 5) {
             elementsMap.divAlert.html('Result index: ' + idx + ', moderate disturbs');
-            elementsMap.divAlert.addClass('alert-quality-3')
+            elementsMap.divAlert.addClass('alert-quality-1')
 
         } else if (idx <= 3) {
             elementsMap.divAlert.html('Result index: ' + idx + ', strong disturbs');
-            elementsMap.divAlert.addClass('alert-quality-4')
+            elementsMap.divAlert.addClass('alert-quality-0')
 
         }
     };

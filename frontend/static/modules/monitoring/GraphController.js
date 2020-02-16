@@ -19,19 +19,94 @@ function GraphController() {
      */
     let curve = null;
     /**
-     * Background colors
+     * Color palete for index
      * @memberOf GraphController
      */
-    const backgroundColor = [
-        '#e48f98'
-    ];
+    let colorBgIdx = {
+        0: '#ff8c87',
+        1: '#ffb089',
+        2: '#ffd390',
+        3: '#f1ff97',
+        4: '#00df25',
+    };
+    let colorBorderIdx = {
+        0: '#c56c68',
+        1: '#d49372',
+        2: '#c1a06d',
+        3: '#bac872',
+        4: '#03b521',
+    };
     /**
-     * Border colors
+     * Pick color for background on overall graph
      * @memberOf GraphController
      */
-    const borderColor = [
-        '#e4425b'
-    ];
+    const pickOverallBackground = function (result) {
+        if (result.fa == 0) {
+            return colorBgIdx[0];
+        }
+        if (result.fa == result.fc) {
+            return colorBgIdx[4];
+        }
+        return colorBgIdx[2];
+    };
+    /**
+     * Pick color for border on overall graph
+     * @memberOf GraphController
+     */
+    const pickOverallBorder = function (result) {
+        if (result.fa == 0) {
+            return colorBorderIdx[0];
+        }
+        if (result.fa == result.fc) {
+            return colorBorderIdx[4];
+        }
+        return colorBorderIdx[2];
+    };
+    /**
+     * Pick color for background on curve graph
+     * @memberOf GraphController
+     */
+    const pickCurveBackground = function (threshold) {
+        if (threshold.quality == 0) {
+            return colorBgIdx[0];
+        }
+        if (threshold.quality == threshold.weight) {
+            return colorBgIdx[4];
+        }
+        return colorBgIdx[2];
+    };
+    /**
+     * Pick color for border on curve graph
+     * @memberOf GraphController
+     */
+    const pickCurveBorder = function (threshold) {
+        if (threshold.quality == 0) {
+            return colorBorderIdx[0];
+        }
+        if (threshold.quality == threshold.weight) {
+            return colorBorderIdx[4];
+        }
+        return colorBorderIdx[2];
+    };
+    /**
+     * Pick color for bg on curve dto graph
+     *
+     * @memberOf GraphController
+     */
+    const pickCurveDotBgColor = function (value, thresholds) {
+        return pickCurveBackground(
+            thresholds.filter(threshold => threshold.begin <= value && value <= threshold.end)[0]
+        )
+    };
+    /**
+     * Pick color for border on curve dot graph
+     * @memberOf GraphController
+     */
+    const pickCurveDotBorderColor = function (value, thresholds) {
+        return pickCurveBorder(
+            thresholds.filter(threshold => threshold.begin <= value && value <= threshold.end)[0]
+        )
+    };
     /**
      * Load indicator
      * @memberOf GraphController
@@ -43,16 +118,20 @@ function GraphController() {
                 {
                     data: values,
                     fill: false,
-                    backgroundColor: backgroundColor,
-                    borderColor: borderColor,
-                    label: 'Quality Curve'
+                    backgroundColor: [],
+                    borderColor: [],
+                    label: 'Quality Curve',
+                    pointRadius: 5,
+                    pointHoverRadius: 5,
                 },
                 {
                     data: [],
                     fill: true,
                     backgroundColor: '#0088ff',
                     borderColor: '#0074d9',
-                    label: 'Result'
+                    label: 'Result',
+                    pointRadius: 10,
+                    pointHoverRadius: 10,
                 }
             ],
         };
@@ -104,8 +183,8 @@ function GraphController() {
             labels: [],
             datasets: [{
                 data: [],
-                backgroundColor: backgroundColor,
-                borderColor: borderColor,
+                backgroundColor: [],
+                borderColor: [],
                 label: 'Monitoring'
             }],
         };
@@ -146,9 +225,19 @@ function GraphController() {
     const cleanGraph = function (chart, update = true ) {
         chart.data.labels = [];
         chart.data.datasets.forEach(dataset => dataset.data = []);
+        chart.data.datasets[0].backgroundColor = [];
+        chart.data.datasets[0].borderColor = [];
         if (update) {
             chart.update();
         }
+    };
+    /**
+     * Method defined to get quality result
+     * @memberOf GraphController
+     */
+    const getQualityResult = function (value, thresholds) {
+        return thresholds
+            .filter(threshold => threshold.begin <= value && value <= threshold.end)[0].quality;
     };
     /**
      * Method defined to update overall graph
@@ -161,7 +250,9 @@ function GraphController() {
         }
         data.results.forEach(result => {
             overall.data.labels.push(result.indicator.description);
-            overall.data.datasets[0].data.push(result.fa)
+            overall.data.datasets[0].data.push(result.fa);
+            overall.data.datasets[0].backgroundColor.push(pickOverallBackground(result));
+            overall.data.datasets[0].borderColor.push(pickOverallBorder(result));
         });
         overall.update();
     };
@@ -174,11 +265,20 @@ function GraphController() {
         let intervals = [];
         data.thresholds.forEach(threshold => {
             intervals.push(threshold.quality);
-            curve.data.datasets[0].data.push(threshold.quality)
+            curve.data.datasets[0].data.push(threshold.quality);
+            curve.data.datasets[0].backgroundColor.push(pickCurveBackground(threshold));
+            curve.data.datasets[0].borderColor.push(pickCurveBorder(threshold));
         });
         curve.data.labels = intervals;
-        value = data.monitoring_quality[0].value;
-        curve.data.datasets[1].data.push({ x: 100, y: value });
+        let quality = data.monitoring_quality[0].value;
+        curve.data.datasets[1].backgroundColor = [];
+        curve.data.datasets[1].borderColor = [];
+        curve.data.datasets[1].backgroundColor.push(pickCurveDotBgColor(quality, data.thresholds));
+        curve.data.datasets[1].borderColor.push(pickCurveDotBorderColor(quality, data.thresholds));
+        curve.data.datasets[1].data.push({
+            x: getQualityResult(quality, data.thresholds),
+            y: quality
+        });
         curve.update();
     };
     /**
