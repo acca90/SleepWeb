@@ -123,7 +123,7 @@ function PatientReferenceController(abstractController) {
      */
     const callBackReferenceSuccess = function ( data, rowData ) {
         if (data.length === 0) {
-            console.log('alertar');
+            mainController.messageList('warning','No references found to link');
             return
         }
         elementsMap.list.hide();
