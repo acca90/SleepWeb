@@ -19,6 +19,11 @@ function PeriodViewController() {
      */
     let lineChart = null;
     /**
+     * Data for tooltip formation
+     * @memberOf PeriodViewController
+     */
+    let tooltip = {};
+    /**
      * Return color for dot base on quality IDX
      * @param idx
      */
@@ -126,15 +131,15 @@ function PeriodViewController() {
      * @memberOf PeriodViewController
      */
     const callBackAnalyzeSuccess = function ( data ) {
-        let dados = processDayEvaluations(data.data);
-        console.log(dados);
+        processTooltipData(data.data);
+        let evaluatedData = processDayEvaluations(data.data);
         initCalendar({
-            months: processMonths(data.begin,data.end),
+            months: processMonths(data.begin, data.end),
             lastMonth: parseInt(data.end.split('-')[1])-1,
             lastYear: data.end.split('-')[0],
-            data: dados
+            data: evaluatedData
         });
-        updateOverall(processDataForLineGraph(data.data));
+        updateLineChart(processDataForLineGraph(data.data));
         elementsMap.divs.list.hide();
         elementsMap.divs.view.show();
     };
@@ -170,6 +175,24 @@ function PeriodViewController() {
     const callBackAnalyzeError = function () {
     };
     /**
+     * Process data to tooltip show
+     * @memberOf PeriodViewController
+     */
+    const processTooltipData = function ( data ) {
+        tooltip = {};
+        data.forEach(item => {
+            let obj = {};
+            let key = item.end.split('T')[0].split('-').reverse().join("/");
+            tooltip[key] = item.results.map(result => {
+                return {
+                    indicator: result.indicator.description,
+                    measurement: result.indicator.measurement,
+                    value: result.value,
+                }
+            });
+        });
+    };
+    /**
      * Method defined to normalize data for line graph
      * @memberOf PeriodViewController
      */
@@ -185,7 +208,7 @@ function PeriodViewController() {
      * Method defined to update overall graph
      * @memberOf PeriodViewController
      */
-    const updateOverall = function ( data ) {
+    const updateLineChart = function ( data ) {
         cleanLineChart(false);
         data.forEach(result => {
             lineChart.data.labels.push(result.date);
@@ -236,7 +259,23 @@ function PeriodViewController() {
                 backgroundColor: '#FF0000',
                 responsive: true,
                 tooltips: {
-                    enabled: false
+                    enabled: true,
+                    callbacks: {
+                        title: function () {
+                            return 'Details'
+                        },
+                        label: function (data) {
+                            return 'Sleep Quality Index: ' + parseInt(data.value)
+                        },
+                        afterLabel: function (data) {
+                            let string = '';
+                            let indicators = tooltip[data.xLabel];
+                            indicators.forEach(indicator => {
+                                string += `\n${indicator.indicator}: ${indicator.value} (${indicator.measurement})`;
+                            });
+                            return string
+                        },
+                    }
                 },
                 scales: {
                     yAxes: [{

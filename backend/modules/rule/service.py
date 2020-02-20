@@ -44,8 +44,9 @@ class RuleService:
             fd += fa
             results.append({
                 'indicator': model_to_dict(Indicator.objects.get(pk=indicator.indicator.id)),
+                'value': indicator.value,
                 'fc': threshold['weight'],
-                'fa': fa
+                'fa': fa,
             })
 
         idx = self.calc_idx(fb, fd)
